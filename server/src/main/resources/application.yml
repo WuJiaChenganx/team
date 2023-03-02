@@ -7,6 +7,8 @@ server:
       force: true
       charset: UTF-8
       enabled: true
+file:
+  doc-dir: static/doc/
 
 spring:
   profiles:
