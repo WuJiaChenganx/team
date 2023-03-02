@@ -26,6 +26,7 @@ public class ManageController {
         List<Object> params =new ArrayList<>();
         params.add(news);
         return APIResponse.success(params);
+        
     }
 
 }
