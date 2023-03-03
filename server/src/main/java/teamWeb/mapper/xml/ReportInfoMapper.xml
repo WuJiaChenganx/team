@@ -67,4 +67,20 @@
         from report
         order  by date desc limit ${start},${end}
     </select>
+
+    <insert id="insertInfo">
+
+    </insert>
+    <update id="updateInfo">
+        update report
+
+    </update>
+
+    <delete id="delete">
+        delete from report
+        <where>
+            `id`=${id}
+        </where>
+    </delete>
+
 </mapper>

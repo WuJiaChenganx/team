@@ -13,18 +13,34 @@ import teamWeb.utils.APIResponse;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @RestController
 @RequestMapping("/manage")
 public class ManageController {
     @Autowired
     ManageService manageService;
+    @Autowired
+    ReportInfoService reportInfoService;
 
+    /*
     @RequestMapping("/news")
     public APIResponse news(@RequestParam(value="start") int start,@RequestParam(value="end") int end){
-        List<ReportInfo> news = manageService.showNews(start,end);
+        List<ReportInfo> news = reportInfoService.allNews(start,end);
         List<Object> params =new ArrayList<>();
         params.add(news);
         return APIResponse.success(params);
+    }*/
+    @RequestMapping("/news")
+    public APIResponse news(@RequestParam(value="operate") String operate,ReportInfo reportInfo){
+        if(Objects.equals(operate, "input")){
+            reportInfoService.insertInfo(reportInfo);
+        } else if (Objects.equals(operate, "updata")) {
+            reportInfoService.updateInfo(reportInfo);
+        }else {
+            reportInfoService.deleteInfo(reportInfo);
+        }
+        return APIResponse.success();
     }
+
 }

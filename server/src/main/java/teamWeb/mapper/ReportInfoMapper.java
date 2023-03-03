@@ -20,5 +20,9 @@ public interface ReportInfoMapper extends BaseMapper<ReportInfo> {
 
     List<ReportInfo> allNews(int start,int end);
 
+    void insertInfo(ReportInfo reportInfo);
 
+    void updateInfo(ReportInfo reportInfo);
+
+    void delete(int id);
 }
