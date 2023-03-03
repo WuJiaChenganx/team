@@ -6,54 +6,16 @@ import java.sql.Date;
 public class OutcomeInfo implements Serializable {
 
     //论文id
-    private String pId;
+    private int id;
     //论文名
     private String title;
-    //作者
-    private String author;
-    //发表时间
-    private Date date;
-    //期刊
-    private String perio;
-    //申请人
-    private String proposer;
-    //发明人
-    private String inventor;
-    //授权人
-    private String authorization;
-    //出版社
-    private String pub;
-    //图片地址
-    private String pictureUrl;
-    //论文链接
-    private String url;
 
-    public OutcomeInfo() {
+    public int getId() {
+        return id;
     }
 
-    @Override
-    public String toString() {
-        return "OutcomeInfo{" +
-                "pId='" + pId + '\'' +
-                ", title='" + title + '\'' +
-                ", author='" + author + '\'' +
-                ", date=" + date +
-                ", perio='" + perio + '\'' +
-                ", proposer='" + proposer + '\'' +
-                ", inventor='" + inventor + '\'' +
-                ", authorization='" + authorization + '\'' +
-                ", pub='" + pub + '\'' +
-                ", pictureUrl='" + pictureUrl + '\'' +
-                ", url='" + url + '\'' +
-                '}';
-    }
-
-    public String getpId() {
-        return pId;
-    }
-
-    public void setpId(String pId) {
-        this.pId = pId;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getTitle() {
@@ -135,4 +97,29 @@ public class OutcomeInfo implements Serializable {
     public void setUrl(String url) {
         this.url = url;
     }
+
+    //作者
+    private String author;
+    //发表时间
+    private Date date;
+    //期刊
+    private String perio;
+    //申请人
+    private String proposer;
+    //发明人
+    private String inventor;
+    //授权人
+    private String authorization;
+    //出版社
+    private String pub;
+    //图片地址
+    private String pictureUrl;
+    //论文链接
+    private String url;
+
+    public OutcomeInfo() {
+    }
+
+
+
 }

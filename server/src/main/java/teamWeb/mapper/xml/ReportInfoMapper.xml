@@ -52,13 +52,19 @@
         limit ${start},${end}
     </select>
 
-    <select id="getNews" resultType="teamWeb.entity.ReportInfo">
+    <select id="getNewsDetail" resultType="teamWeb.entity.ReportInfo">
         select
         `id`,`title`,`date`,`url`,`class`
         from report
         <where>
             `class`= 2
         </where>
+        order  by date desc limit ${start},${end}
+    </select>
+    <select id="allNews" resultType="teamWeb.entity.ReportInfo">
+        select
+        *
+        from report
         order  by date desc limit ${start},${end}
     </select>
 </mapper>

@@ -15,12 +15,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("/teamWeb/news")
+@RequestMapping("/teamWeb")
 public class NewsController {
 
     @Autowired
     ReportInfoService reportInfoService;
 
+    /*
     @RequestMapping("/notice")
     public APIResponse notice(@RequestParam(value="page") int page){
         List<ReportInfo> noticeDetail = reportInfoService.noticeDetail((page-1)*10,page*10);
@@ -51,6 +52,14 @@ public class NewsController {
         List<ReportInfo> consultDetail = reportInfoService.consultDetail((page-1)*10,page*10);
         List<Object> params =new ArrayList<>();
         params.add(consultDetail);
+        return APIResponse.success(params);
+    }
+    */
+    @RequestMapping("/news")
+    public APIResponse allNews(@RequestParam(value="start") int start,@RequestParam(value="end") int end){
+        List<ReportInfo> allNews = reportInfoService.allNews(start,end);
+        List<Object> params =new ArrayList<>();
+        params.add(allNews);
         return APIResponse.success(params);
     }
 }

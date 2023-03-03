@@ -16,5 +16,9 @@ public interface ReportInfoMapper extends BaseMapper<ReportInfo> {
 
     List<ReportInfo> getMeet(int start, int end);
 
-    List<ReportInfo> getNews(int start, int end);
+    List<ReportInfo> getNewsDetail(int start, int end);
+
+    List<ReportInfo> allNews(int start,int end);
+
+
 }

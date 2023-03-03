@@ -19,14 +19,9 @@ public class FileServiceImpl implements FileService {
         filePath = Paths.get(fileProperties.getDocDir()).toAbsolutePath().normalize();
     }
     @Override
-    public Resource loadFileAsResource(String fileName) {
-        Path path = filePath.resolve(fileName).normalize();
-        UrlResource resource = null;
-        try {
-            resource = new UrlResource(path.toUri());
-        } catch (MalformedURLException e) {
-            throw new RuntimeException(e);
-        }
-        return resource;
+    public String loadFileAsResource(String fileName) {
+        String path = filePath.resolve(fileName).normalize().toString();
+
+        return path;
     }
 }
