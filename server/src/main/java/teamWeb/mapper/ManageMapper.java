@@ -1,4 +1,4 @@
-package manage.mapper;
+package teamWeb.mapper;
 
 public interface ManageMapper {
 }

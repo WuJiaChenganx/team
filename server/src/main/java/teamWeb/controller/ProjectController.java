@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import teamWeb.entity.OutcomeInfo;
 import teamWeb.entity.TextboxInfo;
 import teamWeb.service.TextboxInfoService;
 import teamWeb.utils.APIResponse;
@@ -19,18 +20,25 @@ public class ProjectController {
     TextboxInfoService textboxInfoService;
 
     @RequestMapping("/projecting")
-    public APIResponse projecting(@RequestParam(value="page") int page){
-        List<TextboxInfo> projectDetail = textboxInfoService.projectDetail((page-1)*10,page*10);
+    public APIResponse projecting(@RequestParam(value="start") int start,@RequestParam(value="end") int end){
+        List<TextboxInfo> projectDetail = textboxInfoService.projectDetail(start,end);
         List<Object> params =new ArrayList<>();
         params.add(projectDetail);
         return APIResponse.success(params);
     }
 
     @RequestMapping("/projected")
-    public APIResponse projected(@RequestParam(value="page") int page){
-        List<TextboxInfo> projectedDetail = textboxInfoService.projectedDetail((page-1)*10,page*10);
+    public APIResponse projected(@RequestParam(value="start") int start,@RequestParam(value="end") int end){
+        List<TextboxInfo> projectedDetail = textboxInfoService.projectedDetail(start,end);
         List<Object> params =new ArrayList<>();
         params.add(projectedDetail);
+        return APIResponse.success(params);
+    }
+    @RequestMapping("/Detail")
+    public APIResponse getText(@RequestParam(value = "id") int id){
+        List<TextboxInfo> text = textboxInfoService.getText(id);
+        List<Object> params =new ArrayList<>();
+        params.add(text);
         return APIResponse.success(params);
     }
 }

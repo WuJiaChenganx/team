@@ -69,4 +69,11 @@
         select *
         from relation
     </select>
+
+    <select id="getText" resultType="teamWeb.entity.TextboxInfo">
+        select * from textbox
+        <where>
+            id =${id}
+        </where>
+    </select>
 </mapper>

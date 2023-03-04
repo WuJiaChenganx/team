@@ -29,4 +29,9 @@ public class OutcomeInfoServiceImpl extends ServiceImpl<OutcomeInfoMapper, Outco
     public List<OutcomeInfo> monographDetail(int start, int end) {
         return outcomeInfoMapper.getMonographDetail(start,end);
     }
+
+    @Override
+    public List<OutcomeInfo> getOutcome(int id) {
+        return outcomeInfoMapper.getOutcome(id);
+    }
 }

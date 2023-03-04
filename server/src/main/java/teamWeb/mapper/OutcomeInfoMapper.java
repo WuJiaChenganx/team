@@ -13,4 +13,6 @@ public interface OutcomeInfoMapper extends BaseMapper<OutcomeInfo> {
     List<OutcomeInfo> getPatentDetail(int start, int end);
 
     List<OutcomeInfo> getMonographDetail(int start, int end);
+
+    List<OutcomeInfo> getOutcome(int id);
 }

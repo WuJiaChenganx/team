@@ -65,4 +65,9 @@ public class ReportInfoServiceImpl extends ServiceImpl<ReportInfoMapper, ReportI
     public void deleteInfo(ReportInfo reportInfo) {
         reportInfoMapper.delete(reportInfo.getId());
     }
+
+    @Override
+    public List<ReportInfo> getNews(int id) {
+        return reportInfoMapper.getNews(id);
+    }
 }

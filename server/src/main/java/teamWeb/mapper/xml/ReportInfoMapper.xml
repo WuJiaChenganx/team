@@ -68,8 +68,15 @@
         order  by date desc limit ${start},${end}
     </select>
 
+    <select id="getNews" resultType="teamWeb.entity.ReportInfo">
+        select *
+        from report
+        <where>
+            id = ${id}
+        </where>
+    </select>
     <insert id="insertInfo">
-
+        INSERT INTO report(`title`, `date`, `text`, `url`, `pictureurl`) VALUES ("${title}","${date}","${text}","${url}","${pictureUrl}")
     </insert>
     <update id="updateInfo">
         update report
@@ -82,5 +89,6 @@
             `id`=${id}
         </where>
     </delete>
+
 
 </mapper>

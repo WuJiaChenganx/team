@@ -4,11 +4,11 @@ import java.sql.Date;
 
 public class ReportInfo {
     private int id;
-    private String date;
-    private String title;
-    private String url;
-    private String pictureUrl;
-    private String text;
+    private String date="-";
+    private String title="-";
+    private String url="-";
+    private String pictureUrl="-";
+    private String text="-";
 
     public ReportInfo() {
     }

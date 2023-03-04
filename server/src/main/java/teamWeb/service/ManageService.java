@@ -1,4 +1,4 @@
-package manage.service;
+package teamWeb.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import teamWeb.entity.MemberInfo;

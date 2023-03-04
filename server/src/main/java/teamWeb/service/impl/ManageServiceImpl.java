@@ -1,12 +1,8 @@
-package manage.service.impl;
+package teamWeb.service.impl;
 
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import manage.service.ManageService;
+import teamWeb.service.ManageService;
 import org.springframework.stereotype.Service;
-import teamWeb.entity.MemberInfo;
 import teamWeb.entity.ReportInfo;
-import teamWeb.mapper.MemberInfoMapper;
-import teamWeb.service.MemberInfoService;
 
 import java.util.List;
 

@@ -28,4 +28,12 @@
         </where>
         order by date desc limit ${start},${end}
     </select>
+
+    <select id="getOutcome" resultType="teamWeb.entity.OutcomeInfo">
+        select *
+        from outcome
+        <where>
+            id = ${id}
+        </where>
+    </select>
 </mapper>

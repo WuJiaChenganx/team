@@ -2,6 +2,7 @@ package teamWeb.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -60,6 +61,13 @@ public class NewsController {
         List<ReportInfo> allNews = reportInfoService.allNews(start,end);
         List<Object> params =new ArrayList<>();
         params.add(allNews);
+        return APIResponse.success(params);
+    }
+    @RequestMapping("/news/Detail")
+    public APIResponse getNews(@RequestParam(value="id") int id){
+        List<ReportInfo> getNews = reportInfoService.getNews(id);
+        List<Object> params =new ArrayList<>();
+        params.add(getNews);
         return APIResponse.success(params);
     }
 }

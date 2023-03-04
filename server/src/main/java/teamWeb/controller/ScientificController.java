@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("/teamWeb/Scientific")
+@RequestMapping("/teamWeb/scientific")
 public class ScientificController {
     @Autowired
     TextboxInfoService textboxInfoService;
@@ -40,5 +40,11 @@ public class ScientificController {
         params.add(teachDetail);
         return APIResponse.success(params);
     }
-
+    @RequestMapping("/Detail")
+    public APIResponse getText(@RequestParam(value = "id") int id){
+        List<TextboxInfo> text = textboxInfoService.getText(id);
+        List<Object> params =new ArrayList<>();
+        params.add(text);
+        return APIResponse.success(params);
+    }
 }

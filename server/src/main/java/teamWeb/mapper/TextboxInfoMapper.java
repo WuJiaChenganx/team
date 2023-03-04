@@ -25,4 +25,7 @@ public interface TextboxInfoMapper extends BaseMapper<TextboxInfo> {
     List<TextboxInfo> getData(int start, int end);
 
     List<RelationInfo> getRelation();
+
+    List<TextboxInfo> getText(int id);
+
 }
