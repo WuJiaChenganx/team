@@ -32,10 +32,18 @@ public class TeamController {
     }
 
     @RequestMapping("/member")
-    public APIResponse member(@RequestParam(value = "page") int page){
-        List<MemberInfo> getMember = memberInfoService.getMember((page-1)*10,page*10);
+    public APIResponse member(@RequestParam(value="start",defaultValue = "0") int start,@RequestParam(value="end",defaultValue = "10") int end){
+        List<MemberInfo> getMember = memberInfoService.getMember(start, end);
         List<Object> params =new ArrayList<>();
         params.add(getMember);
+        return APIResponse.success(params);
+    }
+
+    @RequestMapping("/Detail")
+    public APIResponse getMember(@RequestParam(value = "id") int id){
+        List<MemberInfo> member = memberInfoService.getDetail(id);
+        List<Object> params =new ArrayList<>();
+        params.add(member);
         return APIResponse.success(params);
     }
 

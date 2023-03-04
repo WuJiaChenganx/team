@@ -20,4 +20,10 @@
         from member
         order by mClass,name limit ${start},${end}
     </select>
+    <select id="getMemberDetail" resultType="teamWeb.entity.MemberInfo">
+        select * from member
+        <where>
+            id = ${id}
+        </where>
+    </select>
 </mapper>

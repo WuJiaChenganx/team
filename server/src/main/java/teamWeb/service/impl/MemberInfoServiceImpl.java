@@ -32,4 +32,9 @@ public class MemberInfoServiceImpl extends ServiceImpl<MemberInfoMapper, MemberI
     public List<MemberInfo> getHomeMember(int start, int end) {
         return memberInfoMapper.getHomeMember(start,end);
     }
+
+    @Override
+    public List<MemberInfo> getDetail(int id) {
+        return memberInfoMapper.getMemberDetail(id);
+    }
 }
