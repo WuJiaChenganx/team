@@ -76,4 +76,8 @@
             id =${id}
         </where>
     </select>
+
+    <insert id="insertInfo">
+        INSERT INTO textbox(`title`, `text`,`fileUrl`,`tClass`,`pictureUrl`,`sDate`,`eDate`) VALUES ("${title}", "${text}","${fileUrl}","${tClass}","${pictureUrl}","${sDate}","${eDate}")
+    </insert>
 </mapper>

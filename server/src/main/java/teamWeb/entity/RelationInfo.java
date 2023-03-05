@@ -3,6 +3,10 @@ package teamWeb.entity;
 public class RelationInfo {
     private int id;
     private String email;
+    private String address;
+    private String phone;
+    private String pictureUrl;
+
 
     @Override
     public String toString() {
@@ -55,7 +59,5 @@ public class RelationInfo {
         this.pictureUrl = pictureUrl;
     }
 
-    private String address;
-    private String phone;
-    private String pictureUrl;
+
 }

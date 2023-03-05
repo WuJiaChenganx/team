@@ -10,6 +10,34 @@ public class OutcomeInfo implements Serializable {
     //论文名
     private String title;
 
+    //作者
+    private String author;
+    //发表时间
+    private Date date;
+    //期刊
+    private String perio;
+    //申请人
+    private String proposer;
+    //发明人
+    private String inventor;
+    //授权人
+    private String authorization;
+    //出版社
+    private String pub;
+    //图片地址
+    private String pictureUrl;
+    //论文链接
+    private String url;
+
+    public int getpClass() {
+        return pClass;
+    }
+
+    public void setpClass(int pClass) {
+        this.pClass = pClass;
+    }
+
+    private int pClass;
     public int getId() {
         return id;
     }
@@ -98,24 +126,7 @@ public class OutcomeInfo implements Serializable {
         this.url = url;
     }
 
-    //作者
-    private String author;
-    //发表时间
-    private Date date;
-    //期刊
-    private String perio;
-    //申请人
-    private String proposer;
-    //发明人
-    private String inventor;
-    //授权人
-    private String authorization;
-    //出版社
-    private String pub;
-    //图片地址
-    private String pictureUrl;
-    //论文链接
-    private String url;
+
 
     public OutcomeInfo() {
     }

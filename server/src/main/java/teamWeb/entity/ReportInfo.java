@@ -10,6 +10,17 @@ public class ReportInfo {
     private String pictureUrl="-";
     private String text="-";
 
+    private int rClass;
+
+    public int getrClass() {
+        return rClass;
+    }
+
+    public void setrClass(int rClass) {
+        this.rClass = rClass;
+    }
+
+
     public ReportInfo() {
     }
 

@@ -14,4 +14,10 @@ public interface MemberInfoService extends IService<MemberInfo> {
     List<MemberInfo> getHomeMember(int start, int end);
 
     List<MemberInfo> getDetail(int id);
+
+    void insertInfo(MemberInfo memberInfo);
+
+    void updateInfo(MemberInfo memberInfo);
+
+    void deleteInfo(MemberInfo memberInfo);
 }

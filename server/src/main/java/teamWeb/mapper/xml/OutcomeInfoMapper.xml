@@ -36,4 +36,10 @@
             id = ${id}
         </where>
     </select>
+
+    <insert id="insertInfo">
+        INSERT INTO outcome(`title`, `author`,`date`,`perio`,`url`,`proposer`,`inventor`,`authorization`,`pub`,`pictureUrl`,`pClass`) VALUES ("${title}", "${author}","${date}","${perio}","${url}","${proposer}","${inventor}","${authorization}","${pub}","${pictureUrl}","${pClass}")
+    </insert>
+
+
 </mapper>

@@ -37,4 +37,19 @@ public class MemberInfoServiceImpl extends ServiceImpl<MemberInfoMapper, MemberI
     public List<MemberInfo> getDetail(int id) {
         return memberInfoMapper.getMemberDetail(id);
     }
+
+    @Override
+    public void insertInfo(MemberInfo memberInfo) {
+        memberInfoMapper.insert(memberInfo);
+    }
+
+    @Override
+    public void updateInfo(MemberInfo memberInfo) {
+        memberInfoMapper.updateInfo(memberInfo);
+    }
+
+    @Override
+    public void deleteInfo(MemberInfo memberInfo) {
+        memberInfoMapper.deleteInfo(memberInfo.getId());
+    }
 }

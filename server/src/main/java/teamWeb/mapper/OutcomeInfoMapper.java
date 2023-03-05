@@ -15,4 +15,10 @@ public interface OutcomeInfoMapper extends BaseMapper<OutcomeInfo> {
     List<OutcomeInfo> getMonographDetail(int start, int end);
 
     List<OutcomeInfo> getOutcome(int id);
+
+    void insertInfo(OutcomeInfo outcomeInfo);
+
+    void updateInfo(OutcomeInfo outcomeInfo);
+
+    void deleteInfo(int id);
 }
