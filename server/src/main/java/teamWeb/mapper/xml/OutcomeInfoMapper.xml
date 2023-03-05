@@ -3,28 +3,28 @@
 
 <mapper namespace="teamWeb.mapper.OutcomeInfoMapper">
     <select id="getPaperDetail" resultType="teamWeb.entity.OutcomeInfo">
-        select `id`,`title`,`author`,`date`,`perio`,`url`,`pictureUrl`,`class`
+        select `id`,`title`,`author`,`date`,`perio`,`url`,`pictureUrl`,`pClass`
         from outcome
         <where>
-            class = 0
+            pClass = 0
         </where>
         order by date desc limit ${start},${end}
     </select>
 
     <select id="getPatentDetail" resultType="teamWeb.entity.OutcomeInfo">
-        select `id`,`title`,`date`,`proposer`,`inventor`,`authorization`,`class`
+        select `id`,`title`,`date`,`proposer`,`inventor`,`authorization`,`pClass`
         from outcome
         <where>
-            class = 1
+            pClass = 1
         </where>
         order by date desc limit ${start},${end}
     </select>
 
     <select id="getMonographDetail" resultType="teamWeb.entity.OutcomeInfo">
-        select `id`,`title`,`date`,`author`,`pub`,`pictureUrl`,`class`
+        select `id`,`title`,`date`,`author`,`pub`,`pictureUrl`,`pClass`
         from outcome
         <where>
-            class = 2
+            pClass = 2
         </where>
         order by date desc limit ${start},${end}
     </select>

@@ -4,60 +4,60 @@
 <mapper namespace="teamWeb.mapper.ReportInfoMapper">
     <select id="teamDynamic" resultType="teamWeb.entity.ReportInfo">
         select
-        `id`,`title`,`date`,`text`,`pictureUrl`,`class`
+        `id`,`title`,`date`,`text`,`pictureUrl`,`rClass`
         from report
         <where>
-            `class`= 1
+            `rClass`= 1
         </where>
         order by date desc limit ${start},${end}
     </select>
 
     <select id="notice" resultType="teamWeb.entity.ReportInfo">
         select
-        `id`,`title`,`date`,`text`,`class`
+        `id`,`title`,`date`,`text`,`rClass`
         from report
         <where>
-            `class`= 0
+            `rClass`= 0
         </where>
         order by date desc limit ${start},${end}
     </select>
 
     <select id="media" resultType="teamWeb.entity.ReportInfo">
         select
-        `id`,`title`,`date`,`url`,`class`
+        `id`,`title`,`date`,`url`,`rClass`
         from report
         <where>
-            `class`= 2
+            `rClass`= 2
         </where>
         order by date desc limit ${start},${end}
     </select>
 
     <select id="consult" resultType="teamWeb.entity.ReportInfo">
         select
-        `id`,`title`,`date`,`url`,`class`
+        `id`,`title`,`date`,`url`,`rClass`
         from report
         <where>
-            `class`= 3
+            `rClass`= 3
         </where>
         order by date desc limit ${start},${end}
     </select>
 
     <select id="getReport" resultType="teamWeb.entity.ReportInfo">
         select
-        `id`,`url`,`class`
+        `id`,`url`,`rClass`
         from report
         <where>
-            `class`= 4
+            `rClass`= 4
         </where>
         limit ${start},${end}
     </select>
 
     <select id="getNewsDetail" resultType="teamWeb.entity.ReportInfo">
         select
-        `id`,`title`,`date`,`url`,`class`
+        `id`,`title`,`date`,`url`,`rClass`
         from report
         <where>
-            `class`= 2
+            `rClass`= 2
         </where>
         order  by date desc limit ${start},${end}
     </select>

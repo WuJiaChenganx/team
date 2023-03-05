@@ -43,12 +43,13 @@ public class ShowHomeController {
     }
 
     @RequestMapping("/news")
-    public APIResponse news(@RequestParam(value="start",defaultValue = "0") int start,@RequestParam(value="end",defaultValue = "10") int end){
-        List<ReportInfo> newsDetail = reportInfoService.newsDetail(start,end);
+    public APIResponse allNews(@RequestParam(value="start") int start,@RequestParam(value="end") int end){
+        List<ReportInfo> allNews = reportInfoService.allNews(start,end);
         List<Object> params =new ArrayList<>();
-        params.add(newsDetail);
+        params.add(allNews);
         return APIResponse.success(params);
     }
+
 
     @RequestMapping("/member")
     public APIResponse member(@RequestParam(value="start",defaultValue = "0") int start,@RequestParam(value="end",defaultValue = "10") int end){

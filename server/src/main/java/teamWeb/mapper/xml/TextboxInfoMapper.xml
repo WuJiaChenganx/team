@@ -3,65 +3,65 @@
 
 <mapper namespace="teamWeb.mapper.TextboxInfoMapper">
     <select id="getProject" resultType="teamWeb.entity.TextboxInfo">
-        select `id`,`text`,`sDate`,`eDate`,`class`
+        select `id`,`text`,`sDate`,`eDate`,`tClass`
         from textbox
         <where>
-            class = 5
+            tClass = 5
         </where>
         order by sDate desc limit ${start},${end}
     </select>
 
     <select id="getProjected" resultType="teamWeb.entity.TextboxInfo">
-        select `id`,`text`,`sDate`,`eDate`,`class`
+        select `id`,`text`,`sDate`,`eDate`,`tClass`
         from textbox
         <where>
-            class = 6
+            tClass = 6
         </where>
         order by sDate desc limit ${start},${end}
     </select>
 
     <select id="getDire" resultType="teamWeb.entity.TextboxInfo">
-        select `id`,`text`,`pictureUrl`,`class`
+        select `id`,`text`,`pictureUrl`,`tClass`
         from textbox
         <where>
-            class = 7
+            tClass = 7
         </where>
         limit ${start},${end}
     </select>
 
     <select id="getPlatform" resultType="teamWeb.entity.TextboxInfo">
-        select `id`,`text`,`pictureUrl`,`class`
+        select `id`,`text`,`pictureUrl`,`tClass`
         from textbox
         <where>
-            class = 2
+            tClass = 2
         </where>
         limit ${start},${end}
     </select>
 
     <select id="getTeach" resultType="teamWeb.entity.TextboxInfo">
-        select `id`,`text`,`pictureUrl`,`class`
+        select `id`,`text`,`pictureUrl`,`tClass`
         from textbox
         <where>
-            class = 3
+            tClass = 3
         </where>
         limit ${start},${end}
     </select>
 
     <select id="getBrief" resultType="teamWeb.entity.TextboxInfo">
-        select `id`,`text`,`pictureUrl`,`class`
+        select `id`,`text`,`pictureUrl`,`tClass`
         from textbox
         <where>
-            class = 4
+            tClass = 4
         </where>
     </select>
 
 
 
     <select id="getEmulation" resultType="teamWeb.entity.TextboxInfo">
-        select `id`,`text`,`fileUrl`,`class`
+        select `id`,`text`,`fileUrl`,`tClass`
         from textbox
         <where>
-            class = 1
+            tClass = 1
         </where>
     </select>
 
