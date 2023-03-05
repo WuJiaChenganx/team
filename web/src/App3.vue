@@ -2,9 +2,9 @@
   <!-- 这里的ID是绑定下面的css用的 -->
   <div id="app">
     <navigationBar></navigationBar>
-    <router-view>
-      <router-view></router-view>
-    </router-view>
+    <!-- <router-view name="Top"></router-view> -->
+    <router-view></router-view>
+    <!-- <router-view name="Bottom"></router-view> -->
     <myFooter></myFooter>
   </div>
 </template>

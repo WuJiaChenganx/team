@@ -24,7 +24,19 @@
           @click="goTo(item.path)"
           style="cursor: pointer"
         >
-          <span>{{ item.title }}</span>
+          <div class="navTitle">{{ item.title }}</div>
+          <div class="subNav" style="position: absolute; z-index: 9999">
+            <!-- 在点击函数中需要加入stop防止冒泡 -->
+            <div
+              class="subNavItem"
+              v-for="(menu, menuIndex) in item.subMenu"
+              :key="menuIndex"
+              style="cursor: pointer"
+              @click.stop="goTo(menu.path)"
+            >
+              {{ menu.title }}
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -36,23 +48,64 @@ export default {
   data() {
     return {
       navigation: [
-        { title: "首页", path: "/home" },
+        {
+          title: "首页",
+          path: "/home",
+        },
         { title: "新闻快讯", path: "/newFlash" },
-        { title: "论文论著", path: "/footer" },
-        { title: "科研教学", path: "/footer" },
-        { title: "团队概况", path: "/footer" },
-        { title: "资源共享", path: "/footer" },
+        {
+          title: "论文论著",
+          path: "/paper",
+          subMenu: [
+            { title: "发表论文", path: "/paper/paper" },
+            { title: "授权专利", path: "/paper/patent" },
+            { title: "出版专著", path: "/paper/book" },
+          ],
+        },
+        {
+          title: "科研教学",
+          path: "/scientificResearch",
+          subMenu: [
+            { title: "科研方向", path: "/scientificResearch/direction" },
+            { title: "科研项目", path: "/scientificResearch/project" },
+            { title: "科研平台", path: "/scientificResearch/platform" },
+            { title: "课程教学", path: "/scientificResearch/curriculum" },
+          ],
+        },
+        {
+          title: "团队概况",
+          path: "/team",
+          subMenu: [
+            { title: "团队简介", path: "/team/profile" },
+            { title: "导师", path: "/team/teacher" },
+            { title: "博士生", path: "/team/doctor" },
+            { title: "研究生", path: "/team/master" },
+            { title: "毕业生", path: "/team/graduate" },
+          ],
+        },
+        {
+          title: "资源共享",
+          path: "/resource",
+          subMenu: [
+            { title: "仿真工具", path: "/resource/simulationTool" },
+            { title: "数据集", path: "/resource/dataSet" },
+          ],
+        },
       ],
     };
   },
   components: {
     logo,
   },
+
   methods: {
     goTo(path) {
-      this.$router.push({
-        path: path,
-      });
+      // 当前不一样就跳转
+      if (this.$route.path !== path) {
+        this.$router.push({
+          path: path,
+        });
+      }
     },
   },
 };
@@ -65,10 +118,12 @@ export default {
   background-size: cover !important;
   /* padding: 30px 0; */
 }
+
 .headerContent {
   width: 100%;
   height: 260px;
 }
+
 .headerContent .text {
   text-align: left;
   display: flex;
@@ -79,6 +134,7 @@ export default {
   height: 260px;
   font-weight: bold;
 }
+
 .headerLogo {
   float: left;
   margin-left: 200px;
@@ -90,6 +146,7 @@ export default {
   height: 50px;
   background-color: #0055a2;
 }
+
 .nav {
   margin: 0 auto;
   width: 80%;
@@ -103,13 +160,7 @@ export default {
   width: 10%;
 }
 
-.navItem span {
-  /* 1.变成块,使得设置的宽高生效 */
-  display: block;
-  /* 2.盒子模型 */
-  width: 100%;
-  height: 100%;
-  /* 3.文字 */
+.navItem .navTitle {
   /* 水平对齐 */
   text-align: center;
   /* 垂直对齐 */
@@ -118,6 +169,30 @@ export default {
 }
 
 .navItem:hover {
+  background-color: #008cd6;
+}
+
+.navItem .subNav {
+  /* 隐藏元素 */
+  width: 8%;
+  display: none;
+  color: #fff;
+  background-color: #0055a2;
+}
+
+.navItem:hover .subNav {
+  display: block;
+}
+
+.subNavItem {
+  height: 50px;
+  text-align: center;
+  /* 垂直对齐 */
+  line-height: 50px;
+  color: #fff;
+}
+
+.subNavItem:hover {
   background-color: #008cd6;
 }
 </style>

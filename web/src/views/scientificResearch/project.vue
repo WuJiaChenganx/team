@@ -1,26 +1,21 @@
 <template>
-  <!-- 首页 -->
+  <!-- 科研项目 -->
   <div>
-    <home></home>
+    <projected></projected>
   </div>
 </template>
-  
+
 <script>
-// 导入组件
-import home from "../components/home/home.vue";
+import projected from "../../components/scientificResearch/project.vue";
 export default {
   data: function () {
     return {};
   },
   created: function () {},
-  mounted: function () {},
   components: {
     // 注册组件
-    home,
+    projected,
   },
 };
 </script>
-  
-<style>
-</style>
-  
+<style></style>

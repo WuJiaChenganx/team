@@ -1,21 +1,20 @@
 <template>
-  <!-- 新闻快讯 -->
+  <!-- 毕业生介绍 -->
   <div>
-    <newFlash></newFlash>
+    <graduate></graduate>
   </div>
 </template>
 
 <script>
-import newFlash from "../components/newFlash/newFlash.vue";
+import graduate from "../../components/team/graduate.vue";
 export default {
   data: function () {
     return {};
   },
   created: function () {},
-  mounted: function () {},
   components: {
     // 注册组件
-    newFlash,
+    graduate,
   },
 };
 </script>

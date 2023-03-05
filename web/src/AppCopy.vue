@@ -1,11 +1,15 @@
 <template>
   <!-- 这里的ID是绑定下面的css用的 -->
   <div id="app">
-    <navigationBar></navigationBar>
-    <router-view>
-      <router-view></router-view>
-    </router-view>
-    <myFooter></myFooter>
+    <!-- 固定头 -->
+    <!-- <header class="header">
+      <navigationBar></navigationBar>
+    </header> -->
+    <router-view></router-view>
+    <!-- 固定尾 -->
+    <!-- <footer class="footer">
+      <myFooter></myFooter>
+    </footer> -->
   </div>
 </template>
 
@@ -14,15 +18,13 @@ import navigationBar from "./components/public/navigationBar.vue";
 import myFooter from "./components/public/myFooter.vue";
 // 导入组件
 export default {
-  name: "app",
-
+  name: "app1",
+  components: {},
   data() {
-    return {};
-  },
-  components: {
-    // 注册组件
-    navigationBar,
-    myFooter,
+    return {
+      navigationBar,
+      myFooter,
+    };
   },
   methods: {},
   created() {},

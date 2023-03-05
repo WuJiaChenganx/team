@@ -1,8 +1,5 @@
 <template>
   <div>
-    <div class="logoAndHeader">
-      <navigationBar></navigationBar>
-    </div>
     <div class="firstContainer">
       <!-- 内容展示 -->
       <div class="firstAllContent">
@@ -49,9 +46,6 @@
         </div>
       </div>
     </div>
-    <div>
-      <myFooter></myFooter>
-    </div>
   </div>
 </template>
 
@@ -60,22 +54,21 @@ import newsList from "./newsList.vue";
 import memberPhoto from "./memberPhoto.vue";
 import friendlyLink from "./friendlyLink.vue";
 import researchTeam from "./researchTeam.vue";
-import myFooter from "./myFooter.vue";
 import activityPhoto from "./activityPhoto.vue";
 import academicTrend from "./academicTrend.vue";
 import noticeAndResearch from "./noticeAndResearch.vue";
-import navigationBar from "./navigationBar.vue";
 export default {
+  name: "home",
   components: {
     newsList,
     memberPhoto,
     friendlyLink,
     researchTeam,
-    myFooter,
+    // myFooter,
     activityPhoto,
     academicTrend,
     noticeAndResearch,
-    navigationBar,
+    // navigationBar,
   },
   data() {
     return {};

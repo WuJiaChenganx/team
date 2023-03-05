@@ -1,12 +1,12 @@
 <template>
-  <!-- 资源共享 -->
+  <!-- 新闻列表 -->
   <div>
-    <resourceSharing></resourceSharing>
+    <newFlash></newFlash>
   </div>
 </template>
-  
-  <script>
-import resourceSharing from "../components/resourceSharing/resourceSharing.vue";
+
+<script>
+import newFlash from "../../components/newFlash/newFlash.vue";
 export default {
   data: function () {
     return {};
@@ -15,7 +15,7 @@ export default {
   mounted: function () {},
   components: {
     // 注册组件
-    resourceSharing,
+    newFlash,
   },
 };
 </script>
