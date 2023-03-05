@@ -28,7 +28,7 @@ public class ShowHomeController {
 
     @RequestMapping("/teamDynamics")
     public APIResponse teamDynamics(@RequestParam(value="start",defaultValue = "0") int start,@RequestParam(value="end",defaultValue = "10") int end){
-        List<ReportInfo> teamDynamicsDetail = reportInfoService.teamDynamicsDetail(0,10);
+        List<ReportInfo> teamDynamicsDetail = reportInfoService.teamDynamicsDetail(start,end);
         List<Object> params =new ArrayList<>();
         params.add(teamDynamicsDetail);
         return APIResponse.success(params);
@@ -36,7 +36,7 @@ public class ShowHomeController {
 
     @RequestMapping("/notice")
     public APIResponse notice(@RequestParam(value="start",defaultValue = "0") int start,@RequestParam(value="end",defaultValue = "10") int end){
-        List<ReportInfo> noticeDetail = reportInfoService.noticeDetail(0,5);
+        List<ReportInfo> noticeDetail = reportInfoService.noticeDetail(start,end);
         List<Object> params =new ArrayList<>();
         params.add(noticeDetail);
         return APIResponse.success(params);
@@ -44,7 +44,7 @@ public class ShowHomeController {
 
     @RequestMapping("/news")
     public APIResponse news(@RequestParam(value="start",defaultValue = "0") int start,@RequestParam(value="end",defaultValue = "10") int end){
-        List<ReportInfo> newsDetail = reportInfoService.newsDetail(0,10);
+        List<ReportInfo> newsDetail = reportInfoService.newsDetail(start,end);
         List<Object> params =new ArrayList<>();
         params.add(newsDetail);
         return APIResponse.success(params);
@@ -52,7 +52,7 @@ public class ShowHomeController {
 
     @RequestMapping("/member")
     public APIResponse member(@RequestParam(value="start",defaultValue = "0") int start,@RequestParam(value="end",defaultValue = "10") int end){
-        List<MemberInfo> member = memberInfoService.getHomeMember(0,10);
+        List<MemberInfo> member = memberInfoService.getHomeMember(start,end);
         List<Object> params =new ArrayList<>();
         params.add(member);
         return APIResponse.success(params);

@@ -27,4 +27,12 @@ public interface TextboxInfoService extends IService<TextboxInfo> {
     List<TextboxInfo> dataDetail(int start, int end);
 
     List<RelationInfo> getRelation();
+
+    List<TextboxInfo> getText(int id);
+
+    void insertInfo(TextboxInfo textboxInfo);
+
+    void updateInfo(TextboxInfo textboxInfo);
+
+    void deleteInfo(TextboxInfo textboxInfo);
 }

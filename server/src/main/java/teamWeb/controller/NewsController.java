@@ -2,6 +2,7 @@ package teamWeb.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,12 +16,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("/teamWeb/news")
+@RequestMapping("/teamWeb")
 public class NewsController {
 
     @Autowired
     ReportInfoService reportInfoService;
 
+    /*
     @RequestMapping("/notice")
     public APIResponse notice(@RequestParam(value="page") int page){
         List<ReportInfo> noticeDetail = reportInfoService.noticeDetail((page-1)*10,page*10);
@@ -51,6 +53,21 @@ public class NewsController {
         List<ReportInfo> consultDetail = reportInfoService.consultDetail((page-1)*10,page*10);
         List<Object> params =new ArrayList<>();
         params.add(consultDetail);
+        return APIResponse.success(params);
+    }
+    */
+    @RequestMapping("/news")
+    public APIResponse allNews(@RequestParam(value="start") int start,@RequestParam(value="end") int end){
+        List<ReportInfo> allNews = reportInfoService.allNews(start,end);
+        List<Object> params =new ArrayList<>();
+        params.add(allNews);
+        return APIResponse.success(params);
+    }
+    @RequestMapping("/news/Detail")
+    public APIResponse getNews(@RequestParam(value="id") int id){
+        List<ReportInfo> getNews = reportInfoService.getNews(id);
+        List<Object> params =new ArrayList<>();
+        params.add(getNews);
         return APIResponse.success(params);
     }
 }

@@ -21,4 +21,14 @@ public interface ReportInfoService extends IService<ReportInfo> {
     List<ReportInfo> meetDetail(int start, int end);
 
     List<ReportInfo> newsDetail(int start, int end);
+
+    List<ReportInfo> allNews(int start, int end);
+
+    void insertInfo(ReportInfo reportInfo);
+
+    void updateInfo(ReportInfo reportInfo);
+
+    void deleteInfo(ReportInfo reportInfo);
+
+    List<ReportInfo> getNews(int id);
 }

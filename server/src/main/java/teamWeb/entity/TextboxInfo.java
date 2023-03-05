@@ -7,8 +7,18 @@ public class TextboxInfo {
     private String pictureUrl;
     private String fileUrl;
 
+    private String tClass;
+
     private String sDate;
     private String eDate;
+
+    public String gettClass() {
+        return tClass;
+    }
+
+    public void settClass(String tClass) {
+        this.tClass = tClass;
+    }
 
     @Override
     public String toString() {

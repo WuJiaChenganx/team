@@ -62,4 +62,24 @@ public class TextboxInfoServiceImpl extends ServiceImpl<TextboxInfoMapper, Textb
         return textboxInfoMapper.getRelation();
     }
 
+    @Override
+    public List<TextboxInfo> getText(int id) {
+        return textboxInfoMapper.getText(id);
+    }
+
+    @Override
+    public void insertInfo(TextboxInfo textboxInfo) {
+        textboxInfoMapper.insertInfo(textboxInfo);
+    }
+
+    @Override
+    public void updateInfo(TextboxInfo textboxInfo) {
+        textboxInfoMapper.updateInfo(textboxInfo);
+    }
+
+    @Override
+    public void deleteInfo(TextboxInfo textboxInfo) {
+        textboxInfoMapper.deleteInfo(textboxInfo.getId());
+    }
+
 }

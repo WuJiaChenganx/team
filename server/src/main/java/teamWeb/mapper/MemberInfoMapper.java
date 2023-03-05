@@ -12,4 +12,10 @@ public interface MemberInfoMapper extends BaseMapper<MemberInfo> {
     List<MemberInfo> getMember(int start, int end);
 
     List<MemberInfo> getHomeMember(int start, int end);
+
+    List<MemberInfo> getMemberDetail(int id);
+
+    void updateInfo(MemberInfo memberInfo);
+
+    void deleteInfo(String id);
 }

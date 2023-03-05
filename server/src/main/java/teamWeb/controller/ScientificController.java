@@ -12,33 +12,39 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("/teamWeb/Scientific")
+@RequestMapping("/teamWeb/scientific")
 public class ScientificController {
     @Autowired
     TextboxInfoService textboxInfoService;
 
     @RequestMapping("/dire")
-    public APIResponse dire(@RequestParam(value="page") int page){
-        List<TextboxInfo> direDetail = textboxInfoService.direDetail((page-1)*10,page*10);
+    public APIResponse dire(@RequestParam(value="start",defaultValue = "0") int start,@RequestParam(value="end",defaultValue = "10") int end){
+        List<TextboxInfo> direDetail = textboxInfoService.direDetail(start,end);
         List<Object> params =new ArrayList<>();
         params.add(direDetail);
         return APIResponse.success(params);
     }
 
     @RequestMapping("/platform")
-    public APIResponse platform(@RequestParam(value="page") int page){
-        List<TextboxInfo> platformDetail = textboxInfoService.platformDetail((page-1)*10,page*10);
+    public APIResponse platform(@RequestParam(value="start",defaultValue = "0") int start,@RequestParam(value="end",defaultValue = "10") int end){
+        List<TextboxInfo> platformDetail = textboxInfoService.platformDetail(start,end);
         List<Object> params =new ArrayList<>();
         params.add(platformDetail);
         return APIResponse.success(params);
     }
 
     @RequestMapping("/teach")
-    public APIResponse teach(@RequestParam(value="page") int page){
-        List<TextboxInfo> teachDetail = textboxInfoService.teachDetail((page-1)*10,page*10);
+    public APIResponse teach(@RequestParam(value="start",defaultValue = "0") int start,@RequestParam(value="end",defaultValue = "10") int end){
+        List<TextboxInfo> teachDetail = textboxInfoService.teachDetail(start,end);
         List<Object> params =new ArrayList<>();
         params.add(teachDetail);
         return APIResponse.success(params);
     }
-
+    @RequestMapping("/Detail")
+    public APIResponse getText(@RequestParam(value = "id") int id){
+        List<TextboxInfo> text = textboxInfoService.getText(id);
+        List<Object> params =new ArrayList<>();
+        params.add(text);
+        return APIResponse.success(params);
+    }
 }

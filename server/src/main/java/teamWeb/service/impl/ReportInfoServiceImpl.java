@@ -43,6 +43,31 @@ public class ReportInfoServiceImpl extends ServiceImpl<ReportInfoMapper, ReportI
 
     @Override
     public List<ReportInfo> newsDetail(int start, int end) {
-        return reportInfoMapper.getNews(start,end);
+        return reportInfoMapper.getNewsDetail(start,end);
+    }
+
+    @Override
+    public List<ReportInfo> allNews(int start, int end) {
+        return reportInfoMapper.allNews(start,end);
+    }
+
+    @Override
+    public void insertInfo(ReportInfo reportInfo) {
+        reportInfoMapper.insertInfo(reportInfo);
+    }
+
+    @Override
+    public void updateInfo(ReportInfo reportInfo) {
+        reportInfoMapper.updateInfo(reportInfo);
+    }
+
+    @Override
+    public void deleteInfo(ReportInfo reportInfo) {
+        reportInfoMapper.delete(reportInfo.getId());
+    }
+
+    @Override
+    public List<ReportInfo> getNews(int id) {
+        return reportInfoMapper.getNews(id);
     }
 }

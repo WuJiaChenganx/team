@@ -11,4 +11,12 @@ public interface OutcomeInfoService extends IService<OutcomeInfo> {
     List<OutcomeInfo> patentDetail(int start, int end);
 
     List<OutcomeInfo> monographDetail(int start, int end);
+
+    List<OutcomeInfo> getOutcome(int id);
+
+    void insertInfo(OutcomeInfo outcomeInfo);
+
+    void updateInfo(OutcomeInfo outcomeInfo);
+
+    void deleteInfo(OutcomeInfo outcomeInfo);
 }
