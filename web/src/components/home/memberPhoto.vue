@@ -1,14 +1,15 @@
 <template>
   <div id="swiper-member">
-    <div class="swiper-container" v-if="photoURL.length">
+    <!-- 如果没有的话就不显示 -->
+    <div class="swiper-container" v-if="studentAllInfo.length">
       <div class="swiper-wrapper">
-        <div class="swiper-slide" v-for="item in photoURL" :key="item">
+        <div class="swiper-slide" v-for="item in studentAllInfo" :key="item.id">
           <!-- 可以加跳转 -->
           <div style="cursor: pointer" class="memberBox">
             <div class="member-img">
-              <img :src="item" />
+              <img :src="item.picUrl" />
             </div>
-            <div class="member-name">张民</div>
+            <div class="member-name">{{ item.name }}</div>
           </div>
         </div>
       </div>
@@ -23,18 +24,182 @@ import "swiper/css/swiper.min.css";
 export default {
   data() {
     return {
-      photoURL: [
-        require("../../assets/images/member/00.jpg"),
-        require("../../assets/images/member/01.jpg"),
-        require("../../assets/images/member/02.jpg"),
-        require("../../assets/images/member/03.jpg"),
-        require("../../assets/images/member/04.jpg"),
-        require("../../assets/images/member/05.jpg"),
-        require("../../assets/images/member/06.jpg"),
-        require("../../assets/images/member/07.jpg"),
-        require("../../assets/images/member/08.jpg"),
-        require("../../assets/images/member/09.jpg"),
-        require("../../assets/images/member/10.jpg"),
+      // photoURL: [
+      //   require("../../assets/images/member/00.jpg"),
+      //   require("../../assets/images/member/01.jpg"),
+      //   require("../../assets/images/member/02.jpg"),
+      //   require("../../assets/images/member/03.jpg"),
+      //   require("../../assets/images/member/04.jpg"),
+      //   require("../../assets/images/member/05.jpg"),
+      //   require("../../assets/images/member/06.jpg"),
+      //   require("../../assets/images/member/07.jpg"),
+      //   require("../../assets/images/member/08.jpg"),
+      //   require("../../assets/images/member/09.jpg"),
+      //   require("../../assets/images/member/10.jpg"),
+      // ],
+      studentAllInfo: [
+        {
+          id: 1,
+          name: "张恒聪1",
+          title: "硕士研究生",
+          email: "zhangshaolei20z@ict.ac.cn",
+          direction: "机器翻译、自然语言处理",
+          education: [
+            { time: "2016-2020", experience: "北京邮电大学,工学硕士" },
+            {
+              time: "2020-present",
+              experience: "中科院计算技术研究所,博士在读",
+            },
+          ],
+          paperList: [
+            {
+              id: 1,
+              paper:
+                "Shaolei Zhang, Yang Feng. Modeling Dual Read/Write Paths for Simultaneous Machine Translation",
+            },
+            {
+              id: 2,
+              paper:
+                "Shaolei Zhang, Yang Feng. Reducing Position Bias in Simultaneous Machine Translation with Length-Aware Framework.",
+            },
+          ],
+          picUrl: require("../../assets/images/activity/00.jpg"),
+        },
+        {
+          id: 2,
+          name: "马云1",
+          title: "硕士研究生",
+          email: "zhangshaolei20z@ict.ac.cn",
+          direction: "深度学习图像处理",
+          education: [
+            { time: "2016-2020", experience: "北京邮电大学,工学硕士" },
+            {
+              time: "2020-present",
+              experience: "中科院计算技术研究所,博士在读",
+            },
+          ],
+          paperList: [
+            {
+              id: 1,
+              paper:
+                "Shaolei Zhang, Yang Feng. Modeling Dual Read/Write Paths for Simultaneous Machine Translation",
+            },
+            {
+              id: 2,
+              paper:
+                "Shaolei Zhang, Yang Feng. Reducing Position Bias in Simultaneous Machine Translation with Length-Aware Framework.",
+            },
+          ],
+          picUrl: require("../../assets/images/activity/00.jpg"),
+        },
+        {
+          id: 3,
+          name: "马化腾1",
+          title: "硕士研究生",
+          email: "zhangshaolei20z@ict.ac.cn",
+          direction: "深度学习图像处理",
+          education: [
+            { time: "2016-2020", experience: "北京邮电大学,工学硕士" },
+            {
+              time: "2020-present",
+              experience: "中科院计算技术研究所,博士在读",
+            },
+          ],
+          paperList: [
+            {
+              id: 1,
+              paper:
+                "Shaolei Zhang, Yang Feng. Modeling Dual Read/Write Paths for Simultaneous Machine Translation",
+            },
+            {
+              id: 2,
+              paper:
+                "Shaolei Zhang, Yang Feng. Reducing Position Bias in Simultaneous Machine Translation with Length-Aware Framework.",
+            },
+          ],
+          picUrl: require("../../assets/images/activity/00.jpg"),
+        },
+        {
+          id: 4,
+          name: "赵云2",
+          title: "硕士研究生",
+          email: "zhangshaolei20z@ict.ac.cn",
+          direction: "深度学习图像处理",
+          education: [
+            { time: "2016-2020", experience: "北京邮电大学,工学硕士" },
+            {
+              time: "2020-present",
+              experience: "中科院计算技术研究所,博士在读",
+            },
+          ],
+          paperList: [
+            {
+              id: 1,
+              paper:
+                "Shaolei Zhang, Yang Feng. Modeling Dual Read/Write Paths for Simultaneous Machine Translation",
+            },
+            {
+              id: 2,
+              paper:
+                "Shaolei Zhang, Yang Feng. Reducing Position Bias in Simultaneous Machine Translation with Length-Aware Framework.",
+            },
+          ],
+          picUrl: require("../../assets/images/activity/00.jpg"),
+        },
+        {
+          id: 5,
+          name: "赵云1",
+          title: "硕士研究生",
+          email: "zhangshaolei20z@ict.ac.cn",
+          direction: "深度学习图像处理",
+          education: [
+            { time: "2016-2020", experience: "北京邮电大学,工学硕士" },
+            {
+              time: "2020-present",
+              experience: "中科院计算技术研究所,博士在读",
+            },
+          ],
+          paperList: [
+            {
+              id: 1,
+              paper:
+                "Shaolei Zhang, Yang Feng. Modeling Dual Read/Write Paths for Simultaneous Machine Translation",
+            },
+            {
+              id: 2,
+              paper:
+                "Shaolei Zhang, Yang Feng. Reducing Position Bias in Simultaneous Machine Translation with Length-Aware Framework.",
+            },
+          ],
+          picUrl: require("../../assets/images/activity/00.jpg"),
+        },
+        {
+          id: 6,
+          name: "赵云1",
+          title: "硕士研究生",
+          email: "zhangshaolei20z@ict.ac.cn",
+          direction: "深度学习图像处理",
+          education: [
+            { time: "2016-2020", experience: "北京邮电大学,工学硕士" },
+            {
+              time: "2020-present",
+              experience: "中科院计算技术研究所,博士在读",
+            },
+          ],
+          paperList: [
+            {
+              id: 1,
+              paper:
+                "Shaolei Zhang, Yang Feng. Modeling Dual Read/Write Paths for Simultaneous Machine Translation",
+            },
+            {
+              id: 2,
+              paper:
+                "Shaolei Zhang, Yang Feng. Reducing Position Bias in Simultaneous Machine Translation with Length-Aware Framework.",
+            },
+          ],
+          picUrl: require("../../assets/images/activity/00.jpg"),
+        },
       ],
     };
   },
@@ -50,8 +215,8 @@ export default {
       },
       // 间距15px
       spaceBetween: 15,
-      // 一次显示7张照片
-      slidesPerView: 7,
+      // 一次显示几张照片
+      slidesPerView: this.studentAllInfo.length,
       // 每一次移动的时候移动1张
       slidesPerGroup: 1,
     });
@@ -91,4 +256,5 @@ export default {
 .memberBox:hover .member-name {
   color: #0055a2;
 }
-</style>>
+</style>
+>

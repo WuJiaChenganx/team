@@ -2,40 +2,18 @@
   <div class="friendlyLink">
     <div class="right-title-box">
       <div class="right-title">友情链接</div>
-      <a href="//nlp.ict.ac.cn/yqlj/" class="title-more">更多 +</a>
+      <a class="title-more">更多 +</a>
     </div>
     <div id="last-content-box">
       <ul class="link-ul">
         <li>
           <a
-            href="//iip.ict.ac.cn/"
-            title="智能信息处理重点实验室"
+            href="http://www.cs.zjut.edu.cn/html/index.html"
+            title="浙江工业大学计算机学院"
             class="link-a"
             target="_blank"
           >
-            智能信息处理重点实验室
-          </a>
-        </li>
-
-        <li>
-          <a
-            href="//www.ict.ac.cn/"
-            title="计算技术研究所"
-            class="link-a"
-            target="_blank"
-          >
-            计算技术研究所
-          </a>
-        </li>
-
-        <li>
-          <a
-            href="//www.cas.cn/"
-            title="中国科学院"
-            class="link-a"
-            target="_blank"
-          >
-            中国科学院
+            浙江工业大学计算机学院
           </a>
         </li>
       </ul>

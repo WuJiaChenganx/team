@@ -36,7 +36,13 @@
             您当前的位置: 首页 > {{ title }} >{{ currentMenu }}
           </div>
         </div>
-        <div class="detailItem" v-for="memberItem in Info" :key="memberItem.id">
+        <div
+          class="detailItem"
+          v-for="memberItem in studentAllInfo"
+          :key="memberItem.id"
+          style="cursor: pointer"
+          @click="gotoDetail(memberItem)"
+        >
           <div class="memberImg"><img :src="memberItem.picUrl" /></div>
           <div class="memberInfo">
             {{ memberItem.name }} {{ memberItem.title }}
@@ -51,7 +57,7 @@
 export default {
   data() {
     return {
-      title: "团队介绍",
+      title: "团队概况",
       currentMenu: "毕业生",
       Menu: [
         { name: "团队简介", path: "/team/profile" },
@@ -60,78 +66,133 @@ export default {
         { name: "硕士生", path: "/team/master" },
         { name: "毕业生", path: "/team/graduate" },
       ],
-      Info: [
+      studentAllInfo: [
         {
           id: 1,
           name: "张恒聪",
-          title: "2022届毕业生",
+          title: "毕业生",
+          email: "zhangshaolei20z@ict.ac.cn",
+          direction: "机器翻译、自然语言处理",
+          education: [
+            { time: "2016-2020", experience: "北京邮电大学,工学硕士" },
+            {
+              time: "2020-present",
+              experience: "中科院计算技术研究所,博士在读",
+            },
+          ],
+          paperList: [
+            {
+              id: 1,
+              paper:
+                "Shaolei Zhang, Yang Feng. Modeling Dual Read/Write Paths for Simultaneous Machine Translation",
+            },
+            {
+              id: 2,
+              paper:
+                "Shaolei Zhang, Yang Feng. Reducing Position Bias in Simultaneous Machine Translation with Length-Aware Framework.",
+            },
+          ],
           picUrl: require("../../assets/images/activity/00.jpg"),
         },
         {
           id: 2,
-          name: "张恒聪1",
-          title: "2022届毕业生",
-          picUrl: require("../../assets/images/activity/01.jpg"),
+          name: "马云",
+          title: "毕业生",
+          email: "zhangshaolei20z@ict.ac.cn",
+          direction: "深度学习图像处理",
+          education: [
+            { time: "2016-2020", experience: "北京邮电大学,工学硕士" },
+            {
+              time: "2020-present",
+              experience: "中科院计算技术研究所,博士在读",
+            },
+          ],
+          paperList: [
+            {
+              id: 1,
+              paper:
+                "Shaolei Zhang, Yang Feng. Modeling Dual Read/Write Paths for Simultaneous Machine Translation",
+            },
+            {
+              id: 2,
+              paper:
+                "Shaolei Zhang, Yang Feng. Reducing Position Bias in Simultaneous Machine Translation with Length-Aware Framework.",
+            },
+          ],
+          picUrl: require("../../assets/images/activity/00.jpg"),
         },
         {
           id: 3,
-          name: "张恒聪1",
-          title: "2022届毕业生",
-          picUrl: require("../../assets/images/activity/01.jpg"),
+          name: "马化腾",
+          title: "毕业生",
+          email: "zhangshaolei20z@ict.ac.cn",
+          direction: "深度学习图像处理",
+          education: [
+            { time: "2016-2020", experience: "北京邮电大学,工学硕士" },
+            {
+              time: "2020-present",
+              experience: "中科院计算技术研究所,博士在读",
+            },
+          ],
+          paperList: [
+            {
+              id: 1,
+              paper:
+                "Shaolei Zhang, Yang Feng. Modeling Dual Read/Write Paths for Simultaneous Machine Translation",
+            },
+            {
+              id: 2,
+              paper:
+                "Shaolei Zhang, Yang Feng. Reducing Position Bias in Simultaneous Machine Translation with Length-Aware Framework.",
+            },
+          ],
+          picUrl: require("../../assets/images/activity/00.jpg"),
         },
         {
           id: 4,
-          name: "张恒聪1",
-          title: "2022届毕业生",
-          picUrl: require("../../assets/images/activity/01.jpg"),
-        },
-        {
-          id: 5,
-          name: "张恒聪2",
-          title: "2022届毕业生",
-          picUrl: require("../../assets/images/activity/01.jpg"),
-        },
-        {
-          id: 6,
-          name: "张恒聪3",
-          title: "2022届毕业生",
-          picUrl: require("../../assets/images/activity/01.jpg"),
-        },
-        {
-          id: 7,
-          name: "张恒聪1",
-          title: "2022届毕业生",
-          picUrl: require("../../assets/images/activity/01.jpg"),
-        },
-        {
-          id: 8,
-          name: "张恒聪1",
-          title: "2022届毕业生",
-          picUrl: require("../../assets/images/activity/01.jpg"),
-        },
-        {
-          id: 9,
-          name: "张恒聪1",
-          title: "2022届毕业生",
-          picUrl: require("../../assets/images/activity/01.jpg"),
-        },
-        {
-          id: 10,
-          name: "张恒聪1",
-          title: "2022届毕业生",
-          picUrl: require("../../assets/images/activity/01.jpg"),
-        },
-        {
-          id: 11,
-          name: "张恒聪1",
-          title: "2022届毕业生",
-          picUrl: require("../../assets/images/activity/01.jpg"),
+          name: "赵云",
+          title: "毕业生",
+          email: "zhangshaolei20z@ict.ac.cn",
+          direction: "深度学习图像处理",
+          education: [
+            { time: "2016-2020", experience: "北京邮电大学,工学硕士" },
+            {
+              time: "2020-present",
+              experience: "中科院计算技术研究所,博士在读",
+            },
+          ],
+          paperList: [
+            {
+              id: 1,
+              paper:
+                "Shaolei Zhang, Yang Feng. Modeling Dual Read/Write Paths for Simultaneous Machine Translation",
+            },
+            {
+              id: 2,
+              paper:
+                "Shaolei Zhang, Yang Feng. Reducing Position Bias in Simultaneous Machine Translation with Length-Aware Framework.",
+            },
+          ],
+          picUrl: require("../../assets/images/activity/00.jpg"),
         },
       ],
     };
   },
   created() {},
-  methods: {},
+  methods: {
+    gotoDetail(item) {
+      this.$router.push({
+        path: "/team/studentDetail",
+        name: "学生详情",
+        // 用query传参,在地址栏后面加东西如 ?id=1这种跟在网址后面
+        query: {
+          // 传参数的时候注意将对象转化成字符串并且加密,在接收端使用解析
+          // 如果不这样做的话就会导致,刷新一下传参的东西解析不了
+          item: encodeURIComponent(JSON.stringify(item)),
+        },
+      });
+    },
+  },
 };
 </script>
 <style scoped>
@@ -213,6 +274,7 @@ export default {
   border-bottom: 1px solid #dfdfdf;
   padding-top: 32px;
   padding-bottom: 20px;
+  margin-bottom: 20px;
 }
 
 .detailItem {
@@ -224,7 +286,7 @@ export default {
 
 .detailItem img {
   width: 200px;
-  height: 200px;
+  height: 230px;
 }
 
 .detailItem .memberInfo {

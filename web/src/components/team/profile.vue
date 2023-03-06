@@ -1,7 +1,7 @@
 <template>
-  <div class="resourceSharing">
+  <div class="profile">
     <!-- default-active表示是当前选中的菜单的index -->
-    <div class="resourceContent">
+    <div class="profileContent">
       <div class="aside">
         <div class="asideTitle">
           {{ title }}
@@ -52,7 +52,7 @@
 export default {
   data() {
     return {
-      title: "团队介绍",
+      title: "团队概况",
       currentMenu: "团队简介",
       Menu: [
         { name: "团队简介", path: "/team/profile" },
@@ -86,7 +86,7 @@ export default {
 };
 </script>
 <style scoped>
-.resourceSharing {
+.profile {
   padding: 30px 0 50px 0;
   background: url(../../assets/images/background/contentBackground.jpg)
     no-repeat;
@@ -94,7 +94,7 @@ export default {
   height: auto;
 }
 
-.resourceContent {
+.profileContent {
   padding-top: 20px;
   width: 75%;
   margin: 0 auto;
@@ -165,6 +165,7 @@ export default {
   border-bottom: 1px solid #dfdfdf;
   padding-top: 32px;
   padding-bottom: 20px;
+  margin-bottom: 20px;
 }
 
 .detailItem {

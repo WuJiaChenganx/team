@@ -1,12 +1,12 @@
 <template>
   <!-- 团队简介 -->
   <div>
-    <teamProfile></teamProfile>
+    <profile></profile>
   </div>
 </template>
 
 <script>
-import teamProfile from "../../components/team/profile.vue";
+import profile from "../../components/team/profile.vue";
 export default {
   data: function () {
     return {};
@@ -14,7 +14,7 @@ export default {
   created: function () {},
   components: {
     // 注册组件
-    teamProfile,
+    profile,
   },
 };
 </script>

@@ -1,11 +1,22 @@
 <template>
   <div class="left-title-box">
     <div class="left-title">研究队伍</div>
-    <a href="//nlp.ict.ac.cn/yjdw/" class="title-more">更多 +</a>
+    <a @click="goTo('team/master')" class="title-more">更多 +</a>
   </div>
 </template>
 <script>
-export default {};
+export default {
+  methods: {
+    goTo(path) {
+      // 当前不一样就跳转
+      if (this.$route.path !== path) {
+        this.$router.push({
+          path: path,
+        });
+      }
+    },
+  },
+};
 </script>
 <style scoped>
 .left-title-box::before,
