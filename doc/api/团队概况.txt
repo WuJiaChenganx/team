@@ -1,0 +1,50 @@
+api:
+method=GET
+/////memberType 的值为'teacher','master','doctor','graduate'
+/teamWeb/teamSurvey/require-member?start=0&end=2&memberType=teacher
+in: null
+out:{
+			"id": 1,
+			"name": "姚信威",
+			"picUrl": "server/src/main/resources/static/picture/d44caa60-2082-43b3-84e8-f72472c4ab98_s.jpg",
+			"pageUrl": "http://www.homepage.zjut.edu.cn/yxw/",
+			"edu": "博士 教授 博士生导师",
+		}
+
+
+
+method=GET
+teamWeb/teamSurvey/require-detail?id=1
+in: null
+out:{
+			"id": 1,
+			"name": "姚信威",
+			"picUrl": "server/src/main/resources/static/picture/d44caa60-2082-43b3-84e8-f72472c4ab98_s.jpg",
+			"email": @163.com,
+			"memberType": "teacher",
+			"direction": "智能物联网、群智感知与协同、泛化人工智能",
+			"educationList": [
+				{
+					"id": 1,
+					"time": "2022-2023",
+					"experience": "aa"
+				},
+				{
+					"id": 2,
+					"time": "2018-1290",
+					"experience": "bb"
+				}
+			],
+			"paperList": [
+				{
+					"id": 1,
+					"name": "aaaa"
+				},
+				{
+					"id": 2,
+					"name": "bbb"
+				}
+			]
+}
+
+
