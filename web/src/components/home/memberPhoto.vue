@@ -24,19 +24,6 @@ import "swiper/css/swiper.min.css";
 export default {
   data() {
     return {
-      // photoURL: [
-      //   require("../../assets/images/member/00.jpg"),
-      //   require("../../assets/images/member/01.jpg"),
-      //   require("../../assets/images/member/02.jpg"),
-      //   require("../../assets/images/member/03.jpg"),
-      //   require("../../assets/images/member/04.jpg"),
-      //   require("../../assets/images/member/05.jpg"),
-      //   require("../../assets/images/member/06.jpg"),
-      //   require("../../assets/images/member/07.jpg"),
-      //   require("../../assets/images/member/08.jpg"),
-      //   require("../../assets/images/member/09.jpg"),
-      //   require("../../assets/images/member/10.jpg"),
-      // ],
       studentAllInfo: [
         {
           id: 1,
