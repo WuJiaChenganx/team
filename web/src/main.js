@@ -19,7 +19,7 @@ Vue.config.productionTip = false;
 // 全局注册
 Vue.use(ElementUI);
 new Vue({
-  // 导入App组件
-  render: (h) => h(App),
-  router: router,
+    // 导入App组件
+    render: (h) => h(App),
+    router: router,
 }).$mount("#app"); //使用mount挂载到index上
