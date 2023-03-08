@@ -1,0 +1,93 @@
+<?teamWeb.xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="teamWeb.teamDynamics.mapper.ReportMapper">
+    <select id="teamDynamic" resultType="teamWeb.teamDynamics.entity.ReportDO">
+        select
+        `id`,`title`,`date`,`text`,`pictureUrl`,`rClass`
+        from report
+        <where>
+            `rClass`= 1
+        </where>
+        order by date desc limit ${start},${end}
+    </select>
+
+    <select id="notice" resultType="teamWeb.teamDynamics.entity.ReportDO">
+        select
+        `id`,`title`,`date`,`text`,`rClass`
+        from report
+        <where>
+            `rClass`= 0
+        </where>
+        order by date desc limit ${start},${end}
+    </select>
+
+    <select id="media" resultType="teamWeb.teamDynamics.entity.ReportDO">
+        select
+        `id`,`title`,`date`,`url`,`rClass`
+        from report
+        <where>
+            `rClass`= 2
+        </where>
+        order by date desc limit ${start},${end}
+    </select>
+
+    <select id="consult" resultType="teamWeb.teamDynamics.entity.ReportDO">
+        select
+        `id`,`title`,`date`,`url`,`rClass`
+        from report
+        <where>
+            `rClass`= 3
+        </where>
+        order by date desc limit ${start},${end}
+    </select>
+
+    <select id="getReport" resultType="teamWeb.teamDynamics.entity.ReportDO">
+        select
+        `id`,`url`,`rClass`
+        from report
+        <where>
+            `rClass`= 4
+        </where>
+        limit ${start},${end}
+    </select>
+
+    <select id="getNewsDetail" resultType="teamWeb.teamDynamics.entity.ReportDO">
+        select
+        `id`,`title`,`date`,`url`,`rClass`
+        from report
+        <where>
+            `rClass`= 2
+        </where>
+        order  by date desc limit ${start},${end}
+    </select>
+    <select id="allNewBOS" resultType="teamWeb.teamDynamics.entity.ReportDO">
+        SELECT id, `date`, title, url, picture_url AS pictureUrl, text, r_class AS rClass
+        FROM report
+        ORDER BY date DESC LIMIT ${start},${end}
+    </select>
+
+    <select id="getNews" resultType="teamWeb.teamDynamics.entity.ReportDO">
+        select *
+        from report
+        <where>
+            id = ${id}
+        </where>
+    </select>
+    <insert id="insertInfo">
+        INSERT INTO report(`title`, `date`, `text`, `url`, `pictureurl`) VALUES ("${title}","${date}","${text}","${url}","${pictureUrl}")
+    </insert>
+    <update id="updateInfo">
+        update report
+
+    </update>
+
+    <delete id="delete">
+        delete from report
+        <where>
+            `id`=${id}
+        </where>
+    </delete>
+
+
+</mapper>

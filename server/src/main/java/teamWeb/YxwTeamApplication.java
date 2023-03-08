@@ -12,7 +12,7 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
         FileProperties.class
 }
 )
-@MapperScan("teamWeb.mapper")
+@MapperScan({"teamWeb.*.mapper", "teamWeb.mapper"})
 public class YxwTeamApplication {
 
     public static void main(String[] args) {
