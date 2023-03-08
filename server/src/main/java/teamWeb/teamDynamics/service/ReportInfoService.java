@@ -3,6 +3,8 @@ package teamWeb.teamDynamics.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import teamWeb.teamDynamics.entity.ReportDO;
 import teamWeb.teamDynamics.pojo.AllNewsBO;
+import teamWeb.teamDynamics.pojo.NoticeBO;
+import teamWeb.teamDynamics.pojo.ReportBO;
 
 import java.util.List;
 
@@ -10,11 +12,11 @@ import java.util.List;
 public interface ReportInfoService extends IService<ReportDO> {
 
 
-    List<ReportDO> teamDynamicsDetail(int start, int end);
+    List<NoticeBO> teamDynamicsDetail(int start, int end);
 
-    List<ReportDO> noticeDetail(int start, int end);
+    List<NoticeBO> noticeDetail(int start, int end);
 
-    List<ReportDO> mediaDetail(int start, int end);
+    List<NoticeBO> mediaDetail(int start, int end);
 
     List<ReportDO> consultDetail(int start, int end);
 
@@ -30,5 +32,5 @@ public interface ReportInfoService extends IService<ReportDO> {
 
     void deleteInfo(ReportDO reportDO);
 
-    List<ReportDO> getNews(int id);
+    List<ReportBO> getNews(Integer id);
 }

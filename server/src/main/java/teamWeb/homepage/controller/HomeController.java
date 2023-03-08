@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import teamWeb.homepage.entity.RelationInfo;
+import teamWeb.teamDynamics.pojo.NoticeBO;
 import teamWeb.teamSurvey.entity.MemberDO;
 import teamWeb.teamDynamics.entity.ReportDO;
 import teamWeb.teamDynamics.pojo.AllNewsBO;
@@ -28,13 +29,13 @@ public class HomeController {
 
     @RequestMapping("/teamDynamics")
     public APIResponse teamDynamics(@RequestParam(value="start",defaultValue = "0") int start,@RequestParam(value="end",defaultValue = "10") int end){
-        List<ReportDO> teamDynamicsDetail = reportInfoService.teamDynamicsDetail(start,end);
+        List<NoticeBO> teamDynamicsDetail = reportInfoService.teamDynamicsDetail(start,end);
         return APIResponse.success(teamDynamicsDetail);
     }
 
     @RequestMapping("/notice")
     public APIResponse notice(@RequestParam(value="start",defaultValue = "0") int start,@RequestParam(value="end",defaultValue = "10") int end){
-        List<ReportDO> noticeDetail = reportInfoService.noticeDetail(start,end);
+        List<NoticeBO> noticeDetail = reportInfoService.noticeDetail(start,end);
         return APIResponse.success(noticeDetail);
     }
 

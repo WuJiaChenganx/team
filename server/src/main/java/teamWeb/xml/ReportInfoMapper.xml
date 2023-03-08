@@ -4,7 +4,7 @@
 <mapper namespace="teamWeb.teamDynamics.mapper.ReportMapper">
     <select id="teamDynamic" resultType="teamWeb.teamDynamics.entity.ReportDO">
         select
-        `id`,`title`,`date`,`text`,`picture_url` AS pictureUrl,`r_class` AS `rClass`
+        `id`,`title`,`date`,`text`,`picture_url` AS pictureUrl,`r_class` AS `rClass`, paper_name AS `paperName`
         from report
         <where>
             `r_class`= "动态"
@@ -24,7 +24,7 @@
 
     <select id="media" resultType="teamWeb.teamDynamics.entity.ReportDO">
         select
-        `id`,`title`,`date`,`url`,`rClass`
+        `id`,`title`,`date`,`url`,`r_class` AS rClass,`text`
         from report
         <where>
             `r_class`= "媒体"
@@ -88,5 +88,19 @@
         </where>
     </delete>
 
+    <select id="reportDetail" resultType="teamWeb.teamDynamics.entity.ReportDO">
+        SELECT `id`,`title`, `date`, `text`, r_Class AS rClass, url, picture_url AS pictureUrl,paper_name AS `paperName`
+        FROM report
+        <where>
+            id = ${id}
+        </where>
+    </select>
 
+    <select id="allFileUrl" resultType="teamWeb.teamDynamics.entity.NoticeFile">
+        SELECT n.id, report_id AS id, file_address AS fileUrl, title
+        FROM noticefile_report_map join noticefile n on n.id = noticefile_report_map.noticefile_id
+        <where>
+            report_id = "${reportId}"
+        </where>
+    </select>
 </mapper>

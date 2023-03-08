@@ -1,0 +1,107 @@
+api:
+method=GET
+http://localhost:8186/teamWeb/report/require-detail?id=1
+in:null
+out:
+{
+	"code": "200",
+	"data": [
+		{
+			"id": 1,
+			"date": "2020-06",
+			"title": "浙工大姚信威博士荣获“杭州市十大青年科技英才”称号！16年的梦想与坚持终会绽放！",
+			"url": "https://www.sohu.com/a/403540901_286785",
+			"pictureUrl": "server/src/main/resources/static/picture/b231c90a9a8543f387a7b4c1d7733a88.jpeg",
+			"text": "每一个80后都曾有过成为科学家的梦想，姚信威也不例外。《变形金刚》《哆啦a梦》，这些耳熟能详的动画是他童年的美好回忆，也在他心里种下了一个研究“机器人”的梦想。在这一梦想的驱动下，2004年， 18岁的姚信威考入了浙江工业大学机电工程学院（现机械工程学院）。\r\n\r\n图书馆、实验室，四年的光阴，姚信威的大部分课余时间都花在这两个地方，并且努力学习学科相关知识。大二那年，姚信威主动联系了学院老师加入科研团队。当年，他几乎把所有的课余时间花在了实验室里，学习相关的知识与操作。即使是一些杂活和整理工作，他也一丝不苟地完成并且乐在其中。当时认真负责的工作精神，也为日后姚信威博士带领团队攀登技术高峰打下了牢固的基础。",
+			"rClass": "通知",
+			"detail": "每一个80后都曾有过成为科学家的梦想，姚信威也不例外。《变形金刚》《哆啦a梦》，这些耳熟能详的动画是他童年的美好回忆，也在他心里种下了一个研究“机器人”的梦想。在这一梦想的驱动下，2004年， 18岁的姚信威考入了浙江工业大学机电工程学院（现机械工程学院）。\r\n\r\n图书馆、实验室，四年的光阴，姚信威的大部分课余时间都花在这两个地方，并且努力学习学科相关知识。大二那年，姚信威主动联系了学院老师加入科研团队。当年，他几乎把所有的课余时间花在了实验室里，学习相关的知识与操作。即使是一些杂活和整理工作，他也一丝不苟地完成并且乐在其中。当时认真负责的工作精神，也为日后姚信威博士带领团队攀登技术高峰打下了牢固的基础。",
+			"picUrl": "server/src/main/resources/static/picture/b231c90a9a8543f387a7b4c1d7733a88.jpeg",
+			"day": "22",
+			"fileUrls": [
+				{
+					"id": 1,
+					"fileUrl": "aa",
+					"title": "aa"
+				},
+				{
+					"id": 2,
+					"fileUrl": "bb",
+					"title": "aa"
+				}
+			],
+			"paperName": "q"
+		}
+	],
+	"msg": null
+}
+
+
+
+
+
+
+
+method=GET
+http://localhost:8186/teamWeb/report/require-notice?start=0&end=5
+in:null
+out:{
+	"code": "200",
+	"data": [
+		{
+			"id": 1,
+			"title": "浙工大姚信威博士荣获“杭州市十大青年科技英才”称号！16年的梦想与坚持终会绽放！",
+			"date": "2020-06",
+			"day": "22",
+			"detail": "恭喜恭喜",
+		}
+	],
+	"msg": null
+}
+
+
+
+
+
+
+method=GET
+http://localhost:8186/teamWeb/report/require-notice?start=0&end=5
+in:null
+out:{
+	"code": "200",
+	"data": [
+		{
+			"id": 2,
+			"title": "张恒聪获得硕士学位",
+			"date": "2022-09",
+			"text": "",
+			"detail": "恭喜恭喜",
+			"day": "01"
+		}
+	],
+	"msg": null
+}
+
+
+
+
+
+
+
+method=GET
+http://localhost:8186/teamWeb/report/require-notice?start=0&end=5
+in:null
+out:{
+	"code": "200",
+	"data": [
+		{
+			"id": 3,
+			"title": "11",
+			"date": "2022-01",
+			"text": "",
+			"detail": "aaaa",
+			"day": "01"
+		}
+	],
+	"msg": null
+}
+

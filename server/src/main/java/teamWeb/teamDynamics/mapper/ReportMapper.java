@@ -1,7 +1,9 @@
 package teamWeb.teamDynamics.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import teamWeb.teamDynamics.entity.NoticeFile;
 import teamWeb.teamDynamics.entity.ReportDO;
+import teamWeb.teamDynamics.pojo.ReportBO;
 
 import java.util.List;
 
@@ -27,4 +29,8 @@ public interface ReportMapper extends BaseMapper<ReportDO> {
     void delete(int id);
 
     List<ReportDO> getNews(int id);
+
+    List<ReportDO> reportDetail(Integer id);
+
+    List<NoticeFile> allFileUrl(Integer reportId);
 }

@@ -13,6 +13,10 @@ out:{
 
 
 
+
+
+
+
 method=GET
 teamWeb/teamSurvey/require-detail?id=1
 in: null
