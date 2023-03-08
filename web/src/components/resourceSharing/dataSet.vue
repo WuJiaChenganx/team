@@ -74,19 +74,19 @@ export default {
         { name: "数据集", path: "/resource/dataSet" },
       ],
       showAllContent: [
-        { detail: "我是无敌的1", time: "2000-06-25" },
-        { detail: "我是无敌的2", time: "2000-06-25" },
-        { detail: "我是无敌的3", time: "2000-06-25" },
-        { detail: "我是无敌的4", time: "2000-06-25" },
-        { detail: "我是无敌的5", time: "2000-06-25" },
-        { detail: "我是无敌的6", time: "2000-06-25" },
-        { detail: "我是无敌的7", time: "2000-06-25" },
-        { detail: "我是无敌的8", time: "2000-06-25" },
-        { detail: "我是无敌的9", time: "2000-06-25" },
-        { detail: "我是无敌的10", time: "2000-06-25" },
-        { detail: "我是无敌的11", time: "2000-06-25" },
-        { detail: "我是无敌的12", time: "2000-06-25" },
-        { detail: "我是无敌的13", time: "2000-06-25" },
+        { detail: "数据集1", time: "2000-06-25" },
+        { detail: "数据集2", time: "2000-06-25" },
+        { detail: "数据集3", time: "2000-06-25" },
+        { detail: "数据集4", time: "2000-06-25" },
+        { detail: "数据集5", time: "2000-06-25" },
+        { detail: "数据集6", time: "2000-06-25" },
+        { detail: "数据集7", time: "2000-06-25" },
+        { detail: "数据集8", time: "2000-06-25" },
+        { detail: "数据集9", time: "2000-06-25" },
+        { detail: "数据集10", time: "2000-06-25" },
+        { detail: "数据集11", time: "2000-06-25" },
+        { detail: "数据集12", time: "2000-06-25" },
+        { detail: "数据集13", time: "2000-06-25" },
       ],
       showPageContent: [],
       // 总共要展示的数量
@@ -120,10 +120,11 @@ export default {
   background: url(../../assets/images/background/contentBackground.jpg)
     no-repeat center;
   width: 100%;
-  height: 500px;
+  height: auto;
 }
 
 .resourceContent {
+  padding-top: 20px;
   width: 75%;
   margin: 0 auto;
   display: flex;
@@ -184,6 +185,7 @@ export default {
   height: 520px;
   background-color: #fff;
   border: 1px solid #dfdfdf;
+  padding-bottom: 30px;
 }
 
 .detailTitle {
@@ -210,7 +212,7 @@ export default {
   height: 6px;
   background: #0055a2;
   border-radius: 50%;
-  left: 0;
+  left: 7px;
   top: 20px;
 }
 

@@ -64,15 +64,14 @@ export default {
     memberPhoto,
     friendlyLink,
     researchTeam,
-    // myFooter,
     activityPhoto,
     academicTrend,
     noticeAndResearch,
-    // navigationBar,
   },
   data() {
     return {};
   },
+  created() {},
   methods: {},
 };
 </script>

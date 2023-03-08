@@ -1,41 +1,40 @@
 <template>
-  <div class="noticeAndResearch">
-    <div class="notice">
-      <div class="notice-title-box">
-        <div class="notice-title">通知公告</div>
-        <a class="title-more" @click="goTo('/activity/notice')">更多 +</a>
+  <!-- 通知公告列表 -->
+  <div class="backgroundBox">
+    <div class="content">
+      <div class="contentTitle">
+        <div class="indexTitle">{{ currentMenu }}</div>
+        <div class="indexPosition">您当前的位置: 首页 > {{ currentMenu }}</div>
       </div>
-      <div class="notice-content-box">
+      <div class="contentItem">
         <div
-          class="noticeItem"
-          v-for="noticeItem in noticeList"
-          :key="noticeItem.id"
+          v-for="(noticeItem, index) in noticeList"
+          :key="index"
+          class="news-row"
           style="cursor: pointer"
           @click="gotoDetail(noticeItem)"
         >
-          <div class="notice-date">
-            {{ noticeItem.date }}-{{ noticeItem.day }}
+          <div class="news-date">
+            <div>{{ noticeItem.day }}</div>
+            <div>{{ noticeItem.date }}</div>
           </div>
-          <div class="notice-thing">
-            {{ noticeItem.title }}
+          <div class="news-title">{{ noticeItem.title }}</div>
+          <div class="news-thing">
+            {{ noticeItem.detail }}
           </div>
         </div>
       </div>
-    </div>
-    <div class="research">
-      <div class="research-title-box">
-        <div class="research-title">研究专题</div>
-      </div>
-      <div class="research-content-box">
-        <div class="researchItem">
-          <div class="researchTheme researchTheme1">研究专题一</div>
-        </div>
-        <div class="researchItem">
-          <div class="researchTheme researchTheme2">研究专题二</div>
-        </div>
-        <div class="researchItem">
-          <div class="researchTheme researchTheme3">研究专题三</div>
-        </div>
+      <div>
+        <!-- page-size展示的选择每页显示个数的选项,页面变动触发的事件是current-change后面的函数,total表示总共的数量 current-page表示当前页数-->
+        <el-pagination
+          background
+          layout="prev, pager, next"
+          @current-change="handleCurrentChange"
+          :page-size="5"
+          :total="total_number"
+          :current-page="current_index"
+        >
+        </el-pagination>
       </div>
     </div>
   </div>
@@ -44,6 +43,11 @@
 export default {
   data() {
     return {
+      currentMenu: "通知公告",
+      // 总共公告的数量
+      total_number: 10,
+      // 当前页面从1开始的这两个属性会在刚开始的时候就更新
+      current_index: 1,
       // 要展示的公告信息
       noticeList: [
         {
@@ -51,8 +55,15 @@ export default {
           day: "18",
           date: "2023-03",
           title: "中科院计算所自然语言处理组招聘启事",
-          detail:
+          detail: [
             "近日，2021年中国科学院计算技术研究所研究生国家奖学金评选结果正式公布，课题组李泽康同学荣获2021年度国家奖学金硕士奖。本次国家奖学金硕士奖共19人进入答辩，经过激烈角逐，最终评选出13人。李泽康，中科院计算所2019级硕士生，导师冯洋研究员，主要研究方向为自然语言处理、对话系统、多模态表示等。已在ACL，TASLP等自然语言处理顶级会议和顶级期刊上发表多篇论文，并获得国际对话技术比赛DSTC8多模态对话生成赛道冠军，DSTC9交互式对话评估赛道任务一第一名、任务二第三名，也曾作为中国大陆唯一受邀者参加国际对话评估研讨会。",
+          ],
+          // 放附件
+          fileUrls: [
+            { id: 0, fileUrl: "" },
+            { id: 1, fileUrl: "" },
+            { id: 2, fileUrl: "" },
+          ],
           picUrl: require("../../assets/images/activity/00.jpg"),
         },
         {
@@ -60,8 +71,15 @@ export default {
           day: "18",
           date: "2023-03",
           title: "中科院计算所自然语言处理组招聘启事",
-          detail:
+          detail: [
             "近日，2021年中国科学院计算技术研究所研究生国家奖学金评选结果正式公布，课题组李泽康同学荣获2021年度国家奖学金硕士奖。本次国家奖学金硕士奖共19人进入答辩，经过激烈角逐，最终评选出13人。李泽康，中科院计算所2019级硕士生，导师冯洋研究员，主要研究方向为自然语言处理、对话系统、多模态表示等。已在ACL，TASLP等自然语言处理顶级会议和顶级期刊上发表多篇论文，并获得国际对话技术比赛DSTC8多模态对话生成赛道冠军，DSTC9交互式对话评估赛道任务一第一名、任务二第三名，也曾作为中国大陆唯一受邀者参加国际对话评估研讨会。",
+          ],
+          // 放附件
+          fileUrls: [
+            { id: 1, fileUrl: "" },
+            { id: 2, fileUrl: "" },
+            { id: 3, fileUrl: "" },
+          ],
           picUrl: require("../../assets/images/activity/00.jpg"),
         },
         {
@@ -75,14 +93,21 @@ export default {
         },
       ],
       // 所有的公告
-      noticeALLList: [
+      noticeAllList: [
         {
           id: 0,
           day: "18",
           date: "2023-03",
           title: "中科院计算所自然语言处理组招聘启事",
-          detail:
+          detail: [
             "近日，2021年中国科学院计算技术研究所研究生国家奖学金评选结果正式公布，课题组李泽康同学荣获2021年度国家奖学金硕士奖。本次国家奖学金硕士奖共19人进入答辩，经过激烈角逐，最终评选出13人。李泽康，中科院计算所2019级硕士生，导师冯洋研究员，主要研究方向为自然语言处理、对话系统、多模态表示等。已在ACL，TASLP等自然语言处理顶级会议和顶级期刊上发表多篇论文，并获得国际对话技术比赛DSTC8多模态对话生成赛道冠军，DSTC9交互式对话评估赛道任务一第一名、任务二第三名，也曾作为中国大陆唯一受邀者参加国际对话评估研讨会。",
+          ],
+          // 放附件
+          fileUrls: [
+            { id: 0, fileUrl: "" },
+            { id: 1, fileUrl: "" },
+            { id: 2, fileUrl: "" },
+          ],
           picUrl: require("../../assets/images/activity/00.jpg"),
         },
         {
@@ -90,8 +115,15 @@ export default {
           day: "18",
           date: "2023-03",
           title: "中科院计算所自然语言处理组招聘启事",
-          detail:
+          detail: [
             "近日，2021年中国科学院计算技术研究所研究生国家奖学金评选结果正式公布，课题组李泽康同学荣获2021年度国家奖学金硕士奖。本次国家奖学金硕士奖共19人进入答辩，经过激烈角逐，最终评选出13人。李泽康，中科院计算所2019级硕士生，导师冯洋研究员，主要研究方向为自然语言处理、对话系统、多模态表示等。已在ACL，TASLP等自然语言处理顶级会议和顶级期刊上发表多篇论文，并获得国际对话技术比赛DSTC8多模态对话生成赛道冠军，DSTC9交互式对话评估赛道任务一第一名、任务二第三名，也曾作为中国大陆唯一受邀者参加国际对话评估研讨会。",
+          ],
+          // 放附件
+          fileUrls: [
+            { id: 1, fileUrl: "" },
+            { id: 2, fileUrl: "" },
+            { id: 3, fileUrl: "" },
+          ],
           picUrl: require("../../assets/images/activity/00.jpg"),
         },
         {
@@ -108,8 +140,15 @@ export default {
           day: "18",
           date: "2023-03",
           title: "中科院计算所自然语言处理组招聘启事",
-          detail:
+          detail: [
             "近日，2021年中国科学院计算技术研究所研究生国家奖学金评选结果正式公布，课题组李泽康同学荣获2021年度国家奖学金硕士奖。本次国家奖学金硕士奖共19人进入答辩，经过激烈角逐，最终评选出13人。李泽康，中科院计算所2019级硕士生，导师冯洋研究员，主要研究方向为自然语言处理、对话系统、多模态表示等。已在ACL，TASLP等自然语言处理顶级会议和顶级期刊上发表多篇论文，并获得国际对话技术比赛DSTC8多模态对话生成赛道冠军，DSTC9交互式对话评估赛道任务一第一名、任务二第三名，也曾作为中国大陆唯一受邀者参加国际对话评估研讨会。",
+          ],
+          // 放附件
+          fileUrls: [
+            { id: 0, fileUrl: "" },
+            { id: 1, fileUrl: "" },
+            { id: 2, fileUrl: "" },
+          ],
           picUrl: require("../../assets/images/activity/00.jpg"),
         },
         {
@@ -117,8 +156,15 @@ export default {
           day: "18",
           date: "2023-03",
           title: "中科院计算所自然语言处理组招聘启事",
-          detail:
+          detail: [
             "近日，2021年中国科学院计算技术研究所研究生国家奖学金评选结果正式公布，课题组李泽康同学荣获2021年度国家奖学金硕士奖。本次国家奖学金硕士奖共19人进入答辩，经过激烈角逐，最终评选出13人。李泽康，中科院计算所2019级硕士生，导师冯洋研究员，主要研究方向为自然语言处理、对话系统、多模态表示等。已在ACL，TASLP等自然语言处理顶级会议和顶级期刊上发表多篇论文，并获得国际对话技术比赛DSTC8多模态对话生成赛道冠军，DSTC9交互式对话评估赛道任务一第一名、任务二第三名，也曾作为中国大陆唯一受邀者参加国际对话评估研讨会。",
+          ],
+          // 放附件
+          fileUrls: [
+            { id: 1, fileUrl: "" },
+            { id: 2, fileUrl: "" },
+            { id: 3, fileUrl: "" },
+          ],
           picUrl: require("../../assets/images/activity/00.jpg"),
         },
         {
@@ -133,7 +179,24 @@ export default {
       ],
     };
   },
+  created() {
+    // let id = this.$route.query.id;
+    // console.log(id);
+    // 其实应该先从后端获取数据将数据传到newsAllList数组里面
+    // 创建的时候就会把总共的数目传进来
+    this.total_number = this.noticeAllList.length;
+    // slice函数包含前面的,不含后面的
+    this.noticeList = this.noticeAllList.slice(
+      (this.current_index - 1) * 5,
+      this.current_index * 5
+    );
+  },
   methods: {
+    handleCurrentChange(val) {
+      // 传入的val是当前页的页码
+      this.current_index = val;
+      this.noticeList = this.noticeAllList.slice((val - 1) * 5, val * 5);
+    },
     gotoDetail(item) {
       this.$router.push({
         path: "/activity/noticeDetail",
@@ -146,182 +209,106 @@ export default {
         },
       });
     },
-    goTo(path) {
-      // 当前不一样就跳转
-      if (this.$route.path !== path) {
-        this.$router.push({
-          path: path,
-        });
-      }
-    },
   },
 };
 </script>
 <style scoped>
-.notice {
-  width: 100%;
-  height: 280px;
-  margin-bottom: 15px;
-  border: 1px solid #d1e4f0;
-  border-radius: 4px;
-  border-top: none;
+.backgroundBox {
+  height: auto;
+  padding: 30px 0;
+  background: #eef7fe;
 }
-.notice-title-box {
-  padding: 12px 20px 12px 15px;
-  position: relative;
-  overflow: hidden;
+.content {
+  width: 75%;
+  height: auto;
+  margin: 0 auto;
+  padding: 0 30px 20px;
+  background-color: #fff;
+  border: 1px solid #dfdfdf;
+}
+.contentTitle {
+  height: 30px;
+  border-bottom: 1px solid #dfdfdf;
+  padding-top: 32px;
+  padding-bottom: 20px;
   margin-bottom: 20px;
 }
-.notice-title-box::before,
-.notice-title-box::after {
-  position: absolute;
-  content: "";
-  z-index: -1;
-  height: 50px;
-}
-.notice-title-box::before {
-  width: 162px;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  background: url(../../assets/images/background/zryy-r-title1.png) no-repeat
-    left center;
-}
-.notice-title-box::after {
-  top: 0px;
-  bottom: 0;
-  left: 161px;
-  right: 0;
-  background: url(../../assets/images/background/zryy-r-title2.png) no-repeat
-    top center;
-  background-size: 100% 50px !important;
-}
-.notice-title-box .notice-title {
-  text-align: left;
-  font-size: 22px;
-  font-weight: bold;
-  line-height: 26px;
-  color: #fff;
-}
-.notice-title-box .title-more {
-  float: right;
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  color: #7db0cb;
-  line-height: 18px;
-}
-/* 文本信息居中 */
-.notice-content-box {
-  overflow: hidden;
-  height: 195px;
-  width: 350px;
-  margin: 0 auto;
-}
-.noticeItem {
-  display: block;
-  font-size: 15px;
-  line-height: 22px;
-}
-.noticeItem:hover .notice-date {
+.indexTitle {
+  float: left;
   color: #333333;
+  font-weight: bold;
+  font-size: 25px;
 }
-.noticeItem:hover .notice-thing {
-  color: #008cd6;
+.indexPosition {
+  float: right;
+  color: #999999;
+  font-size: 15px;
 }
-.noticeItem .notice-date {
+.contentItem {
+  display: flex;
+  flex-direction: column;
+  height: 625px;
+}
+
+.news-row {
+  height: 80px;
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #dfdfdf;
+  transition: all 0.5s;
+}
+/* 时间框 */
+.news-row .news-date {
   float: left;
-  color: #008cd6;
-  margin-right: 10px;
+  width: 70px;
+  height: 70px;
+  background: #008cd6;
+  border-radius: 6px;
+  margin-right: 30px;
+  color: #ffffff;
+  font-family: Arial;
+  line-height: 22px;
+  text-align: center;
+  padding-top: 16px;
+  box-sizing: border-box;
+  transition: all 0.5s;
 }
-.noticeItem .notice-thing {
-  float: left;
-  /* 最多两行,超出两行的直接省略 */
+/* 就是日期中有个要变大 */
+.news-row .news-date div:first-child {
+  font-size: 30px;
+  font-weight: bold;
+}
+/* 文字部分 */
+.news-row .news-title {
+  font-size: 16px;
+  font-weight: bold;
+  color: #333333;
+  line-height: 22px;
+  text-align: left;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  margin-bottom: 10px;
+  transition: all 0.5s;
+}
+.news-thing {
+  font-size: 14px;
+  color: #999999;
+  line-height: 24px;
+  text-align: left;
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
   overflow: hidden;
-  color: #333333;
-  font-size: 17px;
+  height: 48px;
 }
-
-.research {
-  width: 100%;
-  height: 280px;
-  border: 1px solid #d1e4f0;
-  border-radius: 4px;
-  border-top: none;
+.news-row:hover {
+  border-bottom: 1px solid #0055a2;
 }
-.research-title-box {
-  padding: 12px 20px 12px 15px;
-  position: relative;
-  overflow: hidden;
-  margin-bottom: 20px;
+.news-row:hover .news-title {
+  color: #0055a2;
 }
-.research-title-box::before,
-.research-title-box::after {
-  position: absolute;
-  content: "";
-  z-index: -1;
-  height: 50px;
-}
-.research-title-box::before {
-  width: 162px;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  background: url(../../assets/images/background/zryy-r-title1.png) no-repeat
-    left center;
-}
-.research-title-box::after {
-  top: 0px;
-  bottom: 0;
-  left: 161px;
-  right: 0;
-  background: url(../../assets/images/background/zryy-r-title2.png) no-repeat
-    top center;
-  background-size: 100% 50px !important;
-}
-.research-title-box .research-title {
-  text-align: left;
-  font-size: 22px;
-  font-weight: bold;
-  line-height: 26px;
-  color: #fff;
-}
-
-.research-content-box {
-  overflow: hidden;
-  height: 195px;
-  width: 350px;
-  margin: 0 auto;
-}
-.researchItem {
-  display: block;
-  height: 56px;
-  margin-bottom: 9px;
-  background-size: cover !important;
-}
-.researchTheme1 {
-  background: url(../../assets/images/background/zryy-yjzt1.png) no-repeat
-    center center;
-}
-.researchTheme2 {
-  background: url(../../assets/images/background/zryy-yjzt2.png) no-repeat
-    center center;
-}
-.researchTheme3 {
-  margin-bottom: 0;
-  background: url(../../assets/images/background/zryy-yjzt3.png) no-repeat
-    center center;
-}
-.researchTheme {
-  border-radius: 3px;
-  font-size: 21px;
-  font-weight: bold;
-  color: #fff;
-  line-height: 56px;
-  text-align: center;
-  height: 56px;
+.news-row:hover .news-date {
+  background-color: #0055a2;
 }
 </style>

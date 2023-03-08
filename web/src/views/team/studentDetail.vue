@@ -1,12 +1,12 @@
 <template>
-  <!-- 团队简介 -->
+  <!-- 学生详情 -->
   <div>
-    <profile></profile>
+    <studentDetail></studentDetail>
   </div>
 </template>
 
 <script>
-import profile from "../../components/team/profile.vue";
+import studentDetail from "../../components/team/studentDetail.vue";
 export default {
   data: function () {
     return {};
@@ -14,7 +14,7 @@ export default {
   created: function () {},
   components: {
     // 注册组件
-    profile,
+    studentDetail,
   },
 };
 </script>

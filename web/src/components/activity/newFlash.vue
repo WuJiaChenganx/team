@@ -2,8 +2,8 @@
   <div class="backgroundBox">
     <div class="content">
       <div class="contentTitle">
-        <div class="indexTitle">新闻快讯</div>
-        <div class="indexPosition">您当前的位置: 首页 > 新闻快讯</div>
+        <div class="indexTitle">{{ currentMenu }}</div>
+        <div class="indexPosition">您当前的位置: 首页 > {{ currentMenu }}</div>
       </div>
       <div class="contentItem">
         <div
@@ -42,6 +42,8 @@
 export default {
   data() {
     return {
+      title: "团队动态",
+      currentMenu: "新闻快讯",
       // 总共要展示的数量
       total_number: 10,
       // 当前页面从1开始的这两个属性会在刚开始的时候就更新
@@ -190,8 +192,8 @@ export default {
     },
     gotoDetail(item) {
       this.$router.push({
-        path: "/newFlash/detail",
-        name: "新闻详情",
+        path: "/activity/newFlashDetail",
+        name: "新闻快讯详情",
         // 用query传参,在地址栏后面加东西如 ?id=1这种跟在网址后面
         query: {
           // 传参数的时候注意将对象转化成字符串并且加密,在接收端使用解析

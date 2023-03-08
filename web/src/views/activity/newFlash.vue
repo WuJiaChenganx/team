@@ -1,20 +1,21 @@
 <template>
-  <!-- 团队简介 -->
+  <!-- 新闻快讯 -->
   <div>
-    <profile></profile>
+    <newFlash></newFlash>
   </div>
 </template>
 
 <script>
-import profile from "../../components/team/profile.vue";
+import newFlash from "../../components/activity/newFlash.vue";
 export default {
   data: function () {
     return {};
   },
   created: function () {},
+  mounted: function () {},
   components: {
     // 注册组件
-    profile,
+    newFlash,
   },
 };
 </script>

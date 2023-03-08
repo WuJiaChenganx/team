@@ -1,20 +1,21 @@
 <template>
-  <!-- 团队简介 -->
+  <!-- 学术动态详情 -->
   <div>
-    <profile></profile>
+    <academyDetail></academyDetail>
   </div>
 </template>
 
 <script>
-import profile from "../../components/team/profile.vue";
+import academyDetail from "../../components/activity/academyDetail.vue";
 export default {
   data: function () {
     return {};
   },
   created: function () {},
+  mounted: function () {},
   components: {
     // 注册组件
-    profile,
+    academyDetail,
   },
 };
 </script>

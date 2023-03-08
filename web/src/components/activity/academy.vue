@@ -1,30 +1,39 @@
 <template>
-  <div class="academicTrend">
-    <div class="academicTitle">
-      <div class="left-title">学术动态</div>
-      <a class="title-more" @click="goTo('/activity/academy')">更多 +</a>
-    </div>
-
-    <div class="academicContent">
-      <div
-        class="item-content"
-        v-for="academyItem in newsList"
-        :key="academyItem.id"
-        style="cursor: pointer"
-        @click="gotoDetail(academyItem)"
-      >
-        <div class="img-box">
-          <img :src="academyItem.picUrl" />
-        </div>
-        <div class="item-text">
-          <div class="title-box">{{ academyItem.title }}</div>
-          <div class="detail-box">
-            {{ academyItem.profile }}
+  <div class="backgroundBox">
+    <div class="content">
+      <div class="contentTitle">
+        <div class="indexTitle">{{ currentMenu }}</div>
+        <div class="indexPosition">您当前的位置: 首页 > {{ currentMenu }}</div>
+      </div>
+      <div class="contentItem">
+        <div
+          v-for="(item, index) in newsList"
+          :key="index"
+          class="news-row"
+          style="cursor: pointer"
+          @click="gotoDetail(item)"
+        >
+          <div class="news-date">
+            <div>{{ item.day }}</div>
+            <div>{{ item.date }}</div>
           </div>
-          <div class="academicDate">
-            {{ academyItem.date }}-{{ academyItem.day }}
+          <div class="news-title">{{ item.title }}</div>
+          <div class="news-thing">
+            {{ item.profile }}
           </div>
         </div>
+      </div>
+      <div>
+        <!-- page-size展示的选择每页显示个数的选项,页面变动触发的事件是current-change后面的函数,total表示总共的数量 current-page表示当前页数-->
+        <el-pagination
+          background
+          layout="prev, pager, next"
+          @current-change="handleCurrentChange"
+          :page-size="5"
+          :total="total_number"
+          :current-page="current_index"
+        >
+        </el-pagination>
       </div>
     </div>
   </div>
@@ -33,6 +42,12 @@
 export default {
   data() {
     return {
+      title: "团队动态",
+      currentMenu: "学术动态",
+      // 总共要展示的数量
+      total_number: 10,
+      // 当前页面从1开始的这两个属性会在刚开始的时候就更新
+      current_index: 1,
       // 要展示的新闻信息(加载前还要处理过)
       newsList: [
         {
@@ -217,11 +232,28 @@ export default {
       ],
     };
   },
+  created() {
+    // let id = this.$route.query.id;
+    // console.log(id);
+    // 其实应该先从后端获取数据将数据传到newsAllList数组里面
+    // 创建的时候就会把总共的数目传进来
+    this.total_number = this.newsAllList.length;
+    // slice函数包含前面的,不含后面的
+    this.newsList = this.newsAllList.slice(
+      (this.current_index - 1) * 5,
+      this.current_index * 5
+    );
+  },
   methods: {
+    handleCurrentChange(val) {
+      // 传入的val是当前页的页码
+      this.current_index = val;
+      this.newsList = this.newsAllList.slice((val - 1) * 5, val * 5);
+    },
     gotoDetail(item) {
       this.$router.push({
-        path: "/activity/academyDetail",
-        name: "学术动态详情",
+        path: "/activity/newFlashDetail",
+        name: "新闻快讯详情",
         // 用query传参,在地址栏后面加东西如 ?id=1这种跟在网址后面
         query: {
           // 传参数的时候注意将对象转化成字符串并且加密,在接收端使用解析
@@ -230,139 +262,106 @@ export default {
         },
       });
     },
-    goTo(path) {
-      // 当前不一样就跳转
-      if (this.$route.path !== path) {
-        this.$router.push({
-          path: path,
-        });
-      }
-    },
   },
 };
 </script>
 <style scoped>
-.academicTitle {
-  width: 100%;
-  height: 38px;
-  padding-bottom: 0;
-  position: relative;
-  overflow: hidden;
-  margin-bottom: 20px;
+.backgroundBox {
+  height: auto;
+  padding: 30px 0;
+  background: #eef7fe;
 }
-.academicTitle::before,
-.academicTitle::after {
-  position: absolute;
-  content: "";
-  z-index: -1;
-}
-.academicTitle::before {
-  width: 163px;
-  height: 39px;
-  bottom: 0;
-  left: 0;
-  top: 0;
+.content {
+  width: 75%;
+  height: auto;
+  margin: 0 auto;
+  padding: 0 30px 20px;
   background-color: #fff;
-  background: url(../../assets/images/background/zryy-l-title1.png) no-repeat
-    left center;
+  border: 1px solid #dfdfdf;
 }
-.academicTitle::after {
-  top: 0px;
-  left: 160px;
-  right: 0;
-  height: 4px;
-  background: #deecf9;
-}
-.academicTitle .left-title {
-  float: left;
-  font-size: 22px;
-  font-weight: bold;
-  font-style: italic;
-  color: #003266;
-  line-height: 26px;
-}
-.academicTitle .title-more {
-  float: right;
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  color: #7db0cb;
-  line-height: 18px;
-}
-.academicContent {
-  /* 放四个盒子高度为110,margin_bottom为20 */
-  height: 520px;
-}
-/* 每行的宽高 */
-.academicContent .item-content {
-  height: 110px;
+.contentTitle {
+  height: 30px;
+  border-bottom: 1px solid #dfdfdf;
+  padding-top: 32px;
+  padding-bottom: 20px;
   margin-bottom: 20px;
 }
-.item-content .img-box {
+.indexTitle {
   float: left;
-  width: 168px;
-  height: 112px;
-  overflow: hidden;
-  margin-right: 18px;
-  box-sizing: border-box;
+  color: #333333;
+  font-weight: bold;
+  font-size: 25px;
 }
-.item-content .img-box img {
-  width: 100%;
-  height: 100%;
+.indexPosition {
+  float: right;
+  color: #999999;
+  font-size: 15px;
 }
-.item-content .img-box {
-  border: 1px solid #eee;
-}
-.item-content:hover .img-box img {
-  transform: scale(1.1);
-  transition: all 0.5s;
-}
-
-.item-content:hover .title-box {
-  color: #ff2400;
-}
-.item-content:hover .academicDate {
-  color: #0055a2;
-}
-
-.item-text {
-  height: 100%;
-  overflow: hidden;
+.contentItem {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  height: 625px;
 }
-.item-text .title-box {
-  text-align: left;
-  font-size: 17px;
+
+.news-row {
+  height: 80px;
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #dfdfdf;
+  transition: all 0.5s;
+}
+/* 时间框 */
+.news-row .news-date {
+  float: left;
+  width: 70px;
+  height: 70px;
+  background: #008cd6;
+  border-radius: 6px;
+  margin-right: 30px;
+  color: #ffffff;
+  font-family: Arial;
+  line-height: 22px;
+  text-align: center;
+  padding-top: 16px;
+  box-sizing: border-box;
+  transition: all 0.5s;
+}
+/* 就是日期中有个要变大 */
+.news-row .news-date div:first-child {
+  font-size: 30px;
   font-weight: bold;
-  color: #0055a2;
-  line-height: 20px;
+}
+/* 文字部分 */
+.news-row .news-title {
+  font-size: 16px;
+  font-weight: bold;
+  color: #333333;
+  line-height: 22px;
+  text-align: left;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
   margin-bottom: 10px;
+  transition: all 0.5s;
 }
-.item-text .detail-box {
-  font-size: 13px;
-  color: #909090;
-  line-height: 19px;
-  text-align: justify;
+.news-thing {
+  font-size: 14px;
+  color: #999999;
+  line-height: 24px;
+  text-align: left;
   display: -webkit-box;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp: 3;
+  -webkit-line-clamp: 2;
   overflow: hidden;
-  height: 57px;
-  margin-bottom: 10px;
+  height: 48px;
 }
-.item-text .academicDate {
-  text-align: right;
-  font-size: 14px;
-  font-family: Arial;
-  color: #828282;
-  line-height: 1;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
+.news-row:hover {
+  border-bottom: 1px solid #0055a2;
+}
+.news-row:hover .news-title {
+  color: #0055a2;
+}
+.news-row:hover .news-date {
+  background-color: #0055a2;
 }
 </style>

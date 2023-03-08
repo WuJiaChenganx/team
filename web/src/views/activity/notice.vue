@@ -1,12 +1,12 @@
 <template>
-  <!-- 新闻列表 -->
+  <!-- 通知公告 -->
   <div>
-    <newFlash></newFlash>
+    <notice></notice>
   </div>
 </template>
 
 <script>
-import newFlash from "../../components/newFlash/newFlash.vue";
+import notice from "../../components/activity/notice.vue";
 export default {
   data: function () {
     return {};
@@ -15,7 +15,7 @@ export default {
   mounted: function () {},
   components: {
     // 注册组件
-    newFlash,
+    notice,
   },
 };
 </script>

@@ -1,20 +1,21 @@
 <template>
-  <!-- 团队简介 -->
+  <!-- 通知详情 -->
   <div>
-    <profile></profile>
+    <noticeDetail></noticeDetail>
   </div>
 </template>
 
 <script>
-import profile from "../../components/team/profile.vue";
+import noticeDetail from "../../components/activity/noticeDetail.vue";
 export default {
   data: function () {
     return {};
   },
   created: function () {},
+  mounted: function () {},
   components: {
     // 注册组件
-    profile,
+    noticeDetail,
   },
 };
 </script>

@@ -7,12 +7,12 @@ module.exports = {
   publicPath: "/",
   devServer: {
     // http://localhost:8080/api/teamWeb/home
-    // http://192.168.31.28:8186/api/teamWeb/home
-    // http://192.168.31.28:8186/teamWeb/home
+    // http://localhost:8186/api/teamWeb/home
+    // http://localhost:8186/teamWeb/home
     proxy: {
       "/api": {
         // 将/api前面的东西使用target替换
-        target: "http://192.168.31.28:8186",
+        target: "http://localhost:8186",
         // ws: true,
         changeOrigin: true,
         pathRewrite: {

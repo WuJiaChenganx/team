@@ -17,8 +17,8 @@
     <navigation></navigation>
   </div>
 </template>
-  
-  <script>
+
+<script>
 // 导入组件
 import navigation from "./components/indexComponent/navigation.vue";
 export default {
@@ -67,8 +67,8 @@ export default {
   },
 };
 </script>
-  
-  <style>
+
+<style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -77,4 +77,3 @@ export default {
   color: #2c3e50;
 }
 </style>
-  

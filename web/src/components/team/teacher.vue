@@ -1,7 +1,7 @@
 <template>
-  <div class="resourceSharing">
+  <div class="teacher">
     <!-- default-active表示是当前选中的菜单的index -->
-    <div class="resourceContent">
+    <div class="teacherContent">
       <div class="aside">
         <div class="asideTitle">
           {{ title }}
@@ -36,12 +36,28 @@
             您当前的位置: 首页 > {{ title }} >{{ currentMenu }}
           </div>
         </div>
-        <div class="detailItem" v-for="memberItem in Info" :key="memberItem.id">
-          <div class="memberImg"><img :src="memberItem.picUrl" /></div>
-          <div class="memberInfo">
-            {{ memberItem.name }} {{ memberItem.title }}
+        <a
+          class="detailItem"
+          style="cursor: pointer; text-decoration: none"
+          href="http://www.homepage.zjut.edu.cn/yxw/"
+          target="_blank"
+        >
+          <div class="memberImg">
+            <img src="../../assets/images/teacherPhoto/yxw.jpg" />
           </div>
-        </div>
+          <div class="memberInfo">姚信威 教授</div>
+        </a>
+        <a
+          class="detailItem"
+          style="cursor: pointer; text-decoration: none"
+          href="http://www.homepage.zjut.edu.cn/qiangli/"
+          target="_blank"
+        >
+          <div class="memberImg">
+            <img src="../../assets/images/teacherPhoto/lq.jpg" />
+          </div>
+          <div class="memberInfo">李强 讲师</div>
+        </a>
       </div>
     </div>
   </div>
@@ -51,7 +67,7 @@
 export default {
   data() {
     return {
-      title: "团队介绍",
+      title: "团队概况",
       currentMenu: "导师",
       Menu: [
         { name: "团队简介", path: "/team/profile" },
@@ -111,7 +127,7 @@ export default {
 };
 </script>
 <style scoped>
-.resourceSharing {
+.teacher {
   padding: 30px 0 50px 0;
   background: url(../../assets/images/background/contentBackground.jpg)
     no-repeat;
@@ -119,7 +135,7 @@ export default {
   height: auto;
 }
 
-.resourceContent {
+.teacherContent {
   padding-top: 20px;
   width: 75%;
   margin: 0 auto;
@@ -182,6 +198,7 @@ export default {
   height: auto;
   background-color: #fff;
   border: 1px solid #dfdfdf;
+  padding-bottom: 100px;
 }
 
 .detailTitle {
@@ -189,6 +206,7 @@ export default {
   border-bottom: 1px solid #dfdfdf;
   padding-top: 32px;
   padding-bottom: 20px;
+  margin-bottom: 20px;
 }
 
 .detailItem {
@@ -200,7 +218,7 @@ export default {
 
 .detailItem img {
   width: 200px;
-  height: 200px;
+  height: 230px;
 }
 
 .detailItem .memberInfo {

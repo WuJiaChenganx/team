@@ -1,12 +1,12 @@
 <template>
-  <!-- 新闻列表 -->
+  <!-- 学术动态 -->
   <div>
-    <newFlashDetail></newFlashDetail>
+    <academy></academy>
   </div>
 </template>
 
 <script>
-import newFlashDetail from "../../components/newFlash/newFlashDetail.vue";
+import academy from "../../components/activity/academy.vue";
 export default {
   data: function () {
     return {};
@@ -15,7 +15,7 @@ export default {
   mounted: function () {},
   components: {
     // 注册组件
-    newFlashDetail,
+    academy,
   },
 };
 </script>

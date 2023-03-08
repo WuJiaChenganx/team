@@ -52,7 +52,16 @@ export default {
           title: "首页",
           path: "/home",
         },
-        { title: "新闻快讯", path: "/newFlash" },
+        // 团队动态
+        {
+          title: "团队动态",
+          path: "/activity",
+          subMenu: [
+            { title: "新闻快讯", path: "/activity/newFlash" },
+            { title: "学术动态", path: "/activity/academy" },
+            { title: "通知公告", path: "/activity/notice" },
+          ],
+        },
         {
           title: "论文论著",
           path: "/paper",
