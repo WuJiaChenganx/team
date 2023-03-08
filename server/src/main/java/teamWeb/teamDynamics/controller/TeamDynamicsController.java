@@ -20,16 +20,19 @@ public class TeamDynamicsController {
 
 
     @RequestMapping("/require-notice")
-    public APIResponse allNotice(@RequestParam(value="page") int page){
-        List<AllNewsBO> allNotice = reportInfoService.noticeDetail((page-1)*10,page*10);
+    public APIResponse allNotice(@RequestParam(value="start") int start,
+                                 @RequestParam(value="end") int end){
+        List<ReportDO> allNotice = reportInfoService.noticeDetail(start,end);
         return APIResponse.success(allNotice);
     }
 
     @RequestMapping("/require-academicDynamics")
-    public APIResponse allacademicDynamics(@RequestParam(value="page") int page){
-        List<AllNewsBO> teamDynamics = reportInfoService.teamDynamicsDetail((page-1)*10,page*10);
+    public APIResponse allacademicDynamics(@RequestParam(value="start") int start,
+                                           @RequestParam(value="end") int end){
+        List<ReportDO> teamDynamics = reportInfoService.teamDynamicsDetail(start,end);
         return APIResponse.success(teamDynamics);
     }
+
 
     @GetMapping("/require-news")
     public APIResponse allNews(@RequestParam(value="start") int start,

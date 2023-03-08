@@ -4,20 +4,20 @@
 <mapper namespace="teamWeb.teamDynamics.mapper.ReportMapper">
     <select id="teamDynamic" resultType="teamWeb.teamDynamics.entity.ReportDO">
         select
-        `id`,`title`,`date`,`text`,`pictureUrl`,`rClass`
+        `id`,`title`,`date`,`text`,`pictureUrl`,`r_class` AS `rClass`
         from report
         <where>
-            `rClass`= 1
+            `r_class`= "动态"
         </where>
         order by date desc limit ${start},${end}
     </select>
 
     <select id="notice" resultType="teamWeb.teamDynamics.entity.ReportDO">
         select
-        `id`,`title`,`date`,`text`,`rClass`
+        `id`,`title`,`date`,`text`,`r_class` AS `rClass`
         from report
         <where>
-            `rClass`= 0
+            `r_class`= "通知"
         </where>
         order by date desc limit ${start},${end}
     </select>
@@ -27,7 +27,7 @@
         `id`,`title`,`date`,`url`,`rClass`
         from report
         <where>
-            `rClass`= 2
+            `r_class`= "媒体"
         </where>
         order by date desc limit ${start},${end}
     </select>
@@ -54,7 +54,7 @@
 
     <select id="getNewsDetail" resultType="teamWeb.teamDynamics.entity.ReportDO">
         select
-        `id`,`title`,`date`,`url`,`rClass`
+        `id`,`title`,`date`,`url`,`r_class` AS rClass
         from report
         <where>
             `rClass`= 2
@@ -75,11 +75,10 @@
         </where>
     </select>
     <insert id="insertInfo">
-        INSERT INTO report(`title`, `date`, `text`, `url`, `pictureurl`) VALUES ("${title}","${date}","${text}","${url}","${pictureUrl}")
+        INSERT INTO report(`title`, `date`, `text`, `url`, `pictureurl`, `r_class`) VALUES ("${title}","${date}","${text}","${url}","${pictureUrl}", "${rClass}")
     </insert>
     <update id="updateInfo">
         update report
-
     </update>
 
     <delete id="delete">
