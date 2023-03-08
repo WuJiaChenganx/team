@@ -1,4 +1,4 @@
-/*package teamWeb.service;
+package teamWeb.manage.server;
 
 import org.springframework.stereotype.Service;
 import teamWeb.teamDynamics.entity.ReportDO;
@@ -13,4 +13,3 @@ public class ManageServiceImpl implements ManageService {
         return null;
     }
 }
-*/

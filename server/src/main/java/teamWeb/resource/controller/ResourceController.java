@@ -34,25 +34,19 @@ public class ResourceController {
     @RequestMapping("/emulation")
     public APIResponse emulation(@RequestParam(value="start") int start,@RequestParam(value="end") int end){
         List<TextboxInfo> emulationDetail = textboxInfoService.emulationDetail(start,end);
-        List<Object> params =new ArrayList<>();
-        params.add(emulationDetail);
-        return APIResponse.success(params);
+        return APIResponse.success(emulationDetail);
     }
 
     @RequestMapping("/data")
     public APIResponse data(@RequestParam(value="start") int start,@RequestParam(value="end") int end){
         List<TextboxInfo> dataDetail = textboxInfoService.dataDetail(start,end);
-        List<Object> params =new ArrayList<>();
-        params.add(dataDetail);
-        return APIResponse.success(params);
+        return APIResponse.success(dataDetail);
     }
 
     @RequestMapping("/meet")
     public APIResponse meet(@RequestParam(value="start") int start,@RequestParam(value="end") int end){
         List<ReportDO> meetDetail = reportInfoService.meetDetail(start,end);
-        List<Object> params =new ArrayList<>();
-        params.add(meetDetail);
-        return APIResponse.success(params);
+        return APIResponse.success(meetDetail);
     }
 
 

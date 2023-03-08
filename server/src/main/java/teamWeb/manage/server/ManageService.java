@@ -1,4 +1,4 @@
-/*package teamWeb.service;
+package teamWeb.manage.server;
 
 import teamWeb.teamDynamics.entity.ReportDO;
 
@@ -8,4 +8,3 @@ public interface ManageService  {
 
     List<ReportDO> showNews(int start, int end);
 }
-*/

@@ -21,23 +21,17 @@ public class ProjectController {
     @RequestMapping("/projecting")
     public APIResponse projecting(@RequestParam(value="start") int start,@RequestParam(value="end") int end){
         List<TextboxInfo> projectDetail = textboxInfoService.projectDetail(start,end);
-        List<Object> params =new ArrayList<>();
-        params.add(projectDetail);
-        return APIResponse.success(params);
+        return APIResponse.success(projectDetail);
     }
 
     @RequestMapping("/projected")
     public APIResponse projected(@RequestParam(value="start") int start,@RequestParam(value="end") int end){
         List<TextboxInfo> projectedDetail = textboxInfoService.projectedDetail(start,end);
-        List<Object> params =new ArrayList<>();
-        params.add(projectedDetail);
-        return APIResponse.success(params);
+        return APIResponse.success(projectedDetail);
     }
     @RequestMapping("/Detail")
     public APIResponse getText(@RequestParam(value = "id") int id){
         List<TextboxInfo> text = textboxInfoService.getText(id);
-        List<Object> params =new ArrayList<>();
-        params.add(text);
-        return APIResponse.success(params);
+        return APIResponse.success(text);
     }
 }

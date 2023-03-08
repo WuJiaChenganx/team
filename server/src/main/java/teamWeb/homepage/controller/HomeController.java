@@ -29,41 +29,31 @@ public class HomeController {
     @RequestMapping("/teamDynamics")
     public APIResponse teamDynamics(@RequestParam(value="start",defaultValue = "0") int start,@RequestParam(value="end",defaultValue = "10") int end){
         List<ReportDO> teamDynamicsDetail = reportInfoService.teamDynamicsDetail(start,end);
-        List<Object> params =new ArrayList<>();
-        params.add(teamDynamicsDetail);
-        return APIResponse.success(params);
+        return APIResponse.success(teamDynamicsDetail);
     }
 
     @RequestMapping("/notice")
     public APIResponse notice(@RequestParam(value="start",defaultValue = "0") int start,@RequestParam(value="end",defaultValue = "10") int end){
         List<ReportDO> noticeDetail = reportInfoService.noticeDetail(start,end);
-        List<Object> params =new ArrayList<>();
-        params.add(noticeDetail);
-        return APIResponse.success(params);
+        return APIResponse.success(noticeDetail);
     }
 
     @RequestMapping("/news")
     public APIResponse allNews(@RequestParam(value="start") int start,@RequestParam(value="end") int end){
         List<AllNewsBO> allNewBOS = reportInfoService.allNews(start,end);
-        List<Object> params =new ArrayList<>();
-        params.add(allNewBOS);
-        return APIResponse.success(params);
+        return APIResponse.success(allNewBOS);
     }
 
 
     @RequestMapping("/member")
     public APIResponse member(@RequestParam(value="start",defaultValue = "0") int start,@RequestParam(value="end",defaultValue = "10") int end){
         List<MemberDO> member = memberInfoService.getHomeMember(start,end);
-        List<Object> params =new ArrayList<>();
-        params.add(member);
-        return APIResponse.success(params);
+        return APIResponse.success(member);
     }
 
     @RequestMapping("/relation")
     public APIResponse relation(){
         List<RelationInfo> relation = textboxInfoService.getRelation();
-        List<Object> params =new ArrayList<>();
-        params.add(relation);
-        return APIResponse.success(params);
+        return APIResponse.success(relation);
     }
 }

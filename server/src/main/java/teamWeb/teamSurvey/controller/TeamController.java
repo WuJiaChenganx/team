@@ -28,9 +28,8 @@ public class TeamController {
     @RequestMapping("/brief")
     public APIResponse brief(){
         List<TextboxInfo> briefDetail = textboxInfoService.briefDetail();
-        List<Object> params =new ArrayList<>();
-        params.add(briefDetail);
-        return APIResponse.success(params);
+
+        return APIResponse.success(briefDetail);
     }
 
     @GetMapping("/require-member")
@@ -52,9 +51,7 @@ public class TeamController {
     @RequestMapping("/relation")
     public APIResponse relation(){
         List<RelationInfo> getRelation = textboxInfoService.getRelation();
-        List<Object> params =new ArrayList<>();
-        params.add(getRelation);
-        return APIResponse.success(params);
+        return APIResponse.success(getRelation);
     }
 
 

@@ -7,7 +7,7 @@ public class ReportDO {
     private String url;
     private String pictureUrl;
     private String text;
-    private Integer rClass;
+    private String rClass;
 
     public Integer getId() {
         return id;
@@ -57,11 +57,11 @@ public class ReportDO {
         this.text = text;
     }
 
-    public Integer getrClass() {
+    public String getrClass() {
         return rClass;
     }
 
-    public void setrClass(Integer rClass) {
+    public void setrClass(String rClass) {
         this.rClass = rClass;
     }
 }

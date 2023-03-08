@@ -12,38 +12,38 @@ import teamWeb.utils.BeanUtil;
 import java.util.List;
 
 @RestController
-@RequestMapping("/teamWeb/news")
+@RequestMapping("/teamWeb/report")
 public class TeamDynamicsController {
 
     @Autowired
     ReportInfoService reportInfoService;
 
 
-    @RequestMapping("/require-notice")
-    public APIResponse allNotice(@RequestParam(value="start") int start,
-                                 @RequestParam(value="end") int end){
+    @GetMapping("/require-notice")
+    public APIResponse allNotice(@RequestParam(value="start") Integer start,
+                                 @RequestParam(value="end") Integer end){
         List<ReportDO> allNotice = reportInfoService.noticeDetail(start,end);
         return APIResponse.success(allNotice);
     }
 
-    @RequestMapping("/require-academicDynamics")
-    public APIResponse allacademicDynamics(@RequestParam(value="start") int start,
-                                           @RequestParam(value="end") int end){
+    @GetMapping("/require-academicDynamics")
+    public APIResponse allacademicDynamics(@RequestParam(value="start") Integer start,
+                                           @RequestParam(value="end") Integer end){
         List<ReportDO> teamDynamics = reportInfoService.teamDynamicsDetail(start,end);
         return APIResponse.success(teamDynamics);
     }
 
 
     @GetMapping("/require-news")
-    public APIResponse allNews(@RequestParam(value="start") int start,
-                               @RequestParam(value="end") int end){
+    public APIResponse allNews(@RequestParam(value="start") Integer start,
+                               @RequestParam(value="end") Integer end){
         List<AllNewsBO> allNewsBOList = reportInfoService.allNews(start, end);
         List<AllNewsDTO> allNewsDTOList = BeanUtil.convert(allNewsBOList, AllNewsDTO.class);
         return APIResponse.success(allNewsDTOList);
     }
 
-    @RequestMapping(value = "/require-detail")
-    public APIResponse requireDetail(@RequestParam(value="id") int id){
+    @GetMapping(value = "/require-detail")
+    public APIResponse requireDetail(@RequestParam(value="id") Integer id){
         List<ReportDO> getNews = reportInfoService.getNews(id);
 
         return APIResponse.success(getNews);

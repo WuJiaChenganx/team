@@ -1,10 +1,14 @@
-/*
-package teamWeb.controller;
+package teamWeb.manage.controller;
 
-import teamWeb.entity.*;
+
+import teamWeb.manage.server.ManageService;
+import teamWeb.pubications.entity.OutcomeInfo;
+import teamWeb.pubications.service.OutcomeInfoService;
+import teamWeb.research.entity.TextboxInfo;
+import teamWeb.research.service.TextboxInfoService;
+import teamWeb.resource.service.FileService;
 import teamWeb.teamDynamics.entity.ReportDO;
 import teamWeb.teamDynamics.service.ReportInfoService;
-import teamWeb.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -34,7 +38,6 @@ public class ManageController {
 
     @RequestMapping("/news")
     public APIResponse news(@RequestParam(value = "photos") MultipartFile[] photos, @RequestParam(value="operate") String operate, ReportDO reportDO){
-
         if(Objects.equals(operate, "insert")){
             if(photos.length > 0){
                 for (MultipartFile multipartFile : photos) {
@@ -138,6 +141,3 @@ public class ManageController {
         return APIResponse.success();
     }
 }
-
-
-*/

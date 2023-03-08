@@ -4,7 +4,7 @@
 <mapper namespace="teamWeb.teamDynamics.mapper.ReportMapper">
     <select id="teamDynamic" resultType="teamWeb.teamDynamics.entity.ReportDO">
         select
-        `id`,`title`,`date`,`text`,`pictureUrl`,`r_class` AS `rClass`
+        `id`,`title`,`date`,`text`,`picture_url` AS pictureUrl,`r_class` AS `rClass`
         from report
         <where>
             `r_class`= "动态"
