@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="header">
+    <!-- <div class="header">
       <div class="headerContent">
         <div class="headerLogo">
           <logo></logo>
@@ -12,7 +12,7 @@
           <div>浙江工业大学计算机学院重点实验室</div>
         </div>
       </div>
-    </div>
+    </div> -->
 
     <div class="navBackground">
       <!-- 导航栏 -->
