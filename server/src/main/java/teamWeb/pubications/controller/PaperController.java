@@ -5,6 +5,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import teamWeb.pubications.entity.OutcomeInfo;
+import teamWeb.pubications.pojo.AllMonographBO;
+import teamWeb.pubications.pojo.AllPaperBO;
 import teamWeb.pubications.service.OutcomeInfoService;
 import teamWeb.utils.APIResponse;
 
@@ -17,26 +19,21 @@ public class PaperController {
     @Autowired
     OutcomeInfoService outcomeInfoService;
 
-    @RequestMapping("/paper")
+    @RequestMapping("/require-paper")
     public APIResponse paper(@RequestParam(value="start") int start,@RequestParam(value="end") int end){
-        List<OutcomeInfo> paperDetail = outcomeInfoService.paperDetail(start,end);
-        return APIResponse.success(paperDetail);
-    }
-    @RequestMapping("/Detail")
-    public APIResponse getOutcome(@RequestParam(value = "id") int id){
-        List<OutcomeInfo> outcome = outcomeInfoService.getOutcome(id);
-        return APIResponse.success(outcome);
+        List<AllPaperBO> paperBOList = outcomeInfoService.paperDetail(start,end);
+        return APIResponse.success(paperBOList);
     }
 
-    @RequestMapping("/patent")
+    @RequestMapping("/require-patent")
     public APIResponse patent(@RequestParam(value="start") int start,@RequestParam(value="end") int end){
-        List<OutcomeInfo> patentDetail = outcomeInfoService.patentDetail(start,end);
-        return APIResponse.success(patentDetail);
+        List<AllPaperBO> patentList = outcomeInfoService.patentDetail(start,end);
+        return APIResponse.success(patentList);
     }
 
-    @RequestMapping("/monograph")
+    @RequestMapping("/require-monograph")
     public APIResponse monograph(@RequestParam(value="start") int start,@RequestParam(value="end") int end){
-        List<OutcomeInfo> monographDetail = outcomeInfoService.monographDetail(start,end);
-        return APIResponse.success(monographDetail);
+        List<AllMonographBO> monographBOList = outcomeInfoService.monographDetail(start,end);
+        return APIResponse.success(monographBOList);
     }
 }

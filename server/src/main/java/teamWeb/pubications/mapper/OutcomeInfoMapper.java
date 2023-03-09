@@ -7,11 +7,11 @@ import java.util.List;
 
 public interface OutcomeInfoMapper extends BaseMapper<OutcomeInfo> {
 
-    List<OutcomeInfo> getPaperDetail(int start, int end);
+    List<OutcomeInfo> paperDetail(int start, int end);
 
-    List<OutcomeInfo> getPatentDetail(int start, int end);
+    List<OutcomeInfo> patentDetail(int start, int end);
 
-    List<OutcomeInfo> getMonographDetail(int start, int end);
+    List<OutcomeInfo> monographDetail(int start, int end);
 
     List<OutcomeInfo> getOutcome(int id);
 

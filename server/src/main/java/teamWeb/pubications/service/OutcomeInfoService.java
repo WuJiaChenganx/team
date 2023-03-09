@@ -2,17 +2,18 @@ package teamWeb.pubications.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import teamWeb.pubications.entity.OutcomeInfo;
+import teamWeb.pubications.pojo.AllMonographBO;
+import teamWeb.pubications.pojo.AllPaperBO;
 
 import java.util.List;
 
 public interface OutcomeInfoService extends IService<OutcomeInfo> {
-    List<OutcomeInfo> paperDetail(int start, int end);
+    List<AllPaperBO> paperDetail(int start, int end);
 
-    List<OutcomeInfo> patentDetail(int start, int end);
+    List<AllPaperBO> patentDetail(int start, int end);
 
-    List<OutcomeInfo> monographDetail(int start, int end);
+    List<AllMonographBO> monographDetail(int start, int end);
 
-    List<OutcomeInfo> getOutcome(int id);
 
     void insertInfo(OutcomeInfo outcomeInfo);
 

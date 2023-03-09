@@ -1,13 +1,10 @@
-package teamWeb.teamDynamics.pojo;
+package teamWeb.pubications.pojo;
 
-public class NoticeBO {
+public class AllPaperBO {
     private Integer id;
     private String title;
     private String date;
-    private String Day;
 
-    private String text;
-    private String detail;
     private String url;
 
     public String getUrl() {
@@ -16,22 +13,6 @@ public class NoticeBO {
 
     public void setUrl(String url) {
         this.url = url;
-    }
-
-    public String getText() {
-        return text;
-    }
-
-    public void setText(String text) {
-        this.text = text;
-    }
-
-    public String getDetail() {
-        return detail;
-    }
-
-    public void setDetail(String detail) {
-        this.detail = detail;
     }
 
     public Integer getId() {
@@ -56,13 +37,5 @@ public class NoticeBO {
 
     public void setDate(String date) {
         this.date = date;
-    }
-
-    public String getDay() {
-        return Day;
-    }
-
-    public void setDay(String day) {
-        Day = day;
     }
 }

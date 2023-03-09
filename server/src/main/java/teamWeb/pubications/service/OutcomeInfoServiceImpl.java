@@ -5,6 +5,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import teamWeb.pubications.entity.OutcomeInfo;
 import teamWeb.pubications.mapper.OutcomeInfoMapper;
+import teamWeb.pubications.pojo.AllMonographBO;
+import teamWeb.pubications.pojo.AllPaperBO;
+import teamWeb.utils.BeanUtil;
 
 import java.util.List;
 
@@ -15,23 +18,18 @@ public class OutcomeInfoServiceImpl extends ServiceImpl<OutcomeInfoMapper, Outco
     OutcomeInfoMapper outcomeInfoMapper;
 
     @Override
-    public List<OutcomeInfo> paperDetail(int start, int end) {
-        return outcomeInfoMapper.getPaperDetail(start,end);
+    public List<AllPaperBO> paperDetail(int start, int end) {
+        return BeanUtil.convert(outcomeInfoMapper.paperDetail(start,end),AllPaperBO.class);
     }
 
     @Override
-    public List<OutcomeInfo> patentDetail(int start, int end) {
-        return outcomeInfoMapper.getPatentDetail(start,end);
+    public List<AllPaperBO> patentDetail(int start, int end) {
+        return BeanUtil.convert(outcomeInfoMapper.patentDetail(start,end),AllPaperBO.class);
     }
 
     @Override
-    public List<OutcomeInfo> monographDetail(int start, int end) {
-        return outcomeInfoMapper.getMonographDetail(start,end);
-    }
-
-    @Override
-    public List<OutcomeInfo> getOutcome(int id) {
-        return outcomeInfoMapper.getOutcome(id);
+    public List<AllMonographBO> monographDetail(int start, int end) {
+        return BeanUtil.convert(outcomeInfoMapper.monographDetail(start,end),AllMonographBO.class);
     }
 
     @Override

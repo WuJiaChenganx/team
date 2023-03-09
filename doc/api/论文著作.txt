@@ -1,0 +1,124 @@
+api:
+
+method:GET
+http://localhost:8186/teamWeb/paper/require-paper?start=0&end=5
+in:null
+out:{
+	"code": "200",
+	"data": [
+		{
+			"id": 1002,
+			"title": "专利1",
+			"date": "2023-03-07",
+			"url": " "
+		},
+		{
+			"id": 1010,
+			"title": "DRL-Based Offloading for Computation Delay Minimization in Wireless-Powered Multi-access Edge Computing",
+			"date": "2023",
+			"url": ""
+		},
+		{
+			"id": 1011,
+			"title": "Nighttime Image Dehazing Based on Point Light Sources",
+			"date": "2022-12-20",
+			"url": ""
+		},
+		{
+			"id": 1020,
+			"title": "Multi-hop Deflection Routing Algorithm Based on Reinforcement Learning for Energy-Harvesting Nanonetworks",
+			"date": "2022-01",
+			"url": ""
+		},
+		{
+			"id": 1013,
+			"title": "Gold nanostars combined with the searched antibody for targeted oral squamous cell carcinoma therapy",
+			"date": "2022",
+			"url": ""
+		}
+	],
+	"msg": null
+}
+
+
+
+method:GET
+http://localhost:8186/teamWeb/paper/require-paper?start=0&end=5
+in:null
+out:{
+	"code": "200",
+	"data": [
+		{
+			"id": 1033,
+			"title": "张行，姚信威，陈树，王杰，邢伟伟。一种基于3D投影的园区车位预定辅助系统及辅助方法，授权号：ZL202110876699.8（专利权人：浙江慧享信息科技有限公司，授权时间：2023.01.03）",
+			"date": null,
+			"url": null
+		},
+		{
+			"id": 1034,
+			"title": "张行，姚信威，陈树，梅江林，邢伟伟。一种基于蚁群算法的智能约梯方法、系统及设备，授权号：ZL202111468071.0（专利权人：浙江慧享信息科技有限公司，授权时间：2022.04.05）",
+			"date": null,
+			"url": null
+		},
+		{
+			"id": 1035,
+			"title": "姚信威, 赵凯, 陈一玮, 伍奕. 一种面向流引导纳米网络循环感知的机会路由方法, 受理号：202111475640.4",
+			"date": null,
+			"url": null
+		}
+	],
+	"msg": null
+}
+
+
+
+
+method:GET
+http://localhost:8186/teamWeb/paper/require-monograph?start=0&end=5
+in:null
+out:{
+	"code": "200",
+	"data": [
+		{
+			"id": 1008,
+			"title": "FGOR: Flow-Guided Opportunistic Routing for Intra-body Nanonetworks, IEEE Internet of Things Journal, 2022, DOI: 10.1109/JIOT.20 22. 3182142(中科院1区，JCR Q1区，IF：9.471）\r\n",
+			"author": "Yao, X. W., Chen, Y. W., Wu, Y., Zhao, K., & Jornet, J. M.",
+			"date": "2022-09-21",
+			"publisher": null,
+			"pictureUrl": " "
+		},
+		{
+			"id": 1009,
+			"title": "Joint Optimization of Latency and Energy Consumption for Mobile Edge Computing Based Proximity Detection in Road Networks”, China Communications, 2022, \r\n",
+			"author": "Zhao, T., Liu, Y., Shou, G., & Yao, X",
+			"date": "2022-04-19",
+			"publisher": null,
+			"pictureUrl": " "
+		},
+		{
+			"id": 1005,
+			"title": "智能解密：智能+场景应用案例解析\r\n",
+			"author": "姚信威",
+			"date": "2021-04-01",
+			"publisher": null,
+			"pictureUrl": " "
+		},
+		{
+			"id": 1003,
+			"title": "电磁纳米网络-基础理论及关键技术\r\n",
+			"author": "姚信威",
+			"date": "2021-01-01",
+			"publisher": null,
+			"pictureUrl": " "
+		},
+		{
+			"id": 1004,
+			"title": "未来服务——生活服务业的科技化变革\r\n",
+			"author": "姚信威",
+			"date": "2021-01-01",
+			"publisher": null,
+			"pictureUrl": " "
+		}
+	],
+	"msg": null
+}
