@@ -1,30 +1,41 @@
 <template>
   <!-- 通知公告列表 -->
-  <div class="backgroundBox">
-    <div class="content">
-      <div class="contentTitle">
-        <div class="indexTitle">{{ currentMenu }}</div>
-        <div class="indexPosition">您当前的位置: 首页 > {{ currentMenu }}</div>
+  <div class="notice">
+    <div class="noticeContent">
+      <div class="noticeTitle">
+        <div class="title">通知公告</div>
+        <div class="breadCrumb">
+          <el-breadcrumb separator-class="el-icon-arrow-right">
+            <el-breadcrumb-item :to="{ path: '/home' }"
+              >首页</el-breadcrumb-item
+            >
+            <el-breadcrumb-item :to="{ path: '/activity/notice' }"
+              >通知公告</el-breadcrumb-item
+            >
+          </el-breadcrumb>
+        </div>
       </div>
-      <div class="contentItem">
+      <div class="noticeItem">
         <div
           v-for="(noticeItem, index) in noticeList"
           :key="index"
-          class="news-row"
+          class="notice-row"
           style="cursor: pointer"
           @click="gotoDetail(noticeItem)"
         >
-          <div class="news-date">
+          <div class="notice-date">
             <div>{{ noticeItem.day }}</div>
             <div>{{ noticeItem.date }}</div>
           </div>
-          <div class="news-title">{{ noticeItem.title }}</div>
-          <div class="news-thing">
-            {{ noticeItem.detail }}
+          <div class="notice-profile">
+            <div class="notice-title">{{ noticeItem.title }}</div>
+            <div class="notice-thing">
+              {{ noticeItem.detail }}
+            </div>
           </div>
         </div>
       </div>
-      <div>
+      <div class="paging">
         <!-- page-size展示的选择每页显示个数的选项,页面变动触发的事件是current-change后面的函数,total表示总共的数量 current-page表示当前页数-->
         <el-pagination
           background
@@ -55,9 +66,8 @@ export default {
           day: "18",
           date: "2023-03",
           title: "中科院计算所自然语言处理组招聘启事",
-          detail: [
+          detail:
             "近日，2021年中国科学院计算技术研究所研究生国家奖学金评选结果正式公布，课题组李泽康同学荣获2021年度国家奖学金硕士奖。本次国家奖学金硕士奖共19人进入答辩，经过激烈角逐，最终评选出13人。李泽康，中科院计算所2019级硕士生，导师冯洋研究员，主要研究方向为自然语言处理、对话系统、多模态表示等。已在ACL，TASLP等自然语言处理顶级会议和顶级期刊上发表多篇论文，并获得国际对话技术比赛DSTC8多模态对话生成赛道冠军，DSTC9交互式对话评估赛道任务一第一名、任务二第三名，也曾作为中国大陆唯一受邀者参加国际对话评估研讨会。",
-          ],
           // 放附件
           fileUrls: [
             { id: 0, fileUrl: "" },
@@ -71,9 +81,9 @@ export default {
           day: "18",
           date: "2023-03",
           title: "中科院计算所自然语言处理组招聘启事",
-          detail: [
+          detail:
             "近日，2021年中国科学院计算技术研究所研究生国家奖学金评选结果正式公布，课题组李泽康同学荣获2021年度国家奖学金硕士奖。本次国家奖学金硕士奖共19人进入答辩，经过激烈角逐，最终评选出13人。李泽康，中科院计算所2019级硕士生，导师冯洋研究员，主要研究方向为自然语言处理、对话系统、多模态表示等。已在ACL，TASLP等自然语言处理顶级会议和顶级期刊上发表多篇论文，并获得国际对话技术比赛DSTC8多模态对话生成赛道冠军，DSTC9交互式对话评估赛道任务一第一名、任务二第三名，也曾作为中国大陆唯一受邀者参加国际对话评估研讨会。",
-          ],
+
           // 放附件
           fileUrls: [
             { id: 1, fileUrl: "" },
@@ -99,9 +109,8 @@ export default {
           day: "18",
           date: "2023-03",
           title: "中科院计算所自然语言处理组招聘启事",
-          detail: [
+          detail:
             "近日，2021年中国科学院计算技术研究所研究生国家奖学金评选结果正式公布，课题组李泽康同学荣获2021年度国家奖学金硕士奖。本次国家奖学金硕士奖共19人进入答辩，经过激烈角逐，最终评选出13人。李泽康，中科院计算所2019级硕士生，导师冯洋研究员，主要研究方向为自然语言处理、对话系统、多模态表示等。已在ACL，TASLP等自然语言处理顶级会议和顶级期刊上发表多篇论文，并获得国际对话技术比赛DSTC8多模态对话生成赛道冠军，DSTC9交互式对话评估赛道任务一第一名、任务二第三名，也曾作为中国大陆唯一受邀者参加国际对话评估研讨会。",
-          ],
           // 放附件
           fileUrls: [
             { id: 0, fileUrl: "" },
@@ -115,9 +124,8 @@ export default {
           day: "18",
           date: "2023-03",
           title: "中科院计算所自然语言处理组招聘启事",
-          detail: [
+          detail:
             "近日，2021年中国科学院计算技术研究所研究生国家奖学金评选结果正式公布，课题组李泽康同学荣获2021年度国家奖学金硕士奖。本次国家奖学金硕士奖共19人进入答辩，经过激烈角逐，最终评选出13人。李泽康，中科院计算所2019级硕士生，导师冯洋研究员，主要研究方向为自然语言处理、对话系统、多模态表示等。已在ACL，TASLP等自然语言处理顶级会议和顶级期刊上发表多篇论文，并获得国际对话技术比赛DSTC8多模态对话生成赛道冠军，DSTC9交互式对话评估赛道任务一第一名、任务二第三名，也曾作为中国大陆唯一受邀者参加国际对话评估研讨会。",
-          ],
           // 放附件
           fileUrls: [
             { id: 1, fileUrl: "" },
@@ -140,9 +148,8 @@ export default {
           day: "18",
           date: "2023-03",
           title: "中科院计算所自然语言处理组招聘启事",
-          detail: [
+          detail:
             "近日，2021年中国科学院计算技术研究所研究生国家奖学金评选结果正式公布，课题组李泽康同学荣获2021年度国家奖学金硕士奖。本次国家奖学金硕士奖共19人进入答辩，经过激烈角逐，最终评选出13人。李泽康，中科院计算所2019级硕士生，导师冯洋研究员，主要研究方向为自然语言处理、对话系统、多模态表示等。已在ACL，TASLP等自然语言处理顶级会议和顶级期刊上发表多篇论文，并获得国际对话技术比赛DSTC8多模态对话生成赛道冠军，DSTC9交互式对话评估赛道任务一第一名、任务二第三名，也曾作为中国大陆唯一受邀者参加国际对话评估研讨会。",
-          ],
           // 放附件
           fileUrls: [
             { id: 0, fileUrl: "" },
@@ -156,9 +163,8 @@ export default {
           day: "18",
           date: "2023-03",
           title: "中科院计算所自然语言处理组招聘启事",
-          detail: [
+          detail:
             "近日，2021年中国科学院计算技术研究所研究生国家奖学金评选结果正式公布，课题组李泽康同学荣获2021年度国家奖学金硕士奖。本次国家奖学金硕士奖共19人进入答辩，经过激烈角逐，最终评选出13人。李泽康，中科院计算所2019级硕士生，导师冯洋研究员，主要研究方向为自然语言处理、对话系统、多模态表示等。已在ACL，TASLP等自然语言处理顶级会议和顶级期刊上发表多篇论文，并获得国际对话技术比赛DSTC8多模态对话生成赛道冠军，DSTC9交互式对话评估赛道任务一第一名、任务二第三名，也曾作为中国大陆唯一受邀者参加国际对话评估研讨会。",
-          ],
           // 放附件
           fileUrls: [
             { id: 1, fileUrl: "" },
@@ -213,102 +219,226 @@ export default {
 };
 </script>
 <style scoped>
-.backgroundBox {
-  height: auto;
-  padding: 30px 0;
-  background: #eef7fe;
+/* PC端 */
+@media screen and (min-width: 1000px) {
+  .notice {
+    padding: 3rem 0;
+    background: #eef7fe;
+  }
+  .noticeContent {
+    width: 75%;
+    margin: 0 auto;
+    padding: 0 3rem;
+    background-color: #fff;
+    border: 1px solid #dfdfdf;
+  }
+  .noticeTitle {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 2rem 0;
+    border-bottom: 1px solid #dfdfdf;
+  }
+  .title {
+    color: #333333;
+    font-weight: bold;
+    font-size: 2.5rem;
+  }
+  .breadCrumb {
+    padding-top: 1rem;
+  }
+  /* 不被选中时的颜色 */
+  .el-breadcrumb ::v-deep .el-breadcrumb__inner {
+    color: #999 !important;
+    font-weight: 400 !important;
+  }
+  /* 被选中时的颜色 */
+  .el-breadcrumb__item:last-child ::v-deep .el-breadcrumb__inner {
+    color: black !important;
+    font-weight: 800 !important;
+  }
+  /* 设置块和分页的距离 */
+  .noticeItem {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 3rem;
+    min-height: 600px;
+  }
+  /* 设置分页和底部的距离 */
+  .paging {
+    margin-bottom: 3rem;
+  }
+  .notice-row {
+    height: 80px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 20px 0;
+    border-bottom: 1px solid #dfdfdf;
+    transition: all 0.5s;
+  }
+  /* 时间框 */
+  .notice-date {
+    width: 80px;
+    height: 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: #008cd6;
+    border-radius: 6px;
+    color: #ffffff;
+    font-family: Arial;
+    text-align: center;
+    transition: all 0.5s;
+  }
+  /* 就是日期中有个要变大 */
+  .notice-row .notice-date div:first-child {
+    font-size: 3rem;
+    font-weight: bold;
+  } /* 文字部分 */
+  .notice-profile {
+    width: 85%;
+    height: 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+  }
+  .notice-title {
+    margin-bottom: 0.5rem;
+    font-size: 16px;
+    font-weight: bold;
+    color: #333333;
+    text-align: left;
+    overflow: hidden;
+    transition: all 0.5s;
+  }
+  .notice-thing {
+    font-size: 16px;
+    color: #999999;
+    text-align: left;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+  }
+  .notice-row:hover {
+    border-bottom: 1px solid #0055a2;
+  }
+  .notice-row:hover .notice-title {
+    color: #0055a2;
+  }
+  .notice-row:hover .notice-date {
+    background-color: #0055a2;
+  }
 }
-.content {
-  width: 75%;
-  height: auto;
-  margin: 0 auto;
-  padding: 0 30px 20px;
-  background-color: #fff;
-  border: 1px solid #dfdfdf;
-}
-.contentTitle {
-  height: 30px;
-  border-bottom: 1px solid #dfdfdf;
-  padding-top: 32px;
-  padding-bottom: 20px;
-  margin-bottom: 20px;
-}
-.indexTitle {
-  float: left;
-  color: #333333;
-  font-weight: bold;
-  font-size: 25px;
-}
-.indexPosition {
-  float: right;
-  color: #999999;
-  font-size: 15px;
-}
-.contentItem {
-  display: flex;
-  flex-direction: column;
-  height: 625px;
-}
+/* 移动端 */
+@media screen and (max-width: 1000px) {
+  .notice {
+    background: #eef7fe;
+  }
+  .noticeContent {
+    box-sizing: border-box;
+    background-color: #fff;
+    border: 1px solid #dfdfdf;
+  }
+  .noticeTitle {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 2rem 0;
+    border-bottom: 1px solid #dfdfdf;
+  }
+  .title {
+    color: #333333;
+    font-weight: bold;
+    font-size: 2.5rem;
+  }
+  .breadCrumb {
+    padding-top: 1rem;
+  }
 
-.news-row {
-  height: 80px;
-  padding-bottom: 20px;
-  margin-bottom: 20px;
-  border-bottom: 1px solid #dfdfdf;
-  transition: all 0.5s;
-}
-/* 时间框 */
-.news-row .news-date {
-  float: left;
-  width: 70px;
-  height: 70px;
-  background: #008cd6;
-  border-radius: 6px;
-  margin-right: 30px;
-  color: #ffffff;
-  font-family: Arial;
-  line-height: 22px;
-  text-align: center;
-  padding-top: 16px;
-  box-sizing: border-box;
-  transition: all 0.5s;
-}
-/* 就是日期中有个要变大 */
-.news-row .news-date div:first-child {
-  font-size: 30px;
-  font-weight: bold;
-}
-/* 文字部分 */
-.news-row .news-title {
-  font-size: 16px;
-  font-weight: bold;
-  color: #333333;
-  line-height: 22px;
-  text-align: left;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  margin-bottom: 10px;
-  transition: all 0.5s;
-}
-.news-thing {
-  font-size: 14px;
-  color: #999999;
-  line-height: 24px;
-  text-align: left;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
-  overflow: hidden;
-  height: 48px;
-}
-.news-row:hover {
-  border-bottom: 1px solid #0055a2;
-}
-.news-row:hover .news-title {
-  color: #0055a2;
-}
-.news-row:hover .news-date {
-  background-color: #0055a2;
+  /* 不被选中时的颜色 */
+  .el-breadcrumb ::v-deep .el-breadcrumb__inner {
+    color: #999 !important;
+    font-weight: 400 !important;
+  }
+  /* 被选中时的颜色 */
+  .el-breadcrumb__item:last-child ::v-deep .el-breadcrumb__inner {
+    color: black !important;
+    font-weight: 800 !important;
+  }
+  /* 设置块和分页的距离 */
+  .noticeItem {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 3rem;
+    min-height: 450px;
+  }
+  /* 设置分页和底部的距离 */
+  .paging {
+    margin-bottom: 3rem;
+  }
+  .notice-row {
+    height: 8rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 2rem 0;
+    border-bottom: 1px solid #dfdfdf;
+    transition: all 0.5s;
+  }
+  /* 时间框 */
+  .notice-date {
+    width: 8rem;
+    height: 8rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: #008cd6;
+    border-radius: 6px;
+    color: #ffffff;
+    font-family: Arial;
+    text-align: center;
+    transition: all 0.5s;
+  }
+  /* 就是日期中有个要变大 */
+  .notice-row .notice-date div:first-child {
+    font-size: 3rem;
+    font-weight: bold;
+  }
+  /* 文字部分 */
+  .notice-profile {
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+  }
+  .notice-title {
+    margin-bottom: 0.5rem;
+    font-size: 1.6rem;
+    font-weight: bold;
+    color: #333333;
+    text-align: left;
+    overflow: hidden;
+    transition: all 0.5s;
+  }
+  .notice-thing {
+    font-size: 1rem;
+    color: #999999;
+    text-align: left;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+  }
+  .notice-row:hover {
+    border-bottom: 1px solid #0055a2;
+  }
+  .notice-row:hover .notice-title {
+    color: #0055a2;
+  }
+  .notice-row:hover .notice-date {
+    background-color: #0055a2;
+  }
 }
 </style>

@@ -6,10 +6,8 @@
           <logo></logo>
         </div>
         <div class="text">
-          <div style="font-size: 35px; margin-bottom: 20px">
-            群智感知与协同研究组
-          </div>
-          <div>浙江工业大学计算机学院重点实验室</div>
+          <div class="chineseName">群智感知与协同研究组</div>
+          <div class="englishName">Crowdsensing and Coordination</div>
         </div>
       </div>
     </div>
@@ -52,7 +50,6 @@ export default {
           title: "首页",
           path: "/home",
         },
-        // 团队动态
         {
           title: "团队动态",
           path: "/activity",
@@ -120,60 +117,82 @@ export default {
 };
 </script>
 <style scoped>
+/* 背景图以及图片还需要更新 */
 .header {
-  /* 背景图以及图片还需要更新 */
-  background: url(../../assets/images/background/headBackground.jpg) no-repeat
-    center top;
-  background-size: cover !important;
-  /* padding: 30px 0; */
+  /* background: url(../../assets/images/background/main3_left.png) no-repeat; */
+  /* background-size: cover !important; */
 }
 
-.headerContent {
-  width: 100%;
-  height: 260px;
+@media screen and (min-width: 1000px) {
+  .headerContent {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
+  .headerContent .text {
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-size: 2rem;
+    color: #0055a2;
+    font-weight: bold;
+  }
+  .headerLogo {
+    width: 20rem;
+  }
+  .navTitle {
+    font-size: 2rem;
+  }
+}
+@media screen and (max-width: 1000px) {
+  .headerContent {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+  }
+  .headerLogo {
+    width: 20rem;
+    margin-right: 2rem;
+  }
+  .headerContent .text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-size: 2rem;
+    color: #0055a2;
+    font-weight: bold;
+  }
+  .navTitle {
+    font-size: 1rem;
+  }
 }
 
-.headerContent .text {
-  text-align: left;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  font-size: 30px;
-  color: #0055a2;
-  height: 260px;
-  font-weight: bold;
-}
-
-.headerLogo {
-  float: left;
-  margin-left: 200px;
-  height: 200px;
-  width: 300px;
-}
-
+/* 导航栏 */
 .navBackground {
-  height: 50px;
+  height: 5rem;
   background-color: #0055a2;
 }
 
 .nav {
   margin: 0 auto;
-  width: 80%;
-  height: 50px;
+  width: 100%;
+  height: 5rem;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-around;
 }
 
 .navItem {
-  width: 10%;
+  width: 15%;
 }
 
-.navItem .navTitle {
+.navTitle {
   /* 水平对齐 */
   text-align: center;
   /* 垂直对齐 */
-  line-height: 50px;
+  line-height: 5rem;
   color: #fff;
 }
 
@@ -183,7 +202,7 @@ export default {
 
 .navItem .subNav {
   /* 隐藏元素 */
-  width: 8%;
+  width: 15%;
   display: none;
   color: #fff;
   background-color: #0055a2;
@@ -194,10 +213,10 @@ export default {
 }
 
 .subNavItem {
-  height: 50px;
+  height: 5rem;
   text-align: center;
   /* 垂直对齐 */
-  line-height: 50px;
+  line-height: 5rem;
   color: #fff;
 }
 

@@ -1,10 +1,9 @@
 <template>
-  <!-- 消息列表 -->
-  <el-card class="box-card" shadow="never">
-    <div slot="header" class="clearfix">
-      <span class="text">新闻快讯</span>
-      <!-- <div>更多</div> -->
-      <span class="more" @click="goTo('/activity/newFlash')">更多</span>
+  <div class="newList">
+    <!-- 消息列表 -->
+    <div class="newListTitle">
+      <div class="left-title">新闻快讯</div>
+      <a class="title-more" @click="goTo('/activity/newFlash')">更多+</a>
     </div>
     <div class="news">
       <div
@@ -21,7 +20,7 @@
         <div class="news-title">{{ newsItem.title }}</div>
       </div>
     </div>
-  </el-card>
+  </div>
 </template>
 <script>
 export default {
@@ -33,7 +32,8 @@ export default {
           id: 0,
           day: "18",
           date: "2023-03",
-          title: "课题组0同学荣获硕士奖",
+          title:
+            "课题组0同学荣获硕士奖个人结合你的放个假呢规范化给对方比较好的放个假好开个翻江倒海快递费共和国合肥市低功耗开发的很舒服对话框闪电发货和开发商速度很快见风使舵红烧豆腐喝咖啡SDK见风使舵华发商都和科技顺丰单号就开始东方红发送到",
           detail:
             "近日，2021年中国科学院计算技术研究所研究生国家奖学金评选结果正式公布，课题组李泽康同学荣获2021年度国家奖学金硕士奖。本次国家奖学金硕士奖共19人进入答辩，经过激烈角逐，最终评选出13人。李泽康，中科院计算所2019级硕士生，导师冯洋研究员，主要研究方向为自然语言处理、对话系统、多模态表示等。已在ACL，TASLP等自然语言处理顶级会议和顶级期刊上发表多篇论文，并获得国际对话技术比赛DSTC8多模态对话生成赛道冠军，DSTC9交互式对话评估赛道任务一第一名、任务二第三名，也曾作为中国大陆唯一受邀者参加国际对话评估研讨会。",
           picUrl: require("../../assets/images/activity/00.jpg"),
@@ -42,7 +42,8 @@ export default {
           id: 1,
           day: "18",
           date: "2023-03",
-          title: "冯洋老师荣获钱伟长中文信息处理科学技术奖-汉王青年创新奖",
+          title:
+            "冯洋老师荣获钱伟长中文信息处理科学技术奖-汉王青年创新奖人干货的好几个范德蒙",
           detail:
             "近日，2021年中国科学院计算技术研究所研究生国家奖学金评选结果正式公布，课题组李泽康同学荣获2021年度国家奖学金硕士奖。本次国家奖学金硕士奖共19人进入答辩，经过激烈角逐，最终评选出13人。李泽康，中科院计算所2019级硕士生，导师冯洋研究员，主要研究方向为自然语言处理、对话系统、多模态表示等。已在ACL，TASLP等自然语言处理顶级会议和顶级期刊上发表多篇论文，并获得国际对话技术比赛DSTC8多模态对话生成赛道冠军，DSTC9交互式对话评估赛道任务一第一名、任务二第三名，也曾作为中国大陆唯一受邀者参加国际对话评估研讨会。",
           picUrl: require("../../assets/images/activity/00.jpg"),
@@ -61,6 +62,15 @@ export default {
           day: "18",
           date: "2023-03",
           title: "课题组3同学荣获硕士奖",
+          detail:
+            "近日，2021年中国科学院计算技术研究所研究生国家奖学金评选结果正式公布，课题组李泽康同学荣获2021年度国家奖学金硕士奖。本次国家奖学金硕士奖共19人进入答辩，经过激烈角逐，最终评选出13人。李泽康，中科院计算所2019级硕士生，导师冯洋研究员，主要研究方向为自然语言处理、对话系统、多模态表示等。已在ACL，TASLP等自然语言处理顶级会议和顶级期刊上发表多篇论文，并获得国际对话技术比赛DSTC8多模态对话生成赛道冠军，DSTC9交互式对话评估赛道任务一第一名、任务二第三名，也曾作为中国大陆唯一受邀者参加国际对话评估研讨会。",
+          picUrl: require("../../assets/images/activity/00.jpg"),
+        },
+        {
+          id: 4,
+          day: "18",
+          date: "2023-03",
+          title: "课题组5同学荣获硕士奖",
           detail:
             "近日，2021年中国科学院计算技术研究所研究生国家奖学金评选结果正式公布，课题组李泽康同学荣获2021年度国家奖学金硕士奖。本次国家奖学金硕士奖共19人进入答辩，经过激烈角逐，最终评选出13人。李泽康，中科院计算所2019级硕士生，导师冯洋研究员，主要研究方向为自然语言处理、对话系统、多模态表示等。已在ACL，TASLP等自然语言处理顶级会议和顶级期刊上发表多篇论文，并获得国际对话技术比赛DSTC8多模态对话生成赛道冠军，DSTC9交互式对话评估赛道任务一第一名、任务二第三名，也曾作为中国大陆唯一受邀者参加国际对话评估研讨会。",
           picUrl: require("../../assets/images/activity/00.jpg"),
@@ -225,75 +235,76 @@ export default {
 };
 </script>
 <style scoped>
-.box-card {
-  background-color: #deecf9;
+.newListTitle {
+  width: 100%;
+  height: 3.8rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-bottom: 2rem;
 }
-.clearfix {
-  /* 移动到第0行出现小手 */
-  cursor: pointer;
-}
-.clearfix .text {
-  font-size: 22px;
+.left-title {
+  text-align: left;
+  font-size: 2.2rem;
   font-weight: bold;
   color: #003266;
-  line-height: 28px;
-  float: left;
 }
-.clearfix .more {
-  float: right;
-  font-size: 14px;
+.title-more {
+  color: #7db0cb;
+  font-size: 1.4rem;
+  line-height: 1.8rem;
+  cursor: pointer;
 }
 
-.clearfix:before,
-.clearfix:after {
-  display: table;
-  content: "";
-}
-.clearfix:after {
-  clear: both;
-}
 .news {
   display: flex;
   flex-direction: column;
-  height: 340px;
+  justify-content: space-between;
+  height: 34rem;
 }
-.news-row {
-  margin-bottom: 10px;
-}
+
 /* 时间框 */
 .news-row .news-date {
   float: left;
-  width: 58px;
-  height: 58px;
+  width: 5.8rem;
+  height: 5.8rem;
   background: #008cd6;
   border-radius: 2px;
-  margin-right: 30px;
+  margin-right: 3rem;
   /* 时间数字的颜色 */
   color: #ffffff;
   font-family: Arial;
-  line-height: 22px;
-  font-size: 12px;
+  font-size: 1rem;
   text-align: center;
-  padding-top: 11px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 /* 就是日期中有个要变大 */
 .news-row .news-date div:first-child {
-  font-size: 30px;
+  font-size: 2rem;
   font-weight: bold;
 }
-/* 文字部分 */
 .news-row .news-title {
-  font-size: 20px;
+  font-size: 1rem;
   color: #0055a2;
   display: -webkit-box;
   /* 两行直接省略 */
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
-  /* overflow: hidden; */
-  height: 69px;
+  overflow: hidden;
   font-weight: bold;
-  word-wrap: break-word;
-  word-break: break-all;
   text-align: left;
+}
+/* 文字部分 */
+@media screen and (max-width: 1000px) {
+  .news-row .news-title {
+    -webkit-line-clamp: 2;
+  }
+}
+@media screen and (min-width: 1000px) {
+  .news-row .news-title {
+    -webkit-line-clamp: 3;
+  }
 }
 </style>

@@ -1,12 +1,10 @@
 <template>
-  <div class="resourceSharing">
+  <div class="curriculum">
     <!-- default-active表示是当前选中的菜单的index -->
-    <div class="resourceContent">
-      <div class="aside">
-        <div class="asideTitle">
-          {{ title }}
-        </div>
-        <div class="asideContent">
+    <div class="curriculumContent">
+      <div class="curriculumAside">
+        <div class="curriculumAsideTitle">课程教学</div>
+        <div class="curriculumAsideContent">
           <el-menu
             :default-active="this.$route.path"
             router
@@ -16,41 +14,51 @@
             active-text-color="#fff"
           >
             <el-menu-item
-              class="contentItem"
+              class="curriculumAsideItem"
               v-for="(menuItem, menuIndex) in Menu"
               :key="menuIndex"
               :index="menuItem.path"
             >
               <i class="el-icon-sunny"></i>
-              <span slot="title">{{ menuItem.name }}</span>
+              <span>{{ menuItem.name }}</span>
             </el-menu-item>
           </el-menu>
         </div>
       </div>
-      <div class="details">
-        <div class="detailTitle">
-          <div class="currentTitle">
-            {{ currentMenu }}
-          </div>
-          <div style="float: right; color: #999; font-size: 15px">
-            您当前的位置: 首页 > {{ title }} >{{ currentMenu }}
+      <div class="curriculumDetail">
+        <div class="curriculumTitle">
+          <div class="title">课程教学</div>
+          <div class="breadCrumb">
+            <el-breadcrumb separator-class="el-icon-arrow-right">
+              <el-breadcrumb-item :to="{ path: '/home' }"
+                >首页</el-breadcrumb-item
+              >
+              <el-breadcrumb-item
+                :to="{ path: '/scientificResearch/curriculum' }"
+                >课程教学</el-breadcrumb-item
+              >
+            </el-breadcrumb>
           </div>
         </div>
-        <div
-          class="detailItem"
-          v-for="(courseItem, index) in courses"
-          :key="courseItem.courseType"
-        >
-          <div class="courseType">
-            {{ index + 1 }}. {{ courseItem.courseType }}
-          </div>
-          <div class="courseProfile">{{ courseItem.profile }}</div>
+        <div class="curriculumItem">
           <div
-            v-for="courseListItem in courseItem.courseList"
-            :key="courseListItem.id"
+            class="detailItem"
+            v-for="(courseItem, index) in courses"
+            :key="courseItem.courseType"
           >
-            <div class="courseName">
-              {{ courseListItem.id }}. {{ courseListItem.courseName }}
+            <!-- 课程类型:本科生/研究生 -->
+            <div class="detailItemCourseType">
+              {{ index + 1 }}. {{ courseItem.courseType }}
+            </div>
+            <!-- 教学简介 -->
+            <div class="detailItemCourseProfile">{{ courseItem.profile }}</div>
+            <div
+              v-for="courseListItem in courseItem.courseList"
+              :key="courseListItem.id"
+            >
+              <div class="detailItemCourseName">
+                {{ courseListItem.id }}. {{ courseListItem.courseName }}
+              </div>
             </div>
           </div>
         </div>
@@ -119,105 +127,170 @@ export default {
 };
 </script>
 <style scoped>
-.resourceSharing {
-  padding: 30px 0 50px 0;
-  background: url(../../assets/images/background/contentBackground.jpg)
-    no-repeat;
-  width: 100%;
-  height: auto;
-}
+/* PC端  */
+@media screen and (min-width: 1000px) {
+  .curriculum {
+    padding: 3rem 0;
+    background: url(../../assets/images/background/contentBackground.jpg)
+      no-repeat;
+  }
 
-.resourceContent {
-  padding-top: 20px;
-  width: 75%;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
+  .curriculumContent {
+    width: 75%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
 
-.aside {
-  width: 25%;
-  height: auto;
-  padding: 0 15px;
-  float: left;
-}
+  .curriculumAside {
+    width: 25%;
+  }
+  .curriculumAsideTitle {
+    background: url(../../assets/images/background/zryy-menu-t-bg.png) no-repeat;
+    border-radius: 0.6rem;
+    background-size: cover !important;
+    font-weight: bold;
+    color: #fff;
+    font-size: 2rem;
+    line-height: 3rem;
+    height: 3rem;
+    padding: 2rem 3rem;
+    margin-bottom: 0.5rem;
+  }
+  .curriculumAsideItem {
+    font-size: 2rem;
+    text-align: left;
+    cursor: pointer;
+  }
 
-.asideTitle {
-  background: url(../../assets/images/background/zryy-menu-t-bg.png) no-repeat
-    center;
-  border-radius: 6px;
-  background-size: cover !important;
-  font-weight: bold;
-  color: #fff;
-  font-size: 22px;
-  line-height: 30px;
-  height: 30px;
-  padding: 20px 30px;
-  margin-bottom: 10px;
-}
+  .curriculumDetail {
+    width: 73%;
+    padding: 0 3rem;
+    box-sizing: border-box;
+    background-color: #fff;
+    border: 1px solid #dfdfdf;
+  }
 
-.asideContent {
-  height: auto;
-  border: 1px solid #eee;
-}
+  .curriculumTitle {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 2rem 0;
+    border-bottom: 1px solid #dfdfdf;
+  }
+  .title {
+    color: #333333;
+    font-weight: bold;
+    font-size: 2.5rem;
+  }
+  .breadCrumb {
+    padding-top: 1rem;
+  }
+  /* 选中侧边导航的背景颜色 */
+  .el-menu-item.is-active {
+    background: #008cd6 !important;
+  }
 
-.currentTitle {
-  float: left;
-  color: #333333;
-  font-weight: bold;
-  font-size: 25px;
-}
+  .curriculumItem {
+    min-height: 600px;
+    padding-bottom: 2rem;
+  }
 
-.contentItem {
-  font-weight: bold;
-  font-size: 20px;
-  text-align: left;
-  cursor: pointer;
-  padding: 0 20px;
-  border-bottom: 1px solid #eee;
+  .detailItem {
+    word-wrap: break-word;
+    word-break: break-all;
+    line-height: 3rem;
+    margin-top: 1.5rem;
+    text-align: left;
+  }
+  .detailItemCourseType {
+    font-size: 2rem;
+    font-weight: bold;
+  }
+  .detailItemCourseProfile {
+    font-size: 1.8rem;
+  }
+  .detailItemCourseName {
+    text-indent: 2em;
+    font-size: 1.6rem;
+  }
 }
+/* 移动端  */
+@media screen and (max-width: 1000px) {
+  .curriculum {
+    background: url(../../assets/images/background/contentBackground.jpg)
+      no-repeat;
+  }
 
-.el-menu-item.is-active {
-  background: #008cd6 !important;
-}
+  .curriculumContent {
+    display: flex;
+    flex-direction: column;
+  }
 
-.details {
-  float: left;
-  position: relative;
-  padding: 0 15px;
-  width: 75%;
-  height: auto;
-  background-color: #fff;
-  border: 1px solid #dfdfdf;
-  padding-bottom: 150px;
-}
+  .curriculumAside {
+    width: 100%;
+  }
+  /* 不显示侧边导航栏上面的标题 */
+  .curriculumAsideTitle {
+    display: none;
+  }
+  .curriculumAsideItem {
+    font-size: 2rem;
+    text-align: center;
+    cursor: pointer;
+  }
 
-.detailTitle {
-  height: 30px;
-  border-bottom: 1px solid #dfdfdf;
-  padding-top: 32px;
-  padding-bottom: 20px;
-}
+  .curriculumDetail {
+    width: 100%;
+    padding: 0 1.5rem;
+    box-sizing: border-box;
+    background-color: #fff;
+    border: 1px solid #dfdfdf;
+  }
 
-.detailItem {
-  word-wrap: break-word;
-  word-break: break-all;
-  width: 100%;
-  height: auto;
-  line-height: 30px;
-  margin-top: 30px;
-  text-align: left;
-}
-.courseType {
-  font-size: 16px;
-  font-weight: bold;
-}
-.courseProfile {
-  font-size: 15px;
-}
-.courseName {
-  text-indent: 2em;
-  font-size: 14px;
+  .curriculumTitle {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 2rem 0;
+    border-bottom: 1px solid #dfdfdf;
+  }
+  .title {
+    color: #333333;
+    font-weight: bold;
+    font-size: 2.5rem;
+  }
+  .breadCrumb {
+    padding-top: 1rem;
+  }
+  /* 选中侧边导航的背景颜色 */
+  .el-menu-item.is-active {
+    background: #008cd6 !important;
+  }
+
+  .curriculumItem {
+    min-height: 450px;
+    padding-bottom: 2rem;
+  }
+
+  .detailItem {
+    word-wrap: break-word;
+    word-break: break-all;
+    line-height: 3rem;
+    margin-top: 1.5rem;
+    text-align: left;
+  }
+  .detailItemCourseType {
+    font-size: 2rem;
+    font-weight: bold;
+  }
+  .detailItemCourseProfile {
+    font-size: 1.8rem;
+  }
+  .detailItemCourseName {
+    text-indent: 2em;
+    font-size: 1.6rem;
+  }
 }
 </style>

@@ -1,12 +1,10 @@
 <template>
-  <div class="resourceSharing">
+  <div class="graduate">
     <!-- default-active表示是当前选中的菜单的index -->
-    <div class="resourceContent">
-      <div class="aside">
-        <div class="asideTitle">
-          {{ title }}
-        </div>
-        <div class="asideContent">
+    <div class="graduateContent">
+      <div class="graduateAside">
+        <div class="graduateAsideTitle">毕业生</div>
+        <div class="graduateAsideContent">
           <el-menu
             :default-active="this.$route.path"
             router
@@ -16,36 +14,43 @@
             active-text-color="#fff"
           >
             <el-menu-item
-              class="contentItem"
+              class="graduateAsideItem"
               v-for="(menuItem, menuIndex) in Menu"
               :key="menuIndex"
               :index="menuItem.path"
             >
               <i class="el-icon-sunny"></i>
-              <span slot="title">{{ menuItem.name }}</span>
+              <span>{{ menuItem.name }}</span>
             </el-menu-item>
           </el-menu>
         </div>
       </div>
-      <div class="details">
-        <div class="detailTitle">
-          <div class="currentTitle">
-            {{ currentMenu }}
-          </div>
-          <div style="float: right; color: #999; font-size: 15px">
-            您当前的位置: 首页 > {{ title }} >{{ currentMenu }}
+      <div class="graduateDetail">
+        <div class="graduateTitle">
+          <div class="title">毕业生</div>
+          <div class="breadCrumb">
+            <el-breadcrumb separator-class="el-icon-arrow-right">
+              <el-breadcrumb-item :to="{ path: '/home' }"
+                >首页</el-breadcrumb-item
+              >
+              <el-breadcrumb-item :to="{ path: '/team/graduate' }"
+                >毕业生</el-breadcrumb-item
+              >
+            </el-breadcrumb>
           </div>
         </div>
-        <div
-          class="detailItem"
-          v-for="memberItem in studentAllInfo"
-          :key="memberItem.id"
-          style="cursor: pointer"
-          @click="gotoDetail(memberItem)"
-        >
-          <div class="memberImg"><img :src="memberItem.picUrl" /></div>
-          <div class="memberInfo">
-            {{ memberItem.name }} {{ memberItem.title }}
+        <div class="graduateItem">
+          <div
+            class="detailItem"
+            v-for="memberItem in studentAllInfo"
+            :key="memberItem.id"
+            style="cursor: pointer"
+            @click="gotoDetail(memberItem)"
+          >
+            <div class="detailItemImg"><img :src="memberItem.picUrl" /></div>
+            <div class="detailItemInfo">
+              {{ memberItem.name }} {{ memberItem.title }}
+            </div>
           </div>
         </div>
       </div>
@@ -182,7 +187,7 @@ export default {
   methods: {
     gotoDetail(item) {
       this.$router.push({
-        path: "/team/studentDetail",
+        path: "/team/studentInfo",
         name: "学生详情",
         // 用query传参,在地址栏后面加东西如 ?id=1这种跟在网址后面
         query: {
@@ -196,7 +201,169 @@ export default {
 };
 </script>
 <style scoped>
-.resourceSharing {
+/* PC端  */
+@media screen and (min-width: 1000px) {
+  .graduate {
+    padding: 3rem 0;
+    background: url(../../assets/images/background/contentBackground.jpg)
+      no-repeat;
+  }
+
+  .graduateContent {
+    width: 75%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .graduateAside {
+    width: 25%;
+  }
+  .graduateAsideTitle {
+    background: url(../../assets/images/background/zryy-menu-t-bg.png) no-repeat;
+    border-radius: 0.6rem;
+    background-size: cover !important;
+    font-weight: bold;
+    color: #fff;
+    font-size: 2rem;
+    line-height: 3rem;
+    height: 3rem;
+    padding: 2rem 3rem;
+    margin-bottom: 0.5rem;
+  }
+  .graduateAsideItem {
+    font-size: 2rem;
+    text-align: left;
+    cursor: pointer;
+  }
+
+  .graduateDetail {
+    width: 73%;
+    padding: 0 3rem;
+    box-sizing: border-box;
+    background-color: #fff;
+    border: 1px solid #dfdfdf;
+  }
+
+  .graduateTitle {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 2rem 0;
+    border-bottom: 1px solid #dfdfdf;
+  }
+  .title {
+    color: #333333;
+    font-weight: bold;
+    font-size: 2.5rem;
+  }
+  .breadCrumb {
+    padding-top: 1rem;
+  }
+  /* 选中侧边导航的背景颜色 */
+  .el-menu-item.is-active {
+    background: #008cd6 !important;
+  }
+
+  .graduateItem {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 3rem 0;
+  }
+  .detailItem {
+    cursor: pointer;
+    text-decoration: none;
+    padding: 1rem;
+    width: 20rem;
+  }
+
+  .detailItem img {
+    width: 100%;
+    height: 23rem;
+  }
+
+  .detailItem .detailItemInfo {
+    padding: 1rem 0;
+  }
+}
+/* 移动端  */
+@media screen and (max-width: 1000px) {
+  .graduate {
+    background: url(../../assets/images/background/contentBackground.jpg)
+      no-repeat;
+  }
+
+  .graduateContent {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .graduateAside {
+    width: 100%;
+  }
+  /* 不显示侧边导航栏上面的标题 */
+  .graduateAsideTitle {
+    display: none;
+  }
+  .graduateAsideItem {
+    font-size: 2rem;
+    text-align: center;
+    cursor: pointer;
+  }
+
+  .graduateDetail {
+    width: 100%;
+    padding: 0 1.5rem;
+    box-sizing: border-box;
+    background-color: #fff;
+    border: 1px solid #dfdfdf;
+  }
+
+  .graduateTitle {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 2rem 0;
+    border-bottom: 1px solid #dfdfdf;
+  }
+  .title {
+    color: #333333;
+    font-weight: bold;
+    font-size: 2.5rem;
+  }
+  .breadCrumb {
+    padding-top: 1rem;
+  }
+  /* 选中侧边导航的背景颜色 */
+  .el-menu-item.is-active {
+    background: #008cd6 !important;
+  }
+
+  .graduateItem {
+    display: flex;
+    flex-direction: column;
+    padding: 2rem 0;
+  }
+  .detailItem {
+    cursor: pointer;
+    text-decoration: none;
+    margin-bottom: 2rem;
+  }
+
+  .detailItem img {
+    width: 20rem;
+    height: 23rem;
+  }
+
+  .detailItem .detailItemInfo {
+    padding: 1rem 0;
+  }
+}
+/* .resourceSharing {
   padding: 30px 0 50px 0;
   background: url(../../assets/images/background/contentBackground.jpg)
     no-repeat;
@@ -205,7 +372,6 @@ export default {
 }
 
 .resourceContent {
-  padding-top: 20px;
   width: 75%;
   margin: 0 auto;
   display: flex;
@@ -292,5 +458,5 @@ export default {
 .detailItem .memberInfo {
   width: 100%;
   padding: 10px 0;
-}
+} */
 </style>
