@@ -1,16 +1,26 @@
 <template>
-  <div class="backgroundBox">
-    <div class="content">
-      <div class="contentTitle">
-        <div class="indexTitle">{{ title }}</div>
-        <div class="indexPosition">
-          您当前的位置: 首页 > {{ title }}> {{ currentMenu }}
+  <div class="newFlashDetailBackground">
+    <div class="newFlashDetail">
+      <div class="newFlashDetailTitle">
+        <div class="title">新闻快讯</div>
+        <div class="breadCrumb">
+          <el-breadcrumb separator-class="el-icon-arrow-right">
+            <el-breadcrumb-item :to="{ path: '/home' }"
+              >首页</el-breadcrumb-item
+            >
+            <el-breadcrumb-item :to="{ path: '/activity/newFlash' }"
+              >新闻快讯</el-breadcrumb-item
+            >
+            <el-breadcrumb-item :to="{ path: '/activity/newFlashDetail' }"
+              >新闻快讯详情</el-breadcrumb-item
+            >
+          </el-breadcrumb>
         </div>
       </div>
-      <div class="thing">
-        <div class="thingTitle">{{ newsList.title }}</div>
-        <div class="thingContent">{{ newsList.detail }}</div>
-        <div class="personPhoto">
+      <div class="newFlashDetailContent">
+        <div class="newFlashTitle">{{ newsList.title }}</div>
+        <div class="newFlashInfo">{{ newsList.detail }}</div>
+        <div class="newFlashPhoto">
           <img :src="newsList.picUrl" alt="" />
         </div>
       </div>
@@ -41,65 +51,121 @@ export default {
 };
 </script>
 <style scoped>
-.backgroundBox {
-  height: auto;
-  padding: 30px 0;
-  background: #eef7fe;
+/* PC端  */
+@media screen and (min-width: 1000px) {
+  .newFlashDetailBackground {
+    padding: 3rem 0;
+    background: #eef7fe;
+  }
+  .newFlashDetail {
+    width: 75%;
+    /* 内容里面缩进 */
+    padding: 0 3rem;
+    margin: 0 auto;
+    box-sizing: border-box;
+    background-color: #fff;
+    border: 1px solid #dfdfdf;
+  }
+  .newFlashDetailTitle {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 2rem 0;
+    border-bottom: 1px solid #dfdfdf;
+  }
+  .title {
+    color: #333333;
+    font-weight: bold;
+    font-size: 2.5rem;
+  }
+  .breadCrumb {
+    padding-top: 1rem;
+  }
+  .newFlashDetailContent {
+    min-height: 600px;
+    padding-bottom: 2rem;
+  }
+  .newFlashTitle {
+    color: #0055a2;
+    line-height: 3rem;
+    font-size: 2.5rem;
+    font-weight: bold;
+    text-align: center;
+    padding: 2rem;
+  }
+  .newFlashInfo {
+    word-wrap: break-word;
+    word-break: break-all;
+    text-align: left;
+    line-height: 3rem;
+    font-size: 1.6rem;
+    text-indent: 2em;
+    padding-bottom: 2rem;
+  }
+  .newFlashPhoto {
+    padding-bottom: 2rem;
+  }
+  .newFlashPhoto img {
+    /* 只设置宽/高另外一个等比例缩放 */
+    width: 80%;
+  }
 }
-.content {
-  width: 75%;
-  height: auto;
-  margin: 0 auto;
-  padding: 0 30px 20px;
-  background-color: #fff;
-  border: 1px solid #dfdfdf;
-}
-.contentTitle {
-  height: 30px;
-  border-bottom: 1px solid #dfdfdf;
-  padding-top: 32px;
-  padding-bottom: 20px;
-  margin-bottom: 20px;
-}
-.indexTitle {
-  float: left;
-  color: #333333;
-  font-weight: bold;
-  font-size: 25px;
-}
-.indexPosition {
-  float: right;
-  color: #999999;
-  font-size: 15px;
-}
-.thing {
-  padding-bottom: 50px;
-}
-.thingTitle {
-  color: #0055a2;
-  line-height: 30px;
-  font-size: 26px;
-  font-weight: bold;
-  text-align: center;
-  margin-bottom: 20px;
-}
-.thingContent {
-  word-wrap: break-word;
-  word-break: break-all;
-  width: 100%;
-  height: auto;
-  text-align: left;
-  line-height: 30px;
-  font-size: 16px;
-  text-indent: 2em;
-  padding-bottom: 10px;
-}
-.personPhoto {
-  width: 100%;
-  height: auto;
-}
-.personPhoto img {
-  height: 250px;
-  width: 200px;
+
+/* 移动端  */
+@media screen and (max-width: 1000px) {
+  .newFlashDetailBackground {
+    background: #eef7fe;
+  }
+  .newFlashDetail {
+    width: 100%;
+    padding: 0 1.5rem;
+    box-sizing: border-box;
+    background-color: #fff;
+    border: 1px solid #dfdfdf;
+  }
+  .newFlashDetailTitle {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 2rem 0;
+    border-bottom: 1px solid #dfdfdf;
+  }
+  .title {
+    color: #333333;
+    font-weight: bold;
+    font-size: 2.5rem;
+  }
+  .breadCrumb {
+    padding-top: 1rem;
+  }
+  .newFlashDetailContent {
+    min-height: 450px;
+    padding-bottom: 2rem;
+  }
+  .newFlashTitle {
+    color: #0055a2;
+    line-height: 3rem;
+    font-size: 2rem;
+    font-weight: bold;
+    text-align: center;
+    padding: 2rem;
+  }
+  .newFlashInfo {
+    word-wrap: break-word;
+    word-break: break-all;
+    text-align: left;
+    line-height: 3rem;
+    font-size: 1.6rem;
+    text-indent: 2em;
+    padding-bottom: 2rem;
+  }
+
+  .newFlashPhoto {
+    padding-bottom: 2rem;
+  }
+  .newFlashPhoto img {
+    /* 只设置宽/高另外一个等比例缩放 */
+    width: 80%;
+  }
 }
 </style>

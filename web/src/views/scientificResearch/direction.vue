@@ -1,12 +1,10 @@
 <template>
-  <div class="resourceSharing">
+  <div class="direction">
     <!-- default-active表示是当前选中的菜单的index -->
-    <div class="resourceContent">
-      <div class="aside">
-        <div class="asideTitle">
-          {{ title }}
-        </div>
-        <div class="asideContent">
+    <div class="directionContent">
+      <div class="directionAside">
+        <div class="directionAsideTitle">科研方向</div>
+        <div class="directionAsideContent">
           <el-menu
             :default-active="this.$route.path"
             router
@@ -16,34 +14,42 @@
             active-text-color="#fff"
           >
             <el-menu-item
-              class="contentItem"
+              class="directionAsideItem"
               v-for="(menuItem, menuIndex) in Menu"
               :key="menuIndex"
               :index="menuItem.path"
             >
               <i class="el-icon-sunny"></i>
-              <span slot="title">{{ menuItem.name }}</span>
+              <span>{{ menuItem.name }}</span>
             </el-menu-item>
           </el-menu>
         </div>
       </div>
-      <div class="details">
-        <div class="detailTitle">
-          <div class="currentTitle">
-            {{ currentMenu }}
-          </div>
-          <div style="float: right; color: #999; font-size: 15px">
-            您当前的位置: 首页 > {{ title }} >{{ currentMenu }}
+      <div class="directionDetail">
+        <div class="directionTitle">
+          <div class="title">科研方向</div>
+          <div class="breadCrumb">
+            <el-breadcrumb separator-class="el-icon-arrow-right">
+              <el-breadcrumb-item :to="{ path: '/home' }"
+                >首页</el-breadcrumb-item
+              >
+              <el-breadcrumb-item
+                :to="{ path: '/scientificResearch/direction' }"
+                >科研方向</el-breadcrumb-item
+              >
+            </el-breadcrumb>
           </div>
         </div>
-        <div
-          class="detailItem"
-          v-for="directionItem in directions"
-          :key="directionItem.id"
-        >
-          <div class="directionContent">{{ directionItem.Info }}</div>
-          <div class="contentImg">
-            <img :src="directionItem.picUrl" alt="" />
+        <div class="directionItem">
+          <div
+            class="detailItem"
+            v-for="directionItem in directions"
+            :key="directionItem.id"
+          >
+            <div class="detailItemInfo">{{ directionItem.Info }}</div>
+            <div class="detailItemImg">
+              <img :src="directionItem.picUrl" alt="" />
+            </div>
           </div>
         </div>
       </div>
@@ -82,107 +88,174 @@ export default {
 };
 </script>
 <style scoped>
-.resourceSharing {
-  padding: 30px 0 50px 0;
-  background: url(../../assets/images/background/contentBackground.jpg)
-    no-repeat;
-  width: 100%;
-  height: auto;
-}
+/* PC端  */
+@media screen and (min-width: 1000px) {
+  .direction {
+    padding: 3rem 0;
+    background: url(../../assets/images/background/contentBackground.jpg)
+      no-repeat;
+  }
 
-.resourceContent {
-  padding-top: 20px;
-  width: 75%;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
+  .directionContent {
+    width: 75%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
 
-.aside {
-  width: 25%;
-  height: auto;
-  padding: 0 15px;
-  float: left;
-}
+  .directionAside {
+    width: 25%;
+  }
+  .directionAsideTitle {
+    background: url(../../assets/images/background/zryy-menu-t-bg.png) no-repeat;
+    border-radius: 0.6rem;
+    background-size: cover !important;
+    font-weight: bold;
+    color: #fff;
+    font-size: 2rem;
+    line-height: 3rem;
+    height: 3rem;
+    padding: 2rem 3rem;
+    margin-bottom: 0.5rem;
+  }
+  .directionAsideItem {
+    font-size: 2rem;
+    text-align: left;
+    cursor: pointer;
+  }
 
-.asideTitle {
-  background: url(../../assets/images/background/zryy-menu-t-bg.png) no-repeat
-    center;
-  border-radius: 6px;
-  background-size: cover !important;
-  font-weight: bold;
-  color: #fff;
-  font-size: 22px;
-  line-height: 30px;
-  height: 30px;
-  padding: 20px 30px;
-  margin-bottom: 10px;
-}
+  .directionDetail {
+    width: 73%;
+    padding: 0 3rem;
+    box-sizing: border-box;
+    background-color: #fff;
+    border: 1px solid #dfdfdf;
+  }
 
-.asideContent {
-  height: auto;
-  border: 1px solid #eee;
-}
+  .directionTitle {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 2rem 0;
+    border-bottom: 1px solid #dfdfdf;
+  }
+  .title {
+    color: #333333;
+    font-weight: bold;
+    font-size: 2.5rem;
+  }
+  .breadCrumb {
+    padding-top: 1rem;
+  }
+  /* 选中侧边导航的背景颜色 */
+  .el-menu-item.is-active {
+    background: #008cd6 !important;
+  }
 
-.currentTitle {
-  float: left;
-  color: #333333;
-  font-weight: bold;
-  font-size: 25px;
+  .directionItem {
+    min-height: 600px;
+    padding-bottom: 2rem;
+  }
+  /*每个item之间的上边距 */
+  .detailItem {
+    word-wrap: break-word;
+    word-break: break-all;
+    margin-top: 1.5rem;
+  }
+  /* 文字和图片的距离 */
+  .detailItemInfo {
+    line-height: 3rem;
+    font-size: 2rem;
+    text-align: left;
+    text-indent: 2em;
+    margin-bottom: 1rem;
+  }
+  .detailItemImg {
+    padding-bottom: 0.5rem;
+  }
+  .detailItemImg img {
+    /* 只设置宽/高另外一个等比例缩放 */
+    width: 80%;
+  }
 }
+/* 移动端 */
+@media screen and (max-width: 1000px) {
+  .direction {
+    background: url(../../assets/images/background/contentBackground.jpg)
+      no-repeat;
+  }
 
-.contentItem {
-  font-weight: bold;
-  font-size: 20px;
-  text-align: left;
-  cursor: pointer;
-  padding: 0 20px;
-  border-bottom: 1px solid #eee;
-}
+  .directionContent {
+    display: flex;
+    flex-direction: column;
+  }
 
-.el-menu-item.is-active {
-  background: #008cd6 !important;
-}
+  .directionAside {
+    width: 100%;
+  }
+  /* 不显示侧边导航栏上面的标题 */
+  .directionAsideTitle {
+    display: none;
+  }
+  .directionAsideItem {
+    font-size: 2rem;
+    text-align: center;
+    cursor: pointer;
+  }
 
-.details {
-  float: left;
-  position: relative;
-  padding: 0 15px;
-  width: 75%;
-  height: auto;
-  background-color: #fff;
-  border: 1px solid #dfdfdf;
-  padding-bottom: 150px;
-}
+  .directionDetail {
+    width: 100%;
+    padding: 0 1.5rem;
+    box-sizing: border-box;
+    background-color: #fff;
+    border: 1px solid #dfdfdf;
+  }
 
-.detailTitle {
-  height: 30px;
-  border-bottom: 1px solid #dfdfdf;
-  padding-top: 32px;
-  padding-bottom: 20px;
-  margin-bottom: 15px;
-}
+  .directionTitle {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 2rem 0;
+    border-bottom: 1px solid #dfdfdf;
+  }
+  .title {
+    color: #333333;
+    font-weight: bold;
+    font-size: 2.5rem;
+  }
+  .breadCrumb {
+    padding-top: 1rem;
+  }
+  /* 选中侧边导航的背景颜色 */
+  .el-menu-item.is-active {
+    background: #008cd6 !important;
+  }
 
-.detailItem {
-  word-wrap: break-word;
-  word-break: break-all;
-  width: 100%;
-  height: auto;
-  text-align: left;
-  line-height: 30px;
-  font-size: 16px;
-  text-indent: 2em;
-}
-.contentImg {
-  width: 100%;
-  height: auto;
-  /* 使图片对齐 */
-  text-align: center;
-}
-.contentImg img {
-  height: 300px;
-  width: 500px;
-  padding: 10px 0;
+  .directionItem {
+    min-height: 450px;
+    padding-bottom: 2rem;
+  }
+  /*每个item之间的上边距 */
+  .detailItem {
+    word-wrap: break-word;
+    word-break: break-all;
+    margin-top: 1.5em;
+  }
+  /* 文字和图片的距离 */
+  .detailItemInfo {
+    line-height: 3rem;
+    font-size: 2rem;
+    text-align: left;
+    text-indent: 2em;
+    margin-bottom: 1rem;
+  }
+  .detailItemImg {
+    padding-bottom: 0.5rem;
+  }
+  .detailItemImg img {
+    /* 只设置宽/高另外一个等比例缩放 */
+    width: 80%;
+  }
 }
 </style>

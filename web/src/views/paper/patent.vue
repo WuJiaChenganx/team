@@ -1,12 +1,10 @@
 <template>
-  <div class="resourceSharing">
+  <div class="patent">
     <!-- default-active表示是当前选中的菜单的index -->
-    <div class="resourceContent">
-      <div class="aside">
-        <div class="asideTitle">
-          {{ title }}
-        </div>
-        <div class="asideContent">
+    <div class="patentContent">
+      <div class="patentAside">
+        <div class="patentAsideTitle">授权专利</div>
+        <div class="patentAsideContent">
           <el-menu
             :default-active="this.$route.path"
             router
@@ -16,36 +14,47 @@
             active-text-color="#fff"
           >
             <el-menu-item
-              class="contentItem"
+              class="patentAsideItem"
               v-for="(menuItem, menuIndex) in Menu"
               :key="menuIndex"
               :index="menuItem.path"
             >
               <i class="el-icon-sunny"></i>
-              <span slot="title">{{ menuItem.name }}</span>
+              <span>{{ menuItem.name }}</span>
             </el-menu-item>
           </el-menu>
         </div>
       </div>
-      <div class="details">
-        <div class="detailTitle">
-          <div class="currentTitle">
-            {{ currentMenu }}
-          </div>
-          <div style="float: right; color: #999; font-size: 15px">
-            您当前的位置: 首页 > {{ title }} >{{ currentMenu }}
+      <div class="patentDetail">
+        <div class="patentTitle">
+          <div class="title">授权专利</div>
+          <div class="breadCrumb">
+            <el-breadcrumb separator-class="el-icon-arrow-right">
+              <el-breadcrumb-item :to="{ path: '/home' }"
+                >首页</el-breadcrumb-item
+              >
+              <el-breadcrumb-item :to="{ path: '/paper/patent' }"
+                >授权专利</el-breadcrumb-item
+              >
+            </el-breadcrumb>
           </div>
         </div>
-        <div
-          class="detailRow"
-          v-for="(detailItem, detailIndex) in showPageContent"
-          :key="detailIndex"
-        >
-          <div class="Info">
-            {{ detailItem.detail }}
+        <div class="patentItem">
+          <div
+            class="patent-row"
+            v-for="(detailItem, detailIndex) in showPageContent"
+            :key="detailIndex"
+          >
+            <div class="patent-base">
+              <i class="el-icon-notebook-1"></i>
+              <div class="patent-name">
+                {{ detailItem.detail }}
+              </div>
+            </div>
+            <div class="patent-time">{{ detailItem.time }}</div>
           </div>
-          <div class="Time">{{ detailItem.time }}</div>
         </div>
+
         <div class="paging">
           <!-- page-size展示的选择每页显示个数的选项,页面变动触发的事件是current-change后面的函数,total表示总共的数量 current-page表示当前页数-->
           <el-pagination
@@ -75,7 +84,11 @@ export default {
         { name: "出版专著", path: "/paper/book" },
       ],
       showAllContent: [
-        { detail: "专利1", time: "2000-06-25" },
+        {
+          detail:
+            "张行，姚信威，陈树，王杰，邢伟伟。一种基于3D投影的园区车位预定辅助系统及辅助方法，授权号：ZL202110876699.8（专利权人：浙江慧享信息科技有限公司，授权时间：2023.01.03）",
+          time: "2000-06-25",
+        },
         { detail: "专利2", time: "2000-06-25" },
         { detail: "专利3", time: "2000-06-25" },
         { detail: "专利4", time: "2000-06-25" },
@@ -116,130 +129,194 @@ export default {
 };
 </script>
 <style scoped>
-.resourceSharing {
-  padding: 30px 0 50px 0;
-  background: url(../../assets/images/background/contentBackground.jpg)
-    no-repeat;
-  width: 100%;
-  height: auto;
-}
+/* PC端  */
+@media screen and (min-width: 1000px) {
+  .patent {
+    padding: 3rem 0;
+    background: url(../../assets/images/background/contentBackground.jpg)
+      no-repeat;
+  }
 
-.resourceContent {
-  padding-top: 20px;
-  width: 75%;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
+  .patentContent {
+    width: 75%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
 
-.aside {
-  width: 25%;
-  height: auto;
-  padding: 0 15px;
-  float: left;
-}
+  .patentAside {
+    width: 25%;
+  }
+  .patentAsideTitle {
+    background: url(../../assets/images/background/zryy-menu-t-bg.png) no-repeat;
+    border-radius: 0.6rem;
+    background-size: cover !important;
+    font-weight: bold;
+    color: #fff;
+    font-size: 2rem;
+    line-height: 3rem;
+    height: 3rem;
+    padding: 2rem 3rem;
+    margin-bottom: 0.5rem;
+  }
+  .patentAsideItem {
+    font-size: 2rem;
+    text-align: left;
+    cursor: pointer;
+  }
 
-.asideTitle {
-  background: url(../../assets/images/background/zryy-menu-t-bg.png) no-repeat
-    center;
-  border-radius: 6px;
-  background-size: cover !important;
-  font-weight: bold;
-  color: #fff;
-  font-size: 22px;
-  line-height: 30px;
-  height: 30px;
-  padding: 20px 30px;
-  margin-bottom: 10px;
-}
+  .patentDetail {
+    width: 73%;
+    padding: 0 3rem;
+    box-sizing: border-box;
+    background-color: #fff;
+    border: 1px solid #dfdfdf;
+  }
 
-.asideContent {
-  height: auto;
-  border: 1px solid #eee;
-}
+  .patentTitle {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 2rem 0;
+    border-bottom: 1px solid #dfdfdf;
+  }
+  .title {
+    color: #333333;
+    font-weight: bold;
+    font-size: 2.5rem;
+  }
+  .breadCrumb {
+    padding-top: 1rem;
+  }
+  /* 选中侧边导航的背景颜色 */
+  .el-menu-item.is-active {
+    background: #008cd6 !important;
+  }
+  /* 设置块和分页的距离 */
+  .patentItem {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 3rem;
+    min-height: 600px;
+  }
 
-.currentTitle {
-  float: left;
-  color: #333333;
-  font-weight: bold;
-  font-size: 25px;
+  .patent-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    cursor: pointer;
+    padding: 1.5rem 0;
+    border-bottom: 1px solid #dfdfdf;
+  }
+  .patent-base {
+    display: flex;
+    flex-direction: row;
+    font-size: 3rem;
+    line-height: 3rem;
+  }
+  .patent-name {
+    text-align: left;
+    margin-left: 0.5rem;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
+    color: #333333;
+    height: 3rem;
+  }
+  /* 设置分页和底部的距离 */
+  .paging {
+    margin-bottom: 3rem;
+  }
 }
+/* 移动端  */
+@media screen and (max-width: 1000px) {
+  .patent {
+    background: url(../../assets/images/background/contentBackground.jpg)
+      no-repeat;
+  }
 
-.contentItem {
-  font-weight: bold;
-  font-size: 20px;
-  text-align: left;
-  cursor: pointer;
-  padding: 0 20px;
-  border-bottom: 1px solid #eee;
-}
+  .patentContent {
+    display: flex;
+    flex-direction: column;
+  }
 
-.el-menu-item.is-active {
-  background: #008cd6 !important;
-}
+  .patentAside {
+    width: 100%;
+  }
+  /* 不显示侧边导航栏上面的标题 */
+  .patentAsideTitle {
+    display: none;
+  }
+  .patentAsideItem {
+    font-size: 2rem;
+    text-align: center;
+    cursor: pointer;
+  }
 
-.details {
-  float: left;
-  position: relative;
-  padding: 0 15px;
-  width: 75%;
-  height: 520px;
-  background-color: #fff;
-  border: 1px solid #dfdfdf;
-  padding-bottom: 30px;
-}
+  .patentDetail {
+    width: 100%;
+    padding: 0 1.5rem;
+    box-sizing: border-box;
+    background-color: #fff;
+    border: 1px solid #dfdfdf;
+  }
 
-.detailTitle {
-  height: 30px;
-  border-bottom: 1px solid #dfdfdf;
-  padding-top: 32px;
-  padding-bottom: 20px;
-}
+  .patentTitle {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 2rem 0;
+    border-bottom: 1px solid #dfdfdf;
+  }
+  .title {
+    color: #333333;
+    font-weight: bold;
+    font-size: 2.5rem;
+  }
+  .breadCrumb {
+    padding-top: 1rem;
+  }
+  /* 选中侧边导航的背景颜色 */
+  .el-menu-item.is-active {
+    background: #008cd6 !important;
+  }
+  /* 设置块和分页的距离 */
+  .patentItem {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 3rem;
+    min-height: 450px;
+  }
 
-.detailRow {
-  position: relative;
-  width: 100%;
-  box-sizing: border-box;
-  height: 40px;
-  padding: 10px;
-  padding-left: 20px;
-  border-bottom: 1px solid #dfdfdf;
-}
-
-.detailRow::before {
-  position: absolute;
-  content: "";
-  width: 6px;
-  height: 6px;
-  background: #0055a2;
-  border-radius: 50%;
-  left: 7px;
-  top: 20px;
-}
-
-.Info {
-  width: 70%;
-  float: left;
-  text-align: left;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 1;
-  overflow: hidden;
-  color: #333333;
-  font-size: 17px;
-}
-
-.Time {
-  float: right;
-}
-
-.paging {
-  position: absolute;
-  /* 起点移动到了参照物的50%位置 */
-  left: 50%;
-  bottom: 3px;
-  /* 上面注释掉的可以用下面的来替代 位移宽度和高度的一半*/
-  transform: translate(-50%, 0);
+  .patent-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    cursor: pointer;
+    padding: 1.5rem 0;
+    border-bottom: 1px solid #dfdfdf;
+  }
+  .patent-base {
+    display: flex;
+    flex-direction: row;
+    font-size: 3rem;
+    line-height: 3rem;
+  }
+  .patent-name {
+    text-align: left;
+    margin-left: 0.5rem;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
+    color: #333333;
+    height: 3rem;
+  }
+  /* 设置分页和底部的距离 */
+  .paging {
+    margin-bottom: 3rem;
+  }
 }
 </style>

@@ -8,7 +8,7 @@
           <activityPhoto></activityPhoto>
         </div>
         <div class="firstMessageContent">
-          <newsList></newsList>
+          <newsList class="newsList"></newsList>
         </div>
       </div>
     </div>
@@ -18,10 +18,10 @@
         <div class="second-left">
           <!-- hover问题没有解决 -->
           <!-- 放的是学术动态 -->
-          <academicTrend></academicTrend>
+          <academicTrend class="academicTrend"></academicTrend>
         </div>
         <div class="second-right">
-          <notice-and-research></notice-and-research>
+          <notice class="notice"></notice>
         </div>
       </div>
     </div>
@@ -29,20 +29,11 @@
     <div class="lastContainer">
       <div class="lastAllContent">
         <div class="last-left">
-          <div class="left-title-box">
-            <!-- 放的团队成员上面的背景部分 -->
-            <researchTeam></researchTeam>
-          </div>
-          <div class="left-content-box">
-            <div>
-              <!-- 放的是成员图像轮播图 -->
-              <memberPhoto></memberPhoto>
-            </div>
-          </div>
+          <researchTeam class="researchTeam"></researchTeam>
         </div>
         <div class="last-right">
           <!-- 友情链接 -->
-          <friendlyLink></friendlyLink>
+          <friendlyLink class="friendlyLink"></friendlyLink>
         </div>
       </div>
     </div>
@@ -51,22 +42,20 @@
 
 <script>
 import newsList from "./newsList.vue";
-import memberPhoto from "./memberPhoto.vue";
 import friendlyLink from "./friendlyLink.vue";
 import researchTeam from "./researchTeam.vue";
 import activityPhoto from "./activityPhoto.vue";
 import academicTrend from "./academicTrend.vue";
-import noticeAndResearch from "./noticeAndResearch.vue";
+import notice from "./notice.vue";
 export default {
   name: "home",
   components: {
+    activityPhoto,
     newsList,
-    memberPhoto,
+    academicTrend,
+    notice,
     friendlyLink,
     researchTeam,
-    activityPhoto,
-    academicTrend,
-    noticeAndResearch,
   },
   data() {
     return {};
@@ -75,102 +64,187 @@ export default {
   methods: {},
 };
 </script>
-<style>
+<style scoped>
 * {
   margin: 0;
   padding: 0;
 }
 
 .firstContainer {
-  height: 484px;
   background: #deecf9;
 }
+/* PC端  */
+@media screen and (min-width: 1000px) {
+  .firstContainer {
+    margin-bottom: 2rem;
+  }
+  .firstContainer .firstAllContent {
+    width: 75%;
+    height: 100%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
 
-.firstContainer .firstAllContent {
-  width: 75%;
-  height: 100%;
-  /* 居中对齐 */
-  margin: 0 auto;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  /* 内减模式 */
-  box-sizing: border-box;
-}
+  .firstContainer > .firstAllContent .firstPhotoContent {
+    margin-top: 2rem;
+    width: 65%;
+  }
 
-.firstContainer > .firstAllContent .firstPhotoContent {
-  margin-top: 20px;
-  width: 60%;
+  .firstContainer > .firstAllContent .firstMessageContent {
+    margin-top: 2rem;
+    width: 34%;
+  }
+  .newsList {
+    width: 100%;
+    margin-bottom: 1.5rem;
+    padding: 2rem;
+    border: 1px solid #d1e4f0;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  .secondContainer {
+    margin-bottom: 2rem;
+  }
+  .secondContainer .secondAllContent {
+    width: 75%;
+    margin: 0 auto;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  .second-left {
+    width: 65%;
+  }
+  .second-right {
+    width: 33%;
+  }
+  .academicTrend {
+    width: 100%;
+    padding: 2rem;
+    border: 1px solid #d1e4f0;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  .notice {
+    width: 100%;
+    padding: 2rem;
+    border: 1px solid #d1e4f0;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  /* 我是最后一个容器 */
+  .lastContainer {
+    background: #fff;
+    margin-bottom: 2rem;
+  }
+  .lastContainer .lastAllContent {
+    width: 75%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  .last-left {
+    width: 65%;
+  }
+  .last-right {
+    width: 33%;
+  }
+  .researchTeam {
+    width: 100%;
+    padding: 2rem;
+    border: 1px solid #d1e4f0;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  .friendlyLink {
+    width: 100%;
+    padding: 2rem;
+    border: 1px solid #d1e4f0;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
 }
+/* 移动端 */
+@media screen and (max-width: 1000px) {
+  .firstContainer .firstAllContent {
+    display: block;
+    margin-bottom: 0.2rem;
+  }
 
-.firstContainer > .firstAllContent .firstMessageContent {
-  width: 39%;
-  height: 410px;
-}
+  .firstContainer > .firstAllContent .firstPhotoContent {
+    padding: 2rem 0;
+    width: 90%;
+    margin: 0 auto;
+  }
 
-.secondContainer {
-  position: relative;
-  height: 583px;
-  background: #fff;
-  margin-top: 20px;
-  margin-bottom: 20px;
-}
-.secondContainer .secondAllContent {
-  position: absolute;
-  width: 75%;
-  height: 100%;
-  /* 起点移动到了参照物的50%位置 */
-  left: 50%;
-  /* 上面注释掉的可以用下面的来替代 位移宽度和高度的一半*/
-  transform: translate(-50%);
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
-.second-left {
-  width: 68%;
-}
-.second-right {
-  width: 31%;
-}
-.lastContainer {
-  position: relative;
-  height: 247px;
-  background: #fff;
-  margin-bottom: 20px;
-}
-.lastContainer .lastAllContent {
-  position: absolute;
-  width: 75%;
-  height: 100%;
-  /* 起点移动到了参照物的50%位置 */
-  left: 50%;
-  /* 上面注释掉的可以用下面的来替代 位移宽度和高度的一半*/
-  transform: translate(-50%);
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
-.last-left {
-  width: 68%;
-}
-.lastContainer .lastAllContent .left-title-box {
-  width: 100%;
-  height: 38px;
-  padding-bottom: 0;
-  position: relative;
-  overflow: hidden;
-  margin-bottom: 20px;
-}
+  .firstContainer > .firstAllContent .firstMessageContent {
+    width: 100%;
+  }
+  .newsList {
+    width: 100%;
+    padding: 1rem;
+    border: 1px solid #d1e4f0;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
 
-.left-content-box {
-  height: 184px;
-}
+  .secondContainer .secondAllContent {
+    display: block;
+    margin-bottom: 0.2rem;
+  }
+  .second-left {
+    width: 100%;
+  }
+  .second-right {
+    width: 100%;
+  }
+  .academicTrend {
+    width: 100%;
+    padding: 1rem;
+    margin-bottom: 0.2rem;
+    border: 1px solid #d1e4f0;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  .notice {
+    width: 100%;
+    padding: 1rem;
+    margin-bottom: 0.2rem;
+    border: 1px solid #d1e4f0;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
 
-.last-right {
-  width: 31%;
-  border: 1px solid #d1e4f0;
-  border-radius: 4px;
-  border-top: none;
+  /* 我是最后一个容器 */
+  .lastContainer .lastAllContent {
+    display: block;
+    margin-bottom: 0.2rem;
+  }
+  .last-left {
+    width: 100%;
+  }
+  .last-right {
+    width: 100%;
+  }
+  .researchTeam {
+    width: 100%;
+    padding: 1rem;
+    margin-bottom: 0.2rem;
+    border: 1px solid #d1e4f0;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  .friendlyLink {
+    width: 100%;
+    padding: 1rem;
+    margin-bottom: 0.2rem;
+    border: 1px solid #d1e4f0;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
 }
 </style>

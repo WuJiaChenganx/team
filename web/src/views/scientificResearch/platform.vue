@@ -1,12 +1,10 @@
 <template>
-  <div class="resourceSharing">
+  <div class="platform">
     <!-- default-active表示是当前选中的菜单的index -->
-    <div class="resourceContent">
-      <div class="aside">
-        <div class="asideTitle">
-          {{ title }}
-        </div>
-        <div class="asideContent">
+    <div class="platformContent">
+      <div class="platformAside">
+        <div class="platformAsideTitle">科研平台</div>
+        <div class="platformAsideContent">
           <el-menu
             :default-active="this.$route.path"
             router
@@ -16,33 +14,40 @@
             active-text-color="#fff"
           >
             <el-menu-item
-              class="contentItem"
+              class="platformAsideItem"
               v-for="(menuItem, menuIndex) in Menu"
               :key="menuIndex"
               :index="menuItem.path"
             >
               <i class="el-icon-sunny"></i>
-              <span slot="title">{{ menuItem.name }}</span>
+              <span>{{ menuItem.name }}</span>
             </el-menu-item>
           </el-menu>
         </div>
       </div>
-      <div class="details">
-        <div class="detailTitle">
-          <div class="currentTitle">
-            {{ currentMenu }}
-          </div>
-          <div style="float: right; color: #999; font-size: 15px">
-            您当前的位置: 首页 > {{ title }} >{{ currentMenu }}
+      <div class="platformDetail">
+        <div class="platformTitle">
+          <div class="title">科研平台</div>
+          <div class="breadCrumb">
+            <el-breadcrumb separator-class="el-icon-arrow-right">
+              <el-breadcrumb-item :to="{ path: '/home' }"
+                >首页</el-breadcrumb-item
+              >
+              <el-breadcrumb-item :to="{ path: '/scientificResearch/platform' }"
+                >科研平台</el-breadcrumb-item
+              >
+            </el-breadcrumb>
           </div>
         </div>
-        <div
-          class="detailItem"
-          v-for="platformItem in platforms"
-          :key="platformItem.id"
-        >
-          <div class="platformTitle">{{ platformItem.InfoTitle }}</div>
-          <div class="platformDetail">{{ platformItem.InfoDetail }}</div>
+        <div class="platformItem">
+          <div
+            class="detailItem"
+            v-for="platformItem in platforms"
+            :key="platformItem.id"
+          >
+            <div class="detailItemTitle">{{ platformItem.InfoTitle }}</div>
+            <div class="detailItemInfo">{{ platformItem.InfoDetail }}</div>
+          </div>
         </div>
       </div>
     </div>
@@ -94,103 +99,166 @@ export default {
 };
 </script>
 <style scoped>
-.resourceSharing {
-  padding: 30px 0 50px 0;
-  background: url(../../assets/images/background/contentBackground.jpg)
-    no-repeat;
-  width: 100%;
-  height: auto;
-}
+/* PC端  */
+@media screen and (min-width: 1000px) {
+  .platform {
+    padding: 3rem 0;
+    background: url(../../assets/images/background/contentBackground.jpg)
+      no-repeat;
+  }
 
-.resourceContent {
-  padding-top: 20px;
-  width: 75%;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
+  .platformContent {
+    width: 75%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
 
-.aside {
-  width: 25%;
-  height: auto;
-  padding: 0 15px;
-  float: left;
-}
+  .platformAside {
+    width: 25%;
+  }
+  .platformAsideTitle {
+    background: url(../../assets/images/background/zryy-menu-t-bg.png) no-repeat;
+    border-radius: 0.6rem;
+    background-size: cover !important;
+    font-weight: bold;
+    color: #fff;
+    font-size: 2rem;
+    line-height: 3rem;
+    height: 3rem;
+    padding: 2rem 3rem;
+    margin-bottom: 0.5rem;
+  }
+  .platformAsideItem {
+    font-size: 2rem;
+    text-align: left;
+    cursor: pointer;
+  }
 
-.asideTitle {
-  background: url(../../assets/images/background/zryy-menu-t-bg.png) no-repeat
-    center;
-  border-radius: 6px;
-  background-size: cover !important;
-  font-weight: bold;
-  color: #fff;
-  font-size: 22px;
-  line-height: 30px;
-  height: 30px;
-  padding: 20px 30px;
-  margin-bottom: 10px;
-}
+  .platformDetail {
+    width: 73%;
+    padding: 0 3rem;
+    box-sizing: border-box;
+    background-color: #fff;
+    border: 1px solid #dfdfdf;
+  }
 
-.asideContent {
-  height: auto;
-  border: 1px solid #eee;
-}
+  .platformTitle {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 2rem 0;
+    border-bottom: 1px solid #dfdfdf;
+  }
+  .title {
+    color: #333333;
+    font-weight: bold;
+    font-size: 2.5rem;
+  }
+  .breadCrumb {
+    padding-top: 1rem;
+  }
+  /* 选中侧边导航的背景颜色 */
+  .el-menu-item.is-active {
+    background: #008cd6 !important;
+  }
 
-.currentTitle {
-  float: left;
-  color: #333333;
-  font-weight: bold;
-  font-size: 25px;
-}
+  .platformItem {
+    min-height: 600px;
+    padding-bottom: 2rem;
+  }
 
-.contentItem {
-  font-weight: bold;
-  font-size: 20px;
-  text-align: left;
-  cursor: pointer;
-  padding: 0 20px;
-  border-bottom: 1px solid #eee;
+  .detailItem {
+    word-wrap: break-word;
+    word-break: break-all;
+    line-height: 3rem;
+    margin-top: 1.5rem;
+    text-align: left;
+  }
+  .detailItemTitle {
+    color: #153c87;
+    font-weight: bold;
+    font-size: 1.8rem;
+  }
+  .detailItemInfo {
+    text-indent: 2em;
+    font-size: 1.6rem;
+  }
 }
+/* 移动端  */
+@media screen and (max-width: 1000px) {
+  .platform {
+    background: url(../../assets/images/background/contentBackground.jpg)
+      no-repeat;
+  }
 
-.el-menu-item.is-active {
-  background: #008cd6 !important;
-}
+  .platformContent {
+    display: flex;
+    flex-direction: column;
+  }
 
-.details {
-  float: left;
-  position: relative;
-  padding: 0 15px;
-  width: 75%;
-  height: auto;
-  background-color: #fff;
-  border: 1px solid #dfdfdf;
-  padding-bottom: 150px;
-}
+  .platformAside {
+    width: 100%;
+  }
+  /* 不显示侧边导航栏上面的标题 */
+  .platformAsideTitle {
+    display: none;
+  }
+  .platformAsideItem {
+    font-size: 2rem;
+    text-align: center;
+    cursor: pointer;
+  }
 
-.detailTitle {
-  height: 30px;
-  border-bottom: 1px solid #dfdfdf;
-  padding-top: 32px;
-  padding-bottom: 20px;
-}
+  .platformDetail {
+    width: 100%;
+    padding: 0 1.5rem;
+    box-sizing: border-box;
+    background-color: #fff;
+    border: 1px solid #dfdfdf;
+  }
 
-.detailItem {
-  word-wrap: break-word;
-  word-break: break-all;
-  width: 100%;
-  height: auto;
-  margin-top: 30px;
-  text-align: left;
-}
-.platformTitle {
-  color: #153c87;
-  font-weight: bold;
-  font-size: 16px;
-  font-family: 宋体, simsun;
-  margin-bottom: 20px;
-}
-.platformDetail {
-  text-indent: 2em;
+  .platformTitle {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 2rem 0;
+    border-bottom: 1px solid #dfdfdf;
+  }
+  .title {
+    color: #333333;
+    font-weight: bold;
+    font-size: 2.5rem;
+  }
+  .breadCrumb {
+    padding-top: 1rem;
+  }
+  /* 选中侧边导航的背景颜色 */
+  .el-menu-item.is-active {
+    background: #008cd6 !important;
+  }
+
+  .platformItem {
+    min-height: 450px;
+    padding-bottom: 2rem;
+  }
+
+  .detailItem {
+    word-wrap: break-word;
+    word-break: break-all;
+    line-height: 3rem;
+    margin-top: 1.5rem;
+    text-align: left;
+  }
+  .detailItemTitle {
+    color: #153c87;
+    font-weight: bold;
+    font-size: 1.8rem;
+  }
+  .detailItemInfo {
+    text-indent: 2em;
+    font-size: 1.6rem;
+  }
 }
 </style>

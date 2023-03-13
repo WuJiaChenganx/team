@@ -1,29 +1,40 @@
 <template>
-  <div class="backgroundBox">
-    <div class="content">
-      <div class="contentTitle">
-        <div class="indexTitle">{{ currentMenu }}</div>
-        <div class="indexPosition">您当前的位置: 首页 > {{ currentMenu }}</div>
+  <div class="academy">
+    <div class="academyContent">
+      <div class="academyTitle">
+        <div class="title">学术动态</div>
+        <div class="breadCrumb">
+          <el-breadcrumb separator-class="el-icon-arrow-right">
+            <el-breadcrumb-item :to="{ path: '/home' }"
+              >首页</el-breadcrumb-item
+            >
+            <el-breadcrumb-item :to="{ path: '/activity/academy' }"
+              >学术动态</el-breadcrumb-item
+            >
+          </el-breadcrumb>
+        </div>
       </div>
-      <div class="contentItem">
+      <div class="academyItem">
         <div
           v-for="(item, index) in newsList"
           :key="index"
-          class="news-row"
+          class="academy-row"
           style="cursor: pointer"
           @click="gotoDetail(item)"
         >
-          <div class="news-date">
+          <div class="academy-date">
             <div>{{ item.day }}</div>
             <div>{{ item.date }}</div>
           </div>
-          <div class="news-title">{{ item.title }}</div>
-          <div class="news-thing">
-            {{ item.profile }}
+          <div class="academy-profile">
+            <div class="academy-title">{{ item.title }}</div>
+            <div class="academy-thing">
+              {{ item.profile }}
+            </div>
           </div>
         </div>
       </div>
-      <div>
+      <div class="paging">
         <!-- page-size展示的选择每页显示个数的选项,页面变动触发的事件是current-change后面的函数,total表示总共的数量 current-page表示当前页数-->
         <el-pagination
           background
@@ -54,11 +65,11 @@ export default {
           id: 0,
           day: "18",
           date: "2023-03",
-          title: "NLP组在EMNLP 2022会议上顺利举办讲习班",
-          profile:
-            "2022年12月，实验室题为《Non-Autoregressive Models for Fast Sequence Generation》的tutorial讲习班在EMNLP 2022会议上顺利举办。",
-          detail:
-            "本次讲习班时长3小时，由冯洋研究员和邵晨泽同学讲述非自回归序列生成模型的最新研究进展。非自回归序列生成模型是指并行解码生成整个序列的模型，它可以显著地加快序列生成的速度，已经在机器翻译、语音识别、语音合成等领域引起了广泛的关注。本次讲习班全面阐述了非自回归模型在序列生成中面临的多峰性挑战和目前的主流解决方案，例如知识蒸馏、增强表达能力、建模隐变量、改进训练目标、改进解码策略等，对非自回归模型在多种序列生成任务上的进展和它应用在不同任务时的共性和差异做了详细介绍，并展望了非自回归生成未来的发展方向。",
+          title: "NLP课题组2篇论文被ICLR 2023接收",
+          paperName:
+            "Fuzzy Alignments in Directed Acyclic Graph for Non-autoregressive Machine Translation",
+          paperProfile:
+            "非自回归机器翻译（Non-autoregressive Translation, NAT）显著降低了用户等待译文的延迟，但因为语言映射的多峰分布特性，往往性能较差。为此，一些研究者尝试将有向无环图（Directed Acyclic Graph, DAG）结构引入NAT系统，试图通过DAG建模输出字词之间的依赖来缓解多峰分布问题。这种系统一般通过极大似然估计的方式进行模型参数学习，以负对数似然（Negative Log Likelihood, NLL）作为损失函数。尽管上述方法取得了一定的成功，我们发现NLL隐式地要求了目标译文字词与DAG节点之间存在严格对齐关系，弱化了DAG学习多峰分布的能力。在本文中，我们考虑DAG中所有可能的路径与参考译文之间均存在某种模糊对齐关系。我们设计了一个模糊对齐指标以衡量图与译文的匹配程度，并以最大化该指标的方式进行参数学习。大量实验表明我们的方法显著地改善了NAT系统的翻译质量，在多个基于原始语料的NAT翻译任务上达到了最先进的性能。",
           picUrl: require("../../assets/images/activity/00.jpg"),
         },
         {
@@ -252,8 +263,8 @@ export default {
     },
     gotoDetail(item) {
       this.$router.push({
-        path: "/activity/newFlashDetail",
-        name: "新闻快讯详情",
+        path: "/activity/academyDetail",
+        name: "学术动态详情",
         // 用query传参,在地址栏后面加东西如 ?id=1这种跟在网址后面
         query: {
           // 传参数的时候注意将对象转化成字符串并且加密,在接收端使用解析
@@ -266,102 +277,228 @@ export default {
 };
 </script>
 <style scoped>
-.backgroundBox {
-  height: auto;
-  padding: 30px 0;
-  background: #eef7fe;
-}
-.content {
-  width: 75%;
-  height: auto;
-  margin: 0 auto;
-  padding: 0 30px 20px;
-  background-color: #fff;
-  border: 1px solid #dfdfdf;
-}
-.contentTitle {
-  height: 30px;
-  border-bottom: 1px solid #dfdfdf;
-  padding-top: 32px;
-  padding-bottom: 20px;
-  margin-bottom: 20px;
-}
-.indexTitle {
-  float: left;
-  color: #333333;
-  font-weight: bold;
-  font-size: 25px;
-}
-.indexPosition {
-  float: right;
-  color: #999999;
-  font-size: 15px;
-}
-.contentItem {
-  display: flex;
-  flex-direction: column;
-  height: 625px;
-}
+/* PC端 */
+@media screen and (min-width: 1000px) {
+  .academy {
+    padding: 3rem 0;
+    background: #eef7fe;
+  }
+  .academyContent {
+    width: 75%;
+    margin: 0 auto;
+    padding: 0 3rem;
+    background-color: #fff;
+    border: 1px solid #dfdfdf;
+  }
+  .academyTitle {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 2rem 0;
+    border-bottom: 1px solid #dfdfdf;
+  }
+  .title {
+    color: #333333;
+    font-weight: bold;
+    font-size: 2.5rem;
+  }
+  .breadCrumb {
+    padding-top: 1rem;
+  }
 
-.news-row {
-  height: 80px;
-  padding-bottom: 20px;
-  margin-bottom: 20px;
-  border-bottom: 1px solid #dfdfdf;
-  transition: all 0.5s;
+  /* 不被选中时的颜色 */
+  .el-breadcrumb ::v-deep .el-breadcrumb__inner {
+    color: #999 !important;
+    font-weight: 400 !important;
+  }
+  /* 被选中时的颜色 */
+  .el-breadcrumb__item:last-child ::v-deep .el-breadcrumb__inner {
+    color: black !important;
+    font-weight: 800 !important;
+  }
+  /* 设置块和分页的距离 */
+  .academyItem {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 3rem;
+    min-height: 600px;
+  }
+  /* 设置分页和底部的距离 */
+  .paging {
+    margin-bottom: 3rem;
+  }
+  .academy-row {
+    height: 80px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 20px 0;
+    border-bottom: 1px solid #dfdfdf;
+    transition: all 0.5s;
+  }
+  /* 时间框 */
+  .academy-date {
+    width: 80px;
+    height: 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: #008cd6;
+    border-radius: 6px;
+    color: #ffffff;
+    font-family: Arial;
+    text-align: center;
+    transition: all 0.5s;
+  }
+  /* 就是日期中有个要变大 */
+  .academy-row .academy-date div:first-child {
+    font-size: 3rem;
+    font-weight: bold;
+  }
+  /* 文字部分 */
+  .academy-profile {
+    width: 85%;
+    height: 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+  }
+  .academy-title {
+    margin-bottom: 0.5rem;
+    font-size: 16px;
+    font-weight: bold;
+    color: #333333;
+    text-align: left;
+    overflow: hidden;
+    transition: all 0.5s;
+  }
+  .academy-thing {
+    font-size: 16px;
+    color: #999999;
+    text-align: left;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+  }
+  .academy-row:hover {
+    border-bottom: 1px solid #0055a2;
+  }
+  .academy-row:hover .academy-title {
+    color: #0055a2;
+  }
+  .academy-row:hover .academy-date {
+    background-color: #0055a2;
+  }
 }
-/* 时间框 */
-.news-row .news-date {
-  float: left;
-  width: 70px;
-  height: 70px;
-  background: #008cd6;
-  border-radius: 6px;
-  margin-right: 30px;
-  color: #ffffff;
-  font-family: Arial;
-  line-height: 22px;
-  text-align: center;
-  padding-top: 16px;
-  box-sizing: border-box;
-  transition: all 0.5s;
-}
-/* 就是日期中有个要变大 */
-.news-row .news-date div:first-child {
-  font-size: 30px;
-  font-weight: bold;
-}
-/* 文字部分 */
-.news-row .news-title {
-  font-size: 16px;
-  font-weight: bold;
-  color: #333333;
-  line-height: 22px;
-  text-align: left;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  margin-bottom: 10px;
-  transition: all 0.5s;
-}
-.news-thing {
-  font-size: 14px;
-  color: #999999;
-  line-height: 24px;
-  text-align: left;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
-  overflow: hidden;
-  height: 48px;
-}
-.news-row:hover {
-  border-bottom: 1px solid #0055a2;
-}
-.news-row:hover .news-title {
-  color: #0055a2;
-}
-.news-row:hover .news-date {
-  background-color: #0055a2;
+/* 移动端 */
+@media screen and (max-width: 1000px) {
+  .academy {
+    background: #eef7fe;
+  }
+  .academyContent {
+    box-sizing: border-box;
+    background-color: #fff;
+    border: 1px solid #dfdfdf;
+  }
+  .academyTitle {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 2rem 0;
+    border-bottom: 1px solid #dfdfdf;
+  }
+  .title {
+    color: #333333;
+    font-weight: bold;
+    font-size: 2.5rem;
+  }
+  .breadCrumb {
+    padding-top: 1rem;
+  }
+
+  /* 不被选中时的颜色 */
+  .el-breadcrumb ::v-deep .el-breadcrumb__inner {
+    color: #999 !important;
+    font-weight: 400 !important;
+  }
+  /* 被选中时的颜色 */
+  .el-breadcrumb__item:last-child ::v-deep .el-breadcrumb__inner {
+    color: black !important;
+    font-weight: 800 !important;
+  }
+  /* 设置块和分页的距离 */
+  .academyItem {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 3rem;
+    min-height: 450px;
+  }
+  /* 设置分页和底部的距离 */
+  .paging {
+    margin-bottom: 3rem;
+  }
+  .academy-row {
+    height: 8rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 2rem 0;
+    border-bottom: 1px solid #dfdfdf;
+    transition: all 0.5s;
+  }
+  /* 时间框 */
+  .academy-date {
+    width: 8rem;
+    height: 8rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: #008cd6;
+    border-radius: 6px;
+    color: #ffffff;
+    font-family: Arial;
+    text-align: center;
+    transition: all 0.5s;
+  }
+  /* 就是日期中有个要变大 */
+  .academy-row .academy-date div:first-child {
+    font-size: 3rem;
+    font-weight: bold;
+  }
+  /* 文字部分 */
+  .academy-profile {
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+  }
+  .academy-title {
+    margin-bottom: 0.5rem;
+    font-size: 1.6rem;
+    font-weight: bold;
+    color: #333333;
+    text-align: left;
+    overflow: hidden;
+    transition: all 0.5s;
+  }
+  .academy-thing {
+    font-size: 1rem;
+    color: #999999;
+    text-align: left;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+  }
+  .academy-row:hover {
+    border-bottom: 1px solid #0055a2;
+  }
+  .academy-row:hover .academy-title {
+    color: #0055a2;
+  }
+  .academy-row:hover .academy-date {
+    background-color: #0055a2;
+  }
 }
 </style>

@@ -5,7 +5,7 @@
       :interval="4000"
       indicator-position="outside"
       class="photo"
-      height="410px"
+      height="41rem"
     >
       <el-carousel-item v-for="(item, index) in imgArr" :key="index">
         <img :src="item" alt="" />
@@ -15,9 +15,8 @@
     </el-carousel>
   </div>
 </template>
-  
-  
-  <script>
+
+<script>
 export default {
   data() {
     return {
@@ -31,15 +30,13 @@ export default {
         require("../../assets/images/activity/06.jpg"),
         require("../../assets/images/activity/07.jpg"),
         require("../../assets/images/activity/08.jpg"),
-        require("../../assets/images/activity/09.jpg"),
-        require("../../assets/images/activity/10.jpg"),
       ],
     };
   },
   methods: {},
 };
 </script>
-  <style>
+<style>
 .el-carousel__item a {
   color: #475669;
   font-size: 18px;

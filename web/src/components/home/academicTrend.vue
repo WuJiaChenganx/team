@@ -4,7 +4,6 @@
       <div class="left-title">学术动态</div>
       <a class="title-more" @click="goTo('/activity/academy')">更多 +</a>
     </div>
-
     <div class="academicContent">
       <div
         class="item-content"
@@ -13,10 +12,10 @@
         style="cursor: pointer"
         @click="gotoDetail(academyItem)"
       >
-        <div class="img-box">
+        <div class="imgBox">
           <img :src="academyItem.picUrl" />
         </div>
-        <div class="item-text">
+        <div class="textItem">
           <div class="title-box">{{ academyItem.title }}</div>
           <div class="detail-box">
             {{ academyItem.profile }}
@@ -244,76 +243,52 @@ export default {
 <style scoped>
 .academicTitle {
   width: 100%;
-  height: 38px;
-  padding-bottom: 0;
-  position: relative;
-  overflow: hidden;
-  margin-bottom: 20px;
-}
-.academicTitle::before,
-.academicTitle::after {
-  position: absolute;
-  content: "";
-  z-index: -1;
-}
-.academicTitle::before {
-  width: 163px;
-  height: 39px;
-  bottom: 0;
-  left: 0;
-  top: 0;
-  background-color: #fff;
-  background: url(../../assets/images/background/zryy-l-title1.png) no-repeat
-    left center;
-}
-.academicTitle::after {
-  top: 0px;
-  left: 160px;
-  right: 0;
-  height: 4px;
-  background: #deecf9;
+  height: 3.8rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 2rem;
 }
 .academicTitle .left-title {
-  float: left;
-  font-size: 22px;
+  text-align: left;
+  font-size: 2.2rem;
   font-weight: bold;
-  font-style: italic;
   color: #003266;
-  line-height: 26px;
 }
 .academicTitle .title-more {
-  float: right;
-  position: absolute;
-  right: 0;
-  bottom: 0;
   color: #7db0cb;
-  line-height: 18px;
+  font-size: 1.4rem;
+  line-height: 1.8rem;
+  cursor: pointer;
 }
 .academicContent {
-  /* 放四个盒子高度为110,margin_bottom为20 */
-  height: 520px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-bottom: 2rem;
 }
-/* 每行的宽高 */
-.academicContent .item-content {
-  height: 110px;
-  margin-bottom: 20px;
+/* 每行的高 14rem(2rem的下外边距) 放图片和文字横着放*/
+.item-content {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 2rem;
 }
-.item-content .img-box {
+.imgBox {
   float: left;
-  width: 168px;
-  height: 112px;
+  width: 20%;
+  height: 14rem;
   overflow: hidden;
-  margin-right: 18px;
   box-sizing: border-box;
+  border: 1px solid #eee;
 }
-.item-content .img-box img {
+.imgBox img {
   width: 100%;
   height: 100%;
 }
-.item-content .img-box {
-  border: 1px solid #eee;
-}
-.item-content:hover .img-box img {
+
+.item-content:hover .imgBox img {
   transform: scale(1.1);
   transition: all 0.5s;
 }
@@ -325,44 +300,36 @@ export default {
   color: #0055a2;
 }
 
-.item-text {
-  height: 100%;
-  overflow: hidden;
+.textItem {
+  width: 78%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
-.item-text .title-box {
+.title-box {
   text-align: left;
-  font-size: 17px;
-  font-weight: bold;
   color: #0055a2;
-  line-height: 20px;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  margin-bottom: 10px;
+  font-size: 2rem;
+  font-weight: bold;
 }
-.item-text .detail-box {
-  font-size: 13px;
+/* 中间的profile */
+.detail-box {
   color: #909090;
-  line-height: 19px;
-  text-align: justify;
+  font-size: 1.5rem;
+  text-align: left;
+  word-wrap: break-word;
+  word-break: break-all;
+  /* 显示3行 */
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 3;
   overflow: hidden;
-  height: 57px;
-  margin-bottom: 10px;
 }
-.item-text .academicDate {
+.academicDate {
   text-align: right;
-  font-size: 14px;
+  height: 22px;
+  font-size: 1.5rem;
   font-family: Arial;
   color: #828282;
-  line-height: 1;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
 }
 </style>

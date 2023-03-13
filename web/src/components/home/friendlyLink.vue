@@ -1,10 +1,10 @@
 <template>
   <div class="friendlyLink">
-    <div class="right-title-box">
-      <div class="right-title">友情链接</div>
+    <div class="link-title-box">
+      <div class="link-title">友情链接</div>
       <a class="title-more">更多 +</a>
     </div>
-    <div id="last-content-box">
+    <div id="friend-content-box">
       <ul class="link-ul">
         <li>
           <a
@@ -23,69 +23,41 @@
 <script>
 export default {};
 </script>
-<style>
-.right-title-box {
-  padding: 12px 20px 12px 15px;
-  position: relative;
+<style scoped>
+.link-title-box {
   overflow: hidden;
-  margin-bottom: 20px;
+  margin-bottom: 2rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
-.right-title-box::before,
-.right-title-box::after {
-  position: absolute;
-  content: "";
-  z-index: -1;
-  height: 50px;
-}
-.right-title-box::before {
-  width: 162px;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  background: url(../../assets/images/background/zryy-r-title1.png) no-repeat
-    left center;
-}
-.right-title-box::after {
-  top: 0px;
-  bottom: 0;
-  left: 161px;
-  right: 0;
-  background: url(../../assets/images/background/zryy-r-title2.png) no-repeat
-    top center;
-  background-size: 100% 50px !important;
-}
-.right-title-box .right-title {
-  float: left;
-  font-size: 22px;
+
+.link-title {
+  text-align: left;
+  font-size: 2.2rem;
   font-weight: bold;
-  line-height: 26px;
-  color: #ffffff;
-  display: inline-block;
+  color: #003266;
 }
-.right-title-box .title-more {
-  float: right;
-  position: absolute;
-  right: 0;
-  bottom: 0;
+.title-more {
+  font-size: 1.4rem;
   color: #7db0cb;
-  line-height: 18px;
+  line-height: 1.8rem;
+  cursor: pointer;
 }
 .link-ul {
-  padding: 0 22px 18px 22px;
-  min-height: 176px;
+  /* min-height: 176px; */
 }
 .link-ul li {
   list-style: none;
-  margin-bottom: 6px;
+  margin-bottom: 0.6rem;
 }
 .link-ul li:last-child {
   margin-bottom: 0;
 }
 .link-a {
   display: block;
-  font-size: 17px;
+  font-size: 1.7rem;
   color: #333333;
-  line-height: 22px;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;

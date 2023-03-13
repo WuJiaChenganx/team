@@ -1,12 +1,10 @@
 <template>
-  <div class="resourceSharing">
+  <div class="project">
     <!-- default-active表示是当前选中的菜单的index -->
-    <div class="resourceContent">
-      <div class="aside">
-        <div class="asideTitle">
-          {{ title }}
-        </div>
-        <div class="asideContent">
+    <div class="projectContent">
+      <div class="projectAside">
+        <div class="projectAsideTitle">科研项目</div>
+        <div class="projectAsideContent">
           <el-menu
             :default-active="this.$route.path"
             router
@@ -16,40 +14,53 @@
             active-text-color="#fff"
           >
             <el-menu-item
-              class="contentItem"
+              class="projectAsideItem"
               v-for="(menuItem, menuIndex) in Menu"
               :key="menuIndex"
               :index="menuItem.path"
             >
               <i class="el-icon-sunny"></i>
-              <span slot="title">{{ menuItem.name }}</span>
+              <span>{{ menuItem.name }}</span>
             </el-menu-item>
           </el-menu>
         </div>
       </div>
-      <div class="details">
-        <div class="detailTitle">
-          <div class="currentTitle">
-            {{ currentMenu }}
-          </div>
-          <div style="float: right; color: #999; font-size: 15px">
-            您当前的位置: 首页 > {{ title }} >{{ currentMenu }}
+      <div class="projectDetail">
+        <div class="projectTitle">
+          <div class="title">科研平台</div>
+          <div class="breadCrumb">
+            <el-breadcrumb separator-class="el-icon-arrow-right">
+              <el-breadcrumb-item :to="{ path: '/home' }"
+                >首页</el-breadcrumb-item
+              >
+              <el-breadcrumb-item :to="{ path: '/scientificResearch/project' }"
+                >科研平台</el-breadcrumb-item
+              >
+            </el-breadcrumb>
           </div>
         </div>
-        <div
-          class="detailItem"
-          v-for="projectItem in projects"
-          :key="projectItem.id"
-        >
-          <div class="projectName">
-            {{ projectItem.id }}. 项目名称: {{ projectItem.projectName }}
+        <div class="projectItem">
+          <div
+            class="detailItem"
+            v-for="projectItem in projects"
+            :key="projectItem.id"
+          >
+            <div class="detailItemProjectName">
+              {{ projectItem.id }}. 项目名称: {{ projectItem.projectName }}
+            </div>
+            <div class="detailItemProjectResponser">
+              项目负责人: {{ projectItem.responser }}
+            </div>
+            <div class="detailItemProjectType">
+              项目类型: {{ projectItem.projectType }}
+            </div>
+            <div class="detailItemProjectTime">
+              起止时间: {{ projectItem.time }}
+            </div>
+            <div class="detailItemProjectInfo">
+              项目简介: {{ projectItem.projectInfo }}
+            </div>
           </div>
-          <div class="projectResponser">
-            项目负责人: {{ projectItem.responser }}
-          </div>
-          <div class="projectType">项目类型: {{ projectItem.projectType }}</div>
-          <div class="projectTime">起止时间: {{ projectItem.time }}</div>
-          <div class="projectInfo">项目简介: {{ projectItem.projectInfo }}</div>
         </div>
       </div>
     </div>
@@ -104,103 +115,165 @@ export default {
 };
 </script>
 <style scoped>
-.resourceSharing {
-  padding: 30px 0 50px 0;
-  background: url(../../assets/images/background/contentBackground.jpg)
-    no-repeat;
-  width: 100%;
-  height: auto;
-}
+/* PC端  */
+@media screen and (min-width: 1000px) {
+  .project {
+    padding: 3rem 0;
+    background: url(../../assets/images/background/contentBackground.jpg)
+      no-repeat;
+  }
 
-.resourceContent {
-  padding-top: 20px;
-  width: 75%;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
+  .projectContent {
+    width: 75%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
 
-.aside {
-  width: 25%;
-  height: auto;
-  padding: 0 15px;
-  float: left;
-}
+  .projectAside {
+    width: 25%;
+  }
+  .projectAsideTitle {
+    background: url(../../assets/images/background/zryy-menu-t-bg.png) no-repeat;
+    border-radius: 0.6rem;
+    background-size: cover !important;
+    font-weight: bold;
+    color: #fff;
+    font-size: 2rem;
+    line-height: 3rem;
+    height: 3rem;
+    padding: 2rem 3rem;
+    margin-bottom: 0.5rem;
+  }
+  .projectAsideItem {
+    font-size: 2rem;
+    text-align: left;
+    cursor: pointer;
+  }
 
-.asideTitle {
-  background: url(../../assets/images/background/zryy-menu-t-bg.png) no-repeat
-    center;
-  border-radius: 6px;
-  background-size: cover !important;
-  font-weight: bold;
-  color: #fff;
-  font-size: 22px;
-  line-height: 30px;
-  height: 30px;
-  padding: 20px 30px;
-  margin-bottom: 10px;
-}
+  .projectDetail {
+    width: 73%;
+    padding: 0 3rem;
+    box-sizing: border-box;
+    background-color: #fff;
+    border: 1px solid #dfdfdf;
+  }
 
-.asideContent {
-  height: auto;
-  border: 1px solid #eee;
-}
+  .projectTitle {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 2rem 0;
+    border-bottom: 1px solid #dfdfdf;
+  }
+  .title {
+    color: #333333;
+    font-weight: bold;
+    font-size: 2.5rem;
+  }
+  .breadCrumb {
+    padding-top: 1rem;
+  }
+  /* 选中侧边导航的背景颜色 */
+  .el-menu-item.is-active {
+    background: #008cd6 !important;
+  }
 
-.currentTitle {
-  float: left;
-  color: #333333;
-  font-weight: bold;
-  font-size: 25px;
-}
+  .projectItem {
+    min-height: 600px;
+    padding-bottom: 2rem;
+  }
 
-.contentItem {
-  font-weight: bold;
-  font-size: 20px;
-  text-align: left;
-  cursor: pointer;
-  padding: 0 20px;
-  border-bottom: 1px solid #eee;
+  .detailItem {
+    word-wrap: break-word;
+    word-break: break-all;
+    width: 100%;
+    height: auto;
+    margin-top: 3rem;
+    text-align: left;
+    font-family: 宋体;
+    line-height: 3rem;
+    font-size: 1.6rem;
+    font-weight: bold;
+  }
+  .detailItemProjectName {
+    font-size: 2rem;
+  }
+  .detailItemProjectInfo {
+    font-weight: normal;
+  }
 }
+/* 移动端  */
+@media screen and (max-width: 1000px) {
+  .project {
+    background: url(../../assets/images/background/contentBackground.jpg)
+      no-repeat;
+  }
 
-.el-menu-item.is-active {
-  background: #008cd6 !important;
-}
+  .projectContent {
+    display: flex;
+    flex-direction: column;
+  }
 
-.details {
-  float: left;
-  position: relative;
-  padding: 0 15px;
-  width: 75%;
-  height: auto;
-  background-color: #fff;
-  border: 1px solid #dfdfdf;
-  padding-bottom: 150px;
-}
+  .projectAside {
+    width: 100%;
+  }
+  /* 不显示侧边导航栏上面的标题 */
+  .projectAsideTitle {
+    display: none;
+  }
+  .projectAsideItem {
+    font-size: 2rem;
+    text-align: center;
+    cursor: pointer;
+  }
 
-.detailTitle {
-  height: 30px;
-  border-bottom: 1px solid #dfdfdf;
-  padding-top: 32px;
-  padding-bottom: 20px;
-}
-
-.detailItem {
-  word-wrap: break-word;
-  word-break: break-all;
-  width: 100%;
-  height: auto;
-  margin-top: 30px;
-  text-align: left;
-  font-family: 宋体;
-  line-height: 30px;
-  font-size: 14px;
-  font-weight: bold;
-}
-.projectName {
-  font-size: 16px;
-}
-.projectInfo {
-  font-weight: normal;
+  .projectDetail {
+    width: 100%;
+    padding: 0 1.5rem;
+    box-sizing: border-box;
+    background-color: #fff;
+    border: 1px solid #dfdfdf;
+  }
+  .projectTitle {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 2rem 0;
+    border-bottom: 1px solid #dfdfdf;
+  }
+  .title {
+    color: #333333;
+    font-weight: bold;
+    font-size: 2.5rem;
+  }
+  .breadCrumb {
+    padding-top: 1rem;
+  }
+  /* 选中侧边导航的背景颜色 */
+  .el-menu-item.is-active {
+    background: #008cd6 !important;
+  }
+  .projectItem {
+    min-height: 450px;
+    padding-bottom: 2rem;
+  }
+  .detailItem {
+    word-wrap: break-word;
+    word-break: break-all;
+    margin-top: 3rem;
+    text-align: left;
+    font-family: 宋体;
+    line-height: 3rem;
+    font-size: 1.6rem;
+    font-weight: bold;
+  }
+  .detailItemProjectName {
+    font-size: 2rem;
+  }
+  .detailItemProjectInfo {
+    font-weight: normal;
+  }
 }
 </style>

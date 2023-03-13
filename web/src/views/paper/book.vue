@@ -1,50 +1,58 @@
 <template>
-  <div class="resourceSharing">
+  <div class="book">
     <!-- default-active表示是当前选中的菜单的index -->
-    <div class="resourceContent">
-      <div class="aside">
-        <div class="asideTitle">
-          {{ title }}
-        </div>
-        <div class="asideContent">
+    <div class="bookContent">
+      <div class="bookAside">
+        <div class="bookAsideTitle">出版专著</div>
+        <div class="bookAsideContent">
           <el-menu
             :default-active="this.$route.path"
             router
             mode="vertical"
-            background-color="#ffffff"
+            background-color="#fff"
             text-color="#000"
             active-text-color="#fff"
           >
             <el-menu-item
-              class="contentItem"
+              class="bookAsideItem"
               v-for="(menuItem, menuIndex) in Menu"
               :key="menuIndex"
               :index="menuItem.path"
             >
               <i class="el-icon-sunny"></i>
-              <span slot="title">{{ menuItem.name }}</span>
+              <span>{{ menuItem.name }}</span>
             </el-menu-item>
           </el-menu>
         </div>
       </div>
-      <div class="details">
-        <div class="detailTitle">
-          <div class="currentTitle">
-            {{ currentMenu }}
-          </div>
-          <div style="float: right; color: #999; font-size: 15px">
-            您当前的位置: 首页 > {{ title }} >{{ currentMenu }}
+      <div class="bookDetail">
+        <div class="bookTitle">
+          <div class="title">出版专著</div>
+          <div class="breadCrumb">
+            <el-breadcrumb separator-class="el-icon-arrow-right">
+              <el-breadcrumb-item :to="{ path: '/home' }"
+                >首页</el-breadcrumb-item
+              >
+              <el-breadcrumb-item :to="{ path: '/paper/book' }"
+                >出版专著</el-breadcrumb-item
+              >
+            </el-breadcrumb>
           </div>
         </div>
-        <div
-          class="detailRow"
-          v-for="(detailItem, detailIndex) in showPageContent"
-          :key="detailIndex"
-        >
-          <div class="Info">
-            {{ detailItem.detail }}
+        <div class="bookItem">
+          <div
+            class="book-row"
+            v-for="(detailItem, detailIndex) in showPageContent"
+            :key="detailIndex"
+          >
+            <div class="book-base">
+              <i class="el-icon-notebook-1"></i>
+              <div class="book-name">
+                {{ detailItem.detail }}
+              </div>
+            </div>
+            <div class="book-time">{{ detailItem.time }}</div>
           </div>
-          <div class="Time">{{ detailItem.time }}</div>
         </div>
         <div class="paging">
           <!-- page-size展示的选择每页显示个数的选项,页面变动触发的事件是current-change后面的函数,total表示总共的数量 current-page表示当前页数-->
@@ -75,19 +83,19 @@ export default {
         { name: "出版专著", path: "/paper/book" },
       ],
       showAllContent: [
-        { detail: "论文1", time: "2000-06-25" },
-        { detail: "论文2", time: "2000-06-25" },
-        { detail: "论文3", time: "2000-06-25" },
-        { detail: "论文4", time: "2000-06-25" },
-        { detail: "论文5", time: "2000-06-25" },
-        { detail: "论文6", time: "2000-06-25" },
-        { detail: "论文7", time: "2000-06-25" },
-        { detail: "论文8", time: "2000-06-25" },
-        { detail: "论文9", time: "2000-06-25" },
-        { detail: "论文10", time: "2000-06-25" },
-        { detail: "论文11", time: "2000-06-25" },
-        { detail: "论文12", time: "2000-06-25" },
-        { detail: "论文13", time: "2000-06-25" },
+        { detail: "书本1", time: "2000-06-25" },
+        { detail: "书本2", time: "2000-06-25" },
+        { detail: "书本3", time: "2000-06-25" },
+        { detail: "书本4", time: "2000-06-25" },
+        { detail: "书本5", time: "2000-06-25" },
+        { detail: "书本6", time: "2000-06-25" },
+        { detail: "书本7", time: "2000-06-25" },
+        { detail: "书本8", time: "2000-06-25" },
+        { detail: "书本9", time: "2000-06-25" },
+        { detail: "书本10", time: "2000-06-25" },
+        { detail: "书本11", time: "2000-06-25" },
+        { detail: "书本12", time: "2000-06-25" },
+        { detail: "书本13", time: "2000-06-25" },
       ],
       showPageContent: [],
       // 总共要展示的数量
@@ -116,16 +124,203 @@ export default {
 };
 </script>
 <style scoped>
-.resourceSharing {
-  padding: 30px 0 50px 0;
+/* PC端  */
+@media screen and (min-width: 1000px) {
+  .book {
+    padding: 3rem 0;
+    background: url(../../assets/images/background/contentBackground.jpg)
+      no-repeat;
+  }
+
+  .bookContent {
+    width: 75%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .bookAside {
+    width: 25%;
+  }
+  .bookAsideTitle {
+    background: url(../../assets/images/background/zryy-menu-t-bg.png) no-repeat;
+    border-radius: 0.6rem;
+    background-size: cover !important;
+    font-weight: bold;
+    color: #fff;
+    font-size: 2rem;
+    line-height: 3rem;
+    height: 3rem;
+    padding: 2rem 3rem;
+    margin-bottom: 0.5rem;
+  }
+  .bookAsideItem {
+    font-size: 2rem;
+    text-align: left;
+    cursor: pointer;
+  }
+
+  .bookDetail {
+    width: 73%;
+    padding: 0 3rem;
+    box-sizing: border-box;
+    background-color: #fff;
+    border: 1px solid #dfdfdf;
+  }
+
+  .bookTitle {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 2rem 0;
+    border-bottom: 1px solid #dfdfdf;
+  }
+  .title {
+    color: #333333;
+    font-weight: bold;
+    font-size: 2.5rem;
+  }
+  .breadCrumb {
+    padding-top: 1rem;
+  }
+  /* 选中侧边导航的背景颜色 */
+  .el-menu-item.is-active {
+    background: #008cd6 !important;
+  }
+  /* 设置块和分页的距离 */
+  .bookItem {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 3rem;
+    min-height: 600px;
+  }
+
+  .book-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    cursor: pointer;
+    padding: 1.5rem 0;
+    border-bottom: 1px solid #dfdfdf;
+  }
+  .book-base {
+    display: flex;
+    flex-direction: row;
+    font-size: 3rem;
+    line-height: 3rem;
+  }
+  .book-name {
+    text-align: left;
+    margin-left: 0.5rem;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
+    color: #333333;
+    height: 3rem;
+  }
+  /* 设置分页和底部的距离 */
+  .paging {
+    margin-bottom: 3rem;
+  }
+}
+/* 移动端  */
+@media screen and (max-width: 1000px) {
+  .book {
+    background: url(../../assets/images/background/contentBackground.jpg)
+      no-repeat;
+  }
+
+  .bookContent {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .bookAside {
+    width: 100%;
+  }
+  /* 不显示侧边导航栏上面的标题 */
+  .bookAsideTitle {
+    display: none;
+  }
+  .bookAsideItem {
+    font-size: 2rem;
+    text-align: center;
+    cursor: pointer;
+  }
+
+  .bookDetail {
+    width: 100%;
+    padding: 0 1.5rem;
+    box-sizing: border-box;
+    background-color: #fff;
+    border: 1px solid #dfdfdf;
+  }
+
+  .bookTitle {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 2rem 0;
+    border-bottom: 1px solid #dfdfdf;
+  }
+  .title {
+    color: #333333;
+    font-weight: bold;
+    font-size: 2.5rem;
+  }
+  .breadCrumb {
+    padding-top: 1rem;
+  }
+  /* 选中侧边导航的背景颜色 */
+  .el-menu-item.is-active {
+    background: #008cd6 !important;
+  }
+  /* 设置块和分页的距离 */
+  .bookItem {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 3rem;
+    min-height: 450px;
+  }
+
+  .book-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    cursor: pointer;
+    padding: 1.5rem 0;
+    border-bottom: 1px solid #dfdfdf;
+  }
+  .book-base {
+    display: flex;
+    flex-direction: row;
+    font-size: 3rem;
+    line-height: 3rem;
+  }
+  .book-name {
+    text-align: left;
+    margin-left: 0.5rem;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
+    color: #333333;
+    height: 3rem;
+  }
+  /* 设置分页和底部的距离 */
+  .paging {
+    margin-bottom: 3rem;
+  }
+}
+/* .book {
+  padding: 3rem 0;
   background: url(../../assets/images/background/contentBackground.jpg)
     no-repeat;
-  width: 100%;
-  height: auto;
 }
 
-.resourceContent {
-  padding-top: 20px;
+.bookContent {
   width: 75%;
   margin: 0 auto;
   display: flex;
@@ -133,40 +328,39 @@ export default {
   justify-content: space-between;
 }
 
-.aside {
+.bookAside {
   width: 25%;
-  height: auto;
-  padding: 0 15px;
-  float: left;
+  display: flex;
+  flex-direction: column;
 }
 
 .asideTitle {
-  background: url(../../assets/images/background/zryy-menu-t-bg.png) no-repeat
-    center;
-  border-radius: 6px;
+  background: url(../../assets/images/background/zryy-menu-t-bg.png) no-repeat;
+  border-radius: 0.6rem;
   background-size: cover !important;
   font-weight: bold;
   color: #fff;
-  font-size: 22px;
-  line-height: 30px;
-  height: 30px;
-  padding: 20px 30px;
-  margin-bottom: 10px;
+  font-size: 2.2rem;
+  line-height: 3rem;
+  height: 3rem; */
+/* 扩充背景 */
+/* padding: 2rem 3rem; */
+/* 下面的子菜单距离 */
+/* margin-bottom: 1rem;
 }
 
 .asideContent {
-  height: auto;
   border: 1px solid #eee;
-}
+} */
 
-.currentTitle {
+/* .title {
   float: left;
   color: #333333;
   font-weight: bold;
   font-size: 25px;
 }
 
-.contentItem {
+.breadCrumb {
   font-weight: bold;
   font-size: 20px;
   text-align: left;
@@ -179,25 +373,25 @@ export default {
   background: #008cd6 !important;
 }
 
-.details {
+.bookDetail {
   float: left;
   position: relative;
   padding: 0 15px;
-  width: 75%;
+  width: 73%;
   height: 520px;
   background-color: #fff;
   border: 1px solid #dfdfdf;
   padding-bottom: 30px;
 }
 
-.detailTitle {
+.bookTitle {
   height: 30px;
   border-bottom: 1px solid #dfdfdf;
   padding-top: 32px;
   padding-bottom: 20px;
 }
 
-.detailRow {
+.book-row {
   position: relative;
   width: 100%;
   box-sizing: border-box;
@@ -207,7 +401,7 @@ export default {
   border-bottom: 1px solid #dfdfdf;
 }
 
-.detailRow::before {
+.book-row::before {
   position: absolute;
   content: "";
   width: 6px;
@@ -218,7 +412,7 @@ export default {
   top: 20px;
 }
 
-.Info {
+.book-profile {
   width: 70%;
   float: left;
   text-align: left;
@@ -230,16 +424,16 @@ export default {
   font-size: 17px;
 }
 
-.Time {
+.book-time {
   float: right;
-}
+} */
 
 .paging {
-  position: absolute;
+  /* position: absolute; */
   /* 起点移动到了参照物的50%位置 */
-  left: 50%;
-  bottom: 3px;
+  /* left: 50%;
+  bottom: 3px; */
   /* 上面注释掉的可以用下面的来替代 位移宽度和高度的一半*/
-  transform: translate(-50%, 0);
+  /* transform: translate(-50%, 0); */
 }
 </style>

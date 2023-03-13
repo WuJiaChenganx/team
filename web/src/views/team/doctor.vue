@@ -2,11 +2,9 @@
   <div class="doctor">
     <!-- default-active表示是当前选中的菜单的index -->
     <div class="doctorContent">
-      <div class="aside">
-        <div class="asideTitle">
-          {{ title }}
-        </div>
-        <div class="asideContent">
+      <div class="doctorAside">
+        <div class="doctorAsideTitle">博士生</div>
+        <div class="doctorAsideContent">
           <el-menu
             :default-active="this.$route.path"
             router
@@ -16,36 +14,43 @@
             active-text-color="#fff"
           >
             <el-menu-item
-              class="contentItem"
+              class="doctorAsideItem"
               v-for="(menuItem, menuIndex) in Menu"
               :key="menuIndex"
               :index="menuItem.path"
             >
               <i class="el-icon-sunny"></i>
-              <span slot="title">{{ menuItem.name }}</span>
+              <span>{{ menuItem.name }}</span>
             </el-menu-item>
           </el-menu>
         </div>
       </div>
-      <div class="details">
-        <div class="detailTitle">
-          <div class="currentTitle">
-            {{ currentMenu }}
-          </div>
-          <div style="float: right; color: #999; font-size: 15px">
-            您当前的位置: 首页 > {{ title }} >{{ currentMenu }}
+      <div class="doctorDetail">
+        <div class="doctorTitle">
+          <div class="title">博士生</div>
+          <div class="breadCrumb">
+            <el-breadcrumb separator-class="el-icon-arrow-right">
+              <el-breadcrumb-item :to="{ path: '/home' }"
+                >首页</el-breadcrumb-item
+              >
+              <el-breadcrumb-item :to="{ path: '/team/doctor' }"
+                >博士生</el-breadcrumb-item
+              >
+            </el-breadcrumb>
           </div>
         </div>
-        <div
-          class="detailItem"
-          v-for="memberItem in studentAllInfo"
-          :key="memberItem.id"
-          style="cursor: pointer"
-          @click="gotoDetail(memberItem)"
-        >
-          <div class="memberImg"><img :src="memberItem.picUrl" /></div>
-          <div class="memberInfo">
-            {{ memberItem.name }} {{ memberItem.title }}
+        <div class="doctorItem">
+          <div
+            class="detailItem"
+            v-for="memberItem in studentAllInfo"
+            :key="memberItem.id"
+            style="cursor: pointer"
+            @click="gotoDetail(memberItem)"
+          >
+            <div class="detailItemImg"><img :src="memberItem.picUrl" /></div>
+            <div class="detailItemInfo">
+              {{ memberItem.name }} {{ memberItem.title }}
+            </div>
           </div>
         </div>
       </div>
@@ -92,7 +97,7 @@ export default {
                 "Shaolei Zhang, Yang Feng. Reducing Position Bias in Simultaneous Machine Translation with Length-Aware Framework.",
             },
           ],
-          picUrl: require("../../assets/images/activity/00.jpg"),
+          picUrl: require("../../assets/images/teacherPhoto/lq.jpg"),
         },
         {
           id: 2,
@@ -119,7 +124,7 @@ export default {
                 "Shaolei Zhang, Yang Feng. Reducing Position Bias in Simultaneous Machine Translation with Length-Aware Framework.",
             },
           ],
-          picUrl: require("../../assets/images/activity/00.jpg"),
+          picUrl: require("../../assets/images/teacherPhoto/lq.jpg"),
         },
         {
           id: 3,
@@ -146,7 +151,7 @@ export default {
                 "Shaolei Zhang, Yang Feng. Reducing Position Bias in Simultaneous Machine Translation with Length-Aware Framework.",
             },
           ],
-          picUrl: require("../../assets/images/activity/00.jpg"),
+          picUrl: require("../../assets/images/teacherPhoto/lq.jpg"),
         },
         {
           id: 4,
@@ -173,7 +178,61 @@ export default {
                 "Shaolei Zhang, Yang Feng. Reducing Position Bias in Simultaneous Machine Translation with Length-Aware Framework.",
             },
           ],
-          picUrl: require("../../assets/images/activity/00.jpg"),
+          picUrl: require("../../assets/images/teacherPhoto/lq.jpg"),
+        },
+        {
+          id: 5,
+          name: "赵云123",
+          title: "博士研究生",
+          email: "zhangshaolei20z@ict.ac.cn",
+          direction: "深度学习图像处理",
+          education: [
+            { time: "2016-2020", experience: "北京邮电大学,工学硕士" },
+            {
+              time: "2020-present",
+              experience: "中科院计算技术研究所,博士在读",
+            },
+          ],
+          paperList: [
+            {
+              id: 1,
+              paper:
+                "Shaolei Zhang, Yang Feng. Modeling Dual Read/Write Paths for Simultaneous Machine Translation",
+            },
+            {
+              id: 2,
+              paper:
+                "Shaolei Zhang, Yang Feng. Reducing Position Bias in Simultaneous Machine Translation with Length-Aware Framework.",
+            },
+          ],
+          picUrl: require("../../assets/images/teacherPhoto/lq.jpg"),
+        },
+        {
+          id: 6,
+          name: "赵云456",
+          title: "博士研究生",
+          email: "zhangshaolei20z@ict.ac.cn",
+          direction: "深度学习图像处理",
+          education: [
+            { time: "2016-2020", experience: "北京邮电大学,工学硕士" },
+            {
+              time: "2020-present",
+              experience: "中科院计算技术研究所,博士在读",
+            },
+          ],
+          paperList: [
+            {
+              id: 1,
+              paper:
+                "Shaolei Zhang, Yang Feng. Modeling Dual Read/Write Paths for Simultaneous Machine Translation",
+            },
+            {
+              id: 2,
+              paper:
+                "Shaolei Zhang, Yang Feng. Reducing Position Bias in Simultaneous Machine Translation with Length-Aware Framework.",
+            },
+          ],
+          picUrl: require("../../assets/images/teacherPhoto/lq.jpg"),
         },
       ],
     };
@@ -196,101 +255,166 @@ export default {
 };
 </script>
 <style scoped>
-.doctor {
-  padding: 30px 0 50px 0;
-  background: url(../../assets/images/background/contentBackground.jpg)
-    no-repeat;
-  width: 100%;
-  height: auto;
-}
+/* PC端  */
+@media screen and (min-width: 1000px) {
+  .doctor {
+    padding: 3rem 0;
+    background: url(../../assets/images/background/contentBackground.jpg)
+      no-repeat;
+  }
 
-.doctorContent {
-  padding-top: 20px;
-  width: 75%;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
+  .doctorContent {
+    width: 75%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
 
-.aside {
-  width: 25%;
-  height: auto;
-  padding: 0 15px;
-  float: left;
-}
+  .doctorAside {
+    width: 25%;
+  }
+  .doctorAsideTitle {
+    background: url(../../assets/images/background/zryy-menu-t-bg.png) no-repeat;
+    border-radius: 0.6rem;
+    background-size: cover !important;
+    font-weight: bold;
+    color: #fff;
+    font-size: 2rem;
+    line-height: 3rem;
+    height: 3rem;
+    padding: 2rem 3rem;
+    margin-bottom: 0.5rem;
+  }
+  .doctorAsideItem {
+    font-size: 2rem;
+    text-align: left;
+    cursor: pointer;
+  }
 
-.asideTitle {
-  background: url(../../assets/images/background/zryy-menu-t-bg.png) no-repeat
-    center;
-  border-radius: 6px;
-  background-size: cover !important;
-  font-weight: bold;
-  color: #fff;
-  font-size: 22px;
-  line-height: 30px;
-  height: 30px;
-  padding: 20px 30px;
-  margin-bottom: 10px;
-}
+  .doctorDetail {
+    width: 73%;
+    padding: 0 3rem;
+    box-sizing: border-box;
+    background-color: #fff;
+    border: 1px solid #dfdfdf;
+  }
 
-.asideContent {
-  height: auto;
-  border: 1px solid #eee;
-}
+  .doctorTitle {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 2rem 0;
+    border-bottom: 1px solid #dfdfdf;
+  }
+  .title {
+    color: #333333;
+    font-weight: bold;
+    font-size: 2.5rem;
+  }
+  .breadCrumb {
+    padding-top: 1rem;
+  }
+  /* 选中侧边导航的背景颜色 */
+  .el-menu-item.is-active {
+    background: #008cd6 !important;
+  }
 
-.currentTitle {
-  float: left;
-  color: #333333;
-  font-weight: bold;
-  font-size: 25px;
-}
+  .doctorItem {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 3rem 0;
+  }
+  .detailItem {
+    cursor: pointer;
+    text-decoration: none;
+    padding: 1rem;
+    width: 20rem;
+  }
 
-.contentItem {
-  font-weight: bold;
-  font-size: 20px;
-  text-align: left;
-  cursor: pointer;
-  padding: 0 20px;
-  border-bottom: 1px solid #eee;
-}
+  .detailItem img {
+    width: 100%;
+    height: 23rem;
+  }
 
-.el-menu-item.is-active {
-  background: #008cd6 !important;
+  .detailItem .detailItemInfo {
+    padding: 1rem 0;
+  }
 }
+/* 移动端  */
+@media screen and (max-width: 1000px) {
+  .doctor {
+    background: url(../../assets/images/background/contentBackground.jpg)
+      no-repeat;
+  }
 
-.details {
-  float: left;
-  position: relative;
-  padding: 0 15px;
-  width: 75%;
-  height: auto;
-  background-color: #fff;
-  border: 1px solid #dfdfdf;
-}
+  .doctorContent {
+    display: flex;
+    flex-direction: column;
+  }
 
-.detailTitle {
-  height: 30px;
-  border-bottom: 1px solid #dfdfdf;
-  padding-top: 32px;
-  padding-bottom: 20px;
-  margin-bottom: 20px;
-}
+  .doctorAside {
+    width: 100%;
+  }
+  /* 不显示侧边导航栏上面的标题 */
+  .doctorAsideTitle {
+    display: none;
+  }
+  .doctorAsideItem {
+    font-size: 2rem;
+    text-align: center;
+    cursor: pointer;
+  }
 
-.detailItem {
-  float: left;
-  padding: 10px;
-  width: 200px;
-  height: auto;
-}
+  .doctorDetail {
+    width: 100%;
+    padding: 0 1.5rem;
+    box-sizing: border-box;
+    background-color: #fff;
+    border: 1px solid #dfdfdf;
+  }
 
-.detailItem img {
-  width: 200px;
-  height: 230px;
-}
+  .doctorTitle {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 2rem 0;
+    border-bottom: 1px solid #dfdfdf;
+  }
+  .title {
+    color: #333333;
+    font-weight: bold;
+    font-size: 2.5rem;
+  }
+  .breadCrumb {
+    padding-top: 1rem;
+  }
+  /* 选中侧边导航的背景颜色 */
+  .el-menu-item.is-active {
+    background: #008cd6 !important;
+  }
 
-.detailItem .memberInfo {
-  width: 100%;
-  padding: 10px 0;
+  .doctorItem {
+    display: flex;
+    flex-direction: column;
+    padding: 2rem 0;
+  }
+  .detailItem {
+    cursor: pointer;
+    text-decoration: none;
+    margin-bottom: 2rem;
+  }
+
+  .detailItem img {
+    width: 20rem;
+    height: 23rem;
+  }
+
+  .detailItem .detailItemInfo {
+    padding: 1rem 0;
+  }
 }
 </style>
