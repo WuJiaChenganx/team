@@ -63,6 +63,7 @@
         <where>
             tClass = "仿真工具"
         </where>
+        limit ${start},${end}
     </select>
 
     <select id="getRelation" resultType="teamWeb.homepage.entity.RelationInfo">

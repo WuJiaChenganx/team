@@ -36,7 +36,7 @@ public class ManageController {
     @Autowired
     FileService fileService;
 
-    @RequestMapping("/news")
+    @RequestMapping("/control-report")
     public APIResponse news(@RequestParam(value = "photos") MultipartFile[] photos, @RequestParam(value="operate") String operate, ReportDO reportDO){
         if(Objects.equals(operate, "insert")){
             if(photos.length > 0){
