@@ -49,14 +49,6 @@
         WHERE course_textbox_map.textbox_id = ${id}
     </select>
 
-    <select id="getBrief" resultType="teamWeb.research.entity.TextboxInfo">
-        select `id`,`text`,`pictureUrl`,`tClass`
-        from textbox
-        <where>
-            tClass = 4
-        </where>
-    </select>
-
 
 
     <select id="getEmulation" resultType="teamWeb.research.entity.TextboxInfo">
@@ -68,7 +60,7 @@
     </select>
 
     <select id="getRelation" resultType="teamWeb.homepage.entity.RelationInfo">
-        select *
+        select id, email,address,pictureUrl,phone
         from relation
     </select>
 
