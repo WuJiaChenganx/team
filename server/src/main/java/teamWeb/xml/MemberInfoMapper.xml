@@ -24,6 +24,10 @@
         order by mClass,name limit ${start},${end}
     </select>
 
+    <select id="sumMember" resultType="int">
+        SELECT COUNT(*) FROM member
+        WHERE m_class = "${memberType}"
+    </select>
     <select id="memberDetail" resultType="teamWeb.teamSurvey.pojo.MemberBO">
         SELECT id, name, m_class AS memberType, email, research AS direction
         FROM member

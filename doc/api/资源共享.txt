@@ -1,7 +1,7 @@
 api:
 
 method = GET
-http://localhost:8186/teamWeb/resource/require-platform?start=0&end=10
+http://localhost:8186/teamWeb/resource/require-tool?start=0&end=10
 in:null
 out:{
 	"code": "200",
@@ -20,6 +20,7 @@ out:{
 		}
 	],
 	"msg": null
+	"sum": 1
 }
 
 
@@ -38,6 +39,7 @@ out:{
 		}
 	],
 	"msg": null
+	"sum": 1
 }
 
 

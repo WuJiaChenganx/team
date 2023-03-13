@@ -1,15 +1,35 @@
 api:
 method=GET
 /////memberType 的值为'teacher','master','doctor','graduate'
-/teamWeb/teamSurvey/require-member?start=0&end=2&memberType=teacher
+http://localhost:8186/teamWeb/teamSurvey/require-member?start=0&end=2&memberType=teacher
 in: null
 out:{
+	"code": "200",
+	"data": [
+		{
 			"id": 1,
 			"name": "姚信威",
-			"picUrl": "server/src/main/resources/static/picture/d44caa60-2082-43b3-84e8-f72472c4ab98_s.jpg",
+			"pictureUrl": "server/src/main/resources/static/picture/d44caa60-2082-43b3-84e8-f72472c4ab98_s.jpg",
+			"job": null,
+			"resume": null,
+			"society": null,
+			"address": null,
+			"email": null,
 			"pageUrl": "http://www.homepage.zjut.edu.cn/yxw/",
+			"prize": null,
 			"edu": "博士 教授 博士生导师",
+			"research": null,
+			"mClass": "teacher",
+			"memberType": null,
+			"direction": null,
+			"educationList": null,
+			"paperList": null,
+			"picUrl": null
 		}
+	],
+	"msg": null,
+	"sum": 1
+}
 
 
 
@@ -18,13 +38,25 @@ out:{
 
 
 method=GET
-teamWeb/teamSurvey/require-detail?id=1
+http://localhost:8186/teamWeb/teamSurvey/require-detail?id=1
 in: null
 out:{
+	"code": "200",
+	"data": [
+		{
 			"id": 1,
 			"name": "姚信威",
-			"picUrl": "server/src/main/resources/static/picture/d44caa60-2082-43b3-84e8-f72472c4ab98_s.jpg",
-			"email": @163.com,
+			"pictureUrl": null,
+			"job": null,
+			"resume": null,
+			"society": null,
+			"address": null,
+			"email": "xwyao@zjut.edu.cn",
+			"pageUrl": null,
+			"prize": null,
+			"edu": null,
+			"research": null,
+			"mClass": null,
 			"memberType": "teacher",
 			"direction": "智能物联网、群智感知与协同、泛化人工智能",
 			"educationList": [
@@ -48,7 +80,11 @@ out:{
 					"id": 2,
 					"name": "bbb"
 				}
-			]
+			],
+			"picUrl": null
+		}
+	],
+	"msg": null,
+	"sum": null
 }
-
 

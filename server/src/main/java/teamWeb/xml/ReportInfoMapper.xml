@@ -12,6 +12,10 @@
         order by date desc limit ${start},${end}
     </select>
 
+    <select id="sumReport" resultType="int">
+        SELECT COUNT(*) FROM report
+        WHERE r_class="${type}"
+    </select>
     <select id="notice" resultType="teamWeb.teamDynamics.entity.ReportDO">
         select
         `id`,`title`,`date`,`text`,`r_class` AS `rClass`

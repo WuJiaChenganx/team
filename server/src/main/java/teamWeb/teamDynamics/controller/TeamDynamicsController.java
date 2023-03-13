@@ -25,14 +25,14 @@ public class TeamDynamicsController {
     public APIResponse allNotice(@RequestParam(value="start") Integer start,
                                  @RequestParam(value="end") Integer end){
         List<NoticeBO> allNotice = reportInfoService.noticeDetail(start,end);
-        return APIResponse.success(allNotice);
+        return APIResponse.success(allNotice,reportInfoService.sumReport("通知"));
     }
 
     @GetMapping("/require-academicDynamics")
     public APIResponse allacademicDynamics(@RequestParam(value="start") Integer start,
                                            @RequestParam(value="end") Integer end){
         List<NoticeBO> teamDynamics = reportInfoService.teamDynamicsDetail(start,end);
-        return APIResponse.success(teamDynamics);
+        return APIResponse.success(teamDynamics,reportInfoService.sumReport("动态"));
     }
 
 
@@ -40,7 +40,7 @@ public class TeamDynamicsController {
     public APIResponse allNews(@RequestParam(value="start") Integer start,
                                @RequestParam(value="end") Integer end){
         List<NoticeBO> allNewsBOList = reportInfoService.mediaDetail(start, end);
-        return APIResponse.success(allNewsBOList);
+        return APIResponse.success(allNewsBOList,reportInfoService.sumReport("媒体"));
     }
 
     @GetMapping(value = "/require-detail")

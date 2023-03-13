@@ -20,4 +20,6 @@ public interface OutcomeInfoService extends IService<OutcomeInfo> {
     void updateInfo(OutcomeInfo outcomeInfo);
 
     void deleteInfo(OutcomeInfo outcomeInfo);
+
+    Integer sumOutcome(String type);
 }

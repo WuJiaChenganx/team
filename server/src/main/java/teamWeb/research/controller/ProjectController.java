@@ -26,26 +26,26 @@ public class ProjectController {
     @RequestMapping("/require-project")
     public APIResponse projecting(@RequestParam(value="start") int start,@RequestParam(value="end") int end){
         List<ProjectBO> projectDetail = textboxInfoService.projectDetail(start,end);
-        return APIResponse.success(projectDetail);
+        return APIResponse.success(projectDetail,textboxInfoService.sumProject());
     }
 
 
     @RequestMapping("/require-direction")
     public APIResponse direction(@RequestParam(value="start",defaultValue = "0") int start,@RequestParam(value="end",defaultValue = "10") int end){
         List<DirectionsDTO> direDetail = textboxInfoService.direDetail(start,end);
-        return APIResponse.success(direDetail);
+        return APIResponse.success(direDetail,textboxInfoService.sumTextbox("科研方向"));
     }
 
     @RequestMapping("/require-platform")
     public APIResponse platform(@RequestParam(value="start",defaultValue = "0") int start,@RequestParam(value="end",defaultValue = "10") int end){
         List<PlatformDTO> platformDetail = textboxInfoService.platformDetail(start,end);
-        return APIResponse.success(platformDetail);
+        return APIResponse.success(platformDetail,textboxInfoService.sumTextbox("科研平台"));
     }
 
 
     @GetMapping("/require-courses")
     public APIResponse course() {
         List<CoursePageBO> teachDetail = textboxInfoService.teachDetail();
-        return APIResponse.success(teachDetail);
+        return APIResponse.success(teachDetail,textboxInfoService.sumTextbox("课程教学"));
     }
 }

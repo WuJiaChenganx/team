@@ -61,4 +61,9 @@ public class MemberInfoServiceImpl extends ServiceImpl<MemberInfoMapper, MemberD
         List<MemberDO> memberDOList = memberInfoMapper.allMember(start, end, memberType);
         return BeanUtil.convert(memberDOList, MemberBO.class);
     }
+
+    @Override
+    public Integer sumMember(String memberType) {
+        return memberInfoMapper.sumMember(memberType);
+    }
 }

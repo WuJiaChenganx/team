@@ -37,4 +37,8 @@ public interface TextboxInfoMapper extends BaseMapper<TextboxInfo> {
     void updateInfo(TextboxInfo textboxInfo);
 
     void deleteInfo(Integer id);
+
+    Integer sumPaper();
+
+    Integer sumTextbox(String type);
 }

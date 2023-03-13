@@ -38,7 +38,7 @@ public class TeamController {
                                  @RequestParam(value = "memberType") String memberType){
         List<MemberBO> allMemberBOList = memberInfoService.allMember(start, end,memberType);
         List<MemberDTO> allMemberDTOList = BeanUtil.convert(allMemberBOList, MemberDTO.class);
-        return APIResponse.success(allMemberDTOList);
+        return APIResponse.success(allMemberDTOList,memberInfoService.sumMember(memberType));
     }
 
     @GetMapping("/require-detail")

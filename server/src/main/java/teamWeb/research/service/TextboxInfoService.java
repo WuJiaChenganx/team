@@ -33,4 +33,8 @@ public interface TextboxInfoService extends IService<TextboxInfo> {
     void updateInfo(TextboxInfo textboxInfo);
 
     void deleteInfo(TextboxInfo textboxInfo);
+
+    Integer sumProject();
+
+    Integer sumTextbox(String type);
 }

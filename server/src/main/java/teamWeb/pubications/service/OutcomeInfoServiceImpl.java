@@ -33,6 +33,11 @@ public class OutcomeInfoServiceImpl extends ServiceImpl<OutcomeInfoMapper, Outco
     }
 
     @Override
+    public Integer sumOutcome(String type) {
+        return outcomeInfoMapper.sumOutcome(type);
+    }
+
+    @Override
     public void insertInfo(OutcomeInfo outcomeInfo) {
         outcomeInfoMapper.insertInfo(outcomeInfo);
     }
@@ -46,4 +51,7 @@ public class OutcomeInfoServiceImpl extends ServiceImpl<OutcomeInfoMapper, Outco
     public void deleteInfo(OutcomeInfo outcomeInfo) {
         outcomeInfoMapper.deleteInfo(outcomeInfo.getId());
     }
+
+
+
 }

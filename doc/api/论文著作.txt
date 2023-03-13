@@ -38,6 +38,7 @@ out:{
 		}
 	],
 	"msg": null
+	"sum": 10
 }
 
 
@@ -68,6 +69,7 @@ out:{
 		}
 	],
 	"msg": null
+	"sum": 10
 }
 
 
@@ -121,4 +123,5 @@ out:{
 		}
 	],
 	"msg": null
+	"sum": 10
 }

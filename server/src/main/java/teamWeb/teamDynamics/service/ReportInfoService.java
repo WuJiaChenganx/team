@@ -33,4 +33,6 @@ public interface ReportInfoService extends IService<ReportDO> {
     void deleteInfo(ReportDO reportDO);
 
     List<ReportBO> getNews(Integer id);
+
+    Integer sumReport(String type);
 }

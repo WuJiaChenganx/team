@@ -10,6 +10,9 @@ public class APIResponse<T> {
     private T data;
     private String msg;
 
+    private Integer sum;
+
+
     public APIResponse() {
 
     }
@@ -21,6 +24,11 @@ public class APIResponse<T> {
     public APIResponse(String code, T data) {
         this.code = code;
         this.data = data;
+    }
+    public APIResponse(String code, T data,Integer sum) {
+        this.code = code;
+        this.data = data;
+        this.sum = sum;
     }
 
     public APIResponse(String code, String msg) {
@@ -36,6 +44,9 @@ public class APIResponse<T> {
         return new teamWeb.utils.APIResponse(CODE_SUCCESS, data);
     }
 
+    public static teamWeb.utils.APIResponse success(Object data,Integer sum) {
+        return new teamWeb.utils.APIResponse(CODE_SUCCESS, data,sum);
+    }
     public static teamWeb.utils.APIResponse fail(String msg) {
         return new teamWeb.utils.APIResponse(CODE_FAIL, msg);
     }
@@ -67,5 +78,13 @@ public class APIResponse<T> {
     public void setData(T data) {
         this.data = data;
     }
+    public Integer getSum() {
+        return sum;
+    }
+
+    public void setSum(Integer sum) {
+        this.sum = sum;
+    }
+
 }
 

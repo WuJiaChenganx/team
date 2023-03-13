@@ -33,4 +33,6 @@ public interface ReportMapper extends BaseMapper<ReportDO> {
     List<ReportDO> reportDetail(Integer id);
 
     List<NoticeFile> allFileUrl(Integer reportId);
+
+    Integer sumReport(String type);
 }

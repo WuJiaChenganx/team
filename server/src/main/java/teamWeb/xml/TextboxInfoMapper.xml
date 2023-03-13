@@ -49,10 +49,16 @@
         WHERE course_textbox_map.textbox_id = ${id}
     </select>
 
+    <select id="sumPaper" resultType="int">
+        SELECT COUNT(*) FROM paper
+    </select>
 
-
+    <select id="sumTextbox" resultType="int">
+        SELECT COUNT(*) FROM textbox
+        WHERE tClass = "${type}"
+    </select>
     <select id="getEmulation" resultType="teamWeb.research.entity.TextboxInfo">
-        select `id`,`text`,`fileUrl`,`tClass`,title
+        select `id`,`text`,`fileUrl`,`tClass`, title
         from textbox
         <where>
             tClass = "仿真工具"

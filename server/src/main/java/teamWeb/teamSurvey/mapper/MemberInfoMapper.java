@@ -23,4 +23,6 @@ public interface MemberInfoMapper extends BaseMapper<MemberDO> {
     List<PaperDO> allPaper(Integer id);
 
     List<EducationDO> allEducation(Integer id);
+
+    Integer sumMember(String memberType);
 }

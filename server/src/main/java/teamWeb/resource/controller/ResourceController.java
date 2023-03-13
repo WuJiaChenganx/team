@@ -34,18 +34,18 @@ public class ResourceController {
         this.reportInfoService = reportInfoService;
     }
 
-    @GetMapping("/require-platform")
+    @GetMapping("/require-tool")
     public APIResponse emulation(@RequestParam(value="start") int start,@RequestParam(value="end") int end){
         List<ResourceBO> emulationDetail = textboxInfoService.emulationDetail(start,end);
         List<ResourceDTO> resourceDTOList = BeanUtil.convert(emulationDetail,ResourceDTO.class);
-        return APIResponse.success(resourceDTOList);
+        return APIResponse.success(resourceDTOList,textboxInfoService.sumTextbox("仿真工具"));
     }
 
     @GetMapping("/require-data")
     public APIResponse data(@RequestParam(value="start") int start,@RequestParam(value="end") int end){
         List<ResourceBO> dataDetail = textboxInfoService.dataDetail(start,end);
         List<ResourceDTO> resourceDTOList = BeanUtil.convert(dataDetail,ResourceDTO.class);
-        return APIResponse.success(resourceDTOList);
+        return APIResponse.success(resourceDTOList,textboxInfoService.sumTextbox("数据集"));
     }
 
 

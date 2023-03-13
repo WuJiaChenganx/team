@@ -111,4 +111,10 @@ public class ReportInfoServiceImpl extends ServiceImpl<ReportMapper, ReportDO> i
         }
         return reportBOList;
     }
+
+    @Override
+    public Integer sumReport(String type) {
+
+        return reportMapper.sumReport(type);
+    }
 }

@@ -29,6 +29,13 @@
         order by date desc limit ${start},${end}
     </select>
 
+    <select id="sumOutcome" resultType="int">
+        SELECT COUNT(*) FROM outcome
+        <where>
+            p_class = "${type}"
+        </where>
+    </select>
+
 
     <insert id="insertInfo">
         INSERT INTO outcome(`title`, `author`,`date`,`perio`,`url`,`proposer`,`inventor`,`authorization`,`pub`,`pictureUrl`,`pClass`) VALUES ("${title}", "${author}","${date}","${perio}","${url}","${proposer}","${inventor}","${authorization}","${pub}","${pictureUrl}","${pClass}")

@@ -23,18 +23,18 @@ public class PaperController {
     @GetMapping("/require-paper")
     public APIResponse paper(@RequestParam(value="start") int start,@RequestParam(value="end") int end){
         List<AllPaperBO> paperBOList = outcomeInfoService.paperDetail(start,end);
-        return APIResponse.success(paperBOList);
+        return APIResponse.success(paperBOList,outcomeInfoService.sumOutcome("论文"));
     }
 
     @GetMapping("/require-patent")
     public APIResponse patent(@RequestParam(value="start") int start,@RequestParam(value="end") int end){
         List<AllPaperBO> patentList = outcomeInfoService.patentDetail(start,end);
-        return APIResponse.success(patentList);
+        return APIResponse.success(patentList,outcomeInfoService.sumOutcome("专利"));
     }
 
     @GetMapping("/require-monograph")
     public APIResponse monograph(@RequestParam(value="start") int start,@RequestParam(value="end") int end){
         List<AllMonographBO> monographBOList = outcomeInfoService.monographDetail(start,end);
-        return APIResponse.success(monographBOList);
+        return APIResponse.success(monographBOList,outcomeInfoService.sumOutcome("专著"));
     }
 }

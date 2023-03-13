@@ -116,4 +116,14 @@ public class TextboxInfoServiceImpl extends ServiceImpl<TextboxInfoMapper, Textb
         textboxInfoMapper.deleteInfo(textboxInfo.getId());
     }
 
+    @Override
+    public Integer sumProject() {
+        return textboxInfoMapper.sumPaper();
+    }
+
+    @Override
+    public Integer sumTextbox(String type) {
+        return textboxInfoMapper.sumTextbox(type);
+    }
+
 }

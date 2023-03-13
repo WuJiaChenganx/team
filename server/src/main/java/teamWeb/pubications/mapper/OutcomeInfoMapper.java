@@ -13,8 +13,7 @@ public interface OutcomeInfoMapper extends BaseMapper<OutcomeInfo> {
 
     List<OutcomeInfo> monographDetail(int start, int end);
 
-    List<OutcomeInfo> getOutcome(int id);
-
+    Integer sumOutcome(String type);
     void insertInfo(OutcomeInfo outcomeInfo);
 
     void updateInfo(OutcomeInfo outcomeInfo);

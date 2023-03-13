@@ -20,4 +20,7 @@ public interface MemberInfoService extends IService<MemberDO> {
     void deleteInfo(MemberDO memberDo);
 
     List<MemberBO> allMember(int start, int end,String memberType);
+
+    Integer sumMember(String memberType);
+
 }
