@@ -18,7 +18,7 @@
     </select>
 
     <select id="getDire" resultType="teamWeb.research.entity.TextboxInfo">
-        select `id`,`text`,`pictureUrl`,`tClass`
+        select `id`,`text`,`pictureUrl`,`tClass`,title
         from textbox
         <where>
             tClass = "科研方向"
@@ -52,7 +52,7 @@
 
 
     <select id="getEmulation" resultType="teamWeb.research.entity.TextboxInfo">
-        select `id`,`text`,`fileUrl`,`tClass`
+        select `id`,`text`,`fileUrl`,`tClass`,title
         from textbox
         <where>
             tClass = "仿真工具"
