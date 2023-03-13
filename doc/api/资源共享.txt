@@ -1,0 +1,58 @@
+api:
+
+method = GET
+http://localhost:8186/teamWeb/resource/require-platform?start=0&end=10
+in:null
+out:{
+	"code": "200",
+	"data": [
+		{
+			"id": 1002,
+			"title": null,
+			"detail": "简介",
+			"fileUrl": "server/src/main/resources/static/file/aaaa.pdf"
+		},
+		{
+			"id": 1031,
+			"title": null,
+			"detail": "简介简介",
+			"fileUrl": "server/src/main/resources/static/file/aaaa.pdf"
+		}
+	],
+	"msg": null
+}
+
+
+
+method=GET
+http://localhost:8186/teamWeb/resource/require-data?start=0&end=10
+in:null
+out:{
+	"code": "200",
+	"data": [
+		{
+			"id": 1001,
+			"title": "数据集1",
+			"detail": "简介",
+			"fileUrl": "server/src/main/resources/static/file/b.csv"
+		}
+	],
+	"msg": null
+}
+
+
+
+
+////下载////////
+
+http://localhost:8186/teamWeb/resource/download/{path}/{fileName}
+path 为下载类型 file，picture，video
+fileName 为文件名字
+
+////////////////
+示例：
+
+method = GET
+http://localhost:8186/teamWeb/resource/download/file/aaaa.pdf
+in：null
+out：直接下载的内容

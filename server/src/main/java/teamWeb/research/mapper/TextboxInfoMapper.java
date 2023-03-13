@@ -2,12 +2,15 @@ package teamWeb.research.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import teamWeb.homepage.entity.RelationInfo;
+import teamWeb.research.entity.CourseDO;
+import teamWeb.research.entity.ProjectDO;
 import teamWeb.research.entity.TextboxInfo;
+import teamWeb.research.pojo.CoursePageBO;
 
 import java.util.List;
 
 public interface TextboxInfoMapper extends BaseMapper<TextboxInfo> {
-    List<TextboxInfo> getProject(int start, int end);
+    List<ProjectDO> getProject(int start, int end);
 
     List<TextboxInfo> getProjected(int start, int end);
 
@@ -15,7 +18,9 @@ public interface TextboxInfoMapper extends BaseMapper<TextboxInfo> {
 
     List<TextboxInfo> getPlatform(int start, int end);
 
-    List<TextboxInfo> getTeach(int start, int end);
+    List<CoursePageBO> teachDetail();
+
+    List<CourseDO> allCourse(Integer id);
 
     List<TextboxInfo> getBrief();
 
@@ -31,5 +36,5 @@ public interface TextboxInfoMapper extends BaseMapper<TextboxInfo> {
 
     void updateInfo(TextboxInfo textboxInfo);
 
-    void deleteInfo(String id);
+    void deleteInfo(Integer id);
 }

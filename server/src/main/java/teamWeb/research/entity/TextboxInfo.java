@@ -1,7 +1,7 @@
 package teamWeb.research.entity;
 
 public class TextboxInfo {
-    private String id;
+    private Integer id;
     private String title;
     private String text;
     private String pictureUrl;
@@ -12,44 +12,12 @@ public class TextboxInfo {
     private String sDate;
     private String eDate;
 
-    public String gettClass() {
-        return tClass;
+    public Integer getId() {
+        return id;
     }
 
-    public void settClass(String tClass) {
-        this.tClass = tClass;
-    }
-
-    @Override
-    public String toString() {
-        return "TextboxInfo{" +
-                "id='" + id + '\'' +
-                ", title='" + title + '\'' +
-                ", text='" + text + '\'' +
-                ", pictureUrl='" + pictureUrl + '\'' +
-                ", fileUrl='" + fileUrl + '\'' +
-                ", sDate='" + sDate + '\'' +
-                ", eDate='" + eDate + '\'' +
-                '}';
-    }
-
-    public String getsDate() {
-        return sDate;
-    }
-
-    public void setsDate(String sDate) {
-        this.sDate = sDate;
-    }
-
-    public String geteDate() {
-        return eDate;
-    }
-
-    public void seteDate(String eDate) {
-        this.eDate = eDate;
-    }
-
-    public TextboxInfo() {
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getTitle() {
@@ -58,14 +26,6 @@ public class TextboxInfo {
 
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
     public String getText() {
@@ -90,5 +50,29 @@ public class TextboxInfo {
 
     public void setFileUrl(String fileUrl) {
         this.fileUrl = fileUrl;
+    }
+
+    public String gettClass() {
+        return tClass;
+    }
+
+    public void settClass(String tClass) {
+        this.tClass = tClass;
+    }
+
+    public String getsDate() {
+        return sDate;
+    }
+
+    public void setsDate(String sDate) {
+        this.sDate = sDate;
+    }
+
+    public String geteDate() {
+        return eDate;
+    }
+
+    public void seteDate(String eDate) {
+        this.eDate = eDate;
     }
 }

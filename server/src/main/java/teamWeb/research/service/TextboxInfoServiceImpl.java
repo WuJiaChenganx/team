@@ -6,6 +6,11 @@ import org.springframework.stereotype.Service;
 import teamWeb.homepage.entity.RelationInfo;
 import teamWeb.research.entity.TextboxInfo;
 import teamWeb.research.mapper.TextboxInfoMapper;
+import teamWeb.research.pojo.*;
+import teamWeb.resource.pojo.ResourceBO;
+import teamWeb.teamDynamics.pojo.NoticeBO;
+import teamWeb.teamSurvey.pojo.MemberBO;
+import teamWeb.utils.BeanUtil;
 
 import java.util.List;
 @Service
@@ -20,39 +25,69 @@ public class TextboxInfoServiceImpl extends ServiceImpl<TextboxInfoMapper, Textb
     }
 
     @Override
-    public List<TextboxInfo> projectDetail(int start, int end) {
-        return textboxInfoMapper.getProject(start,end);
-    }
+    public List<ProjectBO> projectDetail(int start, int end) {
 
-    @Override
-    public List<TextboxInfo> projectedDetail(int start, int end) {
-        return textboxInfoMapper.getProjected(start,end);
-    }
-
-    @Override
-    public List<TextboxInfo> direDetail(int start, int end) {
-        return textboxInfoMapper.getDire(start,end);
-    }
-
-    @Override
-    public List<TextboxInfo> platformDetail(int start, int end) {
-        return textboxInfoMapper.getPlatform(start,end);
-    }
-
-    @Override
-    public List<TextboxInfo> teachDetail(int start, int end) {
-        return textboxInfoMapper.getTeach(start,end);
+        return BeanUtil.convert(textboxInfoMapper.getProject(start,end),ProjectBO.class);
     }
 
 
     @Override
-    public List<TextboxInfo> emulationDetail(int start, int end) {
-        return textboxInfoMapper.getEmulation(start,end);
+    public List<DirectionsDTO> direDetail(int start, int end) {
+        List<DirectionsBO> directionsBOList = BeanUtil.convert(textboxInfoMapper.getDire(start,end),DirectionsBO.class);
+
+        for (DirectionsBO directionsBO:
+                directionsBOList) {
+            directionsBO.setPicUrl(directionsBO.getPictureUrl());
+            directionsBO.setInfo(directionsBO.getText());
+
+        }
+        return BeanUtil.convert(directionsBOList,DirectionsDTO.class);
     }
 
     @Override
-    public List<TextboxInfo> dataDetail(int start, int end) {
-        return textboxInfoMapper.getData(start,end);
+    public List<PlatformDTO> platformDetail(int start, int end) {
+        List<PlatformBO> platformBOList = BeanUtil.convert(textboxInfoMapper.getPlatform(start,end),PlatformBO.class);
+        for (PlatformBO platformBO:
+                platformBOList) {
+            platformBO.setInfoTitle(platformBO.getTitle());
+            platformBO.setInfoDetail(platformBO.getText());
+        }
+
+        return BeanUtil.convert(platformBOList,PlatformDTO.class);
+    }
+
+    @Override
+    public List<CoursePageBO> teachDetail() {
+        List<CoursePageBO> CoursePageBOList = textboxInfoMapper.teachDetail();
+        for (CoursePageBO coursePageBO:
+                CoursePageBOList) {
+            Integer courseId = coursePageBO.getId();
+            coursePageBO.setCourseList(textboxInfoMapper.allCourse(courseId));
+        }
+        return CoursePageBOList;
+    }
+
+
+    @Override
+    public List<ResourceBO> emulationDetail(int start, int end) {
+        List<ResourceBO> resourceBOList = BeanUtil.convert(textboxInfoMapper.getEmulation(start,end),ResourceBO.class);
+        for (ResourceBO resourceBO:
+                resourceBOList) {
+            resourceBO.setDetail(resourceBO.getText());
+            resourceBO.setText("");
+        }
+        return resourceBOList;
+    }
+
+    @Override
+    public List<ResourceBO> dataDetail(int start, int end) {
+        List<ResourceBO> resourceBOList = BeanUtil.convert(textboxInfoMapper.getData(start,end),ResourceBO.class);
+        for (ResourceBO resourceBO:
+                resourceBOList) {
+            resourceBO.setDetail(resourceBO.getText());
+            resourceBO.setText("");
+        }
+        return resourceBOList;
     }
 
 

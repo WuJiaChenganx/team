@@ -1,0 +1,84 @@
+api:
+
+method = GET
+http://localhost:8186/teamWeb/project/require-project?start=0&end=10
+in:null
+out:{
+	"code": "200",
+	"data": [
+		{
+			"id": 1,
+			"projectName": "面向人体移动纳米物联网的通信建模及协议设计",
+			"responser": "姚信威",
+			"projectType": "浙江省杰出青年科学基金项目",
+			"time": "2023.01-2025.12",
+			"projectInfo": "浙江省杰出青年科学基金项目，“面向人体移动纳米物联网的通信建模及协议设计”，2023.01-2025.12，项目负责人，排名：1/1；"
+		},
+		{
+			"id": 2,
+			"projectName": "低碳运输碳排放智能感知与协同控制关键技术研究与应用示范",
+			"responser": "姚信威",
+			"projectType": "浙江省重点研发“领雁”计划项目",
+			"time": "2023.01-2025.12",
+			"projectInfo": "浙江省重点研发“领雁”计划项目，“低碳运输碳排放智能感知与协同控制关键技术研究与应用示范”，2023.01-2025.12，合作单位项目负责人，排名：2/10；"
+		}
+	],
+	"msg": null
+}
+
+
+
+
+
+method = GET
+http://localhost:8186/teamWeb/project/require-direction?start=0&end=10
+in:null
+out:{
+	"code": "200",
+	"data": [
+		{
+			"id": 1008,
+			"picUrl": "server/src/main/resources/static/picture/微信图片_20230305170123.png",
+			"info": "智能物联网、群智感知与协同、泛化人工智能"
+		}
+	],
+	"msg": null
+}
+
+
+
+
+method=GET
+http://localhost:8186/teamWeb/project/require-platform?start=0&end=10
+in:null
+out:{
+	"code": "200",
+	"data": [
+		{
+			"id": 1003,
+			"infoDetail": "简介。。。",
+			"infoTitle": "浙工大九阳智慧家电重点实验室"
+		}
+	],
+	"msg": null
+}
+
+
+
+method=GET
+http://localhost:8186/teamWeb/project/require-courses
+in:null
+out:{
+	"code": "200",
+	"data": [
+		{
+			"id": 1003,
+			"infoDetail": "简介。。。",
+			"infoTitle": "浙工大九阳智慧家电重点实验室"
+		}
+	],
+	"msg": null
+}
+
+
+

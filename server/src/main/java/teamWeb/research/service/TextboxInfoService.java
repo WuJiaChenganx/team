@@ -3,6 +3,8 @@ package teamWeb.research.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import teamWeb.homepage.entity.RelationInfo;
 import teamWeb.research.entity.TextboxInfo;
+import teamWeb.research.pojo.*;
+import teamWeb.resource.pojo.ResourceBO;
 
 import java.util.List;
 
@@ -10,20 +12,17 @@ public interface TextboxInfoService extends IService<TextboxInfo> {
 
     List<TextboxInfo> briefDetail();
 
-    List<TextboxInfo> projectDetail(int start, int end);
+    List<ProjectBO> projectDetail(int start, int end);
 
+    List<DirectionsDTO> direDetail(int start, int end);
 
-    List<TextboxInfo> projectedDetail(int start, int end);
+    List<PlatformDTO> platformDetail(int start, int end);
 
-    List<TextboxInfo> direDetail(int start, int end);
+    List<CoursePageBO> teachDetail();
 
-    List<TextboxInfo> platformDetail(int start, int end);
+    List<ResourceBO> emulationDetail(int start, int end);
 
-    List<TextboxInfo> teachDetail(int start, int end);
-
-    List<TextboxInfo> emulationDetail(int start, int end);
-
-    List<TextboxInfo> dataDetail(int start, int end);
+    List<ResourceBO> dataDetail(int start, int end);
 
     List<RelationInfo> getRelation();
 

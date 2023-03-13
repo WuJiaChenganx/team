@@ -2,20 +2,17 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="teamWeb.research.mapper.TextboxInfoMapper">
-    <select id="getProject" resultType="teamWeb.research.entity.TextboxInfo">
-        select `id`,`text`,`sDate`,`eDate`,`tClass`
-        from textbox
-        <where>
-            tClass = 5
-        </where>
-        order by sDate desc limit ${start},${end}
+    <select id="getProject" resultType="teamWeb.research.entity.ProjectDO">
+        select `id`,project_name AS projectName, responser, project_type AS projectType, `time`, project_info AS projectInfo
+        from project
+        order by time desc limit ${start},${end}
     </select>
 
-    <select id="getProjected" resultType="teamWeb.research.entity.TextboxInfo">
-        select `id`,`text`,`sDate`,`eDate`,`tClass`
+    <select id="getData" resultType="teamWeb.research.entity.TextboxInfo">
+        select `id`,`text`,`tClass`,`title`, fileUrl
         from textbox
         <where>
-            tClass = 6
+            tClass = "数据集"
         </where>
         order by sDate desc limit ${start},${end}
     </select>
@@ -24,27 +21,32 @@
         select `id`,`text`,`pictureUrl`,`tClass`
         from textbox
         <where>
-            tClass = 7
+            tClass = "科研方向"
         </where>
         limit ${start},${end}
     </select>
 
     <select id="getPlatform" resultType="teamWeb.research.entity.TextboxInfo">
-        select `id`,`text`,`pictureUrl`,`tClass`
+        select `id`,`text`,`pictureUrl`,`tClass`,title
         from textbox
         <where>
-            tClass = 2
+            tClass = "科研平台"
         </where>
         limit ${start},${end}
     </select>
 
-    <select id="getTeach" resultType="teamWeb.research.entity.TextboxInfo">
-        select `id`,`text`,`pictureUrl`,`tClass`
+    <select id="teachDetail" resultType="teamWeb.research.pojo.CoursePageBO">
+        select `id`,`text` AS profile,title AS courseType, `tClass`
         from textbox
         <where>
-            tClass = 3
+            tClass = "课程教学"
         </where>
-        limit ${start},${end}
+    </select>
+
+    <select id="allCourse" resultType="teamWeb.research.entity.CourseDO">
+        select course_id AS id,courseName
+        from course_textbox_map join course c on c.id = course_textbox_map.course_id
+        WHERE course_textbox_map.textbox_id = ${id}
     </select>
 
     <select id="getBrief" resultType="teamWeb.research.entity.TextboxInfo">
@@ -61,7 +63,7 @@
         select `id`,`text`,`fileUrl`,`tClass`
         from textbox
         <where>
-            tClass = 1
+            tClass = "仿真工具"
         </where>
     </select>
 
@@ -76,6 +78,7 @@
             id =${id}
         </where>
     </select>
+
 
     <insert id="insertInfo">
         INSERT INTO textbox(`title`, `text`,`fileUrl`,`tClass`,`pictureUrl`,`sDate`,`eDate`) VALUES ("${title}", "${text}","${fileUrl}","${tClass}","${pictureUrl}","${sDate}","${eDate}")

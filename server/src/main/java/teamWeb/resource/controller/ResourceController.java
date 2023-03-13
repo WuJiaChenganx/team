@@ -1,12 +1,15 @@
 package teamWeb.resource.controller;
 
 import org.springframework.web.bind.annotation.*;
+import teamWeb.resource.pojo.ResourceBO;
+import teamWeb.resource.pojo.ResourceDTO;
 import teamWeb.teamDynamics.entity.ReportDO;
 import teamWeb.research.entity.TextboxInfo;
 import teamWeb.resource.service.FileService;
 import teamWeb.teamDynamics.service.ReportInfoService;
 import teamWeb.research.service.TextboxInfoService;
 import teamWeb.utils.APIResponse;
+import teamWeb.utils.BeanUtil;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
@@ -31,22 +34,18 @@ public class ResourceController {
         this.reportInfoService = reportInfoService;
     }
 
-    @RequestMapping("/emulation")
+    @GetMapping("/require-platform")
     public APIResponse emulation(@RequestParam(value="start") int start,@RequestParam(value="end") int end){
-        List<TextboxInfo> emulationDetail = textboxInfoService.emulationDetail(start,end);
-        return APIResponse.success(emulationDetail);
+        List<ResourceBO> emulationDetail = textboxInfoService.emulationDetail(start,end);
+        List<ResourceDTO> resourceDTOList = BeanUtil.convert(emulationDetail,ResourceDTO.class);
+        return APIResponse.success(resourceDTOList);
     }
 
-    @RequestMapping("/data")
+    @GetMapping("/require-data")
     public APIResponse data(@RequestParam(value="start") int start,@RequestParam(value="end") int end){
-        List<TextboxInfo> dataDetail = textboxInfoService.dataDetail(start,end);
-        return APIResponse.success(dataDetail);
-    }
-
-    @RequestMapping("/meet")
-    public APIResponse meet(@RequestParam(value="start") int start,@RequestParam(value="end") int end){
-        List<ReportDO> meetDetail = reportInfoService.meetDetail(start,end);
-        return APIResponse.success(meetDetail);
+        List<ResourceBO> dataDetail = textboxInfoService.dataDetail(start,end);
+        List<ResourceDTO> resourceDTOList = BeanUtil.convert(dataDetail,ResourceDTO.class);
+        return APIResponse.success(resourceDTOList);
     }
 
 
@@ -69,7 +68,7 @@ public class ResourceController {
                 .body(resource);
     }*/
 
-    @RequestMapping("download/{path}/{fileName}")
+    @GetMapping("download/{path}/{fileName}")
     public void download(@PathVariable String path, HttpServletResponse response, @PathVariable String fileName) {
         path = fileService.loadFileAsResource(path+"/"+fileName);
         try {
