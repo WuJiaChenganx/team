@@ -3,7 +3,7 @@
     <!-- default-active表示是当前选中的菜单的index -->
     <div class="simulationToolContent">
       <div class="simulationToolAside">
-        <div class="simulationToolAsideTitle">仿真工具</div>
+        <div class="simulationToolAsideTitle">资源共享</div>
         <div class="simulationToolAsideContent">
           <el-menu
             :default-active="this.$route.path"
@@ -46,12 +46,26 @@
             :key="detailIndex"
           >
             <div class="simulationTool-base">
-              <i class="el-icon-notebook-1"></i>
+              <i class="el-icon-link"></i>
               <div class="simulationTool-name">
-                {{ detailItem.detail }}
+                {{ detailItem.title }}
               </div>
             </div>
-            <div class="simulationTool-time">{{ detailItem.time }}</div>
+            <div class="simulationTool-profile">
+              {{ detailItem.detail }}
+            </div>
+            <div class="simulationTool-url">
+              <!-- 这个链接可以下载 -->
+              <!-- http://localhost:8186/teamWeb/resource/download/file/aaaa.pdf -->
+              <!-- :href="detailItem.fileUrl" -->
+              <a
+                class="el-button el-button--primary el-button--mini"
+                style="text-decoration: none"
+                :href="detailItem.fileUrl"
+                target="_blank"
+                >下载仿真平台</a
+              >
+            </div>
           </div>
         </div>
         <div class="paging">
@@ -72,6 +86,7 @@
 </template>
 
 <script>
+import { getSimulationToolURL } from "@/api/simulationTool";
 export default {
   data() {
     return {
@@ -81,22 +96,22 @@ export default {
         { name: "仿真工具", path: "/resource/simulationTool" },
         { name: "数据集", path: "/resource/dataSet" },
       ],
-      showAllContent: [
-        { detail: "仿真工具1", time: "2000-06-25" },
-        { detail: "仿真工具2", time: "2000-06-25" },
-        { detail: "仿真工具3", time: "2000-06-25" },
-        { detail: "仿真工具4", time: "2000-06-25" },
-        { detail: "仿真工具5", time: "2000-06-25" },
-        { detail: "仿真工具6", time: "2000-06-25" },
-        { detail: "仿真工具7", time: "2000-06-25" },
-        { detail: "仿真工具8", time: "2000-06-25" },
-        { detail: "仿真工具9", time: "2000-06-25" },
-        { detail: "仿真工具10", time: "2000-06-25" },
-        { detail: "仿真工具11", time: "2000-06-25" },
-        { detail: "仿真工具12", time: "2000-06-25" },
-        { detail: "仿真工具13", time: "2000-06-25" },
+      showPageContent: [
+        // {
+        //   title: "仿真工具1",
+        //   detail:
+        //     "简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介",
+        //   fileUrl:
+        //     "http://localhost:8186/teamWeb/resource/download/file/aaaa.pdf",
+        // },
+        // {
+        //   title: "仿真工具2",
+        //   detail:
+        //     "简介2简介2简介2简介2简介2简介2简介2简介2简介2简介2简介2简介2简介2简介2简介2简介2简介2简介2简介2简介2简介2简介2简介2简介2简介2简介2简介2简介2简介2简介2简介2简介2简介2简介2简介2简介2简介2简介2",
+        //   fileUrl:
+        //     "http://localhost:8186/teamWeb/resource/download/file/aaaa.pdf",
+        // },
       ],
-      showPageContent: [],
       // 总共要展示的数量
       total_number: 10,
       // 当前页面从1开始的这两个属性会在刚开始的时候就更新
@@ -104,28 +119,27 @@ export default {
     };
   },
   created() {
-    this.total_number = this.showAllContent.length;
-    this.showPageContent = this.showAllContent.slice(
-      (this.current_index - 1) * 10,
-      this.current_index * 10
-    );
+    // 分页
+    this.getSimulationToolList();
   },
   methods: {
-    goTo(path) {
-      // 当前不一样就跳转
-      if (this.$route.path !== path) {
-        this.$router.push({
-          path: path,
-        });
-      }
+    // async和await用于同步,就是按顺序执行
+    async getSimulationToolList() {
+      let params = {
+        // 定义参数
+        start: (this.current_index - 1) * 10,
+        end: this.current_index * 10,
+      };
+
+      await getSimulationToolURL(params).then((res) => {
+        this.showPageContent = res.data;
+        this.total_number = res.sum;
+      });
     },
     handleCurrentChange(val) {
       // 传入的val是当前页的页码
       this.current_index = val;
-      this.showPageContent = this.showAllContent.slice(
-        (val - 1) * 10,
-        val * 10
-      );
+      this.getSimulationToolList();
     },
   },
 };
@@ -205,17 +219,15 @@ export default {
 
   .simulationTool-row {
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    cursor: pointer;
+    flex-direction: column;
     padding: 1.5rem 0;
     border-bottom: 1px solid #dfdfdf;
   }
   .simulationTool-base {
     display: flex;
     flex-direction: row;
-    font-size: 3rem;
-    line-height: 3rem;
+    font-size: 2rem;
+    line-height: 2rem;
   }
   .simulationTool-name {
     text-align: left;
@@ -225,7 +237,17 @@ export default {
     -webkit-line-clamp: 1;
     overflow: hidden;
     color: #333333;
-    height: 3rem;
+    height: 2rem;
+    margin-bottom: 1rem;
+  }
+  .simulationTool-profile {
+    text-indent: 2em;
+    text-align: left;
+    font-size: 1.6rem;
+    margin-bottom: 1rem;
+  }
+  .simulationTool-url {
+    text-align: right;
   }
   /* 设置分页和底部的距离 */
   .paging {
@@ -294,17 +316,15 @@ export default {
 
   .simulationTool-row {
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    cursor: pointer;
+    flex-direction: column;
     padding: 1.5rem 0;
     border-bottom: 1px solid #dfdfdf;
   }
   .simulationTool-base {
     display: flex;
     flex-direction: row;
-    font-size: 3rem;
-    line-height: 3rem;
+    font-size: 2rem;
+    line-height: 2rem;
   }
   .simulationTool-name {
     text-align: left;
@@ -314,7 +334,17 @@ export default {
     -webkit-line-clamp: 1;
     overflow: hidden;
     color: #333333;
-    height: 3rem;
+    height: 2rem;
+    margin-bottom: 1rem;
+  }
+  .simulationTool-profile {
+    text-indent: 2em;
+    text-align: left;
+    font-size: 1.6rem;
+    margin-bottom: 1rem;
+  }
+  .simulationTool-url {
+    text-align: right;
   }
   /* 设置分页和底部的距离 */
   .paging {

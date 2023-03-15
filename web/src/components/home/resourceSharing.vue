@@ -1,37 +1,37 @@
 <template>
-  <div class="friendlyLink">
-    <div class="link-title-box">
-      <div class="link-title">友情链接</div>
-      <a class="title-more">更多 +</a>
+  <!-- 首页的资源共享 -->
+  <div class="resourceSharing">
+    <div class="resourceSharing-title-box">
+      <div class="resourceSharing-title">资源共享</div>
+      <a class="title-more" @click="goTo('/resource/simulationTool')">更多+</a>
     </div>
-    <div id="link-content-box">
-      <div class="links">
-        <a
-          href="http://www.cs.zjut.edu.cn/html/index.html"
-          class="linkUrl"
-          target="_blank"
-        >
-          计算机学院官网
-        </a>
-        <a
-          href="http://www.soft.zjut.edu.cn/index.do"
-          class="linkUrl"
-          target="_blank"
-        >
-          E度空间
-        </a>
-        <a href="http://www.news.zjut.edu.cn/" class="linkUrl" target="_blank">
-          工大要闻
-        </a>
+    <div class="resourceSharing-content-box">
+      <div class="linkUrl" @click="goTo('/resource/simulationTool')">
+        仿真工具
       </div>
+      <div class="linkUrl" @click="goTo('/resource/dataSet')">数据集</div>
     </div>
   </div>
 </template>
 <script>
-export default {};
+export default {
+  data() {
+    return {};
+  },
+  methods: {
+    goTo(path) {
+      // 当前不一样就跳转
+      if (this.$route.path !== path) {
+        this.$router.push({
+          path: path,
+        });
+      }
+    },
+  },
+};
 </script>
 <style scoped>
-.link-title-box {
+.resourceSharing-title-box {
   overflow: hidden;
   margin-bottom: 2rem;
   display: flex;
@@ -39,7 +39,7 @@ export default {};
   justify-content: space-between;
 }
 
-.link-title {
+.resourceSharing-title {
   text-align: left;
   font-size: 2.2rem;
   font-weight: bold;
@@ -51,7 +51,11 @@ export default {};
   line-height: 1.8rem;
   cursor: pointer;
 }
-
+.resourceSharing-content-box {
+  overflow: hidden;
+  height: auto;
+  width: 100%;
+}
 .linkUrl {
   margin-bottom: 1rem;
   /* 去掉a标签自带的格式 */

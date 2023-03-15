@@ -1,6 +1,6 @@
 <template>
   <!-- 下载附件模板 -->
-  <div style="margin-top: 20px">
+  <div>
     <a
       class="el-button el-button--primary el-button--mini"
       style="text-decoration: none"
