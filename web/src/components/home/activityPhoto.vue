@@ -5,12 +5,15 @@
       :interval="4000"
       indicator-position="outside"
       class="photo"
-      height="41rem"
+      height="40rem"
     >
-      <el-carousel-item v-for="(item, index) in imgArr" :key="index">
+      <el-carousel-item
+        v-for="(item, index) in imgArr"
+        :key="index"
+        @click.native="goTo('/activity/newFlash')"
+        style="cursor: pointer"
+      >
         <img :src="item" alt="" />
-        <!-- 之后可以加图片注释和跳转功能 -->
-        <!-- <a>{{ item }}</a> -->
       </el-carousel-item>
     </el-carousel>
   </div>
@@ -21,22 +24,27 @@ export default {
   data() {
     return {
       imgArr: [
-        require("../../assets/images/activity/00.jpg"),
-        require("../../assets/images/activity/01.jpg"),
-        require("../../assets/images/activity/02.jpg"),
-        require("../../assets/images/activity/03.jpg"),
-        require("../../assets/images/activity/04.jpg"),
-        require("../../assets/images/activity/05.jpg"),
-        require("../../assets/images/activity/06.jpg"),
-        require("../../assets/images/activity/07.jpg"),
-        require("../../assets/images/activity/08.jpg"),
+        require("../../assets/images/activity/activity1.png"),
+        require("../../assets/images/activity/activity2.png"),
+        require("../../assets/images/activity/activity3.png"),
+        require("../../assets/images/activity/activity4.png"),
+        require("../../assets/images/activity/activity5.png"),
       ],
     };
   },
-  methods: {},
+  methods: {
+    goTo(path) {
+      // 当前不一样就跳转
+      if (this.$route.path !== path) {
+        this.$router.push({
+          path: path,
+        });
+      }
+    },
+  },
 };
 </script>
-<style>
+<style scoped>
 .el-carousel__item a {
   color: #475669;
   font-size: 18px;

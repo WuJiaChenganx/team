@@ -1,23 +1,43 @@
 <template>
-  <div class="newList">
-    <!-- 消息列表 -->
-    <div class="newListTitle">
-      <div class="left-title">新闻快讯</div>
-      <a class="title-more" @click="goTo('/activity/newFlash')">更多+</a>
-    </div>
-    <div class="news">
-      <div
-        class="news-row"
-        style="cursor: pointer"
-        v-for="newsItem in newsList"
-        :key="newsItem.id"
-        @click="gotoDetail(newsItem)"
+  <div class="news">
+    <!-- 轮播图 -->
+    <div class="newsPhoto">
+      <el-carousel
+        :interval="4000"
+        indicator-position="outside"
+        class="photo"
+        height="40rem"
       >
-        <div class="news-date">
-          <div>{{ newsItem.day }}</div>
-          <div>{{ newsItem.date }}</div>
+        <el-carousel-item
+        v-for="(newsItem,newsItemIndex) in newsList"
+          :key="newsItemIndex"
+          @click.native="goTo('/activity/newFlash')"
+          style="cursor: pointer"
+        >
+          <img :src="newsItem.picUrl" alt="" />
+        </el-carousel-item>
+      </el-carousel>
+    </div>
+    <!-- 消息列表 -->
+    <div class="newsList">
+      <div class="newsListTitle">
+        <div class="left-title">新闻快讯</div>
+        <a class="title-more" @click="goTo('/activity/newFlash')">更多+</a>
+      </div>
+      <div class="newsListContent">
+        <div
+          class="news-row"
+          style="cursor: pointer"
+          v-for="(newsItem,newsItemIndex) in newsList"
+          :key="newsItemIndex"
+          @click="gotoDetail(newsItem)"
+        >
+          <div class="news-date">
+            <div>{{ newsItem.day }}</div>
+            <div>{{ newsItem.date }}</div>
+          </div>
+          <div class="news-title">{{ newsItem.title }}</div>
         </div>
-        <div class="news-title">{{ newsItem.title }}</div>
       </div>
     </div>
   </div>
@@ -29,7 +49,6 @@ export default {
       // 要展示的新闻信息(加载前还要处理过)
       newsList: [
         {
-          id: 0,
           day: "18",
           date: "2023-03",
           title: "课题组李泽康同学荣获国家奖学金硕士奖",
@@ -38,7 +57,6 @@ export default {
           picUrl: require("../../assets/images/activity/activity1.png"),
         },
         {
-          id: 1,
           day: "18",
           date: "2023-03",
           title: "冯洋老师荣获钱伟长中文信息处理科学技术奖",
@@ -47,7 +65,6 @@ export default {
           picUrl: require("../../assets/images/activity/activity2.png"),
         },
         {
-          id: 2,
           day: "18",
           date: "2023-03",
           title: "NLP课题组2021年中央广播电视塔秋游行",
@@ -56,7 +73,6 @@ export default {
           picUrl: require("../../assets/images/activity/activity3.png"),
         },
         {
-          id: 3,
           day: "18",
           date: "2023-03",
           title: "NLP课题组举行2020年年会",
@@ -65,7 +81,6 @@ export default {
           picUrl: require("../../assets/images/activity/activity4.png"),
         },
         {
-          id: 4,
           day: "18",
           date: "2023-03",
           title: "NLP课题组2021年春游记",
@@ -104,7 +119,28 @@ export default {
 <style scoped>
 /* PC端 */
 @media screen and (min-width: 1000px) {
-  .newListTitle {
+  .news {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  /* 轮播图 */
+  .newsPhoto {
+    width: 56%;
+  }
+
+  .el-carousel__item img {
+    width: 100%;
+    height: 100%;
+  }
+  /* 新闻列表 */
+  .newsList {
+    width: 42%;
+    padding: 0 1rem;
+    box-sizing: border-box;
+  }
+  .newsListTitle {
     width: 100%;
     display: flex;
     flex-direction: row;
@@ -121,7 +157,7 @@ export default {
     font-size: 1.6rem;
     cursor: pointer;
   }
-  .news {
+  .newsListContent {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -169,7 +205,12 @@ export default {
 
 /* 移动端 */
 @media screen and (max-width: 1000px) {
-  .newListTitle {
+  /* 轮播图 */
+  .el-carousel__item img {
+    width: 100%;
+    height: 100%;
+  }
+  .newsListTitle {
     width: 100%;
     display: flex;
     flex-direction: row;
@@ -187,7 +228,7 @@ export default {
     font-size: 1.6rem;
     cursor: pointer;
   }
-  .news {
+  .newsListContent {
     margin-top: 1rem;
     display: flex;
     flex-direction: column;

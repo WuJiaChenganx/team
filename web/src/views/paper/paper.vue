@@ -72,6 +72,7 @@
 </template>
 
 <script>
+import { getPaperURL } from "@/api/paper/paper";
 export default {
   data() {
     return {
@@ -84,20 +85,33 @@ export default {
       ],
       showAllContent: [
         {
-          detail:
-            "论文1我我表达方式姑父的是及格论文1我我表达方式姑父的是及格论文1我我表达方式姑父的是及格论文1我我表达方式姑父的是及格",
-          time: "2000-06-25",
+          title: "专利1",
+          date: "2023-03-07",
+          url: " ",
+        },
+        {
+          title:
+            "DRL-Based Offloading for Computation Delay Minimization in Wireless-Powered Multi-access Edge Computing",
+          date: "2023",
           url: "",
         },
-        { detail: "论文2", time: "2000-06-25", url: "" },
-        { detail: "论文3", time: "2000-06-25", url: "" },
-        { detail: "论文4", time: "2000-06-25", url: "" },
-        { detail: "论文5", time: "2000-06-25", url: "" },
-        { detail: "论文6", time: "2000-06-25", url: "" },
-        { detail: "论文7", time: "2000-06-25", url: "" },
-        { detail: "论文8", time: "2000-06-25", url: "" },
-        { detail: "论文9", time: "2000-06-25", url: "" },
-        { detail: "论文10", time: "2000-06-25", url: "" },
+        {
+          title: "Nighttime Image Dehazing Based on Point Light Sources",
+          date: "2022-12-20",
+          url: "",
+        },
+        {
+          title:
+            "Multi-hop Deflection Routing Algorithm Based on Reinforcement Learning for Energy-Harvesting Nanonetworks",
+          date: "2022-01",
+          url: "",
+        },
+        {
+          title:
+            "Gold nanostars combined with the searched antibody for targeted oral squamous cell carcinoma therapy",
+          date: "2022",
+          url: "",
+        },
       ],
       showPageContent: [],
       // 总共要展示的数量

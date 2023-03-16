@@ -122,7 +122,7 @@ export default {
   /* background: url(../../assets/images/background/main3_left.png) no-repeat; */
   /* background-size: cover !important; */
 }
-
+/* PC端 */
 @media screen and (min-width: 1000px) {
   .headerContent {
     width: 100%;
@@ -142,10 +142,68 @@ export default {
   .headerLogo {
     width: 20rem;
   }
+
+  /* 导航栏 */
+  .navBackground {
+    height: 5rem;
+    background-color: #0055a2;
+  }
+
+  .nav {
+    margin: 0 auto;
+    width: 100%;
+    height: 5rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+  }
+
+  .navItem {
+    width: 15%;
+  }
+
   .navTitle {
-    font-size: 2rem;
+    /* 水平对齐 */
+    text-align: center;
+    /* 垂直对齐 */
+    line-height: 5rem;
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #fff;
+  }
+
+  .navItem:hover {
+    background-color: #008cd6;
+  }
+
+  .navItem .subNav {
+    /* 隐藏元素 */
+    width: 15%;
+    line-height: 5rem;
+    font-size: 1.8rem;
+    font-weight: bold;
+    display: none;
+    color: #fff;
+    background-color: #0055a2;
+  }
+
+  .navItem:hover .subNav {
+    display: block;
+  }
+
+  .subNavItem {
+    height: 5rem;
+    text-align: center;
+    /* 垂直对齐 */
+    line-height: 5rem;
+    color: #fff;
+  }
+
+  .subNavItem:hover {
+    background-color: #008cd6;
   }
 }
+/* 移动端 */
 @media screen and (max-width: 1000px) {
   .headerContent {
     width: 100%;
@@ -164,63 +222,65 @@ export default {
     color: #0055a2;
     font-weight: bold;
   }
-  .navTitle {
-    font-size: 1rem;
+
+  /* 导航栏 */
+  .navBackground {
+    height: 5rem;
+    background-color: #0055a2;
   }
-}
 
-/* 导航栏 */
-.navBackground {
-  height: 5rem;
-  background-color: #0055a2;
-}
+  .nav {
+    margin: 0 auto;
+    width: 100%;
+    height: 5rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+  }
 
-.nav {
-  margin: 0 auto;
-  width: 100%;
-  height: 5rem;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-}
+  .navItem {
+    width: 15%;
+  }
 
-.navItem {
-  width: 15%;
-}
+  .navTitle {
+    /* 水平对齐 */
+    text-align: center;
+    /* 垂直对齐 */
+    line-height: 5rem;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #fff;
+  }
 
-.navTitle {
-  /* 水平对齐 */
-  text-align: center;
+  /* .navItem:hover {
+    background-color: #008cd6;
+  } */
+
+  .navItem .subNav {
+    /* 隐藏元素 */
+    /* width: 15%;
+    line-height: 5rem;
+    font-size: 1rem;
+    font-weight: bold; */
+    display: none;
+    /* color: #fff;
+    background-color: #0055a2; */
+  }
+
+  /* .navItem:hover .subNav {
+    display: block;
+  } */
+
+  /* .subNavItem {
+    height: 5rem;
+    text-align: center; */
   /* 垂直对齐 */
-  line-height: 5rem;
-  color: #fff;
-}
+  /* line-height: 5rem;
+    color: #fff;
+  } */
 
-.navItem:hover {
-  background-color: #008cd6;
-}
-
-.navItem .subNav {
-  /* 隐藏元素 */
-  width: 15%;
-  display: none;
-  color: #fff;
-  background-color: #0055a2;
-}
-
-.navItem:hover .subNav {
-  display: block;
-}
-
-.subNavItem {
-  height: 5rem;
-  text-align: center;
-  /* 垂直对齐 */
-  line-height: 5rem;
-  color: #fff;
-}
-
-.subNavItem:hover {
-  background-color: #008cd6;
+  /* .subNavItem:hover {
+    background-color: #008cd6;
+  } */
 }
 </style>

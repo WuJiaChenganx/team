@@ -1,6 +1,6 @@
 <template>
   <div class="researchTeam">
-    <div class="left-title-box">
+    <div class="researchTeamTitle">
       <div class="left-title">研究队伍</div>
       <a @click="goTo('team/master')" class="title-more">更多 +</a>
     </div>
@@ -14,7 +14,6 @@
             :key="item.id"
             @click="gotoDetail(item)"
           >
-            <!-- 可以加跳转 -->
             <div class="memberBox">
               <div class="member-img">
                 <img :src="item.picUrl" />
@@ -62,7 +61,7 @@ export default {
                 "Shaolei Zhang, Yang Feng. Reducing Position Bias in Simultaneous Machine Translation with Length-Aware Framework.",
             },
           ],
-          picUrl: require("../../assets/images/activity/00.jpg"),
+          picUrl: require("../../assets/images/teacherPhoto/lq.jpg"),
         },
         {
           id: 2,
@@ -89,7 +88,7 @@ export default {
                 "Shaolei Zhang, Yang Feng. Reducing Position Bias in Simultaneous Machine Translation with Length-Aware Framework.",
             },
           ],
-          picUrl: require("../../assets/images/activity/00.jpg"),
+          picUrl: require("../../assets/images/teacherPhoto/lq.jpg"),
         },
         {
           id: 3,
@@ -116,7 +115,7 @@ export default {
                 "Shaolei Zhang, Yang Feng. Reducing Position Bias in Simultaneous Machine Translation with Length-Aware Framework.",
             },
           ],
-          picUrl: require("../../assets/images/activity/00.jpg"),
+          picUrl: require("../../assets/images/teacherPhoto/lq.jpg"),
         },
         {
           id: 4,
@@ -143,7 +142,7 @@ export default {
                 "Shaolei Zhang, Yang Feng. Reducing Position Bias in Simultaneous Machine Translation with Length-Aware Framework.",
             },
           ],
-          picUrl: require("../../assets/images/activity/00.jpg"),
+          picUrl: require("../../assets/images/teacherPhoto/lq.jpg"),
         },
         {
           id: 5,
@@ -170,7 +169,7 @@ export default {
                 "Shaolei Zhang, Yang Feng. Reducing Position Bias in Simultaneous Machine Translation with Length-Aware Framework.",
             },
           ],
-          picUrl: require("../../assets/images/activity/00.jpg"),
+          picUrl: require("../../assets/images/teacherPhoto/lq.jpg"),
         },
         {
           id: 6,
@@ -197,7 +196,7 @@ export default {
                 "Shaolei Zhang, Yang Feng. Reducing Position Bias in Simultaneous Machine Translation with Length-Aware Framework.",
             },
           ],
-          picUrl: require("../../assets/images/activity/00.jpg"),
+          picUrl: require("../../assets/images/teacherPhoto/lq.jpg"),
         },
       ],
     };
@@ -205,36 +204,21 @@ export default {
   // 从后端拿数据
   created() {},
   mounted() {
-    console.log();
-    if (document.documentElement.clientWidth >= 1000) {
-      new Swiper(".swiper-container", {
-        // 最后一张和第一张无缝衔接
-        loop: true,
-        // 自动播放
-        autoplay: {
-          delay: 1000,
-        },
-        // 间距15px
-        spaceBetween: 15,
-        // 一次显示几张照片
-        slidesPerView: this.studentAllInfo.length,
-        // 每一次移动的时候移动1张
-        slidesPerGroup: 1,
-      });
-    } else {
-      new Swiper(".swiper-container", {
-        // 最后一张和第一张无缝衔接
-        loop: true,
-        // 自动播放
-        autoplay: {
-          delay: 1000,
-        },
-        // 一次显示几张照片
-        slidesPerView: 1,
-        // 每一次移动的时候移动1张
-        slidesPerGroup: 1,
-      });
-    }
+    new Swiper(".swiper-container", {
+      // 最后一张和第一张无缝衔接
+      loop: true,
+      // 自动播放
+      autoplay: {
+        delay: 1000,
+      },
+      // 间距%2的轮播图宽度
+      spaceBetween: "2%",
+      // 一次显示几张照片,可以设置成auto,然后在css中设置swiper-slide的宽度
+      // slidesPerView: this.studentAllInfo.length,
+      slidesPerView: "auto",
+      // 每一次移动的时候移动1张
+      slidesPerGroup: 1,
+    });
   },
   methods: {
     goTo(path) {
@@ -261,56 +245,56 @@ export default {
 };
 </script>
 <style scoped>
-.left-title-box {
-  width: 100%;
-  height: 3.8rem;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  margin-bottom: 2rem;
-}
-.left-title {
-  text-align: left;
-  font-size: 2.2rem;
-  font-weight: bold;
-  color: #003266;
-}
-.title-more {
-  text-align: right;
-  color: #7db0cb;
-  font-size: 1.4rem;
-  line-height: 1.8rem;
-  cursor: pointer;
-}
-
 /* PC端 */
 @media screen and (min-width: 1000px) {
+  .researchTeamTitle {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+  }
+  .left-title {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #003266;
+  }
+  .researchTeamTitle .title-more {
+    color: #7db0cb;
+    font-size: 1.6rem;
+    cursor: pointer;
+  }
+
   /* 轮播图css */
   .swiper-container {
-    height: 12rem;
+    width: 100%;
   }
   /* 去掉最后一张图片的右浮动 */
   .swiper-slide:last-child {
     margin-right: 0;
   }
+  .swiper-slide {
+    /* 宽度15%有6个,间隔2%在js的swiper中设置好了(且间隔有5个)*/
+    width: 15%;
+    text-align: center;
+    font-size: 1.8rem;
+    background: #fff;
+  }
 
   .memberBox {
     display: flex;
-    width: 7rem;
     flex-direction: column;
-    justify-content: space-between;
     cursor: pointer;
   }
   .memberBox .member-img {
-    height: 8rem;
     overflow: hidden;
     margin-bottom: 1rem;
   }
   .member-img img {
+    /* 高度自适应 */
     width: 100%;
-    height: 100%;
   }
-  .memberBox .member-name {
+  .member-name {
     font-size: 1.5rem;
     color: #444444;
     text-align: center;
@@ -325,35 +309,69 @@ export default {
     color: #0055a2;
   }
 }
+
 /* 移动端 */
 @media screen and (max-width: 1000px) {
+  .researchTeamTitle {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+  }
+  .left-title {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #003266;
+  }
+  .researchTeamTitle .title-more {
+    color: #7db0cb;
+    font-size: 1.6rem;
+    cursor: pointer;
+  }
+
   /* 轮播图css */
   .swiper-container {
-    height: 18rem;
+    width: 100%;
+  }
+  /* 去掉最后一张图片的右浮动 */
+  .swiper-slide:last-child {
+    margin-right: 0;
+  }
+  .swiper-slide {
+    /* 宽度15%有6个,间隔2%在js的swiper中设置好了(且间隔有5个)*/
+    width: 15%;
+    text-align: center;
+    font-size: 1.8rem;
+    background: #fff;
   }
 
   .memberBox {
     display: flex;
-    width: 11rem;
     flex-direction: column;
-    justify-content: space-between;
     cursor: pointer;
-    margin: 0 auto;
   }
   .memberBox .member-img {
-    height: 13rem;
     overflow: hidden;
     margin-bottom: 1rem;
   }
   .member-img img {
+    /* 高度自适应 */
     width: 100%;
-    height: 100%;
   }
-  .memberBox .member-name {
-    font-size: 2rem;
+  .member-name {
+    font-size: 1.5rem;
     color: #444444;
     text-align: center;
     font-weight: bold;
+  }
+
+  .memberBox:hover .member-img img {
+    transform: scale(1.1);
+    transition: all 0.5s;
+  }
+  .memberBox:hover .member-name {
+    color: #0055a2;
   }
 }
 </style>

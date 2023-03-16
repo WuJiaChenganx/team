@@ -3,7 +3,7 @@
     <!-- default-active表示是当前选中的菜单的index -->
     <div class="profileContent">
       <div class="profileAside">
-        <div class="profileAsideTitle">团队简介</div>
+        <div class="profileAsideTitle">团队概况</div>
         <div class="projectAsideContent">
           <el-menu
             :default-active="this.$route.path"

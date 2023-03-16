@@ -2,26 +2,27 @@
   <div>
     <div class="firstContainer">
       <!-- 内容展示 -->
-      <div class="firstAllContent">
+      <div class="firstContainerContent">
         <!-- 图片展示的盒子 -->
-        <div class="firstPhotoContent">
+
+        <!-- <div class="firstPhotoContent">
           <activityPhoto></activityPhoto>
         </div>
         <div class="firstMessageContent">
           <newsList class="newsList"></newsList>
-        </div>
+        </div> -->
+        <news></news>
       </div>
     </div>
 
     <div class="secondContainer">
       <div class="secondAllContent">
         <div class="second-left">
-          <!-- hover问题没有解决 -->
-          <!-- 放的是学术动态 -->
           <academicTrend class="academicTrend"></academicTrend>
         </div>
         <div class="second-right">
           <notice class="notice"></notice>
+          <resourceSharing class="resourceSharing"></resourceSharing>
         </div>
       </div>
     </div>
@@ -47,15 +48,19 @@ import researchTeam from "./researchTeam.vue";
 import activityPhoto from "./activityPhoto.vue";
 import academicTrend from "./academicTrend.vue";
 import notice from "./notice.vue";
+import resourceSharing from "./resourceSharing.vue";
+import news from "./news.vue";
 export default {
   name: "home",
   components: {
-    activityPhoto,
-    newsList,
+    news,
+    // activityPhoto,
+    // newsList,
     academicTrend,
     notice,
-    friendlyLink,
+    resourceSharing,
     researchTeam,
+    friendlyLink,
   },
   data() {
     return {};
@@ -70,40 +75,20 @@ export default {
   padding: 0;
 }
 
-.firstContainer {
-  background: #deecf9;
-}
 /* PC端  */
 @media screen and (min-width: 1000px) {
+  /* 新闻背景蓝色 */
   .firstContainer {
+    background: #deecf9;
     margin-bottom: 2rem;
   }
-  .firstContainer .firstAllContent {
+  /* 新闻居中放内容 */
+  .firstContainer .firstContainerContent {
+    padding: 2rem 0;
     width: 75%;
-    height: 100%;
     margin: 0 auto;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
   }
 
-  .firstContainer > .firstAllContent .firstPhotoContent {
-    margin-top: 2rem;
-    width: 65%;
-  }
-
-  .firstContainer > .firstAllContent .firstMessageContent {
-    margin-top: 2rem;
-    width: 34%;
-  }
-  .newsList {
-    width: 100%;
-    margin-bottom: 1.5rem;
-    padding: 2rem;
-    border: 1px solid #d1e4f0;
-    border-radius: 4px;
-    box-sizing: border-box;
-  }
   .secondContainer {
     margin-bottom: 2rem;
   }
@@ -119,6 +104,8 @@ export default {
     width: 65%;
   }
   .second-right {
+    display: flex;
+    flex-direction: column;
     width: 33%;
   }
   .academicTrend {
@@ -129,6 +116,20 @@ export default {
     box-sizing: border-box;
   }
   .notice {
+    /* PC端设置首页通知的最大高度这样好对齐 */
+    max-height: 36rem;
+    overflow: hidden;
+    width: 100%;
+    padding: 2rem;
+    border: 1px solid #d1e4f0;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-bottom: 1rem;
+  }
+  .resourceSharing {
+    /* PC端设置首页资源共享自动拉伸占领空白的位置 */
+    flex: 1 1 auto;
+    overflow: hidden;
     width: 100%;
     padding: 2rem;
     border: 1px solid #d1e4f0;
@@ -154,6 +155,7 @@ export default {
     width: 33%;
   }
   .researchTeam {
+    height: 28rem;
     width: 100%;
     padding: 2rem;
     border: 1px solid #d1e4f0;
@@ -161,6 +163,7 @@ export default {
     box-sizing: border-box;
   }
   .friendlyLink {
+    height: 28rem;
     width: 100%;
     padding: 2rem;
     border: 1px solid #d1e4f0;
@@ -170,18 +173,21 @@ export default {
 }
 /* 移动端 */
 @media screen and (max-width: 1000px) {
-  .firstContainer .firstAllContent {
+  .firstContainer {
+    background: #deecf9;
+  }
+  .firstContainer .firstContainerContent {
     display: block;
     margin-bottom: 0.2rem;
   }
 
-  .firstContainer > .firstAllContent .firstPhotoContent {
+  .firstContainer > .firstContainerContent .firstPhotoContent {
     padding: 2rem 0;
     width: 90%;
     margin: 0 auto;
   }
 
-  .firstContainer > .firstAllContent .firstMessageContent {
+  .firstContainer > .firstContainerContent .firstMessageContent {
     width: 100%;
   }
   .newsList {
@@ -218,7 +224,15 @@ export default {
     border-radius: 4px;
     box-sizing: border-box;
   }
-
+  .resourceSharing {
+    /* PC端设置首页资源共享自动拉伸占领空白的位置 */
+    width: 100%;
+    padding: 1rem;
+    margin-bottom: 0.2rem;
+    border: 1px solid #d1e4f0;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
   /* 我是最后一个容器 */
   .lastContainer .lastAllContent {
     display: block;

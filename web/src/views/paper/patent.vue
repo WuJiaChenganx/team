@@ -3,7 +3,7 @@
     <!-- default-active表示是当前选中的菜单的index -->
     <div class="patentContent">
       <div class="patentAside">
-        <div class="patentAsideTitle">授权专利</div>
+        <div class="patentAsideTitle">论文论著</div>
         <div class="patentAsideContent">
           <el-menu
             :default-active="this.$route.path"

@@ -40,22 +40,11 @@ export default {
       start: 1,
       end: 5,
     };
-    // this.$http.get("/api/teamWeb/home/news").then((response) => {
-    //   // 用箭头函数可以继承this如果用回调函数的话需要在外面用that把this保存起来
-    //   this.movies = response.data.data;
-    //   console.log(this.movies[0]);
-    // });
     this.$http.get("/api/teamWeb/home/news", { params }).then((response) => {
       // 用箭头函数可以继承this如果用回调函数的话需要在外面用that把this保存起来
       this.movies = response.data.data;
       console.log(this.movies[0]);
     });
-    // this.$http
-    //   .get("https://autumnfish.cn/api/joke/list?num=6")
-    //   .then((response) => {
-    //     // 用箭头函数可以继承this如果用回调函数的话需要在外面用that把this保存起来
-    //     this.movies = response.data.data;
-    //   });
   },
   // 和created差不多,mounted只是在挂载(渲染)的时候调用
   mounted: function () {
