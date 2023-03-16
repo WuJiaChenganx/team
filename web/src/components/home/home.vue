@@ -3,18 +3,9 @@
     <div class="firstContainer">
       <!-- 内容展示 -->
       <div class="firstContainerContent">
-        <!-- 图片展示的盒子 -->
-
-        <!-- <div class="firstPhotoContent">
-          <activityPhoto></activityPhoto>
-        </div>
-        <div class="firstMessageContent">
-          <newsList class="newsList"></newsList>
-        </div> -->
-        <news></news>
+        <news class="news"></news>
       </div>
     </div>
-
     <div class="secondContainer">
       <div class="secondAllContent">
         <div class="second-left">
@@ -26,7 +17,6 @@
         </div>
       </div>
     </div>
-
     <div class="lastContainer">
       <div class="lastAllContent">
         <div class="last-left">
@@ -42,10 +32,8 @@
 </template>
 
 <script>
-import newsList from "./newsList.vue";
 import friendlyLink from "./friendlyLink.vue";
 import researchTeam from "./researchTeam.vue";
-import activityPhoto from "./activityPhoto.vue";
 import academicTrend from "./academicTrend.vue";
 import notice from "./notice.vue";
 import resourceSharing from "./resourceSharing.vue";
@@ -54,8 +42,6 @@ export default {
   name: "home",
   components: {
     news,
-    // activityPhoto,
-    // newsList,
     academicTrend,
     notice,
     resourceSharing,
@@ -181,21 +167,21 @@ export default {
     margin-bottom: 0.2rem;
   }
 
-  .firstContainer > .firstContainerContent .firstPhotoContent {
-    padding: 2rem 0;
+  .firstContainer > .firstContainerContent {
+    /* padding: 2rem 0;
     width: 90%;
-    margin: 0 auto;
+    margin: 0 auto; */
   }
 
   .firstContainer > .firstContainerContent .firstMessageContent {
-    width: 100%;
+    /* width: 100%; */
   }
   .newsList {
-    width: 100%;
+    /* width: 100%;
     padding: 1rem;
     border: 1px solid #d1e4f0;
     border-radius: 4px;
-    box-sizing: border-box;
+    box-sizing: border-box; */
   }
 
   .secondContainer .secondAllContent {
