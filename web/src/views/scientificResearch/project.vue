@@ -3,7 +3,7 @@
     <!-- default-active表示是当前选中的菜单的index -->
     <div class="projectContent">
       <div class="projectAside">
-        <div class="projectAsideTitle">科研项目</div>
+        <div class="projectAsideTitle">科研教学</div>
         <div class="projectAsideContent">
           <el-menu
             :default-active="this.$route.path"

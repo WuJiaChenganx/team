@@ -264,6 +264,7 @@ export default {
     font-size: 1.6rem;
     cursor: pointer;
   }
+
   /* 轮播图css */
   .swiper-container {
     width: 100%;

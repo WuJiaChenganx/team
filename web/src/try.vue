@@ -1,31 +1,17 @@
 <template>
   <!-- 这里的ID是绑定下面的css用的 -->
   <div id="app">
-    <navigationBar></navigationBar>
-    <router-view> </router-view>
-    <myFooter></myFooter>
+    <div>我是无敌的</div>
   </div>
 </template>
 
 <script>
-import navigationBar from "./components/public/navigationBar.vue";
-import myFooter from "./components/public/myFooter.vue";
-// 导入组件
 export default {
-  name: "app",
-
-  data() {
-    return {};
-  },
-  components: {
-    // 注册组件
-    navigationBar,
-    myFooter,
-  },
-  methods: {},
-  created() {
+  name: "App",
+  data() {},
+  // 生命周期函数,created在创建的时候会自动调用
+  created: function () {
     console.log("App组件被创建了");
-    // 试试图片在服务器上能不能用
     let params = {
       id: 1,
     };
@@ -35,6 +21,13 @@ export default {
         // 用箭头函数可以继承this如果用回调函数的话需要在外面用that把this保存起来
         console.log(response.data.data);
       });
+  },
+  // 和created差不多,mounted只是在挂载(渲染)的时候调用
+  mounted: function () {
+    // console.log("App被挂载完毕");
+  },
+  components: {
+    // 注册组件
   },
 };
 </script>

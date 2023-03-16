@@ -3,7 +3,7 @@
     <!-- default-active表示是当前选中的菜单的index -->
     <div class="bookContent">
       <div class="bookAside">
-        <div class="bookAsideTitle">出版专著</div>
+        <div class="bookAsideTitle">论文论著</div>
         <div class="bookAsideContent">
           <el-menu
             :default-active="this.$route.path"
@@ -41,17 +41,22 @@
         </div>
         <div class="bookItem">
           <div
-            class="book-row"
-            v-for="(detailItem, detailIndex) in showPageContent"
+            class="detailItem"
+            v-for="(detailItem, detailIndex) in books"
             :key="detailIndex"
           >
-            <div class="book-base">
-              <i class="el-icon-notebook-1"></i>
-              <div class="book-name">
-                {{ detailItem.detail }}
-              </div>
+            <div class="detailItemBookName">
+              书籍名称: {{ detailItem.title }}
             </div>
-            <div class="book-time">{{ detailItem.time }}</div>
+            <div class="detailItemBookTime">
+              出版日期: {{ detailItem.date }}
+            </div>
+            <div class="detailItemBookAuthor">
+              作者: {{ detailItem.author }}
+            </div>
+            <div class="detailItemBookCover">
+              <img :src="detailItem.pictureUrl" alt="" />
+            </div>
           </div>
         </div>
         <div class="paging">
@@ -60,7 +65,7 @@
             background
             layout="prev, pager, next"
             @current-change="handleCurrentChange"
-            :page-size="10"
+            :page-size="5"
             :total="total_number"
             :current-page="current_index"
           >
@@ -72,6 +77,7 @@
 </template>
 
 <script>
+import { getBookURL } from "@/api/paper/book";
 export default {
   data() {
     return {
@@ -82,21 +88,46 @@ export default {
         { name: "授权专利", path: "/paper/patent" },
         { name: "出版专著", path: "/paper/book" },
       ],
-      showAllContent: [
-        { detail: "书本1", time: "2000-06-25" },
-        { detail: "书本2", time: "2000-06-25" },
-        { detail: "书本3", time: "2000-06-25" },
-        { detail: "书本4", time: "2000-06-25" },
-        { detail: "书本5", time: "2000-06-25" },
-        { detail: "书本6", time: "2000-06-25" },
-        { detail: "书本7", time: "2000-06-25" },
-        { detail: "书本8", time: "2000-06-25" },
-        { detail: "书本9", time: "2000-06-25" },
-        { detail: "书本10", time: "2000-06-25" },
-        { detail: "书本11", time: "2000-06-25" },
-        { detail: "书本12", time: "2000-06-25" },
-        { detail: "书本13", time: "2000-06-25" },
+      books: [
+        {
+          title:
+            "FGOR: Flow-Guided Opportunistic Routing for Intra-body Nanonetworks, IEEE Internet of Things Journal, 2022, DOI: 10.1109/JIOT.20 22. 3182142(中科院1区，JCR Q1区，IF：9.471）",
+          author: "Yao, X. W., Chen, Y. W., Wu, Y., Zhao, K., & Jornet, J. M.",
+          date: "2022-09-21",
+          publisher: null,
+          pictureUrl: require("../../assets/images/book/book1.jpg"),
+        },
+        {
+          title:
+            "Joint Optimization of Latency and Energy Consumption for Mobile Edge Computing Based Proximity Detection in Road Networks”, China Communications, 2022",
+          author: "Zhao, T., Liu, Y., Shou, G., & Yao, X",
+          date: "2022-04-19",
+          publisher: null,
+          pictureUrl: require("../../assets/images/book/book2.jpg"),
+        },
+        {
+          title: "智能解密：智能+场景应用案例解析",
+          author: "姚信威",
+          date: "2021-04-01",
+          publisher: null,
+          pictureUrl: require("../../assets/images/book/book3.jpg"),
+        },
+        {
+          title: "电磁纳米网络-基础理论及关键技术",
+          author: "姚信威",
+          date: "2021-01-01",
+          publisher: null,
+          pictureUrl: require("../../assets/images/book/book3.jpg"),
+        },
+        {
+          title: "未来服务——生活服务业的科技化变革",
+          author: "姚信威",
+          date: "2021-01-01",
+          publisher: null,
+          pictureUrl: require("../../assets/images/book/book3.jpg"),
+        },
       ],
+      // 需要展示页面数据
       showPageContent: [],
       // 总共要展示的数量
       total_number: 10,
@@ -105,20 +136,25 @@ export default {
     };
   },
   created() {
-    this.total_number = this.showAllContent.length;
-    this.showPageContent = this.showAllContent.slice(
-      (this.current_index - 1) * 10,
-      this.current_index * 10
-    );
+    this.getBookList();
   },
   methods: {
+    // async和await用于同步,就是按顺序执行
+    async getBookList() {
+      let params = {
+        // 定义参数
+        start: (this.current_index - 1) * 5,
+        end: this.current_index * 5,
+      };
+      await getBookURL(params).then((res) => {
+        this.books = res.data;
+        this.total_number = res.sum;
+      });
+    },
     handleCurrentChange(val) {
       // 传入的val是当前页的页码
       this.current_index = val;
-      this.showPageContent = this.showAllContent.slice(
-        (val - 1) * 10,
-        val * 10
-      );
+      this.getBookList();
     },
   },
 };
@@ -190,35 +226,30 @@ export default {
   }
   /* 设置块和分页的距离 */
   .bookItem {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 3rem;
     min-height: 600px;
+    padding-bottom: 2rem;
   }
 
-  .book-row {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    cursor: pointer;
-    padding: 1.5rem 0;
-    border-bottom: 1px solid #dfdfdf;
-  }
-  .book-base {
-    display: flex;
-    flex-direction: row;
-    font-size: 3rem;
-    line-height: 3rem;
-  }
-  .book-name {
+  .detailItem {
+    word-wrap: break-word;
+    word-break: break-all;
+    width: 100%;
+    height: auto;
+    margin-top: 3rem;
     text-align: left;
-    margin-left: 0.5rem;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 1;
-    overflow: hidden;
-    color: #333333;
-    height: 3rem;
+    line-height: 3rem;
+    font-size: 1.8rem;
+    font-weight: bold;
+  }
+  .detailItemBookName {
+    font-size: 2rem;
+  }
+  .detailItemBookCover {
+    margin-top: 1rem;
+    width: 100%;
+  }
+  .detailItemBookCover img {
+    width: 50%;
   }
   /* 设置分页和底部的距离 */
   .paging {
@@ -279,161 +310,34 @@ export default {
   }
   /* 设置块和分页的距离 */
   .bookItem {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 3rem;
     min-height: 450px;
+    padding-bottom: 2rem;
   }
 
-  .book-row {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    cursor: pointer;
-    padding: 1.5rem 0;
-    border-bottom: 1px solid #dfdfdf;
-  }
-  .book-base {
-    display: flex;
-    flex-direction: row;
-    font-size: 3rem;
-    line-height: 3rem;
-  }
-  .book-name {
+  .detailItem {
+    word-wrap: break-word;
+    word-break: break-all;
+    width: 100%;
+    height: auto;
+    margin-top: 3rem;
     text-align: left;
-    margin-left: 0.5rem;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 1;
-    overflow: hidden;
-    color: #333333;
-    height: 3rem;
+    line-height: 3rem;
+    font-size: 1.8rem;
+    font-weight: bold;
+  }
+  .detailItemBookName {
+    font-size: 2rem;
+  }
+  .detailItemBookCover {
+    margin-top: 1rem;
+    width: 100%;
+  }
+  .detailItemBookCover img {
+    width: 100%;
   }
   /* 设置分页和底部的距离 */
   .paging {
     margin-bottom: 3rem;
   }
-}
-/* .book {
-  padding: 3rem 0;
-  background: url(../../assets/images/background/contentBackground.jpg)
-    no-repeat;
-}
-
-.bookContent {
-  width: 75%;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
-
-.bookAside {
-  width: 25%;
-  display: flex;
-  flex-direction: column;
-}
-
-.asideTitle {
-  background: url(../../assets/images/background/zryy-menu-t-bg.png) no-repeat;
-  border-radius: 0.6rem;
-  background-size: cover !important;
-  font-weight: bold;
-  color: #fff;
-  font-size: 2.2rem;
-  line-height: 3rem;
-  height: 3rem; */
-/* 扩充背景 */
-/* padding: 2rem 3rem; */
-/* 下面的子菜单距离 */
-/* margin-bottom: 1rem;
-}
-
-.asideContent {
-  border: 1px solid #eee;
-} */
-
-/* .title {
-  float: left;
-  color: #333333;
-  font-weight: bold;
-  font-size: 25px;
-}
-
-.breadCrumb {
-  font-weight: bold;
-  font-size: 20px;
-  text-align: left;
-  cursor: pointer;
-  padding: 0 20px;
-  border-bottom: 1px solid #eee;
-}
-
-.el-menu-item.is-active {
-  background: #008cd6 !important;
-}
-
-.bookDetail {
-  float: left;
-  position: relative;
-  padding: 0 15px;
-  width: 73%;
-  height: 520px;
-  background-color: #fff;
-  border: 1px solid #dfdfdf;
-  padding-bottom: 30px;
-}
-
-.bookTitle {
-  height: 30px;
-  border-bottom: 1px solid #dfdfdf;
-  padding-top: 32px;
-  padding-bottom: 20px;
-}
-
-.book-row {
-  position: relative;
-  width: 100%;
-  box-sizing: border-box;
-  height: 40px;
-  padding: 10px;
-  padding-left: 20px;
-  border-bottom: 1px solid #dfdfdf;
-}
-
-.book-row::before {
-  position: absolute;
-  content: "";
-  width: 6px;
-  height: 6px;
-  background: #0055a2;
-  border-radius: 50%;
-  left: 7px;
-  top: 20px;
-}
-
-.book-profile {
-  width: 70%;
-  float: left;
-  text-align: left;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 1;
-  overflow: hidden;
-  color: #333333;
-  font-size: 17px;
-}
-
-.book-time {
-  float: right;
-} */
-
-.paging {
-  /* position: absolute; */
-  /* 起点移动到了参照物的50%位置 */
-  /* left: 50%;
-  bottom: 3px; */
-  /* 上面注释掉的可以用下面的来替代 位移宽度和高度的一半*/
-  /* transform: translate(-50%, 0); */
 }
 </style>

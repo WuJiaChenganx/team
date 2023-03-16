@@ -86,7 +86,7 @@
 </template>
 
 <script>
-import { getDataSetURL } from "@/api/dataSet";
+import { getDataSetURL } from "@/api/resourceSharing/dataSet";
 export default {
   data() {
     return {

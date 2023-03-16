@@ -4,12 +4,14 @@
       <!-- 内容展示 -->
       <div class="firstAllContent">
         <!-- 图片展示的盒子 -->
-        <div class="firstPhotoContent">
+
+        <!-- <div class="firstPhotoContent">
           <activityPhoto></activityPhoto>
         </div>
         <div class="firstMessageContent">
           <newsList class="newsList"></newsList>
-        </div>
+        </div> -->
+        <news></news>
       </div>
     </div>
 
@@ -47,11 +49,13 @@ import activityPhoto from "./activityPhoto.vue";
 import academicTrend from "./academicTrend.vue";
 import notice from "./notice.vue";
 import resourceSharing from "./resourceSharing.vue";
+import news from "./news.vue";
 export default {
   name: "home",
   components: {
-    activityPhoto,
-    newsList,
+    news,
+    // activityPhoto,
+    // newsList,
     academicTrend,
     notice,
     resourceSharing,
@@ -75,10 +79,10 @@ export default {
 @media screen and (min-width: 1000px) {
   .firstContainer {
     background: #deecf9;
-
     margin-bottom: 2rem;
   }
   .firstContainer .firstAllContent {
+    padding: 2rem 0;
     width: 75%;
     height: 100%;
     margin: 0 auto;
@@ -87,23 +91,6 @@ export default {
     justify-content: space-between;
   }
 
-  .firstContainer > .firstAllContent .firstPhotoContent {
-    margin-top: 2rem;
-    width: 65%;
-  }
-
-  .firstContainer > .firstAllContent .firstMessageContent {
-    margin-top: 2rem;
-    width: 34%;
-  }
-  .newsList {
-    width: 100%;
-    margin-bottom: 1.5rem;
-    padding: 1rem;
-    border: 1px solid #d1e4f0;
-    border-radius: 4px;
-    box-sizing: border-box;
-  }
   .secondContainer {
     margin-bottom: 2rem;
   }
