@@ -2,7 +2,7 @@
   <div>
     <div class="firstContainer">
       <!-- 内容展示 -->
-      <div class="firstAllContent">
+      <div class="firstContainerContent">
         <!-- 图片展示的盒子 -->
 
         <!-- <div class="firstPhotoContent">
@@ -77,18 +77,16 @@ export default {
 
 /* PC端  */
 @media screen and (min-width: 1000px) {
+  /* 新闻背景蓝色 */
   .firstContainer {
     background: #deecf9;
     margin-bottom: 2rem;
   }
-  .firstContainer .firstAllContent {
+  /* 新闻居中放内容 */
+  .firstContainer .firstContainerContent {
     padding: 2rem 0;
     width: 75%;
-    height: 100%;
     margin: 0 auto;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
   }
 
   .secondContainer {
@@ -178,18 +176,18 @@ export default {
   .firstContainer {
     background: #deecf9;
   }
-  .firstContainer .firstAllContent {
+  .firstContainer .firstContainerContent {
     display: block;
     margin-bottom: 0.2rem;
   }
 
-  .firstContainer > .firstAllContent .firstPhotoContent {
+  .firstContainer > .firstContainerContent .firstPhotoContent {
     padding: 2rem 0;
     width: 90%;
     margin: 0 auto;
   }
 
-  .firstContainer > .firstAllContent .firstMessageContent {
+  .firstContainer > .firstContainerContent .firstMessageContent {
     width: 100%;
   }
   .newsList {

@@ -9,12 +9,12 @@
         height="40rem"
       >
         <el-carousel-item
-          v-for="(item, index) in imgArr"
-          :key="index"
+        v-for="(newsItem,newsItemIndex) in newsList"
+          :key="newsItemIndex"
           @click.native="goTo('/activity/newFlash')"
           style="cursor: pointer"
         >
-          <img :src="item" alt="" />
+          <img :src="newsItem.picUrl" alt="" />
         </el-carousel-item>
       </el-carousel>
     </div>
@@ -28,8 +28,8 @@
         <div
           class="news-row"
           style="cursor: pointer"
-          v-for="newsItem in newsList"
-          :key="newsItem.id"
+          v-for="(newsItem,newsItemIndex) in newsList"
+          :key="newsItemIndex"
           @click="gotoDetail(newsItem)"
         >
           <div class="news-date">
@@ -46,17 +46,9 @@
 export default {
   data() {
     return {
-      imgArr: [
-        require("../../assets/images/activity/activity1.png"),
-        require("../../assets/images/activity/activity2.png"),
-        require("../../assets/images/activity/activity3.png"),
-        require("../../assets/images/activity/activity4.png"),
-        require("../../assets/images/activity/activity5.png"),
-      ],
       // 要展示的新闻信息(加载前还要处理过)
       newsList: [
         {
-          id: 0,
           day: "18",
           date: "2023-03",
           title: "课题组李泽康同学荣获国家奖学金硕士奖",
@@ -65,7 +57,6 @@ export default {
           picUrl: require("../../assets/images/activity/activity1.png"),
         },
         {
-          id: 1,
           day: "18",
           date: "2023-03",
           title: "冯洋老师荣获钱伟长中文信息处理科学技术奖",
@@ -74,7 +65,6 @@ export default {
           picUrl: require("../../assets/images/activity/activity2.png"),
         },
         {
-          id: 2,
           day: "18",
           date: "2023-03",
           title: "NLP课题组2021年中央广播电视塔秋游行",
@@ -83,7 +73,6 @@ export default {
           picUrl: require("../../assets/images/activity/activity3.png"),
         },
         {
-          id: 3,
           day: "18",
           date: "2023-03",
           title: "NLP课题组举行2020年年会",
@@ -92,7 +81,6 @@ export default {
           picUrl: require("../../assets/images/activity/activity4.png"),
         },
         {
-          id: 4,
           day: "18",
           date: "2023-03",
           title: "NLP课题组2021年春游记",
