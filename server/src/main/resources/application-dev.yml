@@ -4,11 +4,12 @@ server:
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/yxw?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC
+    url: jdbc:mysql://localhost:3306/team?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC
     username: root
     # password: 123456
     # password: Zhanghc2018
     password: wjcbscb520
+    #password: ltp@12356
 #    url: jdbc:mysql://47.96.147.242:3306/hlg_wf?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC
 #    username: hlgUser
 #    password: hlg!1@2#3

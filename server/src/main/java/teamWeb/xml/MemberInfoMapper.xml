@@ -29,7 +29,7 @@
         WHERE m_class = "${memberType}"
     </select>
     <select id="memberDetail" resultType="teamWeb.teamSurvey.pojo.MemberBO">
-        SELECT id, name, m_class AS memberType, email, research AS direction
+        SELECT id, name, m_class AS memberType, email, research AS direction, pictureUrl
         FROM member
         <where>
             id = ${id}
@@ -48,5 +48,6 @@
         <where>
             member_id= ${memberId}
         </where>
+        ORDER BY e.time DESC
     </select>
 </mapper>

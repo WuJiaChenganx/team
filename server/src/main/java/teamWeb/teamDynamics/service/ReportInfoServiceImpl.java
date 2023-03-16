@@ -9,6 +9,7 @@ import teamWeb.teamDynamics.pojo.AllNewsBO;
 import teamWeb.teamDynamics.pojo.NoticeBO;
 import teamWeb.teamDynamics.pojo.ReportBO;
 import teamWeb.teamSurvey.pojo.MemberBO;
+import teamWeb.utils.Address;
 import teamWeb.utils.BeanUtil;
 
 import java.util.List;
@@ -104,10 +105,12 @@ public class ReportInfoServiceImpl extends ServiceImpl<ReportMapper, ReportDO> i
                 reportBOList) {
             Integer reportId = reportBO.getId();
             reportBO.setFileUrls(reportMapper.allFileUrl(reportId));
+            reportBO.setPictureUrl(Address.rootAddress()+reportBO.getPictureUrl());
             reportBO.setPicUrl(reportBO.getPictureUrl());
             reportBO.setDetail(reportBO.getText());
             reportBO.setDay(reportBO.getDate().split("-")[2]);
             reportBO.setDate(reportBO.getDate().substring(0, 7));
+
         }
         return reportBOList;
     }

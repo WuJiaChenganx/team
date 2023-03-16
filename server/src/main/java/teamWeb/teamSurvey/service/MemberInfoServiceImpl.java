@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import teamWeb.teamSurvey.entity.MemberDO;
 import teamWeb.teamSurvey.mapper.MemberInfoMapper;
 import teamWeb.teamSurvey.pojo.MemberBO;
+import teamWeb.utils.Address;
 import teamWeb.utils.BeanUtil;
 
 import java.util.List;
@@ -28,7 +29,7 @@ public class MemberInfoServiceImpl extends ServiceImpl<MemberInfoMapper, MemberD
             Integer memberId = memberBO.getId();
             memberBO.setPaperList(memberInfoMapper.allPaper(memberId));
             memberBO.setEducationList(memberInfoMapper.allEducation(memberId));
-            memberBO.setPicUrl(memberBO.getPictureUrl());
+            memberBO.setPicUrl(Address.rootAddress() + memberBO.getPictureUrl());
         }
 
         return memberBOList;
@@ -59,7 +60,15 @@ public class MemberInfoServiceImpl extends ServiceImpl<MemberInfoMapper, MemberD
     @Override
     public List<MemberBO> allMember(int start, int end, String memberType) {
         List<MemberDO> memberDOList = memberInfoMapper.allMember(start, end, memberType);
-        return BeanUtil.convert(memberDOList, MemberBO.class);
+        List<MemberBO> memberBOList = BeanUtil.convert(memberDOList, MemberBO.class);
+        for (MemberBO memberBO:
+                memberBOList) {
+            Integer memberId = memberBO.getId();
+            memberBO.setPaperList(memberInfoMapper.allPaper(memberId));
+            memberBO.setEducationList(memberInfoMapper.allEducation(memberId));
+            memberBO.setPicUrl(Address.rootAddress() + memberBO.getPictureUrl());
+        }
+        return memberBOList;
     }
 
     @Override
