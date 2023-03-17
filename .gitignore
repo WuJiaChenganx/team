@@ -22,3 +22,5 @@ server/.idea
 *.sln
 *.sw?
 /server/target
+server/src/main/resources/application-dev.yml
+server/src/main/resources/application-dev.yml

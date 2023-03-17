@@ -7,6 +7,8 @@ import teamWeb.pubications.entity.OutcomeInfo;
 import teamWeb.pubications.mapper.OutcomeInfoMapper;
 import teamWeb.pubications.pojo.AllMonographBO;
 import teamWeb.pubications.pojo.AllPaperBO;
+import teamWeb.teamSurvey.pojo.MemberBO;
+import teamWeb.utils.Address;
 import teamWeb.utils.BeanUtil;
 
 import java.util.List;
@@ -29,7 +31,15 @@ public class OutcomeInfoServiceImpl extends ServiceImpl<OutcomeInfoMapper, Outco
 
     @Override
     public List<AllMonographBO> monographDetail(int start, int end) {
-        return BeanUtil.convert(outcomeInfoMapper.monographDetail(start,end),AllMonographBO.class);
+        List<AllMonographBO> allMonographBOList = BeanUtil.convert(outcomeInfoMapper.monographDetail(start,end),AllMonographBO.class);
+
+        for (AllMonographBO allMonographBO:
+                allMonographBOList) {
+            if(!allMonographBO.getPictureUrl().equals("")) {
+                allMonographBO.setPictureUrl(Address.rootAddress() + allMonographBO.getPictureUrl());
+            }
+        }
+        return allMonographBOList;
     }
 
     @Override
