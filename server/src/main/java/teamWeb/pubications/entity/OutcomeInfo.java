@@ -22,6 +22,8 @@ public class OutcomeInfo implements Serializable {
     private String pictureUrl;
     //论文链接
     private String url;
+    private String detail;
+    private String keyword;
 
     public Integer getId() {
         return id;
@@ -85,5 +87,21 @@ public class OutcomeInfo implements Serializable {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public String getDetail() {
+        return detail;
+    }
+
+    public void setDetail(String detail) {
+        this.detail = detail;
+    }
+
+    public String getKeyword() {
+        return keyword;
+    }
+
+    public void setKeyword(String keyword) {
+        this.keyword = keyword;
     }
 }

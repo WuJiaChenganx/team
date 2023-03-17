@@ -3,7 +3,7 @@
 
 <mapper namespace="teamWeb.pubications.mapper.OutcomeInfoMapper">
     <select id="paperDetail" resultType="teamWeb.pubications.entity.OutcomeInfo">
-        select `id`,`title`,`date`,`url`,`pictureUrl`,`p_class` AS pClass,`detail`
+        select `id`,`title`,`date`,`url`,`pictureUrl`,`p_class` AS pClass,`detail`,`keyword`
         from outcome
         <where>
             p_class = "论文"
