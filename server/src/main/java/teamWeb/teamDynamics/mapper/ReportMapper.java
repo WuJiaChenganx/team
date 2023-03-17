@@ -29,8 +29,7 @@ public interface ReportMapper extends BaseMapper<ReportDO> {
     void delete(int id);
 
     List<ReportDO> getNews(int id);
-
-    List<ReportDO> reportDetail(Integer id);
+    ReportDO reportDetail(Integer id);
 
     List<NoticeFile> allFileUrl(Integer reportId);
 

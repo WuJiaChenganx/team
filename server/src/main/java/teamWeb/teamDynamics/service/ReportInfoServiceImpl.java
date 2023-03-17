@@ -53,7 +53,10 @@ public class ReportInfoServiceImpl extends ServiceImpl<ReportMapper, ReportDO> i
         List<NoticeBO> noticeBOList = BeanUtil.convert(reportMapper.media(start,end-start),NoticeBO.class);
         for (NoticeBO noticeBO:
                 noticeBOList) {
-            noticeBO.setDay(noticeBO.getDate().split("-")[2]);
+            List<String> times = Arrays.asList(noticeBO.getDate().split("-"));
+            if (times.size()>=3) {
+                noticeBO.setDay(noticeBO.getDate().split("-")[2]);
+            }
             noticeBO.setDate(noticeBO.getDate().substring(0, 7));
             noticeBO.setDetail(noticeBO.getText());
             noticeBO.setText("");
@@ -99,26 +102,22 @@ public class ReportInfoServiceImpl extends ServiceImpl<ReportMapper, ReportDO> i
     }
 
     @Override
-    public List<ReportBO> getNews(Integer id) {
-        List<ReportDO> reportDOList = reportMapper.reportDetail(id);
-        List<ReportBO> reportBOList = BeanUtil.convert(reportDOList,ReportBO.class);
-        for (ReportBO reportBO:
-                reportBOList) {
-            Integer reportId = reportBO.getId();
-            reportBO.setFileUrls(reportMapper.allFileUrl(reportId));
-            List<String> picList = Arrays.asList(reportBO.getPictureUrl().split(";"));
-            for (String pic:
-                 picList) {
-                pic = Address.rootAddress()+pic;
-            }
-            reportBO.setPicUrl(picList);
-
-            reportBO.setDetail(reportBO.getText());
-            reportBO.setDay(reportBO.getDate().split("-")[2]);
-            reportBO.setDate(reportBO.getDate().substring(0, 7));
-
+    public ReportBO getNews(Integer id) {
+        ReportDO reportDO = reportMapper.reportDetail(id);
+        ReportBO reportBO = BeanUtil.convert(reportDO,ReportBO.class);
+        Integer reportId = reportBO.getId();
+        reportBO.setFileUrls(reportMapper.allFileUrl(reportId));
+        List<String> picList = Arrays.asList(reportBO.getPictureUrl().split(";"));
+        for (int i = 0; i < picList.size(); i++) {
+            picList.set(i,Address.rootAddress()+picList.get(i));
         }
-        return reportBOList;
+        reportBO.setPicUrl(picList);
+
+        reportBO.setDetail(reportBO.getText());
+        reportBO.setDay(reportBO.getDate().split("-")[2]);
+        reportBO.setDate(reportBO.getDate().substring(0, 7));
+
+        return reportBO;
     }
 
     @Override

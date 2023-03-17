@@ -45,7 +45,7 @@ public class TeamDynamicsController {
 
     @GetMapping(value = "/require-detail")
     public APIResponse requireDetail(@RequestParam(value="id") Integer id){
-        List<ReportBO> getNews = reportInfoService.getNews(id);
+        ReportBO getNews = reportInfoService.getNews(id);
         return APIResponse.success(getNews);
     }
 }
