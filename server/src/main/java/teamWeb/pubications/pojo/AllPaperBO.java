@@ -4,8 +4,26 @@ public class AllPaperBO {
     private Integer id;
     private String title;
     private String date;
-
+    private String detail;
     private String url;
+    private Integer number;
+
+
+    public String getDetail() {
+        return detail;
+    }
+
+    public void setDetail(String detail) {
+        this.detail = detail;
+    }
+
+    public Integer getNumber() {
+        return number;
+    }
+
+    public void setNumber(Integer number) {
+        this.number = number;
+    }
 
     public String getUrl() {
         return url;

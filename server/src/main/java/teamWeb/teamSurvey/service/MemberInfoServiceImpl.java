@@ -38,7 +38,7 @@ public class MemberInfoServiceImpl extends ServiceImpl<MemberInfoMapper, MemberD
 
     @Override
     public List<MemberDO> getHomeMember(int start, int end) {
-        return memberInfoMapper.getHomeMember(start,end);
+        return memberInfoMapper.getHomeMember(start,end-start);
     }
 
 
@@ -59,7 +59,7 @@ public class MemberInfoServiceImpl extends ServiceImpl<MemberInfoMapper, MemberD
 
     @Override
     public List<MemberBO> allMember(int start, int end, String memberType) {
-        List<MemberDO> memberDOList = memberInfoMapper.allMember(start, end, memberType);
+        List<MemberDO> memberDOList = memberInfoMapper.allMember(start, end-start, memberType);
         List<MemberBO> memberBOList = BeanUtil.convert(memberDOList, MemberBO.class);
         for (MemberBO memberBO:
                 memberBOList) {

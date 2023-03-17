@@ -13,18 +13,10 @@ public class ReportBO {
     private String text;
     private String rClass;
     private String detail;
-    private String picUrl;
+    private List<String> picUrl;
     private String day;
     private List<NoticeFile> fileUrls;
     private String paperName;
-
-    public String getPaperName() {
-        return paperName;
-    }
-
-    public void setPaperName(String paperName) {
-        this.paperName = paperName;
-    }
 
     public Integer getId() {
         return id;
@@ -32,14 +24,6 @@ public class ReportBO {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public List<NoticeFile> getFileUrls() {
-        return fileUrls;
-    }
-
-    public void setFileUrls(List<NoticeFile> fileUrls) {
-        this.fileUrls = fileUrls;
     }
 
     public String getDate() {
@@ -98,11 +82,11 @@ public class ReportBO {
         this.detail = detail;
     }
 
-    public String getPicUrl() {
+    public List<String> getPicUrl() {
         return picUrl;
     }
 
-    public void setPicUrl(String picUrl) {
+    public void setPicUrl(List<String> picUrl) {
         this.picUrl = picUrl;
     }
 
@@ -112,5 +96,21 @@ public class ReportBO {
 
     public void setDay(String day) {
         this.day = day;
+    }
+
+    public List<NoticeFile> getFileUrls() {
+        return fileUrls;
+    }
+
+    public void setFileUrls(List<NoticeFile> fileUrls) {
+        this.fileUrls = fileUrls;
+    }
+
+    public String getPaperName() {
+        return paperName;
+    }
+
+    public void setPaperName(String paperName) {
+        this.paperName = paperName;
     }
 }

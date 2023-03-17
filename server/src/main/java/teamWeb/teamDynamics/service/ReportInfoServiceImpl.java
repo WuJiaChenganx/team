@@ -12,6 +12,7 @@ import teamWeb.teamSurvey.pojo.MemberBO;
 import teamWeb.utils.Address;
 import teamWeb.utils.BeanUtil;
 
+import java.util.Arrays;
 import java.util.List;
 
 
@@ -23,7 +24,7 @@ public class ReportInfoServiceImpl extends ServiceImpl<ReportMapper, ReportDO> i
 
     @Override
     public List<NoticeBO> teamDynamicsDetail(int start, int end) {
-        List<NoticeBO> noticeBOList = BeanUtil.convert(reportMapper.teamDynamic(start,end),NoticeBO.class);
+        List<NoticeBO> noticeBOList = BeanUtil.convert(reportMapper.teamDynamic(start,end-start),NoticeBO.class);
         for (NoticeBO noticeBO:
                 noticeBOList) {
             noticeBO.setDay(noticeBO.getDate().split("-")[2]);
@@ -36,7 +37,7 @@ public class ReportInfoServiceImpl extends ServiceImpl<ReportMapper, ReportDO> i
 
     @Override
     public List<NoticeBO> noticeDetail(int start, int end) {
-        List<NoticeBO> noticeBOList = BeanUtil.convert(reportMapper.notice(start,end),NoticeBO.class);
+        List<NoticeBO> noticeBOList = BeanUtil.convert(reportMapper.notice(start,end-start),NoticeBO.class);
         for (NoticeBO noticeBO:
                 noticeBOList) {
             noticeBO.setDay(noticeBO.getDate().split("-")[2]);
@@ -49,7 +50,7 @@ public class ReportInfoServiceImpl extends ServiceImpl<ReportMapper, ReportDO> i
 
     @Override
     public List<NoticeBO> mediaDetail(int start, int end) {
-        List<NoticeBO> noticeBOList = BeanUtil.convert(reportMapper.media(start,end),NoticeBO.class);
+        List<NoticeBO> noticeBOList = BeanUtil.convert(reportMapper.media(start,end-start),NoticeBO.class);
         for (NoticeBO noticeBO:
                 noticeBOList) {
             noticeBO.setDay(noticeBO.getDate().split("-")[2]);
@@ -62,22 +63,22 @@ public class ReportInfoServiceImpl extends ServiceImpl<ReportMapper, ReportDO> i
 
     @Override
     public List<ReportDO> consultDetail(int start, int end) {
-        return reportMapper.consult(start,end);
+        return reportMapper.consult(start,end-start);
     }
 
     @Override
     public List<ReportDO> meetDetail(int start, int end) {
-        return reportMapper.getMeet(start,end);
+        return reportMapper.getMeet(start,end-start);
     }
 
     @Override
     public List<ReportDO> newsDetail(int start, int end) {
-        return reportMapper.getNewsDetail(start,end);
+        return reportMapper.getNewsDetail(start,end-start);
     }
 
     @Override
     public List<AllNewsBO> allNews(int start, int end) {
-        List<ReportDO> reportDOList = reportMapper.allNews(start, end);
+        List<ReportDO> reportDOList = reportMapper.allNews(start, end-start);
 
         return BeanUtil.convert(reportDOList, AllNewsBO.class);
     }
@@ -105,8 +106,13 @@ public class ReportInfoServiceImpl extends ServiceImpl<ReportMapper, ReportDO> i
                 reportBOList) {
             Integer reportId = reportBO.getId();
             reportBO.setFileUrls(reportMapper.allFileUrl(reportId));
-            reportBO.setPictureUrl(Address.rootAddress()+reportBO.getPictureUrl());
-            reportBO.setPicUrl(reportBO.getPictureUrl());
+            List<String> picList = Arrays.asList(reportBO.getPictureUrl().split(";"));
+            for (String pic:
+                 picList) {
+                pic = Address.rootAddress()+pic;
+            }
+            reportBO.setPicUrl(picList);
+
             reportBO.setDetail(reportBO.getText());
             reportBO.setDay(reportBO.getDate().split("-")[2]);
             reportBO.setDate(reportBO.getDate().substring(0, 7));

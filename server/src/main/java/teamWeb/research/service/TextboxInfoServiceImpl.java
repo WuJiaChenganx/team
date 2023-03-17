@@ -28,13 +28,13 @@ public class TextboxInfoServiceImpl extends ServiceImpl<TextboxInfoMapper, Textb
     @Override
     public List<ProjectBO> projectDetail(int start, int end) {
 
-        return BeanUtil.convert(textboxInfoMapper.getProject(start,end),ProjectBO.class);
+        return BeanUtil.convert(textboxInfoMapper.getProject(start,end-start),ProjectBO.class);
     }
 
 
     @Override
     public List<DirectionsDTO> direDetail(int start, int end) {
-        List<DirectionsBO> directionsBOList = BeanUtil.convert(textboxInfoMapper.getDire(start,end),DirectionsBO.class);
+        List<DirectionsBO> directionsBOList = BeanUtil.convert(textboxInfoMapper.getDire(start,end-start),DirectionsBO.class);
 
         for (DirectionsBO directionsBO:
                 directionsBOList) {
@@ -47,7 +47,7 @@ public class TextboxInfoServiceImpl extends ServiceImpl<TextboxInfoMapper, Textb
 
     @Override
     public List<PlatformDTO> platformDetail(int start, int end) {
-        List<PlatformBO> platformBOList = BeanUtil.convert(textboxInfoMapper.getPlatform(start,end),PlatformBO.class);
+        List<PlatformBO> platformBOList = BeanUtil.convert(textboxInfoMapper.getPlatform(start,end-start),PlatformBO.class);
         for (PlatformBO platformBO:
                 platformBOList) {
             platformBO.setInfoTitle(platformBO.getTitle());
@@ -71,7 +71,7 @@ public class TextboxInfoServiceImpl extends ServiceImpl<TextboxInfoMapper, Textb
 
     @Override
     public List<ResourceBO> emulationDetail(int start, int end) {
-        List<ResourceBO> resourceBOList = BeanUtil.convert(textboxInfoMapper.getEmulation(start,end),ResourceBO.class);
+        List<ResourceBO> resourceBOList = BeanUtil.convert(textboxInfoMapper.getEmulation(start,end-start),ResourceBO.class);
         for (ResourceBO resourceBO:
                 resourceBOList) {
             resourceBO.setDetail(resourceBO.getText());
@@ -82,7 +82,7 @@ public class TextboxInfoServiceImpl extends ServiceImpl<TextboxInfoMapper, Textb
 
     @Override
     public List<ResourceBO> dataDetail(int start, int end) {
-        List<ResourceBO> resourceBOList = BeanUtil.convert(textboxInfoMapper.getData(start,end),ResourceBO.class);
+        List<ResourceBO> resourceBOList = BeanUtil.convert(textboxInfoMapper.getData(start,end-start),ResourceBO.class);
         for (ResourceBO resourceBO:
                 resourceBOList) {
             resourceBO.setDetail(resourceBO.getText());
