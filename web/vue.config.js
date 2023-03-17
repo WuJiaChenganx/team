@@ -6,9 +6,9 @@ const { defineConfig } = require("@vue/cli-service");
 module.exports = {
     publicPath: "/",
     devServer: {
-        // http://localhost:8080/api/teamWeb/home
-        // http://localhost:8186/api/teamWeb/home
-        // http://localhost:8186/teamWeb/home
+        // http://前端IP和端口/api/teamWeb/home
+        // http://后端IP和端口/api/teamWeb/home
+        // http://后端IP和端口/teamWeb/home
         proxy: {
             "/api": {
                 // 将/api前面的东西使用target替换

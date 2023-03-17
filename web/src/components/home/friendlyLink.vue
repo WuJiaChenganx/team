@@ -31,6 +31,11 @@
 export default {};
 </script>
 <style scoped>
+.friendlyLink {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
 .link-title-box {
   overflow: hidden;
   margin-bottom: 2rem;

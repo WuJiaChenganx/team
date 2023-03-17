@@ -23,19 +23,7 @@ export default {
     myFooter,
   },
   methods: {},
-  created() {
-    console.log("App组件被创建了");
-    // 试试图片在服务器上能不能用
-    let params = {
-      id: 1,
-    };
-    this.$http
-      .get("/api/teamWeb/teamSurvey/require-detail", { params })
-      .then((response) => {
-        // 用箭头函数可以继承this如果用回调函数的话需要在外面用that把this保存起来
-        console.log(response.data.data);
-      });
-  },
+  created() {},
 };
 </script>
 

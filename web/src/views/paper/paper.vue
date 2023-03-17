@@ -48,10 +48,10 @@
             <div class="paper-base">
               <i class="el-icon-notebook-1"></i>
               <div class="paper-name">
-                {{ detailItem.detail }}
+                {{ detailItem.title }}
               </div>
             </div>
-            <div class="paper-time">{{ detailItem.time }}</div>
+            <div class="paper-time">{{ detailItem.date }}</div>
           </div>
         </div>
         <div class="paging">
@@ -72,7 +72,7 @@
 </template>
 
 <script>
-import { getPaperURL } from "@/api/paper/paper";
+import { getPaperURL } from "@/api/api";
 export default {
   data() {
     return {
@@ -88,6 +88,7 @@ export default {
           title: "专利1",
           date: "2023-03-07",
           url: " ",
+          keywords: "",
         },
         {
           title:
@@ -120,23 +121,8 @@ export default {
       current_index: 1,
     };
   },
-  created() {
-    this.total_number = this.showAllContent.length;
-    this.showPageContent = this.showAllContent.slice(
-      (this.current_index - 1) * 10,
-      this.current_index * 10
-    );
-  },
-  methods: {
-    handleCurrentChange(val) {
-      // 传入的val是当前页的页码
-      this.current_index = val;
-      this.showPageContent = this.showAllContent.slice(
-        (val - 1) * 10,
-        val * 10
-      );
-    },
-  },
+  created() {},
+  methods: {},
 };
 </script>
 <style scoped>

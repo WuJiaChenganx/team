@@ -41,20 +41,15 @@
         </div>
         <div class="patentItem">
           <div
-            class="patent-row"
-            v-for="(detailItem, detailIndex) in showPageContent"
+            class="detailItem"
+            v-for="(detailItem, detailIndex) in patents"
             :key="detailIndex"
           >
-            <div class="patent-base">
-              <i class="el-icon-notebook-1"></i>
-              <div class="patent-name">
-                {{ detailItem.detail }}
-              </div>
+            <div class="detailItemInfo">
+              [{{ detailItem.number + 1 }}] {{ detailItem.title }}
             </div>
-            <div class="patent-time">{{ detailItem.time }}</div>
           </div>
         </div>
-
         <div class="paging">
           <!-- page-size展示的选择每页显示个数的选项,页面变动触发的事件是current-change后面的函数,total表示总共的数量 current-page表示当前页数-->
           <el-pagination
@@ -73,6 +68,7 @@
 </template>
 
 <script>
+import { getPatentURL } from "@/api/api";
 export default {
   data() {
     return {
@@ -83,26 +79,7 @@ export default {
         { name: "授权专利", path: "/paper/patent" },
         { name: "出版专著", path: "/paper/book" },
       ],
-      showAllContent: [
-        {
-          detail:
-            "张行，姚信威，陈树，王杰，邢伟伟。一种基于3D投影的园区车位预定辅助系统及辅助方法，授权号：ZL202110876699.8（专利权人：浙江慧享信息科技有限公司，授权时间：2023.01.03）",
-          time: "2000-06-25",
-        },
-        { detail: "专利2", time: "2000-06-25" },
-        { detail: "专利3", time: "2000-06-25" },
-        { detail: "专利4", time: "2000-06-25" },
-        { detail: "专利5", time: "2000-06-25" },
-        { detail: "专利6", time: "2000-06-25" },
-        { detail: "专利7", time: "2000-06-25" },
-        { detail: "专利8", time: "2000-06-25" },
-        { detail: "专利9", time: "2000-06-25" },
-        { detail: "专利10", time: "2000-06-25" },
-        { detail: "专利11", time: "2000-06-25" },
-        { detail: "专利12", time: "2000-06-25" },
-        { detail: "专利13", time: "2000-06-25" },
-      ],
-      showPageContent: [],
+      patents: [],
       // 总共要展示的数量
       total_number: 10,
       // 当前页面从1开始的这两个属性会在刚开始的时候就更新
@@ -110,20 +87,26 @@ export default {
     };
   },
   created() {
-    this.total_number = this.showAllContent.length;
-    this.showPageContent = this.showAllContent.slice(
-      (this.current_index - 1) * 10,
-      this.current_index * 10
-    );
+    this.getPatentList();
   },
   methods: {
+    // async和await用于同步,就是按顺序执行
+    async getPatentList() {
+      let params = {
+        // 定义参数
+        start: (this.current_index - 1) * 10,
+        end: this.current_index * 10,
+      };
+      await getPatentURL(params).then((res) => {
+        this.patents = res.data;
+        console.log(res.data);
+        this.total_number = res.sum;
+      });
+    },
     handleCurrentChange(val) {
       // 传入的val是当前页的页码
       this.current_index = val;
-      this.showPageContent = this.showAllContent.slice(
-        (val - 1) * 10,
-        val * 10
-      );
+      this.getPatentList();
     },
   },
 };
@@ -201,30 +184,19 @@ export default {
     min-height: 600px;
   }
 
-  .patent-row {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    cursor: pointer;
-    padding: 1.5rem 0;
-    border-bottom: 1px solid #dfdfdf;
-  }
-  .patent-base {
-    display: flex;
-    flex-direction: row;
-    font-size: 3rem;
-    line-height: 3rem;
-  }
-  .patent-name {
+  .detailItem {
+    word-wrap: break-word;
+    word-break: break-all;
+    margin-top: 1rem;
     text-align: left;
-    margin-left: 0.5rem;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 1;
-    overflow: hidden;
-    color: #333333;
-    height: 3rem;
+    line-height: 3rem;
+    font-size: 1.8rem;
+    font-weight: bold;
   }
+  .detailItemInfo {
+    font-size: 2rem;
+  }
+
   /* 设置分页和底部的距离 */
   .paging {
     margin-bottom: 3rem;

@@ -65,7 +65,7 @@
             background
             layout="prev, pager, next"
             @current-change="handleCurrentChange"
-            :page-size="5"
+            :page-size="3"
             :total="total_number"
             :current-page="current_index"
           >
@@ -77,7 +77,7 @@
 </template>
 
 <script>
-import { getBookURL } from "@/api/paper/book";
+import { getBookURL } from "@/api/api";
 export default {
   data() {
     return {
@@ -95,7 +95,7 @@ export default {
           author: "Yao, X. W., Chen, Y. W., Wu, Y., Zhao, K., & Jornet, J. M.",
           date: "2022-09-21",
           publisher: null,
-          pictureUrl: require("../../assets/images/book/book1.jpg"),
+          pictureUrl: "",
         },
         {
           title:
@@ -103,32 +103,31 @@ export default {
           author: "Zhao, T., Liu, Y., Shou, G., & Yao, X",
           date: "2022-04-19",
           publisher: null,
-          pictureUrl: require("../../assets/images/book/book2.jpg"),
+          pictureUrl: "",
         },
         {
           title: "智能解密：智能+场景应用案例解析",
           author: "姚信威",
           date: "2021-04-01",
           publisher: null,
-          pictureUrl: require("../../assets/images/book/book3.jpg"),
+          pictureUrl: "",
         },
         {
           title: "电磁纳米网络-基础理论及关键技术",
           author: "姚信威",
           date: "2021-01-01",
           publisher: null,
-          pictureUrl: require("../../assets/images/book/book3.jpg"),
+          pictureUrl: "",
         },
         {
           title: "未来服务——生活服务业的科技化变革",
           author: "姚信威",
           date: "2021-01-01",
           publisher: null,
-          pictureUrl: require("../../assets/images/book/book3.jpg"),
+          pictureUrl: "",
         },
       ],
-      // 需要展示页面数据
-      showPageContent: [],
+
       // 总共要展示的数量
       total_number: 10,
       // 当前页面从1开始的这两个属性会在刚开始的时候就更新
@@ -143,8 +142,8 @@ export default {
     async getBookList() {
       let params = {
         // 定义参数
-        start: (this.current_index - 1) * 5,
-        end: this.current_index * 5,
+        start: (this.current_index - 1) * 3,
+        end: this.current_index * 3,
       };
       await getBookURL(params).then((res) => {
         this.books = res.data;
@@ -233,9 +232,7 @@ export default {
   .detailItem {
     word-wrap: break-word;
     word-break: break-all;
-    width: 100%;
-    height: auto;
-    margin-top: 3rem;
+    margin-top: 2rem;
     text-align: left;
     line-height: 3rem;
     font-size: 1.8rem;

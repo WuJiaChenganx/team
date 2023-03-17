@@ -86,7 +86,7 @@
 </template>
 
 <script>
-import { getSimulationToolURL } from "@/api/resourceSharing/simulationTool";
+import { getSimulationToolURL } from "@/api/api";
 export default {
   data() {
     return {

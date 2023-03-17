@@ -55,7 +55,7 @@ export default {
   methods: {},
 };
 </script>
-<style scoped>
+<style lang="scss" scoped>
 * {
   margin: 0;
   padding: 0;
@@ -133,6 +133,7 @@ export default {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    align-items: stretch;
   }
   .last-left {
     width: 65%;
@@ -141,7 +142,6 @@ export default {
     width: 33%;
   }
   .researchTeam {
-    height: 28rem;
     width: 100%;
     padding: 2rem;
     border: 1px solid #d1e4f0;
@@ -149,7 +149,7 @@ export default {
     box-sizing: border-box;
   }
   .friendlyLink {
-    height: 28rem;
+    /* height: 28rem; */
     width: 100%;
     padding: 2rem;
     border: 1px solid #d1e4f0;
@@ -165,23 +165,6 @@ export default {
   .firstContainer .firstContainerContent {
     display: block;
     margin-bottom: 0.2rem;
-  }
-
-  .firstContainer > .firstContainerContent {
-    /* padding: 2rem 0;
-    width: 90%;
-    margin: 0 auto; */
-  }
-
-  .firstContainer > .firstContainerContent .firstMessageContent {
-    /* width: 100%; */
-  }
-  .newsList {
-    /* width: 100%;
-    padding: 1rem;
-    border: 1px solid #d1e4f0;
-    border-radius: 4px;
-    box-sizing: border-box; */
   }
 
   .secondContainer .secondAllContent {
