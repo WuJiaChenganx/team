@@ -28,7 +28,7 @@
 
     <select id="media" resultType="teamWeb.teamDynamics.entity.ReportDO">
         select
-        `id`,`title`,`date`,`url`,`r_class` AS rClass,`text`
+        `id`,`title`,`date`,`url`,`r_class` AS rClass,`text`,picture_url AS pictureUrl
         from report
         <where>
             `r_class`= "媒体"

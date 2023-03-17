@@ -1,5 +1,7 @@
 package teamWeb.teamDynamics.pojo;
 
+import java.util.List;
+
 public class NoticeBO {
     private Integer id;
     private String title;
@@ -9,6 +11,24 @@ public class NoticeBO {
     private String text;
     private String detail;
     private String url;
+    private List<String> picUrl;
+    private String pictureUrl;
+
+    public String getPictureUrl() {
+        return pictureUrl;
+    }
+
+    public void setPictureUrl(String pictureUrl) {
+        this.pictureUrl = pictureUrl;
+    }
+
+    public List<String> getPicUrl() {
+        return picUrl;
+    }
+
+    public void setPicUrl(List<String> picUrl) {
+        this.picUrl = picUrl;
+    }
 
     public String getUrl() {
         return url;
