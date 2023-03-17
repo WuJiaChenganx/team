@@ -1,7 +1,7 @@
 api:
 
 method:GET
-http://localhost:8186/teamWeb/paper/require-paper?start=0&end=5
+http://localhost:8186/teamWeb/paper/require-patent?start=0&end=5
 in:null
 out:{
 	"code": "200",

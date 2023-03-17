@@ -47,7 +47,9 @@
             style="cursor: pointer"
             @click="gotoDetail(memberItem)"
           >
-            <div class="detailItemImg"><img :src="memberItem.picUrl" /></div>
+            <div class="detailItemImg">
+              <img :src="memberItem.picUrl" @error="setDefaultImage" />
+            </div>
             <div class="detailItemInfo">
               {{ memberItem.name }} {{ memberItem.title }}
             </div>
@@ -59,6 +61,8 @@
 </template>
 
 <script>
+// 设置默认缺失的图片
+import defaultImage from "@/assets/images/member/default.png";
 export default {
   data() {
     return {
@@ -124,7 +128,7 @@ export default {
                 "Shaolei Zhang, Yang Feng. Reducing Position Bias in Simultaneous Machine Translation with Length-Aware Framework.",
             },
           ],
-          picUrl: require("../../assets/images/activity/00.jpg"),
+          picUrl: "",
         },
         {
           id: 3,
@@ -185,6 +189,10 @@ export default {
   },
   created() {},
   methods: {
+    // 设置默认缺失的图片
+    setDefaultImage(e) {
+      e.target.src = defaultImage;
+    },
     gotoDetail(item) {
       this.$router.push({
         path: "/team/studentInfo",
