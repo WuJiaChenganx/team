@@ -11,14 +11,14 @@ public class MemberDTO {
     private String picUrl;
 
     private Integer comeInDate;
-    private String mClass;
+    private String memberType;
 
-    public String getmClass() {
-        return mClass;
+    public String getMemberType() {
+        return memberType;
     }
 
-    public void setmClass(String mClass) {
-        this.mClass = mClass;
+    public void setMemberType(String memberType) {
+        this.memberType = memberType;
     }
 
     public Integer getId() {
