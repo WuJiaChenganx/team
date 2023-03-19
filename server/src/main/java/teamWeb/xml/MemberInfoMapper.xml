@@ -3,12 +3,12 @@
 
 <mapper namespace="teamWeb.teamSurvey.mapper.MemberInfoMapper">
     <select id="allMember" resultType="teamWeb.teamSurvey.entity.MemberDO">
-        select `id`,`pictureUrl`,`edu`,`name`,m_class AS mClass,pageUrl
+        select `id`,`pictureUrl`,`edu`,`name`,m_class AS mClass,pageUrl, `come_in_year` AS comeInDate
         from member
         <where>
             m_class = "${memberType}"
         </where>
-        order by mClass,name limit ${start},${end}
+        order by comeInDate,name limit ${start},${end}
     </select>
 
     <select id="getAllDetail" resultType="teamWeb.teamSurvey.entity.MemberDO">

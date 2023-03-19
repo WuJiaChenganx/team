@@ -37,6 +37,16 @@ public class MemberBO {
 
     private List<PaperDO> paperList;
 
+    private Integer comeInDate;
+
+    public Integer getComeInDate() {
+        return comeInDate;
+    }
+
+    public void setComeInDate(Integer comeInDate) {
+        this.comeInDate = comeInDate;
+    }
+
     public Integer getId() {
         return id;
     }
