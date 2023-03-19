@@ -232,13 +232,14 @@ export default {
   .detailItem {
     word-wrap: break-word;
     word-break: break-all;
-    margin-top: 2rem;
+    margin-top: 2.5rem;
     text-align: left;
     line-height: 3rem;
     font-size: 1.8rem;
-    font-weight: bold;
   }
   .detailItemBookName {
+    color: #0055a2;
+    font-weight: bold;
     font-size: 2rem;
   }
   .detailItemBookCover {
@@ -246,7 +247,8 @@ export default {
     width: 100%;
   }
   .detailItemBookCover img {
-    width: 50%;
+    width: 20rem;
+    height: 25rem;
   }
   /* 设置分页和底部的距离 */
   .paging {
@@ -314,23 +316,22 @@ export default {
   .detailItem {
     word-wrap: break-word;
     word-break: break-all;
-    width: 100%;
-    height: auto;
-    margin-top: 3rem;
+    margin-top: 2.5rem;
     text-align: left;
     line-height: 3rem;
     font-size: 1.8rem;
-    font-weight: bold;
   }
   .detailItemBookName {
-    font-size: 2rem;
+    color: #0055a2;
+    font-weight: bold;
   }
   .detailItemBookCover {
     margin-top: 1rem;
     width: 100%;
   }
   .detailItemBookCover img {
-    width: 100%;
+    width: 20rem;
+    height: 25rem;
   }
   /* 设置分页和底部的距离 */
   .paging {

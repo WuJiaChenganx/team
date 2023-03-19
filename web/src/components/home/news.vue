@@ -6,10 +6,10 @@
         <el-carousel-item
           v-for="(newsItem, newsItemIndex) in newsList"
           :key="newsItemIndex"
-          @click.native="gotoDetail(newsItem)"
+          @click.native="gotoDetail(newsItem.id)"
           class="newsPhotoItem"
         >
-          <img :src="newsItem.picUrl" alt="" />
+          <img :src="newsItem.picUrl[0]" alt="" />
           <!-- 遮罩 -->
           <div class="mask">{{ newsItem.title }}</div>
         </el-carousel-item>
@@ -24,10 +24,9 @@
       <div class="newsListContent">
         <div
           class="news-row"
-          style="cursor: pointer"
           v-for="(newsItem, newsItemIndex) in newsList"
           :key="newsItemIndex"
-          @click="gotoDetail(newsItem)"
+          @click="gotoDetail(newsItem.id)"
         >
           <div class="news-date">
             <div>{{ newsItem.day }}</div>
@@ -40,65 +39,35 @@
   </div>
 </template>
 <script>
+import { getNewFlashURL } from "@/api/api";
 export default {
   data() {
     return {
       // 要展示的新闻信息(加载前还要处理过)
-      newsList: [
-        {
-          day: "18",
-          date: "2023-03",
-          title: "课题组李泽康同学荣获国家奖学金硕士奖",
-          detail:
-            "近日，2021年中国科学院计算技术研究所研究生国家奖学金评选结果正式公布，课题组李泽康同学荣获2021年度国家奖学金硕士奖。本次国家奖学金硕士奖共19人进入答辩，经过激烈角逐，最终评选出13人。李泽康，中科院计算所2019级硕士生，导师冯洋研究员，主要研究方向为自然语言处理、对话系统、多模态表示等。已在ACL，TASLP等自然语言处理顶级会议和顶级期刊上发表多篇论文，并获得国际对话技术比赛DSTC8多模态对话生成赛道冠军，DSTC9交互式对话评估赛道任务一第一名、任务二第三名，也曾作为中国大陆唯一受邀者参加国际对话评估研讨会。",
-          picUrl: require("../../assets/images/activity/activity1.png"),
-        },
-        {
-          day: "18",
-          date: "2023-03",
-          title: "冯洋老师荣获钱伟长中文信息处理科学技术奖",
-          detail:
-            "近日，2021年中国科学院计算技术研究所研究生国家奖学金评选结果正式公布，课题组李泽康同学荣获2021年度国家奖学金硕士奖。本次国家奖学金硕士奖共19人进入答辩，经过激烈角逐，最终评选出13人。李泽康，中科院计算所2019级硕士生，导师冯洋研究员，主要研究方向为自然语言处理、对话系统、多模态表示等。已在ACL，TASLP等自然语言处理顶级会议和顶级期刊上发表多篇论文，并获得国际对话技术比赛DSTC8多模态对话生成赛道冠军，DSTC9交互式对话评估赛道任务一第一名、任务二第三名，也曾作为中国大陆唯一受邀者参加国际对话评估研讨会。",
-          picUrl: require("../../assets/images/activity/activity2.png"),
-        },
-        {
-          day: "18",
-          date: "2023-03",
-          title: "NLP课题组2021年中央广播电视塔秋游行",
-          detail:
-            "近日，2021年中国科学院计算技术研究所研究生国家奖学金评选结果正式公布，课题组李泽康同学荣获2021年度国家奖学金硕士奖。本次国家奖学金硕士奖共19人进入答辩，经过激烈角逐，最终评选出13人。李泽康，中科院计算所2019级硕士生，导师冯洋研究员，主要研究方向为自然语言处理、对话系统、多模态表示等。已在ACL，TASLP等自然语言处理顶级会议和顶级期刊上发表多篇论文，并获得国际对话技术比赛DSTC8多模态对话生成赛道冠军，DSTC9交互式对话评估赛道任务一第一名、任务二第三名，也曾作为中国大陆唯一受邀者参加国际对话评估研讨会。",
-          picUrl: require("../../assets/images/activity/activity3.png"),
-        },
-        {
-          day: "18",
-          date: "2023-03",
-          title: "NLP课题组举行2020年年会",
-          detail:
-            "近日，2021年中国科学院计算技术研究所研究生国家奖学金评选结果正式公布，课题组李泽康同学荣获2021年度国家奖学金硕士奖。本次国家奖学金硕士奖共19人进入答辩，经过激烈角逐，最终评选出13人。李泽康，中科院计算所2019级硕士生，导师冯洋研究员，主要研究方向为自然语言处理、对话系统、多模态表示等。已在ACL，TASLP等自然语言处理顶级会议和顶级期刊上发表多篇论文，并获得国际对话技术比赛DSTC8多模态对话生成赛道冠军，DSTC9交互式对话评估赛道任务一第一名、任务二第三名，也曾作为中国大陆唯一受邀者参加国际对话评估研讨会。",
-          picUrl: require("../../assets/images/activity/activity4.png"),
-        },
-        {
-          day: "18",
-          date: "2023-03",
-          title: "NLP课题组2021年春游记",
-          detail:
-            "近日，2021年中国科学院计算技术研究所研究生国家奖学金评选结果正式公布，课题组李泽康同学荣获2021年度国家奖学金硕士奖。本次国家奖学金硕士奖共19人进入答辩，经过激烈角逐，最终评选出13人。李泽康，中科院计算所2019级硕士生，导师冯洋研究员，主要研究方向为自然语言处理、对话系统、多模态表示等。已在ACL，TASLP等自然语言处理顶级会议和顶级期刊上发表多篇论文，并获得国际对话技术比赛DSTC8多模态对话生成赛道冠军，DSTC9交互式对话评估赛道任务一第一名、任务二第三名，也曾作为中国大陆唯一受邀者参加国际对话评估研讨会。",
-          picUrl: require("../../assets/images/activity/activity5.png"),
-        },
-      ],
+      newsList: [],
     };
   },
-  created() {},
+  created() {
+    this.getNewFlashList();
+  },
   methods: {
-    gotoDetail(item) {
+    // async和await用于同步,就是按顺序执行
+    async getNewFlashList() {
+      let params = {
+        // 定义参数
+        start: 0,
+        end: 5,
+      };
+      await getNewFlashURL(params).then((res) => {
+        this.newsList = res.data;
+      });
+    },
+    gotoDetail(id) {
       this.$router.push({
         path: "/activity/newFlashDetail",
         name: "新闻快讯详情",
-        // 用query传参,在地址栏后面加东西如 ?id=1这种跟在网址后面
         query: {
-          // 传参数的时候注意将对象转化成字符串并且加密,在接收端使用解析
-          // 如果不这样做的话就会导致,刷新一下传参的东西解析不了
-          item: encodeURIComponent(JSON.stringify(item)),
+          id: id,
         },
       });
     },
@@ -176,6 +145,7 @@ export default {
     height: 35rem;
   }
   .news-row {
+    cursor: pointer;
     height: 6rem;
     display: flex;
     flex-direction: row;
@@ -278,6 +248,7 @@ export default {
     height: 45rem;
   }
   .news-row {
+    cursor: pointer;
     height: 8rem;
     display: flex;
     flex-direction: row;
@@ -310,7 +281,7 @@ export default {
     display: -webkit-box;
     /* 两行直接省略 */
     -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
+    -webkit-line-clamp: 3;
     overflow: hidden;
     font-weight: bold;
     text-align: left;

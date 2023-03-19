@@ -40,19 +40,26 @@
           </div>
         </div>
         <div class="paperItem">
-          <div
-            class="paper-row"
-            v-for="(detailItem, detailIndex) in showPageContent"
+          <a
+            class="detailItem"
+            v-for="(detailItem, detailIndex) in papers"
             :key="detailIndex"
+            :href="detailItem.url"
+            target="_blank"
           >
-            <div class="paper-base">
-              <i class="el-icon-notebook-1"></i>
-              <div class="paper-name">
-                {{ detailItem.title }}
-              </div>
+            <div class="detailItemPaperName">
+              论文名称: {{ detailItem.title }}
             </div>
-            <div class="paper-time">{{ detailItem.date }}</div>
-          </div>
+            <div class="detailItemPaperKeyWord">
+              关键词: {{ detailItem.keyword }}
+            </div>
+            <div class="detailItemPaperDate">
+              发表日期: {{ detailItem.date }}
+            </div>
+            <div class="detailItemPaperDetail">
+              摘要: {{ detailItem.detail }}
+            </div>
+          </a>
         </div>
         <div class="paging">
           <!-- page-size展示的选择每页显示个数的选项,页面变动触发的事件是current-change后面的函数,total表示总共的数量 current-page表示当前页数-->
@@ -60,7 +67,7 @@
             background
             layout="prev, pager, next"
             @current-change="handleCurrentChange"
-            :page-size="10"
+            :page-size="15"
             :total="total_number"
             :current-page="current_index"
           >
@@ -83,46 +90,35 @@ export default {
         { name: "授权专利", path: "/paper/patent" },
         { name: "出版专著", path: "/paper/book" },
       ],
-      showAllContent: [
-        {
-          title: "专利1",
-          date: "2023-03-07",
-          url: " ",
-          keywords: "",
-        },
-        {
-          title:
-            "DRL-Based Offloading for Computation Delay Minimization in Wireless-Powered Multi-access Edge Computing",
-          date: "2023",
-          url: "",
-        },
-        {
-          title: "Nighttime Image Dehazing Based on Point Light Sources",
-          date: "2022-12-20",
-          url: "",
-        },
-        {
-          title:
-            "Multi-hop Deflection Routing Algorithm Based on Reinforcement Learning for Energy-Harvesting Nanonetworks",
-          date: "2022-01",
-          url: "",
-        },
-        {
-          title:
-            "Gold nanostars combined with the searched antibody for targeted oral squamous cell carcinoma therapy",
-          date: "2022",
-          url: "",
-        },
-      ],
-      showPageContent: [],
+      papers: [],
       // 总共要展示的数量
       total_number: 10,
       // 当前页面从1开始的这两个属性会在刚开始的时候就更新
       current_index: 1,
     };
   },
-  created() {},
-  methods: {},
+  created() {
+    this.getPaperList();
+  },
+  methods: {
+    // async和await用于同步,就是按顺序执行
+    async getPaperList() {
+      let params = {
+        // 定义参数
+        start: (this.current_index - 1) * 15,
+        end: this.current_index * 15,
+      };
+      await getPaperURL(params).then((res) => {
+        this.papers = res.data;
+        this.total_number = res.sum;
+      });
+    },
+    handleCurrentChange(val) {
+      // 传入的val是当前页的页码
+      this.current_index = val;
+      this.getPaperList();
+    },
+  },
 };
 </script>
 <style scoped>
@@ -192,35 +188,42 @@ export default {
   }
   /* 设置块和分页的距离 */
   .paperItem {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 3rem;
     min-height: 600px;
+    padding-bottom: 2rem;
   }
 
-  .paper-row {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    cursor: pointer;
-    padding: 1.5rem 0;
-    border-bottom: 1px solid #dfdfdf;
-  }
-  .paper-base {
-    display: flex;
-    flex-direction: row;
-    font-size: 3rem;
-    line-height: 3rem;
-  }
-  .paper-name {
+  .detailItem {
+    display: block;
+    word-wrap: break-word;
+    word-break: break-all;
+    margin-top: 2.5rem;
     text-align: left;
-    margin-left: 0.5rem;
+    line-height: 3rem;
+    font-size: 1.6rem;
+    text-decoration: none;
+    color: black;
+  }
+  .detailItemPaperName {
+    color: #0055a2;
+    font-weight: bold;
+    font-size: 2rem;
+  }
+  .detailItem:hover .detailItemPaperKeyWord {
+    font-weight: bold;
+  }
+  .detailItem:hover .detailItemPaperDate {
+    font-weight: bold;
+  }
+  .detailItem:hover .detailItemPaperDetail {
+    font-weight: bold;
+  }
+  .detailItemPaperDetail {
+    font-weight: normal;
+    /* 显示3行 */
     display: -webkit-box;
     -webkit-box-orient: vertical;
-    -webkit-line-clamp: 1;
+    -webkit-line-clamp: 3;
     overflow: hidden;
-    color: #333333;
-    height: 3rem;
   }
   /* 设置分页和底部的距离 */
   .paging {
@@ -281,35 +284,33 @@ export default {
   }
   /* 设置块和分页的距离 */
   .paperItem {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 3rem;
+    padding-bottom: 2rem;
     min-height: 450px;
   }
 
-  .paper-row {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    cursor: pointer;
-    padding: 1.5rem 0;
-    border-bottom: 1px solid #dfdfdf;
-  }
-  .paper-base {
-    display: flex;
-    flex-direction: row;
-    font-size: 3rem;
-    line-height: 3rem;
-  }
-  .paper-name {
+  .detailItem {
+    display: block;
+    word-wrap: break-word;
+    word-break: break-all;
+    margin-top: 2.5rem;
     text-align: left;
-    margin-left: 0.5rem;
+    line-height: 3rem;
+    font-size: 1.6rem;
+    text-decoration: none;
+    color: black;
+  }
+  .detailItemPaperName {
+    color: #0055a2;
+    font-size: 2rem;
+    font-weight: bold;
+  }
+  .detailItemPaperDetail {
+    font-weight: normal;
+    /* 显示3行 */
     display: -webkit-box;
     -webkit-box-orient: vertical;
-    -webkit-line-clamp: 1;
+    -webkit-line-clamp: 3;
     overflow: hidden;
-    color: #333333;
-    height: 3rem;
   }
   /* 设置分页和底部的距离 */
   .paging {

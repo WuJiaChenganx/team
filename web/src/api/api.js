@@ -39,3 +39,36 @@ export function getDataSetURL(params) {
         params,
     });
 }
+// 获取新闻
+export function getNewFlashURL(params) {
+    return request({
+        url: "/api/teamWeb/report/require-news",
+        method: "GET",
+        params,
+    });
+}
+// 获取学术动态
+export function getAcademyURL(params) {
+    return request({
+        url: "/api/teamWeb/report/require-academicDynamics",
+        method: "GET",
+        params,
+    });
+}
+// 获取通知
+export function getNoticeURL(params) {
+    return request({
+        url: "/api/teamWeb/report/require-notice",
+        method: "GET",
+        params,
+    });
+}
+
+// 获取新闻/学术动态/通知的详情(参数是id)
+export function getActivityDetail(params) {
+    return request({
+        url: "/api/teamWeb/report/require-detail",
+        method: "GET",
+        params,
+    });
+}
