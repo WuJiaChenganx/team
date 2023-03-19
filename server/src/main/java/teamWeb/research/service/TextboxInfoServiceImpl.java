@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import teamWeb.homepage.entity.RelationInfo;
+import teamWeb.pubications.pojo.AllPaperBO;
 import teamWeb.research.entity.TextboxInfo;
 import teamWeb.research.mapper.TextboxInfoMapper;
 import teamWeb.research.pojo.*;
@@ -27,7 +28,13 @@ public class TextboxInfoServiceImpl extends ServiceImpl<TextboxInfoMapper, Textb
 
     @Override
     public List<ProjectBO> projectDetail(int start, int end) {
-
+        List<ProjectBO> projectBOList = BeanUtil.convert(textboxInfoMapper.getProject(start,end-start),ProjectBO.class);
+        Integer numberIndex = 1;
+        for (ProjectBO projectBO:
+                projectBOList) {
+            projectBO.setNumber(start+numberIndex);
+            numberIndex = numberIndex+1;
+        }
         return BeanUtil.convert(textboxInfoMapper.getProject(start,end-start),ProjectBO.class);
     }
 
@@ -35,6 +42,7 @@ public class TextboxInfoServiceImpl extends ServiceImpl<TextboxInfoMapper, Textb
     @Override
     public List<DirectionsDTO> direDetail(int start, int end) {
         List<DirectionsBO> directionsBOList = BeanUtil.convert(textboxInfoMapper.getDire(start,end-start),DirectionsBO.class);
+
 
         for (DirectionsBO directionsBO:
                 directionsBOList) {

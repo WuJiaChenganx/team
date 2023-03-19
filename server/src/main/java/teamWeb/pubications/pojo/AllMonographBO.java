@@ -8,6 +8,16 @@ public class AllMonographBO {
     private String publisher;
     private String pictureUrl;
 
+    private Integer number;
+
+    public Integer getNumber() {
+        return number;
+    }
+
+    public void setNumber(Integer number) {
+        this.number = number;
+    }
+
     public String getPictureUrl() {
         return pictureUrl;
     }

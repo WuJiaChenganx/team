@@ -40,11 +40,15 @@ public class OutcomeInfoServiceImpl extends ServiceImpl<OutcomeInfoMapper, Outco
     public List<AllMonographBO> monographDetail(int start, int end) {
         List<AllMonographBO> allMonographBOList = BeanUtil.convert(outcomeInfoMapper.monographDetail(start,end-start),AllMonographBO.class);
 
+        Integer numberIndex = 1;
+
         for (AllMonographBO allMonographBO:
                 allMonographBOList) {
             if(!allMonographBO.getPictureUrl().equals("")) {
                 allMonographBO.setPictureUrl(Address.rootAddress() + allMonographBO.getPictureUrl());
             }
+            allMonographBO.setNumber(start+numberIndex);
+            numberIndex = numberIndex+1;
         }
         return allMonographBOList;
     }

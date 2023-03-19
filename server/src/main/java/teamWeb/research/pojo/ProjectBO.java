@@ -7,6 +7,15 @@ public class ProjectBO {
     private String projectType;
     private String time;
     private String projectInfo;
+    private Integer number;
+
+    public Integer getNumber() {
+        return number;
+    }
+
+    public void setNumber(Integer number) {
+        this.number = number;
+    }
 
     public Integer getId() {
         return id;
