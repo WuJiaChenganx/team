@@ -39,13 +39,11 @@
             </el-breadcrumb>
           </div>
         </div>
-        <div class="profileItem">
-          <div
-            class="detailItem"
-            v-for="profileItem in profile"
-            :key="profileItem.id"
-          >
-            {{ profileItem.Info }}
+        <div class="profiles">
+          <div class="detail">
+            <div class="profile-title">{{ profile.title }}</div>
+            <div class="profile-info">{{ profile.info1 }}</div>
+            <div class="profile-info">{{ profile.info2 }}</div>
           </div>
         </div>
       </div>
@@ -66,24 +64,13 @@ export default {
         { name: "硕士生", path: "/team/master" },
         { name: "毕业生", path: "/team/graduate" },
       ],
-      profile: [
-        {
-          id: 1,
-          Info: "下一代移动计算与数据创新实验室（Lab for Intelligent Networking and Knowledge Engineering, 简称LINKE），由ACM Fellow及杰岀科学家、IEEE Fellow、******李向阳教授和IEEE Fellow、******张燕咏教授引领，团队包括2名******、1名国家基金委杰出青年科学基金获得者、多名国家级四青人才包括基金委优青基金获得者、海外优青基金获得者、中组部青年拔尖人才计划和1名达摩院青橙奖获得者等10多名海内外优秀教师。",
-        },
-        {
-          id: 2,
-          Info: "实验室主要面向国际科技前沿、国家重大战略需求、国民经济主战场和人民生命健康进行攻关创新。主要在前沿智能物联网、数据智能、量子计算等领域，从无线通信、移动计算、边缘计算、智能无人系统、数据理解、数据共享、智能学习及隐私保护等方面开展创新性科研和平台建设。实验室当前设有感知智能、 计算智能、数据智能、无人系统和量子计算几个科研小组。",
-        },
-        {
-          id: 3,
-          Info: "实验室曾获得中国科技部、工信部、中科院、基金委等多个国家级重大/重点项目支持，包括牵头一项工信部物联网安全重点研发计划、两项科技部人工智能2030重点研发计划、以课题参加的约10项重点研发计划和包括华为、腾讯、阿里、华米、招商银行、蔚来等多个领域知名公司的科研项目支持。实验室一共毕业博士约40多人（博士毕业生中包括7位在美国知名大学、北京大学、浙江大学、北航等担任助理/副/正教授，包括IEEE Fellow、中国基金委杰出青年基金、优秀青年基金、青年长江学者获得者等；其他大部分在世界顶尖公司如谷歌、华为等工作），硕士毕业生大多在行业领军企业工作。团队学生多人到海外高校交流学习，大部分学生在读期间曾经到国内外知名单位企业实习。",
-        },
-        {
-          id: 4,
-          Info: "实验室曾获得中国科技部、工信部、中科院、基金委等多个国家级重大/重点项目支持，包括牵头一项工信部物联网安全重点研发计划、两项科技部人工智能2030重点研发计划、以课题参加的约10项重点研发计划和包括华为、腾讯、阿里、华米、招商银行、蔚来等多个领域知名公司的科研项目支持。实验室一共毕业博士约40多人（博士毕业生中包括7位在美国知名大学、北京大学、浙江大学、北航等担任助理/副/正教授，包括IEEE Fellow、中国基金委杰出青年基金、优秀青年基金、青年长江学者获得者等；其他大部分在世界顶尖公司如谷歌、华为等工作），硕士毕业生大多在行业领军企业工作。团队学生多人到海外高校交流学习，大部分学生在读期间曾经到国内外知名单位企业实习。",
-        },
-      ],
+      profile: {
+        title: "群智感知与协同”高水平研究团队",
+        info1:
+          "重视团队建设，以国家重大战略需求为导向，以解决卡脖子问题为主要目标，为推动我国网络强国战略提供技术支撑和保障。团队成员现有全职老师 6人，教授2人，副教授2人，讲师2人，博士研究生和硕士研究生30余人，外聘兼职人员多人。将在现有人员基础上，计划进一步吸纳更多知名院校的青年教师、博士后和研究生，最终打造成一支老中青、校内校外结合的一流协同创新研究团队，取得国际一流的科研成果。通过指导学术参与科研项目、独立承担学术研究课题和开展学术讨论等方式，提高学生的独立研究能力和沟通能力，培养一流青年计算机人才。预计每年都向学术界输送高水平博士，向学术界及业界输送计算机专业硕士及优秀本科生。",
+        info2:
+          "鼓励团队学生进行学术交流，支持学生前往国内外顶级学府继续深造，提升学生自身能力的同时传播团队的学术思想和理念，进一步提高团队在人工智能领域的影响力。团队建设与人才培养相辅相成，预计构建一支兼具高水平人才、高影响力的学术团队。通过对重大科研学术成果进行必要的物质和精神奖励。设立专门学术专区和场地，以物联网、人工智能等为基础，多学科交叉，深入浅出进行研究，实现多学科融合创新发展。营造科学民主、开放创新的学术环境，以及和谐团结、友爱互助、奋进拼搏的文化氛围，提升团队的凝聚力、执行力和创新能力，提倡“共商、共建、共享”的团队氛围，积极主动融入到服务国家战略和区域经济社会发展，培养“顶天立地”的高质量人才。",
+      },
     };
   },
   created() {},
@@ -156,18 +143,25 @@ export default {
     background: #008cd6 !important;
   }
 
-  .profileItem {
+  .profiles {
     min-height: 600px;
     padding-bottom: 2rem;
   }
 
-  .detailItem {
+  .detail {
     word-wrap: break-word;
     word-break: break-all;
     line-height: 3rem;
     font-size: 1.6rem;
-    margin-top: 1.5rem;
     text-align: left;
+  }
+  .profile-title {
+    color: #0055a2;
+    font-weight: bold;
+    font-size: 2rem;
+    padding: 1rem 0;
+  }
+  .profile-info {
     text-indent: 2em;
   }
 }
@@ -224,18 +218,25 @@ export default {
     background: #008cd6 !important;
   }
 
-  .profileItem {
+  .profiles {
     min-height: 450px;
     padding-bottom: 2rem;
   }
 
-  .detailItem {
+  .detail {
     word-wrap: break-word;
     word-break: break-all;
     line-height: 3rem;
-    margin-top: 1.5rem;
     font-size: 1.6rem;
     text-align: left;
+  }
+  .profile-title {
+    color: #0055a2;
+    font-weight: bold;
+    font-size: 2rem;
+    padding: 1rem 0;
+  }
+  .profile-info {
     text-indent: 2em;
   }
 }

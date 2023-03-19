@@ -46,7 +46,7 @@
             :key="detailIndex"
           >
             <div class="detailItemBookName">
-              书籍名称: {{ detailItem.title }}
+              {{ detailItem.number }}. 书籍名称: {{ detailItem.title }}
             </div>
             <div class="detailItemBookTime">
               出版日期: {{ detailItem.date }}
@@ -88,45 +88,7 @@ export default {
         { name: "授权专利", path: "/paper/patent" },
         { name: "出版专著", path: "/paper/book" },
       ],
-      books: [
-        {
-          title:
-            "FGOR: Flow-Guided Opportunistic Routing for Intra-body Nanonetworks, IEEE Internet of Things Journal, 2022, DOI: 10.1109/JIOT.20 22. 3182142(中科院1区，JCR Q1区，IF：9.471）",
-          author: "Yao, X. W., Chen, Y. W., Wu, Y., Zhao, K., & Jornet, J. M.",
-          date: "2022-09-21",
-          publisher: null,
-          pictureUrl: "",
-        },
-        {
-          title:
-            "Joint Optimization of Latency and Energy Consumption for Mobile Edge Computing Based Proximity Detection in Road Networks”, China Communications, 2022",
-          author: "Zhao, T., Liu, Y., Shou, G., & Yao, X",
-          date: "2022-04-19",
-          publisher: null,
-          pictureUrl: "",
-        },
-        {
-          title: "智能解密：智能+场景应用案例解析",
-          author: "姚信威",
-          date: "2021-04-01",
-          publisher: null,
-          pictureUrl: "",
-        },
-        {
-          title: "电磁纳米网络-基础理论及关键技术",
-          author: "姚信威",
-          date: "2021-01-01",
-          publisher: null,
-          pictureUrl: "",
-        },
-        {
-          title: "未来服务——生活服务业的科技化变革",
-          author: "姚信威",
-          date: "2021-01-01",
-          publisher: null,
-          pictureUrl: "",
-        },
-      ],
+      books: [],
 
       // 总共要展示的数量
       total_number: 10,

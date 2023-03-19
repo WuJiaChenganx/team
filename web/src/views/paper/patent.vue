@@ -100,7 +100,6 @@ export default {
       };
       await getPatentURL(params).then((res) => {
         this.patents = res.data;
-        console.log(res.data);
         this.total_number = res.sum;
       });
     },

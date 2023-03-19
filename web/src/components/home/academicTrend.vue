@@ -73,6 +73,11 @@ export default {
 <style scoped>
 /* PC端 */
 @media screen and (min-width: 1000px) {
+  .academicTrend {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
   .academicTitle {
     width: 100%;
     display: flex;
@@ -95,18 +100,17 @@ export default {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    margin-bottom: 2rem;
   }
   /* 每一行 横着排列 */
   .academicTrend-row {
     display: flex;
     flex-direction: row;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
   }
 
   .academicTrend-img {
     /* 固定宽高 */
-    height: 12.5rem;
+    height: 15rem;
     width: 18rem;
     margin-right: 2rem;
     box-sizing: border-box;
@@ -136,6 +140,7 @@ export default {
     flex: 1 1 auto;
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
   }
   .title-box {
     text-align: left;
@@ -201,6 +206,7 @@ export default {
   .academicTrend-img {
     /* 图片满屏,高度自适应 */
     width: 100%;
+    overflow: hidden;
   }
   .academicTrend-img img {
     width: 100%;
