@@ -35,7 +35,7 @@ public class TextboxInfoServiceImpl extends ServiceImpl<TextboxInfoMapper, Textb
             projectBO.setNumber(start+numberIndex);
             numberIndex = numberIndex+1;
         }
-        return BeanUtil.convert(textboxInfoMapper.getProject(start,end-start),ProjectBO.class);
+        return projectBOList;
     }
 
 
