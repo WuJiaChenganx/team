@@ -119,7 +119,7 @@ public class TextboxInfoServiceImpl extends ServiceImpl<TextboxInfoMapper, Textb
 
     @Override
     public Integer sumProject() {
-        return textboxInfoMapper.sumPaper();
+        return textboxInfoMapper.sumProject();
     }
 
     @Override

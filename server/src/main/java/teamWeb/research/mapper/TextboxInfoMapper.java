@@ -41,4 +41,6 @@ public interface TextboxInfoMapper extends BaseMapper<TextboxInfo> {
     Integer sumPaper();
 
     Integer sumTextbox(String type);
+
+    Integer sumProject();
 }

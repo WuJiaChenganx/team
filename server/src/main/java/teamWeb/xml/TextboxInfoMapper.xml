@@ -49,8 +49,8 @@
         WHERE course_textbox_map.textbox_id = ${id}
     </select>
 
-    <select id="sumPaper" resultType="int">
-        SELECT COUNT(*) FROM paper
+    <select id="sumProject" resultType="int">
+        SELECT COUNT(*) FROM project
     </select>
 
     <select id="sumTextbox" resultType="int">
