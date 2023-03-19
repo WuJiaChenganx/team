@@ -46,7 +46,8 @@
             :key="detailIndex"
           >
             <div class="detailItemInfo">
-              [{{ detailItem.number + 1 }}] {{ detailItem.title }}
+              [ {{ detailItem.number }} ]
+              {{ detailItem.title }}
             </div>
           </div>
         </div>
@@ -185,16 +186,17 @@ export default {
   }
 
   .detailItem {
+    padding: 1rem 0;
     word-wrap: break-word;
     word-break: break-all;
     margin-top: 1rem;
     text-align: left;
     line-height: 3rem;
-    font-size: 1.8rem;
-    font-weight: bold;
-  }
-  .detailItemInfo {
     font-size: 2rem;
+    border-bottom: 1px solid #eee;
+  }
+  .detailItem:hover {
+    font-weight: bold;
   }
 
   /* 设置分页和底部的距离 */
@@ -262,29 +264,15 @@ export default {
     min-height: 450px;
   }
 
-  .patent-row {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    cursor: pointer;
-    padding: 1.5rem 0;
-    border-bottom: 1px solid #dfdfdf;
-  }
-  .patent-base {
-    display: flex;
-    flex-direction: row;
-    font-size: 3rem;
-    line-height: 3rem;
-  }
-  .patent-name {
+  .detailItem {
+    padding: 1rem 0;
+    word-wrap: break-word;
+    word-break: break-all;
+    margin-top: 1rem;
     text-align: left;
-    margin-left: 0.5rem;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 1;
-    overflow: hidden;
-    color: #333333;
-    height: 3rem;
+    line-height: 3rem;
+    font-size: 2rem;
+    border-bottom: 1px solid #eee;
   }
   /* 设置分页和底部的距离 */
   .paging {

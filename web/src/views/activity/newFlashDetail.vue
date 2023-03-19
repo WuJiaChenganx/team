@@ -18,35 +18,57 @@
         </div>
       </div>
       <div class="newFlashDetailContent">
-        <div class="newFlashTitle">{{ newsList.title }}</div>
-        <div class="newFlashInfo">{{ newsList.detail }}</div>
-        <div class="newFlashPhoto">
-          <img :src="newsList.picUrl" alt="" />
+        <div class="newFlashTitle">{{ newsFlashDetail.title }}</div>
+        <div class="newFlashInfo">{{ newsFlashDetail.detail }}</div>
+        <div
+          class="newFlashPhoto"
+          v-for="imgUrl in newsFlashDetail.picUrl"
+          :key="imgUrl"
+        >
+          <img :src="imgUrl" alt="" />
         </div>
       </div>
     </div>
   </div>
 </template>
 <script>
+import { getActivityDetail } from "@/api/api";
 export default {
   data() {
     return {
-      title: "新闻快讯",
-      currentMenu: "新闻详情",
-      newsList: {},
-      // newsList: {
-      //   id: 0,
-      //   day: "18",
-      //   date: "2023-03",
-      //   title: "课题组0同学荣获硕士奖",
-      //   detail:
-      //     "近日，2021年中国科学院计算技术研究所研究生国家奖学金评选结果正式公布，课题组李泽康同学荣获2021年度国家奖学金硕士奖。本次国家奖学金硕士奖共19人进入答辩，经过激烈角逐，最终评选出13人。李泽康，中科院计算所2019级硕士生，导师冯洋研究员，主要研究方向为自然语言处理、对话系统、多模态表示等。已在ACL，TASLP等自然语言处理顶级会议和顶级期刊上发表多篇论文，并获得国际对话技术比赛DSTC8多模态对话生成赛道冠军，DSTC9交互式对话评估赛道任务一第一名、任务二第三名，也曾作为中国大陆唯一受邀者参加国际对话评估研讨会。",
-      //   picUrl: require("../../assets/images/activity/00.jpg"),
-      // },
+      newsFlashDetail: {
+        // id: 11149,
+        // date: "2023-03",
+        // title: "“ChatGPT技术的创新与突破”研讨会在杭州举行",
+        // url: "https://mp.weixin.qq.com/s/WS5ms_W9DCFxDqW1UjBH8Q",
+        // text: "3月10日，“ChatGPT技术的创新与突破”研讨会在杭州举行，本次活动由中国人工智能学会（CAAI）、杭州市科技工作者服务中心和浙江省数字经济联合会青年专家委员会联合主办；得到了浙江省首席信息官协会、浙江省产融互联网技术研究院、浙江省虚拟现实产业联盟、杭州威创智能科技有限公司、CAAI自然计算与数字智能城市专委会以及杭州市计算机学会的大力支持。\r\nCAAI自然计算与数字智能城市专委会秘书长、浙江工业大学前沿交叉科学研究院副院长姚信威主持了本次活动，他在接受媒体采访时表示：“ChatGPT的诞生可能是巨大惊喜，也可能存在巨大担忧。当前在单模态应用方面已取得了很大的进步，相信在ChatGPT4甚至更高版本到来之后，多模态应用将会获得更多扩展，很多行业的革新将更加明显。”",
+        // rClass: "媒体",
+        // detail:
+        //   "3月10日，“ChatGPT技术的创新与突破”研讨会在杭州举行，本次活动由中国人工智能学会（CAAI）、杭州市科技工作者服务中心和浙江省数字经济联合会青年专家委员会联合主办；得到了浙江省首席信息官协会、浙江省产融互联网技术研究院、浙江省虚拟现实产业联盟、杭州威创智能科技有限公司、CAAI自然计算与数字智能城市专委会以及杭州市计算机学会的大力支持。\r\nCAAI自然计算与数字智能城市专委会秘书长、浙江工业大学前沿交叉科学研究院副院长姚信威主持了本次活动，他在接受媒体采访时表示：“ChatGPT的诞生可能是巨大惊喜，也可能存在巨大担忧。当前在单模态应用方面已取得了很大的进步，相信在ChatGPT4甚至更高版本到来之后，多模态应用将会获得更多扩展，很多行业的革新将更加明显。”",
+        // picUrl: [
+        //   require("../../assets/images/activity/trend1.png"),
+        //   require("../../assets/images/activity/trend2.png"),
+        // ],
+        // day: "10",
+        // fileUrls: [],
+        // paperName: "",
+      },
     };
   },
   created() {
-    this.newsList = JSON.parse(decodeURIComponent(this.$route.query.item));
+    this.getNewFlashDetail(this.$route.query.id);
+  },
+  methods: {
+    // async和await用于同步,就是按顺序执行
+    async getNewFlashDetail(id) {
+      // 从上一个路由获取的参数
+      let params = {
+        id: id,
+      };
+      await getActivityDetail(params).then((res) => {
+        this.newsFlashDetail = res.data;
+      });
+    },
   },
 };
 </script>
@@ -103,7 +125,7 @@ export default {
     padding-bottom: 2rem;
   }
   .newFlashPhoto {
-    padding-bottom: 2rem;
+    padding-bottom: 1rem;
   }
   .newFlashPhoto img {
     /* 只设置宽/高另外一个等比例缩放 */
