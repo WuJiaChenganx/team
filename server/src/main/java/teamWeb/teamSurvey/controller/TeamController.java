@@ -44,8 +44,7 @@ public class TeamController {
     @GetMapping("/require-detail")
     public APIResponse memberDetail(@RequestParam(value = "id") Integer id){
         List<MemberBO> memberBOList = memberInfoService.memberDetail(id);
-        List<MemberDTO> memberDTOList = BeanUtil.convert(memberBOList, MemberDTO.class);
-        return APIResponse.success(memberDTOList);
+        return APIResponse.success(memberBOList);
     }
 
     @RequestMapping("/relation")
