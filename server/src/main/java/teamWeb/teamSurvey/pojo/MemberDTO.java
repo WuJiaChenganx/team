@@ -11,6 +11,15 @@ public class MemberDTO {
     private String picUrl;
 
     private Integer comeInDate;
+    private String mClass;
+
+    public String getmClass() {
+        return mClass;
+    }
+
+    public void setmClass(String mClass) {
+        this.mClass = mClass;
+    }
 
     public Integer getId() {
         return id;
