@@ -27,6 +27,13 @@ public class ReportInfoServiceImpl extends ServiceImpl<ReportMapper, ReportDO> i
         List<NoticeBO> noticeBOList = BeanUtil.convert(reportMapper.teamDynamic(start,end-start),NoticeBO.class);
         for (NoticeBO noticeBO:
                 noticeBOList) {
+            if(!noticeBO.getPictureUrl().isEmpty()) {
+                List<String> picList = Arrays.asList(noticeBO.getPictureUrl().split(";"));
+                for (int i = 0; i < picList.size(); i++) {
+                    picList.set(i, Address.rootAddress() + picList.get(i));
+                }
+                noticeBO.setPicUrl(picList);
+            }
             noticeBO.setDay(noticeBO.getDate().split("-")[2]);
             noticeBO.setDate(noticeBO.getDate().substring(0, 7));
             noticeBO.setDetail(noticeBO.getText());
@@ -117,6 +124,7 @@ public class ReportInfoServiceImpl extends ServiceImpl<ReportMapper, ReportDO> i
         ReportBO reportBO = BeanUtil.convert(reportDO,ReportBO.class);
         Integer reportId = reportBO.getId();
         reportBO.setFileUrls(reportMapper.allFileUrl(reportId));
+
         List<String> picList = Arrays.asList(reportBO.getPictureUrl().split(";"));
         for (int i = 0; i < picList.size(); i++) {
             picList.set(i,Address.rootAddress()+picList.get(i));
