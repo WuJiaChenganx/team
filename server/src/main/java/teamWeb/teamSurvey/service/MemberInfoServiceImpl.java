@@ -22,17 +22,13 @@ public class MemberInfoServiceImpl extends ServiceImpl<MemberInfoMapper, MemberD
 
 
     @Override
-    public List<MemberBO> memberDetail(Integer id) {
-        List<MemberBO> memberBOList = memberInfoMapper.memberDetail(id);
-        for (MemberBO memberBO:
-             memberBOList) {
-            Integer memberId = memberBO.getId();
-            memberBO.setPaperList(memberInfoMapper.allPaper(memberId));
-            memberBO.setEducationList(memberInfoMapper.allEducation(memberId));
-            memberBO.setPicUrl(Address.rootAddress() + memberBO.getPictureUrl());
-        }
-
-        return memberBOList;
+    public MemberBO memberDetail(Integer id) {
+        MemberBO memberBO = memberInfoMapper.memberDetail(id);
+        Integer memberId = memberBO.getId();
+        memberBO.setPaperList(memberInfoMapper.allPaper(memberId));
+        memberBO.setEducationList(memberInfoMapper.allEducation(memberId));
+        memberBO.setPicUrl(Address.rootAddress() + memberBO.getPictureUrl());
+        return memberBO;
     }
 
 

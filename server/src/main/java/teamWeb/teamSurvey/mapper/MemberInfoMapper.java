@@ -18,7 +18,7 @@ public interface MemberInfoMapper extends BaseMapper<MemberDO> {
 
     List<MemberDO> allMember(int start, int end, String memberType);
 
-    List<MemberBO> memberDetail(Integer id);
+    MemberBO memberDetail(Integer id);
 
     List<PaperDO> allPaper(Integer id);
 

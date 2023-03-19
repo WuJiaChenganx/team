@@ -11,7 +11,7 @@ public interface MemberInfoService extends IService<MemberDO> {
 
     List<MemberDO> getHomeMember(int start, int end);
 
-    List<MemberBO> memberDetail(Integer id);
+    MemberBO memberDetail(Integer id);
 
     void insertInfo(MemberDO memberDo);
 
