@@ -9,8 +9,6 @@ import java.util.List;
 public interface MemberInfoService extends IService<MemberDO> {
     // List<MemberDO> memberDetail(String name);
 
-    List<MemberDO> getHomeMember(int start, int end);
-
     MemberBO memberDetail(Integer id);
 
     void insertInfo(MemberDO memberDo);
@@ -23,4 +21,5 @@ public interface MemberInfoService extends IService<MemberDO> {
 
     Integer sumMember(String memberType);
 
+    List<MemberBO> homeMember();
 }

@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import teamWeb.teamDynamics.entity.NoticeFile;
 import teamWeb.teamDynamics.entity.ReportDO;
 import teamWeb.teamDynamics.pojo.ReportBO;
+import teamWeb.teamDynamics.pojo.ReportDetailBO;
 
 import java.util.List;
 
@@ -34,4 +35,6 @@ public interface ReportMapper extends BaseMapper<ReportDO> {
     List<NoticeFile> allFileUrl(Integer reportId);
 
     Integer sumReport(String type);
+
+    List<ReportDetailBO> reportTextDetail(Integer reportId);
 }

@@ -21,22 +21,18 @@ public class MemberInfoServiceImpl extends ServiceImpl<MemberInfoMapper, MemberD
     }
 
 
+
+
     @Override
     public MemberBO memberDetail(Integer id) {
         MemberBO memberBO = memberInfoMapper.memberDetail(id);
         Integer memberId = memberBO.getId();
+        memberBO.setMemberType(memberBO.getmClass());
         memberBO.setPaperList(memberInfoMapper.allPaper(memberId));
         memberBO.setEducationList(memberInfoMapper.allEducation(memberId));
         memberBO.setPicUrl(Address.rootAddress() + memberBO.getPictureUrl());
         return memberBO;
     }
-
-
-    @Override
-    public List<MemberDO> getHomeMember(int start, int end) {
-        return memberInfoMapper.getHomeMember(start,end-start);
-    }
-
 
     @Override
     public void insertInfo(MemberDO memberDo) {
@@ -59,6 +55,7 @@ public class MemberInfoServiceImpl extends ServiceImpl<MemberInfoMapper, MemberD
         List<MemberBO> memberBOList = BeanUtil.convert(memberDOList, MemberBO.class);
         for (MemberBO memberBO:
                 memberBOList) {
+            memberBO.setMemberType(memberBO.getmClass());
             memberBO.setPicUrl(Address.rootAddress() + memberBO.getPictureUrl());
         }
         return memberBOList;
@@ -67,5 +64,19 @@ public class MemberInfoServiceImpl extends ServiceImpl<MemberInfoMapper, MemberD
     @Override
     public Integer sumMember(String memberType) {
         return memberInfoMapper.sumMember(memberType);
+    }
+
+    @Override
+    public List<MemberBO> homeMember() {
+        List<MemberDO> memberDOList = memberInfoMapper.allMember(0, 1000, "teacher");
+        memberDOList.addAll(memberInfoMapper.allMember(0, 1000, "doctor"));
+        memberDOList.addAll(memberInfoMapper.allMember(0, 1000, "master"));
+        List<MemberBO> memberBOList = BeanUtil.convert(memberDOList, MemberBO.class);
+        for (MemberBO memberBO:
+                memberBOList) {
+            memberBO.setMemberType(memberBO.getmClass());
+            memberBO.setPicUrl(Address.rootAddress() + memberBO.getPictureUrl());
+        }
+        return memberBOList;
     }
 }

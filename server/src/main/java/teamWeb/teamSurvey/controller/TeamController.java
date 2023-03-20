@@ -33,7 +33,7 @@ public class TeamController {
     }
 
     @GetMapping("/require-member")
-    public APIResponse allMember(@RequestParam(value="start",defaultValue = "0") int start,
+    public APIResponse member(@RequestParam(value="start",defaultValue = "0") int start,
                                  @RequestParam(value="end",defaultValue = "10") int end,
                                  @RequestParam(value = "memberType") String memberType){
         List<MemberBO> allMemberBOList = memberInfoService.allMember(start, end,memberType);
@@ -41,6 +41,12 @@ public class TeamController {
         return APIResponse.success(allMemberDTOList,memberInfoService.sumMember(memberType));
     }
 
+    @GetMapping("require-homeMember")
+    public APIResponse homeMember(){
+        List<MemberBO> homeMemberList = memberInfoService.homeMember();
+        List<MemberDTO> homeMemberDTOList = BeanUtil.convert(homeMemberList, MemberDTO.class);
+        return APIResponse.success(homeMemberDTOList);
+    }
     @GetMapping("/require-detail")
     public APIResponse memberDetail(@RequestParam(value = "id") Integer id){
         MemberBO member = memberInfoService.memberDetail(id);

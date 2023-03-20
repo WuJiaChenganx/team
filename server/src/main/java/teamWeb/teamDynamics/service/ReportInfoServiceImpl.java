@@ -4,10 +4,9 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import teamWeb.teamDynamics.entity.ReportDO;
+import teamWeb.teamDynamics.entity.ReportDetailDO;
 import teamWeb.teamDynamics.mapper.ReportMapper;
-import teamWeb.teamDynamics.pojo.AllNewsBO;
-import teamWeb.teamDynamics.pojo.NoticeBO;
-import teamWeb.teamDynamics.pojo.ReportBO;
+import teamWeb.teamDynamics.pojo.*;
 import teamWeb.teamSurvey.pojo.MemberBO;
 import teamWeb.utils.Address;
 import teamWeb.utils.BeanUtil;
@@ -123,18 +122,26 @@ public class ReportInfoServiceImpl extends ServiceImpl<ReportMapper, ReportDO> i
         ReportDO reportDO = reportMapper.reportDetail(id);
         ReportBO reportBO = BeanUtil.convert(reportDO,ReportBO.class);
         Integer reportId = reportBO.getId();
+
         reportBO.setFileUrls(reportMapper.allFileUrl(reportId));
 
-        List<String> picList = Arrays.asList(reportBO.getPictureUrl().split(";"));
-        for (int i = 0; i < picList.size(); i++) {
-            picList.set(i,Address.rootAddress()+picList.get(i));
+        List<ReportDetailBO> reportDetailBOList = reportMapper.reportTextDetail(reportId);
+        for (ReportDetailBO reportDetailBO:
+                reportDetailBOList) {
+            if(!reportDetailBO.getPictureUrl().isEmpty()) {
+                List<String> picList = Arrays.asList(reportDetailBO.getPictureUrl().split(";"));
+                for (int i = 0; i < picList.size(); i++) {
+                    picList.set(i, Address.rootAddress() + picList.get(i));
+                }
+                reportDetailBO.setPicUrl(picList);
+            }
         }
-        reportBO.setPicUrl(picList);
 
-        reportBO.setDetail(reportBO.getText());
+
+        reportBO.setDetail(BeanUtil.convert(reportDetailBOList, ReportDetailDTO.class));
+
         reportBO.setDay(reportBO.getDate().split("-")[2]);
         reportBO.setDate(reportBO.getDate().substring(0, 7));
-
         return reportBO;
     }
 

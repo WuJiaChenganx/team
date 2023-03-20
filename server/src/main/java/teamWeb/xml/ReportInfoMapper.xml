@@ -107,4 +107,14 @@
             report_id = "${reportId}"
         </where>
     </select>
+
+    <select id="reportTextDetail" resultType="teamWeb.teamDynamics.pojo.ReportDetailBO">
+        SELECT detail_id AS id, text, pic_url AS pictureUrl,section
+        FROM report_detail_and_report_map join report_detail on report_detail.id = report_detail_and_report_map.detail_id
+        <where>
+            report_id = ${reportId}
+        </where>
+        ORDER BY section
+    </select>
+
 </mapper>

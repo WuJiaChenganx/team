@@ -1,8 +1,10 @@
 package teamWeb.teamDynamics.pojo;
 
 import teamWeb.teamDynamics.entity.NoticeFile;
+import teamWeb.teamDynamics.entity.ReportDetailDO;
 
 import java.util.List;
+import java.util.Map;
 
 public class ReportBO {
     private Integer id;
@@ -12,7 +14,7 @@ public class ReportBO {
     private String pictureUrl;
     private String text;
     private String rClass;
-    private String detail;
+    private List<ReportDetailDTO> detail;
     private List<String> picUrl;
     private String day;
     private List<NoticeFile> fileUrls;
@@ -74,11 +76,12 @@ public class ReportBO {
         this.rClass = rClass;
     }
 
-    public String getDetail() {
+
+    public List<ReportDetailDTO> getDetail() {
         return detail;
     }
 
-    public void setDetail(String detail) {
+    public void setDetail(List<ReportDetailDTO> detail) {
         this.detail = detail;
     }
 

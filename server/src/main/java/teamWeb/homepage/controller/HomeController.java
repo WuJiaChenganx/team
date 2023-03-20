@@ -46,11 +46,6 @@ public class HomeController {
     }
 
 
-    @RequestMapping("/member")
-    public APIResponse member(@RequestParam(value="start",defaultValue = "0") int start,@RequestParam(value="end",defaultValue = "10") int end){
-        List<MemberDO> member = memberInfoService.getHomeMember(start,end);
-        return APIResponse.success(member);
-    }
 
     @RequestMapping("/relation")
     public APIResponse relation(){
