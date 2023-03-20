@@ -61,7 +61,7 @@ export default {
                 "Shaolei Zhang, Yang Feng. Reducing Position Bias in Simultaneous Machine Translation with Length-Aware Framework.",
             },
           ],
-          picUrl: require("../../assets/images/teacherPhoto/lq.jpg"),
+          picUrl: require("../../assets/images/teacherPhoto/zhc.jpg"),
         },
         {
           id: 2,

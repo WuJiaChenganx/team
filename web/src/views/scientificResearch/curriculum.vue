@@ -209,11 +209,13 @@ export default {
     font-weight: bold;
   }
   .detailItemCourseProfile {
-    font-size: 1.8rem;
+    padding: 0.5rem 0;
+    font-size: 1.6rem;
   }
   .detailItemCourseName {
     text-indent: 2em;
     font-size: 1.6rem;
+    padding: 0.5rem 0;
   }
 }
 /* 移动端  */
@@ -286,11 +288,13 @@ export default {
     font-weight: bold;
   }
   .detailItemCourseProfile {
-    font-size: 1.8rem;
+    padding: 0.5rem 0;
+    font-size: 1.6rem;
   }
   .detailItemCourseName {
     text-indent: 2em;
     font-size: 1.6rem;
+    padding: 0.5rem 0;
   }
 }
 </style>

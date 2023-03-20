@@ -46,7 +46,7 @@
             :key="projectItem.id"
           >
             <div class="detailItemProjectName">
-              {{ projectItem.id }}. 项目名称: {{ projectItem.projectName }}
+              {{ projectItem.number }}. 项目名称: {{ projectItem.projectName }}
             </div>
             <div class="detailItemProjectResponser">
               项目负责人: {{ projectItem.responser }}
@@ -57,10 +57,19 @@
             <div class="detailItemProjectTime">
               起止时间: {{ projectItem.time }}
             </div>
-            <div class="detailItemProjectInfo">
-              项目简介: {{ projectItem.projectInfo }}
-            </div>
           </div>
+        </div>
+        <div class="paging">
+          <!-- page-size展示的选择每页显示个数的选项,页面变动触发的事件是current-change后面的函数,total表示总共的数量 current-page表示当前页数-->
+          <el-pagination
+            background
+            layout="prev, pager, next"
+            @current-change="handleCurrentChange"
+            :page-size="10"
+            :total="total_number"
+            :current-page="current_index"
+          >
+          </el-pagination>
         </div>
       </div>
     </div>
@@ -68,6 +77,7 @@
 </template>
 
 <script>
+import { getProjectURL } from "@/api/api";
 export default {
   data() {
     return {
@@ -79,39 +89,35 @@ export default {
         { name: "科研平台", path: "/scientificResearch/platform" },
         { name: "课程教学", path: "/scientificResearch/curriculum" },
       ],
-      projects: [
-        {
-          id: 1,
-          projectName: "无线网络性能分析、优化与保障研究",
-          responser: "姚信威",
-          projectType: "基金委-杰出青年科学基金项目",
-          time: "2016-2021",
-          projectInfo:
-            "本项目将以物联网为背景，研究以能量为中心的无源网络体系结构中的关键科学问题，例如外部能量的建模、弱能量下的节点设计、弱能量下的计算、弱能量下的路由和数据融合、弱能量下的节点定位和跟踪、弱能量下的深度感知等;并在此基础之上，建立由无源节点组成的新型网络体系结构。",
-        },
-        {
-          id: 2,
-          projectName: "跨域协同的多模态高效感知与增强智能",
-          responser: "姚信威",
-          projectType: "基金委-应急项目",
-          time: "2018-2022",
-          projectInfo:
-            "本项目着重解决相关的数据共享交易中的三个核心科学问题：1）数据标记体系和权限管理，2）面向需求的可信安全数据共享机制和计算模式，3）面向参与实体的信誉管理和追责。项目拟构建数据资产的标记、确权模型和理论，研究适合大数据共享交易环节的安全高效共享计算方法，建立对参与实体的信誉管理和追责机制和方法，构建安全可信的数据共享与计算的基础理论体系，并搭建应用验证示范平台。",
-        },
-        {
-          id: 3,
-          projectName: "大数据共享与交易中的数据安全可信研究 ",
-          responser: "姚信威",
-          projectType: "基金委-重点项目",
-          time: "2022-2023",
-          projectInfo:
-            "本项目着重解决相关的数据共享交易中的三个核心科学问题：1）数据标记体系和权限管理，2）面向需求的可信安全数据共享机制和计算模式，3）面向参与实体的信誉管理和追责。项目拟构建数据资产的标记、确权模型和理论，研究适合大数据共享交易环节的安全高效共享计算方法，建立对参与实体的信誉管理和追责机制和方法，构建安全可信的数据共享与计算的基础理论体系，并搭建应用验证示范平台。",
-        },
-      ],
+      projects: [],
+      // 总共要展示的数量
+      total_number: 10,
+      // 当前页面从1开始的这两个属性会在刚开始的时候就更新
+      current_index: 1,
     };
   },
-  created() {},
-  methods: {},
+  created() {
+    this.getProjectList();
+  },
+  methods: {
+    // async和await用于同步,就是按顺序执行
+    async getProjectList() {
+      let params = {
+        // 定义参数
+        start: (this.current_index - 1) * 10,
+        end: this.current_index * 10,
+      };
+      await getProjectURL(params).then((res) => {
+        this.projects = res.data;
+        this.total_number = res.sum;
+      });
+    },
+    handleCurrentChange(val) {
+      // 传入的val是当前页的页码
+      this.current_index = val;
+      this.getProjectList();
+    },
+  },
 };
 </script>
 <style scoped>
@@ -203,6 +209,11 @@ export default {
   .detailItemProjectInfo {
     font-weight: normal;
   }
+
+  /* 设置分页和底部的距离 */
+  .paging {
+    margin: 3rem 0;
+  }
 }
 /* 移动端  */
 @media screen and (max-width: 1000px) {
@@ -274,6 +285,10 @@ export default {
   }
   .detailItemProjectInfo {
     font-weight: normal;
+  }
+  /* 设置分页和底部的距离 */
+  .paging {
+    margin: 3rem 0;
   }
 }
 </style>

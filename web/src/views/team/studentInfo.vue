@@ -59,14 +59,16 @@
               </div>
             </div>
             <div class="basicRight">
-              <img :src="studentInfo.picUrl" alt="" />
+              <img :src="studentInfo.picUrl" @error="setDefaultImage" />
             </div>
           </div>
           <div class="educationBackground">
             <div class="educationBackgroundTitle">教育背景</div>
             <div
               class="educationItem"
-              v-for="(educationItem, educationIndex) in studentInfo.education"
+              v-for="(
+                educationItem, educationIndex
+              ) in studentInfo.educationList"
               :key="educationIndex"
             >
               {{ educationItem.time }} {{ educationItem.experience }}
@@ -79,7 +81,7 @@
               v-for="(paperItem, paperIndex) in studentInfo.paperList"
               :key="paperIndex"
             >
-              {{ paperItem.paper }}
+              {{ paperItem.name }}
             </div>
           </div>
         </div>
@@ -88,6 +90,9 @@
   </div>
 </template>
 <script>
+import { getMemberDetail } from "@/api/api";
+// 设置默认缺失的图片
+import defaultImage from "@/assets/images/member/default.png";
 export default {
   data() {
     return {
@@ -100,46 +105,35 @@ export default {
         { name: "毕业生", path: "/team/graduate" },
       ],
       activeMenu: this.$route.path,
-      studentInfo: {},
-      // studentInfo: {
-      //   id: 1,
-      //   name: "张恒聪",
-      //   title: "博士研究生",
-      //   email: "zhangshaolei20z@ict.ac.cn",
-      //   direction: "机器翻译、自然语言处理",
-      //   education: [
-      //     { time: "2016-2020", experience: "北京邮电大学,工学硕士" },
-      //     {
-      //       time: "2020-present",
-      //       experience: "中科院计算技术研究所,博士在读",
-      //     },
-      //   ],
-      //   paperList: [
-      //     {
-      //       id: 1,
-      //       paper:
-      //         "Shaolei Zhang, Yang Feng. Modeling Dual Read/Write Paths for Simultaneous Machine Translation",
-      //     },
-      //     {
-      //       id: 2,
-      //       paper:
-      //         "Shaolei Zhang, Yang Feng. Reducing Position Bias in Simultaneous Machine Translation with Length-Aware Framework.",
-      //     },
-      //   ],
-      //   picUrl: require("../../assets/images/activity/00.jpg"),
-      // },
+      studentInfo: [],
     };
   },
   created() {
-    this.studentInfo = JSON.parse(decodeURIComponent(this.$route.query.item));
-    if (this.studentInfo.title == "博士研究生") {
-      this.activeMenu = "/team/doctor";
-    } else if (this.studentInfo.title == "硕士研究生") {
-      this.activeMenu = "/team/master";
-    } else if (this.studentInfo.title == "毕业生") {
-      this.activeMenu = "/team/graduate";
-    }
-    console.log(this.studentInfo);
+    this.getStudentInfo(this.$route.query.id);
+  },
+  methods: {
+    // async和await用于同步,就是按顺序执行
+    async getStudentInfo(id) {
+      // 从上一个路由获取的参数
+      let params = {
+        id: id,
+      };
+      await getMemberDetail(params).then((res) => {
+        this.studentInfo = res.data;
+        // 处理侧边菜单的选中问题
+        if (this.studentInfo.memberType == "doctor") {
+          this.activeMenu = "/team/doctor";
+        } else if (this.studentInfo.memberType == "master") {
+          this.activeMenu = "/team/master";
+        } else if (this.studentInfo.memberType == "graduate") {
+          this.activeMenu = "/team/graduate";
+        }
+      });
+    },
+    // 设置默认缺失的图片
+    setDefaultImage(e) {
+      e.target.src = defaultImage;
+    },
   },
 };
 </script>

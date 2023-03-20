@@ -43,13 +43,13 @@
         <div class="directionItem">
           <div
             class="detailItem"
-            v-for="directionItem in directions"
-            :key="directionItem.id"
+            v-for="(directionItem, directionItemIndex) in directions"
+            :key="directionItemIndex"
           >
-            <div class="detailItemInfo">{{ directionItem.Info }}</div>
-            <div class="detailItemImg">
-              <img :src="directionItem.picUrl" alt="" />
+            <div class="detailItemTitle">
+              ({{ directionItemIndex + 1 }}) {{ directionItem.title }}
             </div>
+            <div class="detailItemInfo">{{ directionItem.info }}</div>
           </div>
         </div>
       </div>
@@ -71,14 +71,16 @@ export default {
       ],
       directions: [
         {
-          id: 1,
-          Info: " 实验室主要面向国际科技前沿、国家重大战略需求、国民经济主战场和人民生命健康进行攻关创新。主要在前沿智能物联网、智能计算、数据智能、量子计算等领域，从无线通信、移动计算、边缘计算、智能无人系统、数据理解、数据共享、智能学习及隐私保护等方面开展创新性科研和平台建设。",
-          picUrl: require("../../assets/images/activity/04.jpg"),
+          title: "微观尺度——纳米物联网",
+          info: " 随着纳米技术和微电子技术的不断发展，微观世界领域的物联网智能感知与通信技术及其前所未有的应用场景具有极其重大的价值与战略意义。虽然纳米机器人的潜在用途非常广泛，并具有巨大的战略意义，然而受纳米器件的体积大小、感知能力、计算能力、存储能力、能量供应等物理因素制约，单个纳米器件（机器人）只能执行一些十分简单的任务（如计算、感知、数据存贮和驱动等）。因此，在人体健康应用场景下，如何释放单个纳米机器人的应用潜能，允许纳米机器人之间相互协作，共享和融合信息，扩展单个纳米机器人在复杂性和操作性等方面的能力，即构建高可靠性的人体移动电磁纳米机器人网络。该特殊的人体移动电磁纳米机器人网络（统称：纳米物联网或纳米网络）的基础网络理论和关键通信技术就是本方向的重点研究内容，具体包括基于太赫兹频段的人体纳米网络同信道干扰模型和调制解调机制，人体移动纳米网络的动态拓扑结构及能量模型，能量受限环境下的纳米网络MAC协议，以及能耗均衡的中继协议。本方向的研究对于微观动态环境下的人体纳米机器人网络具有重要的理论研究价值，对未来人体医学健康诊疗等场景具有重要的实际应用价值。",
         },
         {
-          id: 2,
-          Info: "实验室目前设有感知智能、计算智能、数据智能、无人系统和量子计算几个科研小组。感知智能主要研究低功耗智能感知和无源网络，包括新型的跨域多模态感知、低功耗甚至无源的组网与接入技术；计算智能主要研究边缘计算相关的计算理论、方法和技术和和网络安全，包括端边云计算和基于边缘计算的安全和优化；数据智能主要研究数据理解、数据质量评估、数据共享和交易、联邦学习、隐私保护、及相关算法分析和计算理论；无人系统主要研究基于边缘计算的车路协同的无人驾驶系统；量子计算主要研究量子软件和量子计算相关理论和系统，尤其是量子-经典混合计算的理论与平台。",
-          picUrl: require("../../assets/images/activity/04.jpg"),
+          title: "宏观尺度——智能感知与计算",
+          info: "实为提升多模态智能物联融合感知与计算能力，推动物联网感知相关技术的进一步发展与应用，1）拟研究基于多模数据语义框架的语义理解与智能抽取方法，针对多模数据的共性特征，设计针对结构化或非结构化多源原始数据的语义框架自适应定义方法与自动拓展机制，将语义框架定义抽象为马尔可夫决策过程，设计基于逆强化学习的语义框架构建模型，将领域先验知识结合到奖励函数学习过程中。在框架构建的基础上，设计针对多模数据的特征抽取与表达方法，实现数据的统一描述与表示。2）在多模数据语义定义与特征发现的基础上，拟利用多模态数据本身的特征及对应的应用，挖掘不同模态数据的重要程度，进而提升多模态数据的融合表达与共同学习能力。设计一种具有一定通用性和可解释性的多模态融合框架。3）拟针对多模态数据的分析任务，研究相关大规模知识库的构建，包括知识表示、实体对齐、数据异常修复等。进而通过将知识库整合进统一语义表述框架，实现多模数据与外部知识的无缝融合，从而获得更为精确的结果。",
+        },
+        {
+          title: "宏观尺度——交通运输碳排放智能感知与协同控制",
+          info: "研发交通运行碳排放智能监测系统，重点突破出行方式与运输结构的优化、多模式交通网络实时在线碳排放监测与低碳导向的智能管控等关键技术，实现成果在城市交通、公路货运等行业的示范应用。1）拟提出构建“云-边-端”结构化分布式的路侧多形态智能感知架构，利用部署在路侧及路面的摄像机和雷达以及高精度称重装置对交通运行车辆的车牌、类型、重量、位置、速度及流量等信息进行实时、动态、精准、全息感知，进而研发交通运行碳排放智能监测系统；2）基于“云-边-端”架构的智能监测系统采集的多模态交通运输车辆数据，研究基于深度学习方法构建“单车级-路径级-区域级”的多尺度碳排放计算模型，即基于车辆个性化数据的单个车辆碳排放的计算模型、基于车辆运行路径的碳排放计算模型和基于路段的区域碳排放计算模型。结合车辆实时行驶特征属性和碳排放监测数据构建训练数据，对单个车辆碳排放进行测算；基于单车碳排放量计算模型，结合机动车在不同等级道路上的，分析交通流量状况对机动车碳排放的影响，对车辆运行路径的碳排放进行测算；进一步基于路段的检测数据构建区域短时碳排放计算模型。3）结合交通运输碳排放深度学习模型，构建涵盖微观-中观-宏观多尺度碳排放计算评估体系和计算方法，打造面向超大规模交通网络的实时在线碳排放计算平台，实现实时、精准、高效的碳排放计算和管理，同时突破出行方式与运输结构优化并实现低碳导向的智能管控。",
         },
       ],
     };
@@ -161,22 +163,21 @@ export default {
   .detailItem {
     word-wrap: break-word;
     word-break: break-all;
-    margin-top: 1.5rem;
+    margin-top: 2rem;
+  }
+  .detailItemTitle {
+    color: #0055a2;
+    font-weight: bold;
+    font-size: 2rem;
+    text-align: left;
+    margin-bottom: 1rem;
   }
   /* 文字和图片的距离 */
   .detailItemInfo {
     line-height: 3rem;
-    font-size: 2rem;
+    font-size: 1.8rem;
     text-align: left;
     text-indent: 2em;
-    margin-bottom: 1rem;
-  }
-  .detailItemImg {
-    padding-bottom: 0.5rem;
-  }
-  .detailItemImg img {
-    /* 只设置宽/高另外一个等比例缩放 */
-    width: 80%;
   }
 }
 /* 移动端 */
@@ -240,22 +241,21 @@ export default {
   .detailItem {
     word-wrap: break-word;
     word-break: break-all;
-    margin-top: 1.5em;
+    margin-top: 0.5rem;
+  }
+  .detailItemTitle {
+    color: #0055a2;
+    font-weight: bold;
+    font-size: 2rem;
+    text-align: left;
+    margin-bottom: 1rem;
   }
   /* 文字和图片的距离 */
   .detailItemInfo {
     line-height: 3rem;
-    font-size: 2rem;
+    font-size: 1.8rem;
     text-align: left;
     text-indent: 2em;
-    margin-bottom: 1rem;
-  }
-  .detailItemImg {
-    padding-bottom: 0.5rem;
-  }
-  .detailItemImg img {
-    /* 只设置宽/高另外一个等比例缩放 */
-    width: 80%;
   }
 }
 </style>
