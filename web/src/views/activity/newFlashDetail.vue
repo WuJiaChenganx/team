@@ -36,23 +36,7 @@ import { getActivityDetail } from "@/api/api";
 export default {
   data() {
     return {
-      newsFlashDetail: {
-        // id: 11149,
-        // date: "2023-03",
-        // title: "“ChatGPT技术的创新与突破”研讨会在杭州举行",
-        // url: "https://mp.weixin.qq.com/s/WS5ms_W9DCFxDqW1UjBH8Q",
-        // text: "3月10日，“ChatGPT技术的创新与突破”研讨会在杭州举行，本次活动由中国人工智能学会（CAAI）、杭州市科技工作者服务中心和浙江省数字经济联合会青年专家委员会联合主办；得到了浙江省首席信息官协会、浙江省产融互联网技术研究院、浙江省虚拟现实产业联盟、杭州威创智能科技有限公司、CAAI自然计算与数字智能城市专委会以及杭州市计算机学会的大力支持。\r\nCAAI自然计算与数字智能城市专委会秘书长、浙江工业大学前沿交叉科学研究院副院长姚信威主持了本次活动，他在接受媒体采访时表示：“ChatGPT的诞生可能是巨大惊喜，也可能存在巨大担忧。当前在单模态应用方面已取得了很大的进步，相信在ChatGPT4甚至更高版本到来之后，多模态应用将会获得更多扩展，很多行业的革新将更加明显。”",
-        // rClass: "媒体",
-        // detail:
-        //   "3月10日，“ChatGPT技术的创新与突破”研讨会在杭州举行，本次活动由中国人工智能学会（CAAI）、杭州市科技工作者服务中心和浙江省数字经济联合会青年专家委员会联合主办；得到了浙江省首席信息官协会、浙江省产融互联网技术研究院、浙江省虚拟现实产业联盟、杭州威创智能科技有限公司、CAAI自然计算与数字智能城市专委会以及杭州市计算机学会的大力支持。\r\nCAAI自然计算与数字智能城市专委会秘书长、浙江工业大学前沿交叉科学研究院副院长姚信威主持了本次活动，他在接受媒体采访时表示：“ChatGPT的诞生可能是巨大惊喜，也可能存在巨大担忧。当前在单模态应用方面已取得了很大的进步，相信在ChatGPT4甚至更高版本到来之后，多模态应用将会获得更多扩展，很多行业的革新将更加明显。”",
-        // picUrl: [
-        //   require("../../assets/images/activity/trend1.png"),
-        //   require("../../assets/images/activity/trend2.png"),
-        // ],
-        // day: "10",
-        // fileUrls: [],
-        // paperName: "",
-      },
+      newsFlashDetail: {},
     };
   },
   created() {
@@ -111,7 +95,6 @@ export default {
     color: #0055a2;
     line-height: 3rem;
     font-size: 2.5rem;
-    font-weight: bold;
     text-align: center;
     padding: 2rem;
   }
@@ -168,7 +151,6 @@ export default {
     color: #0055a2;
     line-height: 3rem;
     font-size: 2rem;
-    font-weight: bold;
     text-align: center;
     padding: 2rem;
   }

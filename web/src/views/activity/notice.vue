@@ -2,48 +2,73 @@
   <!-- 通知公告列表 -->
   <div class="notice">
     <div class="noticeContent">
-      <div class="noticeTitle">
-        <div class="title">通知公告</div>
-        <div class="breadCrumb">
-          <el-breadcrumb separator-class="el-icon-arrow-right">
-            <el-breadcrumb-item :to="{ path: '/home' }"
-              >首页</el-breadcrumb-item
+      <div class="noticeAside">
+        <div class="noticeAsideTitle">团队动态</div>
+        <div class="noticeAsideContent">
+          <el-menu
+            :default-active="this.$route.path"
+            router
+            mode="vertical"
+            background-color="#ffffff"
+            text-color="#000"
+            active-text-color="#fff"
+          >
+            <el-menu-item
+              class="noticeAsideItem"
+              v-for="(menuItem, menuIndex) in Menu"
+              :key="menuIndex"
+              :index="menuItem.path"
             >
-            <el-breadcrumb-item :to="{ path: '/activity/notice' }"
-              >通知公告</el-breadcrumb-item
-            >
-          </el-breadcrumb>
+              <i class="el-icon-sunny"></i>
+              <span>{{ menuItem.name }}</span>
+            </el-menu-item>
+          </el-menu>
         </div>
       </div>
-      <div class="noticeItem">
-        <div
-          v-for="(item, index) in noticeList"
-          :key="index"
-          class="notice-row"
-          @click="gotoDetail(item.id)"
-        >
-          <div class="notice-date">
-            <div>{{ item.day }}</div>
-            <div>{{ item.date }}</div>
+      <div class="noticeDetail">
+        <div class="noticeTitle">
+          <div class="title">通知公告</div>
+          <div class="breadCrumb">
+            <el-breadcrumb separator-class="el-icon-arrow-right">
+              <el-breadcrumb-item :to="{ path: '/home' }"
+                >首页</el-breadcrumb-item
+              >
+              <el-breadcrumb-item :to="{ path: '/activity/notice' }"
+                >通知公告</el-breadcrumb-item
+              >
+            </el-breadcrumb>
           </div>
-          <div class="notice-profile">
-            <div class="notice-title">{{ item.title }}</div>
-            <div class="notice-thing">
-              {{ item.detail }}
+        </div>
+        <div class="noticeItem">
+          <div
+            v-for="(item, index) in noticeList"
+            :key="index"
+            class="notice-row"
+            @click="gotoDetail(item.id)"
+          >
+            <div class="notice-date">
+              <div>{{ item.day }}</div>
+              <div>{{ item.date }}</div>
+            </div>
+            <div class="notice-profile">
+              <div class="notice-title">{{ item.title }}</div>
+              <div class="notice-thing">
+                {{ item.detail }}
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      <div class="paging">
-        <el-pagination
-          background
-          layout="prev, pager, next"
-          @current-change="handleCurrentChange"
-          :page-size="10"
-          :total="total_number"
-          :current-page="current_index"
-        >
-        </el-pagination>
+        <div class="paging">
+          <el-pagination
+            background
+            layout="prev, pager, next"
+            @current-change="handleCurrentChange"
+            :page-size="10"
+            :total="total_number"
+            :current-page="current_index"
+          >
+          </el-pagination>
+        </div>
       </div>
     </div>
   </div>
@@ -53,6 +78,11 @@ import { getNoticeURL } from "@/api/api";
 export default {
   data() {
     return {
+      Menu: [
+        { name: "新闻快讯", path: "/activity/newFlash" },
+        { name: "学术动态", path: "/activity/academy" },
+        { name: "通知公告", path: "/activity/notice" },
+      ],
       // 要展示的公告信息
       noticeList: [],
       // 总共公告的数量
@@ -99,12 +129,40 @@ export default {
 @media screen and (min-width: 1000px) {
   .notice {
     padding: 3rem 0;
-    background: #eef7fe;
+    background: url(../../assets/images/background/contentBackground.jpg)
+      no-repeat;
   }
   .noticeContent {
     width: 75%;
     margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  .noticeAside {
+    width: 25%;
+  }
+  .noticeAsideTitle {
+    background: url(../../assets/images/background/zryy-menu-t-bg.png) no-repeat;
+    border-radius: 0.6rem;
+    background-size: cover !important;
+    font-weight: bold;
+    color: #fff;
+    font-size: 2rem;
+    line-height: 3rem;
+    height: 3rem;
+    padding: 2rem 3rem;
+    margin-bottom: 0.5rem;
+  }
+  .noticeAsideItem {
+    font-size: 2rem;
+    text-align: left;
+    cursor: pointer;
+  }
+  .noticeDetail {
+    width: 73%;
     padding: 0 3rem;
+    box-sizing: border-box;
     background-color: #fff;
     border: 1px solid #dfdfdf;
   }
@@ -127,6 +185,10 @@ export default {
   .el-breadcrumb ::v-deep .el-breadcrumb__inner {
     color: #999 !important;
     font-weight: 400 !important;
+  }
+  /* 选中侧边导航的背景颜色 */
+  .el-menu-item.is-active {
+    background: #008cd6 !important;
   }
   /* 被选中时的颜色 */
   .el-breadcrumb__item:last-child ::v-deep .el-breadcrumb__inner {
@@ -156,6 +218,7 @@ export default {
   }
   /* 时间框 */
   .notice-date {
+    margin-right: 2rem;
     width: 80px;
     height: 80px;
     display: flex;
@@ -174,7 +237,8 @@ export default {
     font-weight: bold;
   } /* 文字部分 */
   .notice-profile {
-    width: 85%;
+    width: 70%;
+    flex: 1 1 auto;
     height: 80px;
     display: flex;
     flex-direction: column;
@@ -188,6 +252,12 @@ export default {
     text-align: left;
     overflow: hidden;
     transition: all 0.5s;
+    transition: all 0.5s;
+    /* 显示1行 */
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
   }
   .notice-thing {
     font-size: 16px;
@@ -214,10 +284,29 @@ export default {
     background: #eef7fe;
   }
   .noticeContent {
+    display: flex;
+    flex-direction: column;
+  }
+  .noticeAside {
+    width: 100%;
+  }
+  /* 不显示侧边导航栏上面的标题 */
+  .noticeAsideTitle {
+    display: none;
+  }
+  .noticeAsideItem {
+    font-size: 2rem;
+    text-align: center;
+    cursor: pointer;
+  }
+  .noticeDetail {
+    width: 100%;
+    padding: 0 1.5rem;
     box-sizing: border-box;
     background-color: #fff;
     border: 1px solid #dfdfdf;
   }
+
   .noticeTitle {
     display: flex;
     flex-direction: row;
@@ -233,7 +322,10 @@ export default {
   .breadCrumb {
     padding-top: 1rem;
   }
-
+  /* 选中侧边导航的背景颜色 */
+  .el-menu-item.is-active {
+    background: #008cd6 !important;
+  }
   /* 不被选中时的颜色 */
   .el-breadcrumb ::v-deep .el-breadcrumb__inner {
     color: #999 !important;
@@ -267,6 +359,7 @@ export default {
   }
   /* 时间框 */
   .notice-date {
+    margin-right: 2rem;
     width: 8rem;
     height: 8rem;
     display: flex;
@@ -286,7 +379,8 @@ export default {
   }
   /* 文字部分 */
   .notice-profile {
-    width: 80%;
+    width: 70%;
+    flex: 1 1 auto;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -299,6 +393,11 @@ export default {
     text-align: left;
     overflow: hidden;
     transition: all 0.5s;
+    /* 显示1行 */
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
   }
   .notice-thing {
     font-size: 1rem;

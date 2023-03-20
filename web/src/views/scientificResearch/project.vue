@@ -27,14 +27,14 @@
       </div>
       <div class="projectDetail">
         <div class="projectTitle">
-          <div class="title">科研平台</div>
+          <div class="title">科研项目</div>
           <div class="breadCrumb">
             <el-breadcrumb separator-class="el-icon-arrow-right">
               <el-breadcrumb-item :to="{ path: '/home' }"
                 >首页</el-breadcrumb-item
               >
               <el-breadcrumb-item :to="{ path: '/scientificResearch/project' }"
-                >科研平台</el-breadcrumb-item
+                >科研项目</el-breadcrumb-item
               >
             </el-breadcrumb>
           </div>

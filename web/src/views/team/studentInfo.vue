@@ -81,7 +81,7 @@
               v-for="(paperItem, paperIndex) in studentInfo.paperList"
               :key="paperIndex"
             >
-              {{ paperItem.name }}
+              {{ paperIndex + 1 }}. {{ paperItem.name }}
             </div>
           </div>
         </div>
@@ -96,7 +96,6 @@ import defaultImage from "@/assets/images/member/default.png";
 export default {
   data() {
     return {
-      title: "团队概况",
       Menu: [
         { name: "团队简介", path: "/team/profile" },
         { name: "导师", path: "/team/teacher" },

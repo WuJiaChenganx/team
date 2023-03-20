@@ -63,6 +63,7 @@ export default {
     padding: 3rem 0;
     background: #eef7fe;
   }
+
   .academyDetail {
     width: 75%;
     /* 内容里面缩进 */
@@ -95,7 +96,6 @@ export default {
     color: #0055a2;
     line-height: 3rem;
     font-size: 2.5rem;
-    font-weight: bold;
     text-align: center;
     padding: 2rem;
   }
@@ -113,7 +113,7 @@ export default {
   }
   .academyPhoto img {
     /* 只设置宽/高另外一个等比例缩放 */
-    width: 80%;
+    width: 50%;
   }
 }
 
@@ -152,7 +152,6 @@ export default {
     color: #0055a2;
     line-height: 3rem;
     font-size: 2rem;
-    font-weight: bold;
     text-align: center;
     padding: 2rem;
   }
@@ -171,7 +170,7 @@ export default {
   }
   .academyPhoto img {
     /* 只设置宽/高另外一个等比例缩放 */
-    width: 80%;
+    width: 50%;
   }
 }
 </style>
