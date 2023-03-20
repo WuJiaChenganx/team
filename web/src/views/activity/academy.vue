@@ -1,49 +1,73 @@
 <template>
   <div class="academy">
     <div class="academyContent">
-      <div class="academyTitle">
-        <div class="title">学术动态</div>
-        <div class="breadCrumb">
-          <el-breadcrumb separator-class="el-icon-arrow-right">
-            <el-breadcrumb-item :to="{ path: '/home' }"
-              >首页</el-breadcrumb-item
+      <div class="academyAside">
+        <div class="academyAsideTitle">团队动态</div>
+        <div class="academyAsideContent">
+          <el-menu
+            :default-active="this.$route.path"
+            router
+            mode="vertical"
+            background-color="#ffffff"
+            text-color="#000"
+            active-text-color="#fff"
+          >
+            <el-menu-item
+              class="academyAsideItem"
+              v-for="(menuItem, menuIndex) in Menu"
+              :key="menuIndex"
+              :index="menuItem.path"
             >
-            <el-breadcrumb-item :to="{ path: '/activity/academy' }"
-              >学术动态</el-breadcrumb-item
-            >
-          </el-breadcrumb>
+              <i class="el-icon-sunny"></i>
+              <span>{{ menuItem.name }}</span>
+            </el-menu-item>
+          </el-menu>
         </div>
       </div>
-      <div class="academyItem">
-        <div
-          v-for="(item, index) in academyList"
-          :key="index"
-          class="academy-row"
-          @click="gotoDetail(item.id)"
-        >
-          <div class="academy-date">
-            <div>{{ item.day }}</div>
-            <div>{{ item.date }}</div>
+      <div class="academyDetail">
+        <div class="academyTitle">
+          <div class="title">学术动态</div>
+          <div class="breadCrumb">
+            <el-breadcrumb separator-class="el-icon-arrow-right">
+              <el-breadcrumb-item :to="{ path: '/home' }"
+                >首页</el-breadcrumb-item
+              >
+              <el-breadcrumb-item :to="{ path: '/activity/academy' }"
+                >学术动态</el-breadcrumb-item
+              >
+            </el-breadcrumb>
           </div>
-          <div class="academy-profile">
-            <div class="academy-title">{{ item.title }}</div>
-            <div class="academy-thing">
-              {{ item.detail }}
+        </div>
+        <div class="academyItem">
+          <div
+            v-for="(item, index) in academyList"
+            :key="index"
+            class="academy-row"
+            @click="gotoDetail(item.id)"
+          >
+            <div class="academy-date">
+              <div>{{ item.day }}</div>
+              <div>{{ item.date }}</div>
+            </div>
+            <div class="academy-profile">
+              <div class="academy-title">{{ item.title }}</div>
+              <div class="academy-thing">
+                {{ item.detail }}
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      <div class="paging">
-        <!-- page-size展示的选择每页显示个数的选项,页面变动触发的事件是current-change后面的函数,total表示总共的数量 current-page表示当前页数-->
-        <el-pagination
-          background
-          layout="prev, pager, next"
-          @current-change="handleCurrentChange"
-          :page-size="5"
-          :total="total_number"
-          :current-page="current_index"
-        >
-        </el-pagination>
+        <div class="paging">
+          <el-pagination
+            background
+            layout="prev, pager, next"
+            @current-change="handleCurrentChange"
+            :page-size="5"
+            :total="total_number"
+            :current-page="current_index"
+          >
+          </el-pagination>
+        </div>
       </div>
     </div>
   </div>
@@ -53,8 +77,11 @@ import { getAcademyURL } from "@/api/api";
 export default {
   data() {
     return {
-      title: "团队动态",
-      currentMenu: "学术动态",
+      Menu: [
+        { name: "新闻快讯", path: "/activity/newFlash" },
+        { name: "学术动态", path: "/activity/academy" },
+        { name: "通知公告", path: "/activity/notice" },
+      ],
       // 总共要展示的数量
       total_number: 10,
       // 当前页面从1开始的这两个属性会在刚开始的时候就更新
@@ -101,15 +128,44 @@ export default {
 @media screen and (min-width: 1000px) {
   .academy {
     padding: 3rem 0;
-    background: #eef7fe;
+    background: url(../../assets/images/background/contentBackground.jpg)
+      no-repeat;
   }
   .academyContent {
     width: 75%;
     margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  .academyAside {
+    width: 25%;
+  }
+  .academyAsideTitle {
+    background: url(../../assets/images/background/zryy-menu-t-bg.png) no-repeat;
+    border-radius: 0.6rem;
+    background-size: cover !important;
+    font-weight: bold;
+    color: #fff;
+    font-size: 2rem;
+    line-height: 3rem;
+    height: 3rem;
+    padding: 2rem 3rem;
+    margin-bottom: 0.5rem;
+  }
+  .academyAsideItem {
+    font-size: 2rem;
+    text-align: left;
+    cursor: pointer;
+  }
+  .academyDetail {
+    width: 73%;
     padding: 0 3rem;
+    box-sizing: border-box;
     background-color: #fff;
     border: 1px solid #dfdfdf;
   }
+
   .academyTitle {
     display: flex;
     flex-direction: row;
@@ -124,6 +180,10 @@ export default {
   }
   .breadCrumb {
     padding-top: 1rem;
+  }
+  /* 选中侧边导航的背景颜色 */
+  .el-menu-item.is-active {
+    background: #008cd6 !important;
   }
 
   /* 不被选中时的颜色 */
@@ -159,6 +219,7 @@ export default {
   }
   /* 时间框 */
   .academy-date {
+    margin-right: 2rem;
     width: 80px;
     height: 80px;
     display: flex;
@@ -178,7 +239,8 @@ export default {
   }
   /* 文字部分 */
   .academy-profile {
-    width: 85%;
+    width: 70%;
+    flex: 1 1 auto;
     height: 80px;
     display: flex;
     flex-direction: column;
@@ -192,6 +254,11 @@ export default {
     text-align: left;
     overflow: hidden;
     transition: all 0.5s;
+    /* 显示1行 */
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
   }
   .academy-thing {
     font-size: 16px;
@@ -218,6 +285,24 @@ export default {
     background: #eef7fe;
   }
   .academyContent {
+    display: flex;
+    flex-direction: column;
+  }
+  .academyAside {
+    width: 100%;
+  }
+  /* 不显示侧边导航栏上面的标题 */
+  .academyAsideTitle {
+    display: none;
+  }
+  .academyAsideItem {
+    font-size: 2rem;
+    text-align: center;
+    cursor: pointer;
+  }
+  .academyDetail {
+    width: 100%;
+    padding: 0 1.5rem;
     box-sizing: border-box;
     background-color: #fff;
     border: 1px solid #dfdfdf;
@@ -237,7 +322,10 @@ export default {
   .breadCrumb {
     padding-top: 1rem;
   }
-
+  /* 选中侧边导航的背景颜色 */
+  .el-menu-item.is-active {
+    background: #008cd6 !important;
+  }
   /* 不被选中时的颜色 */
   .el-breadcrumb ::v-deep .el-breadcrumb__inner {
     color: #999 !important;
@@ -271,6 +359,7 @@ export default {
   }
   /* 时间框 */
   .academy-date {
+    margin-right: 2rem;
     width: 8rem;
     height: 8rem;
     display: flex;
@@ -290,7 +379,8 @@ export default {
   }
   /* 文字部分 */
   .academy-profile {
-    width: 80%;
+    width: 70%;
+    flex: 1 1 auto;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -303,6 +393,11 @@ export default {
     text-align: left;
     overflow: hidden;
     transition: all 0.5s;
+    /* 显示1行 */
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
   }
   .academy-thing {
     font-size: 1rem;

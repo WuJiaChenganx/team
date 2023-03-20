@@ -96,7 +96,6 @@ export default {
     color: #0055a2;
     line-height: 3rem;
     font-size: 2.5rem;
-    font-weight: bold;
     text-align: center;
     padding: 2rem;
   }
@@ -153,7 +152,6 @@ export default {
     color: #0055a2;
     line-height: 3rem;
     font-size: 2rem;
-    font-weight: bold;
     text-align: center;
     padding: 2rem;
   }

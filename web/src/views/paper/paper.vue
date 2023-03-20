@@ -48,17 +48,17 @@
             target="_blank"
           >
             <div class="detailItemPaperName">
-              论文名称: {{ detailItem.title }}
+              {{ detailItem.number }}. {{ detailItem.title }}
             </div>
             <div class="detailItemPaperKeyWord">
               关键词: {{ detailItem.keyword }}
             </div>
-            <div class="detailItemPaperDate">
+            <!-- <div class="detailItemPaperDate">
               发表日期: {{ detailItem.date }}
             </div>
             <div class="detailItemPaperDetail">
               摘要: {{ detailItem.detail }}
-            </div>
+            </div> -->
           </a>
         </div>
         <div class="paging">
@@ -83,8 +83,6 @@ import { getPaperURL } from "@/api/api";
 export default {
   data() {
     return {
-      title: "论文论著",
-      currentMenu: "出版专著",
       Menu: [
         { name: "发表论文", path: "/paper/paper" },
         { name: "授权专利", path: "/paper/patent" },
@@ -210,20 +208,6 @@ export default {
   }
   .detailItem:hover .detailItemPaperKeyWord {
     font-weight: bold;
-  }
-  .detailItem:hover .detailItemPaperDate {
-    font-weight: bold;
-  }
-  .detailItem:hover .detailItemPaperDetail {
-    font-weight: bold;
-  }
-  .detailItemPaperDetail {
-    font-weight: normal;
-    /* 显示3行 */
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 3;
-    overflow: hidden;
   }
   /* 设置分页和底部的距离 */
   .paging {
