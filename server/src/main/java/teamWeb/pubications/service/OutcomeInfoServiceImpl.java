@@ -21,7 +21,14 @@ public class OutcomeInfoServiceImpl extends ServiceImpl<OutcomeInfoMapper, Outco
 
     @Override
     public List<AllPaperBO> paperDetail(int start, int end) {
-        return BeanUtil.convert(outcomeInfoMapper.paperDetail(start,end-start),AllPaperBO.class);
+        List<AllPaperBO> allPaperBOList = BeanUtil.convert(outcomeInfoMapper.paperDetail(start,end-start),AllPaperBO.class);
+        Integer numberIndex = 1;
+        for (AllPaperBO allPaperBO:
+                allPaperBOList) {
+            allPaperBO.setNumber(start+numberIndex);
+            numberIndex = numberIndex+1;
+        }
+        return allPaperBOList;
     }
 
     @Override
