@@ -12,6 +12,7 @@ import teamWeb.utils.Address;
 import teamWeb.utils.BeanUtil;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 
@@ -26,13 +27,14 @@ public class ReportInfoServiceImpl extends ServiceImpl<ReportMapper, ReportDO> i
         List<NoticeBO> noticeBOList = BeanUtil.convert(reportMapper.teamDynamic(start,end-start),NoticeBO.class);
         for (NoticeBO noticeBO:
                 noticeBOList) {
+            List<String> picList = Collections.emptyList();
             if(!noticeBO.getPictureUrl().isEmpty()) {
-                List<String> picList = Arrays.asList(noticeBO.getPictureUrl().split(";"));
+                picList = Arrays.asList(noticeBO.getPictureUrl().split(";"));
                 for (int i = 0; i < picList.size(); i++) {
                     picList.set(i, Address.rootAddress() + picList.get(i));
                 }
-                noticeBO.setPicUrl(picList);
             }
+            noticeBO.setPicUrl(picList);
             noticeBO.setDay(noticeBO.getDate().split("-")[2]);
             noticeBO.setDate(noticeBO.getDate().substring(0, 7));
             noticeBO.setDetail(noticeBO.getText());
@@ -62,13 +64,14 @@ public class ReportInfoServiceImpl extends ServiceImpl<ReportMapper, ReportDO> i
         List<NoticeBO> noticeBOList = BeanUtil.convert(reportMapper.media(start,end-start),NoticeBO.class);
         for (NoticeBO noticeBO:
                 noticeBOList) {
+            List<String> picList = Collections.emptyList();
             if(!noticeBO.getPictureUrl().isEmpty()) {
-                List<String> picList = Arrays.asList(noticeBO.getPictureUrl().split(";"));
+                picList = Arrays.asList(noticeBO.getPictureUrl().split(";"));
                 for (int i = 0; i < picList.size(); i++) {
                     picList.set(i, Address.rootAddress() + picList.get(i));
                 }
-                noticeBO.setPicUrl(picList);
             }
+            noticeBO.setPicUrl(picList);
             List<String> times = Arrays.asList(noticeBO.getDate().split("-"));
             if (times.size()>=3) {
                 noticeBO.setDay(noticeBO.getDate().split("-")[2]);
