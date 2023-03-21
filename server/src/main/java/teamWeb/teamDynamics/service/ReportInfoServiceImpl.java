@@ -129,15 +129,17 @@ public class ReportInfoServiceImpl extends ServiceImpl<ReportMapper, ReportDO> i
         reportBO.setFileUrls(reportMapper.allFileUrl(reportId));
 
         List<ReportDetailBO> reportDetailBOList = reportMapper.reportTextDetail(reportId);
+
         for (ReportDetailBO reportDetailBO:
                 reportDetailBOList) {
+            List<String> picList = Collections.emptyList();
             if(!(reportDetailBO.getPictureUrl() == null)) {
-                List<String> picList = Arrays.asList(reportDetailBO.getPictureUrl().split(";"));
+                picList = Arrays.asList(reportDetailBO.getPictureUrl().split(";"));
                 for (int i = 0; i < picList.size(); i++) {
                     picList.set(i, Address.rootAddress() + picList.get(i));
                 }
-                reportDetailBO.setPicUrl(picList);
             }
+            reportDetailBO.setPicUrl(picList);
         }
 
 
