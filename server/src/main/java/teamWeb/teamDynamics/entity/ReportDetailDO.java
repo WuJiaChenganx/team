@@ -8,6 +8,16 @@ public class ReportDetailDO {
     Integer section;
     String text;
 
+    String bold;
+
+    public String getBold() {
+        return bold;
+    }
+
+    public void setBold(String bold) {
+        this.bold = bold;
+    }
+
     public String getText() {
         return text;
     }

@@ -8,6 +8,15 @@ public class ReportDetailBO {
     Integer section;
     List<String> picUrl;
     String text;
+    String bold;
+
+    public String getBold() {
+        return bold;
+    }
+
+    public void setBold(String bold) {
+        this.bold = bold;
+    }
 
     public String getText() {
         return text;
