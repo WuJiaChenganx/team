@@ -206,17 +206,14 @@ export default {
     padding-bottom: 2rem;
   }
   .basicInfo {
-    height: 23rem;
     margin-top: 2rem;
     display: flex;
     flex-direction: row;
   }
   .basicLeft {
-    height: 100%;
     flex: 1 1 auto;
-    padding: 5.5rem 3rem 3rem 5rem;
+    padding: 3rem;
     background: #dbeeff;
-    box-sizing: border-box;
     font-size: 1.8rem;
     color: #0055a2;
     text-align: left;
@@ -234,8 +231,8 @@ export default {
     margin-bottom: 1rem;
   }
   .basicRight {
-    width: 20rem;
-    height: 23rem;
+    width: 13rem;
+    height: 18rem;
     margin-left: 1rem;
   }
   /* 图片尺寸固定 */
@@ -337,18 +334,14 @@ export default {
     padding-bottom: 2rem;
   }
   .basicInfo {
-    height: 23rem;
     margin-top: 2rem;
-    width: 100%;
     display: flex;
     flex-direction: row;
   }
   .basicLeft {
-    height: 100%;
     flex: 1 1 auto;
     padding: 3rem 0.5rem;
     background: #dbeeff;
-    box-sizing: border-box;
     font-size: 1.8rem;
     color: #0055a2;
     text-align: left;
@@ -366,8 +359,8 @@ export default {
     margin-bottom: 1rem;
   }
   .basicRight {
-    width: 20rem;
-    height: 23rem;
+    width: 13rem;
+    height: 18rem;
     margin-left: 1rem;
   }
   /* 图片尺寸固定 */

@@ -2,23 +2,23 @@
   <div class="researchTeam">
     <div class="researchTeamTitle">
       <div class="left-title">研究队伍</div>
-      <a @click="goTo('team/master')" class="title-more">更多 +</a>
+      <a @click="goTo('team/profile')" class="title-more">更多 +</a>
     </div>
     <div id="swiper-member">
       <!-- 如果没有的话就不显示 -->
-      <div class="swiper-container" v-if="studentAllInfo.length">
+      <div class="swiper-container" v-if="teamCover.length">
         <div class="swiper-wrapper">
           <div
             class="swiper-slide"
-            v-for="item in studentAllInfo"
-            :key="item.id"
-            @click="gotoDetail(item)"
+            v-for="(teamItem, teamItemIndex) in teamCover"
+            :key="teamItemIndex"
+            @click="gotoDetail(teamItem.id)"
           >
             <div class="memberBox">
               <div class="member-img">
-                <img :src="item.picUrl" />
+                <img :src="teamItem.picUrl" @error="setDefaultImage" />
               </div>
-              <div class="member-name">{{ item.name }}</div>
+              <div class="member-name">{{ teamItem.name }}</div>
             </div>
           </div>
         </div>
@@ -32,195 +32,42 @@
 import Swiper from "swiper";
 // 引入css部分
 import "swiper/css/swiper.min.css";
+import { getHomeMember } from "@/api/api";
+// 设置默认缺失的图片
+import defaultImage from "@/assets/images/member/default.png";
 export default {
   data() {
     return {
-      studentAllInfo: [
-        {
-          id: 1,
-          name: "张恒聪1",
-          title: "硕士研究生",
-          email: "zhangshaolei20z@ict.ac.cn",
-          direction: "机器翻译、自然语言处理",
-          education: [
-            { time: "2016-2020", experience: "北京邮电大学,工学硕士" },
-            {
-              time: "2020-present",
-              experience: "中科院计算技术研究所,博士在读",
-            },
-          ],
-          paperList: [
-            {
-              id: 1,
-              paper:
-                "Shaolei Zhang, Yang Feng. Modeling Dual Read/Write Paths for Simultaneous Machine Translation",
-            },
-            {
-              id: 2,
-              paper:
-                "Shaolei Zhang, Yang Feng. Reducing Position Bias in Simultaneous Machine Translation with Length-Aware Framework.",
-            },
-          ],
-          picUrl: require("../../assets/images/teacherPhoto/zhc.jpg"),
-        },
-        {
-          id: 2,
-          name: "马云1",
-          title: "硕士研究生",
-          email: "zhangshaolei20z@ict.ac.cn",
-          direction: "深度学习图像处理",
-          education: [
-            { time: "2016-2020", experience: "北京邮电大学,工学硕士" },
-            {
-              time: "2020-present",
-              experience: "中科院计算技术研究所,博士在读",
-            },
-          ],
-          paperList: [
-            {
-              id: 1,
-              paper:
-                "Shaolei Zhang, Yang Feng. Modeling Dual Read/Write Paths for Simultaneous Machine Translation",
-            },
-            {
-              id: 2,
-              paper:
-                "Shaolei Zhang, Yang Feng. Reducing Position Bias in Simultaneous Machine Translation with Length-Aware Framework.",
-            },
-          ],
-          picUrl: require("../../assets/images/teacherPhoto/lq.jpg"),
-        },
-        {
-          id: 3,
-          name: "马化腾1",
-          title: "硕士研究生",
-          email: "zhangshaolei20z@ict.ac.cn",
-          direction: "深度学习图像处理",
-          education: [
-            { time: "2016-2020", experience: "北京邮电大学,工学硕士" },
-            {
-              time: "2020-present",
-              experience: "中科院计算技术研究所,博士在读",
-            },
-          ],
-          paperList: [
-            {
-              id: 1,
-              paper:
-                "Shaolei Zhang, Yang Feng. Modeling Dual Read/Write Paths for Simultaneous Machine Translation",
-            },
-            {
-              id: 2,
-              paper:
-                "Shaolei Zhang, Yang Feng. Reducing Position Bias in Simultaneous Machine Translation with Length-Aware Framework.",
-            },
-          ],
-          picUrl: require("../../assets/images/teacherPhoto/lq.jpg"),
-        },
-        {
-          id: 4,
-          name: "赵云2",
-          title: "硕士研究生",
-          email: "zhangshaolei20z@ict.ac.cn",
-          direction: "深度学习图像处理",
-          education: [
-            { time: "2016-2020", experience: "北京邮电大学,工学硕士" },
-            {
-              time: "2020-present",
-              experience: "中科院计算技术研究所,博士在读",
-            },
-          ],
-          paperList: [
-            {
-              id: 1,
-              paper:
-                "Shaolei Zhang, Yang Feng. Modeling Dual Read/Write Paths for Simultaneous Machine Translation",
-            },
-            {
-              id: 2,
-              paper:
-                "Shaolei Zhang, Yang Feng. Reducing Position Bias in Simultaneous Machine Translation with Length-Aware Framework.",
-            },
-          ],
-          picUrl: require("../../assets/images/teacherPhoto/lq.jpg"),
-        },
-        {
-          id: 5,
-          name: "赵云1",
-          title: "硕士研究生",
-          email: "zhangshaolei20z@ict.ac.cn",
-          direction: "深度学习图像处理",
-          education: [
-            { time: "2016-2020", experience: "北京邮电大学,工学硕士" },
-            {
-              time: "2020-present",
-              experience: "中科院计算技术研究所,博士在读",
-            },
-          ],
-          paperList: [
-            {
-              id: 1,
-              paper:
-                "Shaolei Zhang, Yang Feng. Modeling Dual Read/Write Paths for Simultaneous Machine Translation",
-            },
-            {
-              id: 2,
-              paper:
-                "Shaolei Zhang, Yang Feng. Reducing Position Bias in Simultaneous Machine Translation with Length-Aware Framework.",
-            },
-          ],
-          picUrl: require("../../assets/images/teacherPhoto/lq.jpg"),
-        },
-        {
-          id: 6,
-          name: "赵云1",
-          title: "硕士研究生",
-          email: "zhangshaolei20z@ict.ac.cn",
-          direction: "深度学习图像处理",
-          education: [
-            { time: "2016-2020", experience: "北京邮电大学,工学硕士" },
-            {
-              time: "2020-present",
-              experience: "中科院计算技术研究所,博士在读",
-            },
-          ],
-          paperList: [
-            {
-              id: 1,
-              paper:
-                "Shaolei Zhang, Yang Feng. Modeling Dual Read/Write Paths for Simultaneous Machine Translation",
-            },
-            {
-              id: 2,
-              paper:
-                "Shaolei Zhang, Yang Feng. Reducing Position Bias in Simultaneous Machine Translation with Length-Aware Framework.",
-            },
-          ],
-          picUrl: require("../../assets/images/teacherPhoto/lq.jpg"),
-        },
-      ],
+      teamCover: [],
     };
   },
-  // 从后端拿数据
-  created() {},
-  mounted() {
-    new Swiper(".swiper-container", {
-      // 最后一张和第一张无缝衔接
-      loop: true,
-      // 自动播放
-      autoplay: {
-        delay: 1000,
-      },
-      // 间距%2的轮播图宽度
-      spaceBetween: "2%",
-      // 一次显示几张照片,可以设置成auto,然后在css中设置swiper-slide的宽度
-      // slidesPerView: this.studentAllInfo.length,
-      slidesPerView: "auto",
-      // 每一次移动的时候移动1张
-      slidesPerGroup: 1,
-    });
+  created() {
+    this.getTeamCoverList();
   },
+
   methods: {
+    // async和await用于同步,就是按顺序执行
+    async getTeamCoverList() {
+      let params = {};
+      await getHomeMember(params).then((res) => {
+        this.teamCover = res.data;
+      });
+      new Swiper(".swiper-container", {
+        // 最后一张和第一张无缝衔接
+        loop: true,
+        // 自动播放
+        autoplay: {
+          delay: 1000,
+        },
+        // 间距%2的轮播图宽度
+        spaceBetween: "2%",
+        // 一次显示几张照片,可以设置成auto,然后在css中设置swiper-slide的宽度
+        // slidesPerView: this.teamCover.length,
+        slidesPerView: "auto",
+        // 每一次移动的时候移动1张
+        slidesPerGroup: 1,
+      });
+    },
     goTo(path) {
       // 当前不一样就跳转
       if (this.$route.path !== path) {
@@ -229,17 +76,18 @@ export default {
         });
       }
     },
-    gotoDetail(item) {
+    gotoDetail(id) {
       this.$router.push({
         path: "/team/studentInfo",
         name: "学生详情",
-        // 用query传参,在地址栏后面加东西如 ?id=1这种跟在网址后面
         query: {
-          // 传参数的时候注意将对象转化成字符串并且加密,在接收端使用解析
-          // 如果不这样做的话就会导致,刷新一下传参的东西解析不了
-          item: encodeURIComponent(JSON.stringify(item)),
+          id,
         },
       });
+    },
+    // 设置默认缺失的图片
+    setDefaultImage(e) {
+      e.target.src = defaultImage;
     },
   },
 };
@@ -291,8 +139,10 @@ export default {
     margin-bottom: 1rem;
   }
   .member-img img {
+    overflow: hidden;
     /* 高度自适应 */
-    width: 100%;
+    width: 80%;
+    height: 12.5rem;
   }
   .member-name {
     font-size: 1.5rem;
@@ -301,10 +151,6 @@ export default {
     font-weight: bold;
   }
 
-  .memberBox:hover .member-img img {
-    transform: scale(1.1);
-    transition: all 0.5s;
-  }
   .memberBox:hover .member-name {
     color: #0055a2;
   }

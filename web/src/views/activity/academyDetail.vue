@@ -19,13 +19,22 @@
       </div>
       <div class="academyDetailContent">
         <div class="academyTitle">{{ academyDetail.title }}</div>
-        <div class="academyInfo">{{ academyDetail.detail }}</div>
         <div
-          class="academyPhoto"
-          v-for="imgUrl in academyDetail.picUrl"
-          :key="imgUrl"
+          class="academyDetailItem"
+          v-for="(academyItem, academyItemIndex) in academyDetail.detail"
+          :key="academyItemIndex"
         >
-          <img :src="imgUrl" alt="" />
+          <div class="academyInfo">{{ academyItem.text }}</div>
+          <div
+            :class="academyItem.picUrl.length == 1 ? 'photoBox1' : 'photoBox2'"
+          >
+            <div
+              v-for="(imgUrl, imgUrlIndex) in academyItem.picUrl"
+              :key="imgUrlIndex"
+            >
+              <img :src="imgUrl" />
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -56,7 +65,7 @@ export default {
   },
 };
 </script>
-<style scoped>
+<style lang="scss" scoped>
 /* PC端  */
 @media screen and (min-width: 1000px) {
   .academyDetailBackground {
@@ -108,12 +117,28 @@ export default {
     text-indent: 2em;
     padding-bottom: 2rem;
   }
-  .academyPhoto {
+  .photoBox1 {
+    width: 100%;
     padding-bottom: 1rem;
+    img {
+      width: 65%;
+    }
   }
-  .academyPhoto img {
-    /* 只设置宽/高另外一个等比例缩放 */
-    width: 50%;
+
+  .photoBox2 {
+    width: 100%;
+    padding-bottom: 1rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    div {
+      width: 45%;
+      margin-right: 2rem;
+    }
+    img {
+      width: 100%;
+      height: 100%;
+    }
   }
 }
 
@@ -164,13 +189,27 @@ export default {
     text-indent: 2em;
     padding-bottom: 2rem;
   }
-
-  .academyPhoto {
-    padding-bottom: 2rem;
+  .photoBox1 {
+    width: 100%;
+    padding-bottom: 1rem;
+    img {
+      width: 60%;
+    }
   }
-  .academyPhoto img {
-    /* 只设置宽/高另外一个等比例缩放 */
-    width: 50%;
+
+  .photoBox2 {
+    width: 100%;
+    padding-bottom: 1rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    div {
+      width: 49%;
+    }
+    img {
+      width: 100%;
+      height: 100%;
+    }
   }
 }
 </style>

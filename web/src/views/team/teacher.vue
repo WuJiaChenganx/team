@@ -205,11 +205,11 @@ export default {
     cursor: pointer;
     text-decoration: none;
     padding: 1rem;
-    width: 20rem;
+    width: 13rem;
   }
 
   .detailItem img {
-    height: 23rem;
+    height: 15rem;
   }
 
   .detailItem .detailItemInfo {

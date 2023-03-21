@@ -53,12 +53,6 @@
             <div class="detailItemPaperKeyWord">
               关键词: {{ detailItem.keyword }}
             </div>
-            <!-- <div class="detailItemPaperDate">
-              发表日期: {{ detailItem.date }}
-            </div>
-            <div class="detailItemPaperDetail">
-              摘要: {{ detailItem.detail }}
-            </div> -->
           </a>
         </div>
         <div class="paging">

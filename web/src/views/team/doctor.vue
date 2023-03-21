@@ -50,7 +50,7 @@
               <img :src="memberItem.picUrl" @error="setDefaultImage" />
             </div>
             <div class="detailItemInfo">
-              {{ memberItem.comeInDate }}届 {{ memberItem.name }}
+              {{ memberItem.comeInDate }}级 {{ memberItem.name }}
             </div>
           </div>
         </div>
@@ -146,6 +146,7 @@ export default {
   }
 
   .doctorDetail {
+    min-height: 600px;
     width: 73%;
     padding: 0 3rem;
     box-sizing: border-box;
@@ -176,21 +177,24 @@ export default {
   .doctorItem {
     width: 100%;
     display: flex;
-    flex-direction: row;
     flex-wrap: wrap;
-    justify-content: space-between;
     padding: 3rem 0;
   }
   .detailItem {
     cursor: pointer;
     text-decoration: none;
+    width: 20%;
+    box-sizing: border-box;
     padding: 1rem;
-    width: 20rem;
   }
 
-  .detailItem img {
+  .detailItemImg {
     width: 100%;
-    height: 23rem;
+    height: 13.4rem;
+  }
+  .detailItem img {
+    height: 100%;
+    width: 100%;
   }
 
   .detailItem .detailItemInfo {
