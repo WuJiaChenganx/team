@@ -7,7 +7,6 @@ public class ReportDetailDTO {
     Integer section;
     List<String> picUrl;
     String text;
-
     String bold;
 
     public String getBold() {

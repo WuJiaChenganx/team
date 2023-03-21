@@ -28,7 +28,7 @@ public class ReportInfoServiceImpl extends ServiceImpl<ReportMapper, ReportDO> i
         for (NoticeBO noticeBO:
                 noticeBOList) {
             List<String> picList = Collections.emptyList();
-            if(!noticeBO.getPictureUrl().isEmpty()) {
+            if(!(noticeBO.getPictureUrl() == null)) {
                 picList = Arrays.asList(noticeBO.getPictureUrl().split(";"));
                 for (int i = 0; i < picList.size(); i++) {
                     picList.set(i, Address.rootAddress() + picList.get(i));
@@ -65,7 +65,7 @@ public class ReportInfoServiceImpl extends ServiceImpl<ReportMapper, ReportDO> i
         for (NoticeBO noticeBO:
                 noticeBOList) {
             List<String> picList = Collections.emptyList();
-            if(!noticeBO.getPictureUrl().isEmpty()) {
+            if(!(noticeBO.getPictureUrl() == null)) {
                 picList = Arrays.asList(noticeBO.getPictureUrl().split(";"));
                 for (int i = 0; i < picList.size(); i++) {
                     picList.set(i, Address.rootAddress() + picList.get(i));
@@ -131,7 +131,7 @@ public class ReportInfoServiceImpl extends ServiceImpl<ReportMapper, ReportDO> i
         List<ReportDetailBO> reportDetailBOList = reportMapper.reportTextDetail(reportId);
         for (ReportDetailBO reportDetailBO:
                 reportDetailBOList) {
-            if(!reportDetailBO.getPictureUrl().isEmpty()) {
+            if(!(reportDetailBO.getPictureUrl() == null)) {
                 List<String> picList = Arrays.asList(reportDetailBO.getPictureUrl().split(";"));
                 for (int i = 0; i < picList.size(); i++) {
                     picList.set(i, Address.rootAddress() + picList.get(i));
