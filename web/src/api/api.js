@@ -100,3 +100,11 @@ export function getProjectURL(params) {
     params,
   });
 }
+// 首页团队详情(不需要参数全部传)
+export function getHomeMember(params) {
+  return request({
+    url: "/api/teamWeb/teamSurvey/require-homeMember",
+    method: "GET",
+    params,
+  });
+}

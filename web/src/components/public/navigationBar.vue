@@ -51,24 +51,6 @@ export default {
           path: "/home",
         },
         {
-          title: "团队动态",
-          path: "/activity",
-          subMenu: [
-            { title: "新闻快讯", path: "/activity/newFlash" },
-            { title: "学术动态", path: "/activity/academy" },
-            { title: "通知公告", path: "/activity/notice" },
-          ],
-        },
-        {
-          title: "论文论著",
-          path: "/paper",
-          subMenu: [
-            { title: "发表论文", path: "/paper/paper" },
-            { title: "授权专利", path: "/paper/patent" },
-            { title: "出版专著", path: "/paper/book" },
-          ],
-        },
-        {
           title: "科研教学",
           path: "/scientificResearch",
           subMenu: [
@@ -76,6 +58,15 @@ export default {
             { title: "科研项目", path: "/scientificResearch/project" },
             { title: "科研平台", path: "/scientificResearch/platform" },
             { title: "课程教学", path: "/scientificResearch/curriculum" },
+          ],
+        },
+        {
+          title: "团队动态",
+          path: "/activity",
+          subMenu: [
+            { title: "新闻快讯", path: "/activity/newFlash" },
+            { title: "学术动态", path: "/activity/academy" },
+            { title: "通知公告", path: "/activity/notice" },
           ],
         },
         {
@@ -87,6 +78,15 @@ export default {
             { title: "博士生", path: "/team/doctor" },
             { title: "研究生", path: "/team/master" },
             { title: "毕业生", path: "/team/graduate" },
+          ],
+        },
+        {
+          title: "论文论著",
+          path: "/paper",
+          subMenu: [
+            { title: "发表论文", path: "/paper/paper" },
+            { title: "授权专利", path: "/paper/patent" },
+            { title: "出版专著", path: "/paper/book" },
           ],
         },
         {

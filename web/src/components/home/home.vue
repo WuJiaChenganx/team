@@ -149,7 +149,6 @@ export default {
     box-sizing: border-box;
   }
   .friendlyLink {
-    /* height: 28rem; */
     width: 100%;
     padding: 2rem;
     border: 1px solid #d1e4f0;
