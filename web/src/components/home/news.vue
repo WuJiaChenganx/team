@@ -110,6 +110,10 @@ export default {
     line-height: 3rem;
     text-indent: 2em;
     font-weight: bold;
+    display: -webkit-box;
+    /* 一行直接省略 */
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
   }
   .el-carousel__item img {
     width: 100%;
@@ -171,12 +175,14 @@ export default {
     font-weight: bold;
   }
   .news-title {
+    height: 6rem;
+    line-height: 2rem;
     width: 70%;
     flex: 1 1 auto;
     font-size: 1.5rem;
     color: #0055a2;
     display: -webkit-box;
-    /* 两行直接省略 */
+    /* 三行直接省略 */
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 3;
     overflow: hidden;

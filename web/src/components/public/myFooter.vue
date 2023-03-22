@@ -3,14 +3,14 @@
     <footer class="footer">
       <div class="container">
         <span>版权所有 &copy;{{ CopyrightYear }} 群智感知与协同研究所</span>
-        <a href="https://beian.miit.gov.cn/#/Integrated/index" target="_blank"
-          >京ICP备05002829号-1</a
-        >
+        <a
+          href="https://beian.miit.gov.cn/#/Integrated/index"
+          target="_blank"
+        ></a>
         <a
           href="http://www.beian.gov.cn/portal/registerSystemInfo"
           target="_blank"
-          >京公网安备1101080060号</a
-        >
+        ></a>
         <br />
         <span>地址：杭州市西湖区留和路288号</span><br />
         <span>电话：86-10-62601166</span> <span>邮箱：ictoffice@ict.ac.cn</span>

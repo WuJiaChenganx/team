@@ -24,8 +24,11 @@
           v-for="(academyItem, academyItemIndex) in academyDetail.detail"
           :key="academyItemIndex"
         >
-          <div class="academyInfo">{{ academyItem.text }}</div>
+          <div class="academyInfo">
+            {{ academyItem.text }}
+          </div>
           <div
+            v-if="academyItem.picUrl.length"
             :class="academyItem.picUrl.length == 1 ? 'photoBox1' : 'photoBox2'"
           >
             <div
@@ -115,7 +118,7 @@ export default {
     line-height: 3rem;
     font-size: 1.6rem;
     text-indent: 2em;
-    padding-bottom: 2rem;
+    padding-bottom: 0.5rem;
   }
   .photoBox1 {
     width: 100%;

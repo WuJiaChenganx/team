@@ -6,17 +6,41 @@
           <logo></logo>
         </div>
         <div class="text">
-          <div class="chineseName">群智感知与协同研究组</div>
-          <div class="englishName">Crowdsensing and Coordination</div>
+          <div class="chineseName" @click="languageType='Chinese'">群智感知与协同研究组</div>
+          <div class="englishName" @click="languageType='English'">Crowdsensing and Coordination</div>
         </div>
       </div>
     </div>
 
     <div class="navBackground">
       <!-- 导航栏 -->
-      <div class="nav">
+      <!-- v-if 里面加个变量 然后通过按钮改变变量啥的 -->
+      <div class="nav" v-if="languageType=='Chinese'">
         <div
-          v-for="(item, index) in navigationEN"
+          v-for="(item, index) in navigation"
+          :key="index"
+          class="navItem"
+          @click="goTo(item.path)"
+          style="cursor: pointer"
+        >
+          <div class="navTitle">{{ item.title }}</div>
+          <div class="subNav" style="position: absolute; z-index: 9999">
+            <!-- 在点击函数中需要加入stop防止冒泡 -->
+            <div
+              class="subNavItem"
+              v-for="(menu, menuIndex) in item.subMenu"
+              :key="menuIndex"
+              style="cursor: pointer"
+              @click.stop="goTo(menu.path)"
+            >
+              {{ menu.title }}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="nav" v-else>
+        <div
+          v-for="(item, index) in navigationEnglish"
           :key="index"
           class="navItem"
           @click="goTo(item.path)"
@@ -45,7 +69,8 @@ import logo from "./logo.vue";
 export default {
   data() {
     return {
-      navigationZH: [
+      languageType: 'Chinese',
+      navigation: [
         {
           title: "首页",
           path: "/home",
@@ -98,32 +123,32 @@ export default {
           ],
         },
       ],
-      navigationEN: [
+      navigationEnglish: [
         {
           title: "Home",
           path: "/home",
         },
         {
-          title: "Research",
+          title: "ScientificResearch",
           path: "/scientificResearch",
           subMenu: [
-            { title: "dirction", path: "/scientificResearch/direction" },
-            { title: "project", path: "/scientificResearch/project" },
-            { title: "platform", path: "/scientificResearch/platform" },
-            { title: "teaching", path: "/scientificResearch/curriculum" },
+            { title: "科研方向", path: "/scientificResearch/direction" },
+            { title: "科研项目", path: "/scientificResearch/project" },
+            { title: "科研平台", path: "/scientificResearch/platform" },
+            { title: "课程教学", path: "/scientificResearch/curriculum" },
           ],
         },
         {
           title: "Activity",
           path: "/activity",
           subMenu: [
-            { title: "news", path: "/activity/newFlash" },
-            { title: "academy", path: "/activity/academy" },
-            { title: "notice", path: "/activity/notice" },
+            { title: "新闻快讯", path: "/activity/newFlash" },
+            { title: "学术动态", path: "/activity/academy" },
+            { title: "通知公告", path: "/activity/notice" },
           ],
         },
         {
-          title: "Snapshot",
+          title: "Team",
           path: "/team",
           subMenu: [
             { title: "团队简介", path: "/team/profile" },
@@ -134,7 +159,7 @@ export default {
           ],
         },
         {
-          title: "Publication",
+          title: "Paper",
           path: "/paper",
           subMenu: [
             { title: "发表论文", path: "/paper/paper" },
