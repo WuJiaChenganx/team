@@ -6,8 +6,8 @@
           <logo></logo>
         </div>
         <div class="text">
-          <div class="chineseName">群智感知与协同研究组</div>
-          <div class="englishName">Crowdsensing and Coordination</div>
+          <div class="chineseName" @click="changeLanguage('Chinese')">群智感知与协同研究组</div>
+          <div class="englishName" @click="changeLanguage('English')">Crowdsensing and Coordination</div>
         </div>
       </div>
     </div>
@@ -16,7 +16,7 @@
       <!-- 导航栏 -->
       <div class="nav">
         <div
-          v-for="(item, index) in navigationEN"
+          v-for="(item, index) in navigation"
           :key="index"
           class="navItem"
           @click="goTo(item.path)"
@@ -45,6 +45,60 @@ import logo from "./logo.vue";
 export default {
   data() {
     return {
+      languageType: 'Chinese',
+      navigation: [
+        {
+          title: "首页",
+          path: "/home",
+        },
+        {
+          title: "科研教学",
+          path: "/scientificResearch",
+          subMenu: [
+            { title: "科研方向", path: "/scientificResearch/direction" },
+            { title: "科研项目", path: "/scientificResearch/project" },
+            { title: "科研平台", path: "/scientificResearch/platform" },
+            { title: "课程教学", path: "/scientificResearch/curriculum" },
+          ],
+        },
+        {
+          title: "团队动态",
+          path: "/activity",
+          subMenu: [
+            { title: "新闻快讯", path: "/activity/newFlash" },
+            { title: "学术动态", path: "/activity/academy" },
+            { title: "通知公告", path: "/activity/notice" },
+          ],
+        },
+        {
+          title: "团队概况",
+          path: "/team",
+          subMenu: [
+            { title: "团队简介", path: "/team/profile" },
+            { title: "导师", path: "/team/teacher" },
+            { title: "博士生", path: "/team/doctor" },
+            { title: "研究生", path: "/team/master" },
+            { title: "毕业生", path: "/team/graduate" },
+          ],
+        },
+        {
+          title: "论文论著",
+          path: "/paper",
+          subMenu: [
+            { title: "发表论文", path: "/paper/paper" },
+            { title: "授权专利", path: "/paper/patent" },
+            { title: "出版专著", path: "/paper/book" },
+          ],
+        },
+        {
+          title: "资源共享",
+          path: "/resource",
+          subMenu: [
+            { title: "仿真工具", path: "/resource/simulationTool" },
+            { title: "数据集", path: "/resource/dataSet" },
+          ],
+        },
+      ],
       navigationZH: [
         {
           title: "首页",
@@ -126,28 +180,28 @@ export default {
           title: "Snapshot",
           path: "/team",
           subMenu: [
-            { title: "团队简介", path: "/team/profile" },
-            { title: "导师", path: "/team/teacher" },
-            { title: "博士生", path: "/team/doctor" },
-            { title: "研究生", path: "/team/master" },
-            { title: "毕业生", path: "/team/graduate" },
+            { title: "profile", path: "/team/profile" },
+            { title: "teacher", path: "/team/teacher" },
+            { title: "doctor", path: "/team/doctor" },
+            { title: "master", path: "/team/master" },
+            { title: "graduate", path: "/team/graduate" },
           ],
         },
         {
           title: "Publication",
           path: "/paper",
           subMenu: [
-            { title: "发表论文", path: "/paper/paper" },
-            { title: "授权专利", path: "/paper/patent" },
-            { title: "出版专著", path: "/paper/book" },
+            { title: "paper", path: "/paper/paper" },
+            { title: "patent", path: "/paper/patent" },
+            { title: "book", path: "/paper/book" },
           ],
         },
         {
           title: "Resource",
           path: "/resource",
           subMenu: [
-            { title: "仿真工具", path: "/resource/simulationTool" },
-            { title: "数据集", path: "/resource/dataSet" },
+            { title: "tool", path: "/resource/simulationTool" },
+            { title: "dataset", path: "/resource/dataSet" },
           ],
         },
       ],
@@ -158,6 +212,13 @@ export default {
   },
 
   methods: {
+    changeLanguage(languageType){
+      if(languageType =='Chinese'){
+        this.navigation=this.navigationZH;
+      }else{
+        this.navigation=this.navigationEN;
+      }
+    },
     goTo(path) {
       // 当前不一样就跳转
       if (this.$route.path !== path) {
