@@ -27,6 +27,7 @@ public class MemberBO {
     private String edu;
     //研究方向
     private String research;
+    private String title;
     //类别
     private String mClass;
     private String memberType;
@@ -45,6 +46,14 @@ public class MemberBO {
 
     public void setComeInDate(Integer comeInDate) {
         this.comeInDate = comeInDate;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public Integer getId() {

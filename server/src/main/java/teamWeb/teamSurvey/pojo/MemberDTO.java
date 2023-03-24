@@ -12,6 +12,24 @@ public class MemberDTO {
 
     private Integer comeInDate;
     private String memberType;
+    private String title;
+    private String pageUrl;
+
+    public String getPageUrl() {
+        return pageUrl;
+    }
+
+    public void setPageUrl(String pageUrl) {
+        this.pageUrl = pageUrl;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
     public String getMemberType() {
         return memberType;

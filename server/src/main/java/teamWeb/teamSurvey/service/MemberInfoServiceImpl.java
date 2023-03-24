@@ -55,6 +55,7 @@ public class MemberInfoServiceImpl extends ServiceImpl<MemberInfoMapper, MemberD
         List<MemberBO> memberBOList = BeanUtil.convert(memberDOList, MemberBO.class);
         for (MemberBO memberBO:
                 memberBOList) {
+            memberBO.setTitle(memberBO.getEdu());
             memberBO.setMemberType(memberBO.getmClass());
             memberBO.setPicUrl(Address.rootAddress() + memberBO.getPictureUrl());
         }
@@ -74,6 +75,7 @@ public class MemberInfoServiceImpl extends ServiceImpl<MemberInfoMapper, MemberD
         List<MemberBO> memberBOList = BeanUtil.convert(memberDOList, MemberBO.class);
         for (MemberBO memberBO:
                 memberBOList) {
+            memberBO.setTitle(memberBO.getEdu());
             memberBO.setMemberType(memberBO.getmClass());
             memberBO.setPicUrl(Address.rootAddress() + memberBO.getPictureUrl());
         }

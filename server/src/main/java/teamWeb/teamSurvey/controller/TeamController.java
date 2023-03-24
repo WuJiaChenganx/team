@@ -41,7 +41,7 @@ public class TeamController {
         return APIResponse.success(allMemberDTOList,memberInfoService.sumMember(memberType));
     }
 
-    @GetMapping("require-homeMember")
+    @GetMapping("/require-homeMember")
     public APIResponse homeMember(){
         List<MemberBO> homeMemberList = memberInfoService.homeMember();
         List<MemberDTO> homeMemberDTOList = BeanUtil.convert(homeMemberList, MemberDTO.class);

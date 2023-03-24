@@ -11,6 +11,8 @@ import java.io.IOException;
 @Component
 public class Address {
 
+    public static final String BaseUrl = "http://121.43.183.119:6250/";
+
     public static String rootAddress(){
         File directory = new File("");// 参数为空
         String courseFile = null;
