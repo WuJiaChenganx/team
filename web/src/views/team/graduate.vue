@@ -3,7 +3,7 @@
     <!-- default-active表示是当前选中的菜单的index -->
     <div class="graduateContent">
       <div class="graduateAside">
-        <div class="graduateAsideTitle">团队概况</div>
+        <div class="graduateAsideTitle">{{ pageItem.allTitle }}</div>
         <div class="graduateAsideContent">
           <el-menu
             :default-active="this.$route.path"
@@ -15,7 +15,7 @@
           >
             <el-menu-item
               class="graduateAsideItem"
-              v-for="(menuItem, menuIndex) in Menu"
+              v-for="(menuItem, menuIndex) in menu"
               :key="menuIndex"
               :index="menuItem.path"
             >
@@ -27,15 +27,15 @@
       </div>
       <div class="graduateDetail">
         <div class="graduateTitle">
-          <div class="title">毕业生</div>
+          <div class="title">{{ pageItem.subTitle }}</div>
           <div class="breadCrumb">
             <el-breadcrumb separator-class="el-icon-arrow-right">
-              <el-breadcrumb-item :to="{ path: '/home' }"
-                >首页</el-breadcrumb-item
-              >
-              <el-breadcrumb-item :to="{ path: '/team/graduate' }"
-                >毕业生</el-breadcrumb-item
-              >
+              <el-breadcrumb-item :to="{ path: '/home' }">{{
+                pageItem.home
+              }}</el-breadcrumb-item>
+              <el-breadcrumb-item :to="{ path: '/team/graduate' }">{{
+                pageItem.graduate
+              }}</el-breadcrumb-item>
             </el-breadcrumb>
           </div>
         </div>
@@ -66,20 +66,51 @@ import defaultImage from "@/assets/images/member/default.png";
 export default {
   data() {
     return {
-      Menu: [
+      pageItem: {},
+      chineseItem: {
+        allTitle: "团队概况",
+        subTitle: "毕业生",
+        home: "首页",
+        graduate: "毕业生",
+      },
+      englishItem: {
+        allTitle: "Snapshot",
+        subTitle: "Graduate",
+        home: "home",
+        graduate: "Graduate",
+      },
+      menu: [],
+      menuZH: [
         { name: "团队简介", path: "/team/profile" },
         { name: "导师", path: "/team/teacher" },
         { name: "博士生", path: "/team/doctor" },
         { name: "硕士生", path: "/team/master" },
         { name: "毕业生", path: "/team/graduate" },
       ],
+      menuEN: [
+        { name: "Profile", path: "/team/profile" },
+        { name: "Teacher", path: "/team/teacher" },
+        { name: "Doctor", path: "/team/doctor" },
+        { name: "Master", path: "/team/master" },
+        { name: "Graduate", path: "/team/graduate" },
+      ],
       studentCover: [],
     };
   },
   created() {
     this.getMemberCoverList();
+    this.changUI();
   },
   methods: {
+    changUI() {
+      if (this.$store.getters.getLanguageType == "Chinese") {
+        this.menu = this.menuZH;
+        this.pageItem = this.chineseItem;
+      } else if (this.$store.getters.getLanguageType == "English") {
+        this.menu = this.menuEN;
+        this.pageItem = this.englishItem;
+      }
+    },
     // async和await用于同步,就是按顺序执行
     async getMemberCoverList() {
       let params = {
@@ -97,8 +128,8 @@ export default {
     },
     gotoDetail(id) {
       this.$router.push({
-        path: "/team/studentDetail",
-        name: "学生详情",
+        path: "/team/memberInfo",
+        name: "成员详情",
         query: {
           id: id,
         },
@@ -190,11 +221,10 @@ export default {
 
   .detailItemImg {
     width: 100%;
-    height: 13.4rem;
   }
   .detailItem img {
-    height: 100%;
-    width: 100%;
+    height: 13.5rem;
+    width: 9rem;
   }
 
   .detailItem .detailItemInfo {

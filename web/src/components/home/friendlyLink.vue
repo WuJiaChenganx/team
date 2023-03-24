@@ -1,8 +1,8 @@
 <template>
   <div class="friendlyLink">
     <div class="link-title-box">
-      <div class="link-title">友情链接</div>
-      <a class="title-more">更多 +</a>
+      <div class="link-title">{{ pageItem.title }}</div>
+      <a class="title-more">{{ pageItem.more }} +</a>
     </div>
     <div id="link-content-box">
       <div class="links">
@@ -10,25 +10,55 @@
           href="http://www.cs.zjut.edu.cn/html/index.html"
           class="linkUrl"
           target="_blank"
-        >
-          计算机学院官网
+          >{{ pageItem.officialWebsite }}
         </a>
         <a
           href="http://www.soft.zjut.edu.cn/index.do"
           class="linkUrl"
           target="_blank"
-        >
-          E度空间
+          >{{ pageItem.eSpace }}
         </a>
         <a href="http://www.news.zjut.edu.cn/" class="linkUrl" target="_blank">
-          工大要闻
+          {{ pageItem.officialNews }}
         </a>
       </div>
     </div>
   </div>
 </template>
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      pageItem: {},
+      chineseItem: {
+        title: "友情链接",
+        more: "更多",
+        officialWebsite: "计算机学院官网",
+        eSpace: "E度空间",
+        officialNews: "工大要闻",
+      },
+      englishItem: {
+        title: "Links",
+        more: "more",
+        officialWebsite: "Officials",
+        eSpace: "E-Space",
+        officialNews: "Official-News",
+      },
+    };
+  },
+  created() {
+    this.changUI();
+  },
+  methods: {
+    changUI() {
+      if (this.$store.getters.getLanguageType == "Chinese") {
+        this.pageItem = this.chineseItem;
+      } else if (this.$store.getters.getLanguageType == "English") {
+        this.pageItem = this.englishItem;
+      }
+    },
+  },
+};
 </script>
 <style scoped>
 .friendlyLink {
@@ -79,7 +109,7 @@ export default {};
   width: 9px;
   height: 9px;
   left: 0;
-  top: 8px;
+  top: 6px;
   background: url(../../assets/images/background/zryy-link-icon.png) no-repeat
     center center;
 }

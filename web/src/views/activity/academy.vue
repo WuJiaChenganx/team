@@ -2,7 +2,7 @@
   <div class="academy">
     <div class="academyContent">
       <div class="academyAside">
-        <div class="academyAsideTitle">团队动态</div>
+        <div class="academyAsideTitle">{{ pageItem.allTitle }}</div>
         <div class="academyAsideContent">
           <el-menu
             :default-active="this.$route.path"
@@ -14,7 +14,7 @@
           >
             <el-menu-item
               class="academyAsideItem"
-              v-for="(menuItem, menuIndex) in Menu"
+              v-for="(menuItem, menuIndex) in menu"
               :key="menuIndex"
               :index="menuItem.path"
             >
@@ -26,15 +26,15 @@
       </div>
       <div class="academyDetail">
         <div class="academyTitle">
-          <div class="title">学术动态</div>
+          <div class="title">{{ pageItem.subTitle }}</div>
           <div class="breadCrumb">
             <el-breadcrumb separator-class="el-icon-arrow-right">
-              <el-breadcrumb-item :to="{ path: '/home' }"
-                >首页</el-breadcrumb-item
-              >
-              <el-breadcrumb-item :to="{ path: '/activity/academy' }"
-                >学术动态</el-breadcrumb-item
-              >
+              <el-breadcrumb-item :to="{ path: '/home' }">{{
+                pageItem.home
+              }}</el-breadcrumb-item>
+              <el-breadcrumb-item :to="{ path: '/activity/academy' }">{{
+                pageItem.academyList
+              }}</el-breadcrumb-item>
             </el-breadcrumb>
           </div>
         </div>
@@ -77,10 +77,29 @@ import { getAcademyURL } from "@/api/api";
 export default {
   data() {
     return {
-      Menu: [
+      pageItem: {},
+      chineseItem: {
+        allTitle: "团队动态",
+        subTitle: "学术动态",
+        home: "首页",
+        academyList: "学术列表",
+      },
+      englishItem: {
+        allTitle: "Activity",
+        subTitle: "Academy",
+        home: "Home",
+        academyList: "Academy List",
+      },
+      menu: [],
+      menuZH: [
         { name: "新闻快讯", path: "/activity/newFlash" },
         { name: "学术动态", path: "/activity/academy" },
         { name: "通知公告", path: "/activity/notice" },
+      ],
+      menuEN: [
+        { name: "News", path: "/activity/newFlash" },
+        { name: "Academy", path: "/activity/academy" },
+        { name: "Notices", path: "/activity/notice" },
       ],
       // 总共要展示的数量
       total_number: 10,
@@ -92,8 +111,18 @@ export default {
   },
   created() {
     this.getAcademyList();
+    this.changUI();
   },
   methods: {
+    changUI() {
+      if (this.$store.getters.getLanguageType == "Chinese") {
+        this.menu = this.menuZH;
+        this.pageItem = this.chineseItem;
+      } else if (this.$store.getters.getLanguageType == "English") {
+        this.menu = this.menuEN;
+        this.pageItem = this.englishItem;
+      }
+    },
     // async和await用于同步,就是按顺序执行
     async getAcademyList() {
       let params = {

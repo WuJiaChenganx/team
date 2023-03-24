@@ -3,7 +3,7 @@
   <div class="notice">
     <div class="noticeContent">
       <div class="noticeAside">
-        <div class="noticeAsideTitle">团队动态</div>
+        <div class="noticeAsideTitle">{{ pageItem.allTitle }}</div>
         <div class="noticeAsideContent">
           <el-menu
             :default-active="this.$route.path"
@@ -15,7 +15,7 @@
           >
             <el-menu-item
               class="noticeAsideItem"
-              v-for="(menuItem, menuIndex) in Menu"
+              v-for="(menuItem, menuIndex) in menu"
               :key="menuIndex"
               :index="menuItem.path"
             >
@@ -27,15 +27,15 @@
       </div>
       <div class="noticeDetail">
         <div class="noticeTitle">
-          <div class="title">通知公告</div>
+          <div class="title">{{ pageItem.subTitle }}</div>
           <div class="breadCrumb">
             <el-breadcrumb separator-class="el-icon-arrow-right">
-              <el-breadcrumb-item :to="{ path: '/home' }"
-                >首页</el-breadcrumb-item
-              >
-              <el-breadcrumb-item :to="{ path: '/activity/notice' }"
-                >通知公告</el-breadcrumb-item
-              >
+              <el-breadcrumb-item :to="{ path: '/home' }">{{
+                pageItem.home
+              }}</el-breadcrumb-item>
+              <el-breadcrumb-item :to="{ path: '/activity/notice' }">{{
+                pageItem.newsList
+              }}</el-breadcrumb-item>
             </el-breadcrumb>
           </div>
         </div>
@@ -78,10 +78,29 @@ import { getNoticeURL } from "@/api/api";
 export default {
   data() {
     return {
-      Menu: [
+      pageItem: {},
+      chineseItem: {
+        allTitle: "团队动态",
+        subTitle: "通知公告",
+        home: "首页",
+        newsList: "通知列表",
+      },
+      englishItem: {
+        allTitle: "Activity",
+        subTitle: "Notices",
+        home: "Home",
+        newsList: "Notices List",
+      },
+      menu: [],
+      menuZH: [
         { name: "新闻快讯", path: "/activity/newFlash" },
         { name: "学术动态", path: "/activity/academy" },
         { name: "通知公告", path: "/activity/notice" },
+      ],
+      menuEN: [
+        { name: "News", path: "/activity/newFlash" },
+        { name: "Academy", path: "/activity/academy" },
+        { name: "Notices", path: "/activity/notice" },
       ],
       // 要展示的公告信息
       noticeList: [],
@@ -93,8 +112,18 @@ export default {
   },
   created() {
     this.getNoticeList();
+    this.changUI();
   },
   methods: {
+    changUI() {
+      if (this.$store.getters.getLanguageType == "Chinese") {
+        this.menu = this.menuZH;
+        this.pageItem = this.chineseItem;
+      } else if (this.$store.getters.getLanguageType == "English") {
+        this.menu = this.menuEN;
+        this.pageItem = this.englishItem;
+      }
+    },
     // async和await用于同步,就是按顺序执行
     async getNoticeList() {
       let params = {

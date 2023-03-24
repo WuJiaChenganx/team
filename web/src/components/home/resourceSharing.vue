@@ -2,23 +2,58 @@
   <!-- 首页的资源共享 -->
   <div class="resourceSharing">
     <div class="resourceSharing-title-box">
-      <div class="resourceSharing-title">资源共享</div>
-      <a class="title-more" @click="goTo('/resource/simulationTool')">更多+</a>
+      <div class="resourceSharing-title">{{ pageItem.title }}</div>
+      <a class="title-more" @click="goTo('/resource/simulationTool')"
+        >{{ pageItem.more }}+</a
+      >
     </div>
     <div class="resourceSharing-content-box">
       <div class="linkUrl" @click="goTo('/resource/simulationTool')">
-        仿真工具
+        {{ pageItem.tool }}
       </div>
-      <div class="linkUrl" @click="goTo('/resource/dataSet')">数据集</div>
+      <div class="linkUrl" @click="goTo('/resource/dataSet')">
+        {{ pageItem.dataSet }}
+      </div>
     </div>
   </div>
 </template>
 <script>
+import Paper from "@/views/paper/paper.vue";
+
 export default {
   data() {
-    return {};
+    return {
+      pageItem: {
+        title: "资源共享",
+        more: "更多",
+        tool: "仿真工具",
+        dataSet: "数据集",
+      },
+      chineseItem: {
+        title: "资源共享",
+        more: "更多",
+        tool: "仿真工具",
+        dataSet: "数据集",
+      },
+      englishItem: {
+        title: "Resource",
+        more: "more",
+        tool: "Tool",
+        dataSet: "Dataset",
+      },
+    };
+  },
+  created() {
+    this.changUI();
   },
   methods: {
+    changUI() {
+      if (this.$store.getters.getLanguageType == "Chinese") {
+        this.pageItem = this.chineseItem;
+      } else if (this.$store.getters.getLanguageType == "English") {
+        this.pageItem = this.englishItem;
+      }
+    },
     goTo(path) {
       // 当前不一样就跳转
       if (this.$route.path !== path) {
@@ -78,7 +113,7 @@ export default {
   width: 9px;
   height: 9px;
   left: 0;
-  top: 8px;
+  top: 6px;
   background: url(../../assets/images/background/zryy-link-icon.png) no-repeat
     center center;
 }

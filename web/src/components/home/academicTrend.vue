@@ -1,8 +1,10 @@
 <template>
   <div class="academicTrend">
     <div class="academicTitle">
-      <div class="left-title">学术动态</div>
-      <a class="title-more" @click="goTo('/activity/academy')">更多 +</a>
+      <div class="left-title">{{ pageItem.title }}</div>
+      <a class="title-more" @click="goTo('/activity/academy')"
+        >{{ pageItem.more }} +</a
+      >
     </div>
     <div class="academicTrendItem">
       <div
@@ -33,12 +35,23 @@ export default {
   data() {
     return {
       academyList: [],
+      pageItem: {},
+      chineseItem: { title: "学术动态", more: "更多" },
+      englishItem: { title: "Academy", more: "more" },
     };
   },
   created() {
     this.getAcademyList();
+    this.changUI();
   },
   methods: {
+    changUI() {
+      if (this.$store.getters.getLanguageType == "Chinese") {
+        this.pageItem = this.chineseItem;
+      } else if (this.$store.getters.getLanguageType == "English") {
+        this.pageItem = this.englishItem;
+      }
+    },
     // async和await用于同步,就是按顺序执行
     async getAcademyList() {
       let params = {

@@ -2,18 +2,18 @@
   <div class="newFlashDetailBackground">
     <div class="newFlashDetail">
       <div class="newFlashDetailTitle">
-        <div class="title">新闻快讯</div>
+        <div class="title">{{ pageItem.title }}</div>
         <div class="breadCrumb">
           <el-breadcrumb separator-class="el-icon-arrow-right">
-            <el-breadcrumb-item :to="{ path: '/home' }"
-              >首页</el-breadcrumb-item
-            >
-            <el-breadcrumb-item :to="{ path: '/activity/newFlash' }"
-              >新闻快讯</el-breadcrumb-item
-            >
-            <el-breadcrumb-item :to="{ path: '/activity/newFlashDetail' }"
-              >新闻快讯详情</el-breadcrumb-item
-            >
+            <el-breadcrumb-item :to="{ path: '/home' }">{{
+              pageItem.home
+            }}</el-breadcrumb-item>
+            <el-breadcrumb-item :to="{ path: '/activity/newFlash' }">{{
+              pageItem.newFlashList
+            }}</el-breadcrumb-item>
+            <el-breadcrumb-item :to="{ path: '/activity/newFlashDetail' }">{{
+              pageItem.newFlashDetail
+            }}</el-breadcrumb-item>
           </el-breadcrumb>
         </div>
       </div>
@@ -48,13 +48,34 @@ import { getActivityDetail } from "@/api/api";
 export default {
   data() {
     return {
+      pageItem: {},
+      chineseItem: {
+        title: "新闻快讯",
+        home: "首页",
+        newFlashList: "新闻列表",
+        newFlashDetail: "详情",
+      },
+      englishItem: {
+        title: "News",
+        home: "Home",
+        newFlashList: "News List",
+        newFlashDetail: "News Detail",
+      },
       newsFlashDetail: {},
     };
   },
   created() {
     this.getNewFlashDetail(this.$route.query.id);
+    this.changUI();
   },
   methods: {
+    changUI() {
+      if (this.$store.getters.getLanguageType == "Chinese") {
+        this.pageItem = this.chineseItem;
+      } else if (this.$store.getters.getLanguageType == "English") {
+        this.pageItem = this.englishItem;
+      }
+    },
     // async和await用于同步,就是按顺序执行
     async getNewFlashDetail(id) {
       // 从上一个路由获取的参数

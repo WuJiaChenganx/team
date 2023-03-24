@@ -3,7 +3,7 @@
     <!-- default-active表示是当前选中的菜单的index -->
     <div class="profileContent">
       <div class="profileAside">
-        <div class="profileAsideTitle">团队概况</div>
+        <div class="profileAsideTitle">{{ pageItem.allTitle }}</div>
         <div class="projectAsideContent">
           <el-menu
             :default-active="this.$route.path"
@@ -15,7 +15,7 @@
           >
             <el-menu-item
               class="profileAsideItem"
-              v-for="(menuItem, menuIndex) in Menu"
+              v-for="(menuItem, menuIndex) in menu"
               :key="menuIndex"
               :index="menuItem.path"
             >
@@ -27,15 +27,15 @@
       </div>
       <div class="profileDetail">
         <div class="profileTitle">
-          <div class="title">团队简介</div>
+          <div class="title">{{ pageItem.subTitle }}</div>
           <div class="breadCrumb">
             <el-breadcrumb separator-class="el-icon-arrow-right">
-              <el-breadcrumb-item :to="{ path: '/home' }"
-                >首页</el-breadcrumb-item
-              >
-              <el-breadcrumb-item :to="{ path: '/team/profile' }"
-                >团队简介</el-breadcrumb-item
-              >
+              <el-breadcrumb-item :to="{ path: '/home' }">{{
+                pageItem.home
+              }}</el-breadcrumb-item>
+              <el-breadcrumb-item :to="{ path: '/team/profile' }">{{
+                pageItem.profile
+              }}</el-breadcrumb-item>
             </el-breadcrumb>
           </div>
         </div>
@@ -55,14 +55,33 @@
 export default {
   data() {
     return {
-      title: "团队概况",
-      currentMenu: "团队简介",
-      Menu: [
+      pageItem: {},
+      chineseItem: {
+        allTitle: "团队概况",
+        subTitle: "团队简介",
+        home: "首页",
+        profile: "团队简介",
+      },
+      englishItem: {
+        allTitle: "Snapshot",
+        subTitle: "Profile",
+        home: "home",
+        profile: "Profile",
+      },
+      menu: [],
+      menuZH: [
         { name: "团队简介", path: "/team/profile" },
         { name: "导师", path: "/team/teacher" },
         { name: "博士生", path: "/team/doctor" },
         { name: "硕士生", path: "/team/master" },
         { name: "毕业生", path: "/team/graduate" },
+      ],
+      menuEN: [
+        { name: "Profile", path: "/team/profile" },
+        { name: "Teacher", path: "/team/teacher" },
+        { name: "Doctor", path: "/team/doctor" },
+        { name: "Master", path: "/team/master" },
+        { name: "Graduate", path: "/team/graduate" },
       ],
       profile: {
         title: "群智感知与协同”高水平研究团队",
@@ -73,8 +92,21 @@ export default {
       },
     };
   },
-  created() {},
-  methods: {},
+
+  created() {
+    this.changUI();
+  },
+  methods: {
+    changUI() {
+      if (this.$store.getters.getLanguageType == "Chinese") {
+        this.menu = this.menuZH;
+        this.pageItem = this.chineseItem;
+      } else if (this.$store.getters.getLanguageType == "English") {
+        this.menu = this.menuEN;
+        this.pageItem = this.englishItem;
+      }
+    },
+  },
 };
 </script>
 <style scoped>

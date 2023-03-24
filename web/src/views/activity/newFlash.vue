@@ -2,7 +2,7 @@
   <div class="newFlash">
     <div class="newFlashContent">
       <div class="newFlashAside">
-        <div class="newFlashAsideTitle">团队动态</div>
+        <div class="newFlashAsideTitle">{{ pageItem.allTitle }}</div>
         <div class="newFlashAsideContent">
           <el-menu
             :default-active="this.$route.path"
@@ -14,7 +14,7 @@
           >
             <el-menu-item
               class="newFlashAsideItem"
-              v-for="(menuItem, menuIndex) in Menu"
+              v-for="(menuItem, menuIndex) in menu"
               :key="menuIndex"
               :index="menuItem.path"
             >
@@ -26,15 +26,15 @@
       </div>
       <div class="newFlashDetail">
         <div class="newFlashTitle">
-          <div class="title">新闻快讯</div>
+          <div class="title">{{ pageItem.subTitle }}</div>
           <div class="breadCrumb">
             <el-breadcrumb separator-class="el-icon-arrow-right">
-              <el-breadcrumb-item :to="{ path: '/home' }"
-                >首页</el-breadcrumb-item
-              >
-              <el-breadcrumb-item :to="{ path: '/activity/newFlash' }"
-                >新闻动态</el-breadcrumb-item
-              >
+              <el-breadcrumb-item :to="{ path: '/home' }">{{
+                pageItem.home
+              }}</el-breadcrumb-item>
+              <el-breadcrumb-item :to="{ path: '/activity/newFlash' }">{{
+                pageItem.newsList
+              }}</el-breadcrumb-item>
             </el-breadcrumb>
           </div>
         </div>
@@ -77,10 +77,29 @@ import { getNewFlashURL } from "@/api/api";
 export default {
   data() {
     return {
-      Menu: [
+      pageItem: {},
+      chineseItem: {
+        allTitle: "团队动态",
+        subTitle: "新闻快讯",
+        home: "首页",
+        newsList: "新闻列表",
+      },
+      englishItem: {
+        allTitle: "Activity",
+        subTitle: "News",
+        home: "Home",
+        newsList: "News List",
+      },
+      menu: [],
+      menuZH: [
         { name: "新闻快讯", path: "/activity/newFlash" },
         { name: "学术动态", path: "/activity/academy" },
         { name: "通知公告", path: "/activity/notice" },
+      ],
+      menuEN: [
+        { name: "News", path: "/activity/newFlash" },
+        { name: "Academy", path: "/activity/academy" },
+        { name: "Notices", path: "/activity/notice" },
       ],
       // 要展示的新闻信息
       newsList: [],
@@ -92,8 +111,18 @@ export default {
   },
   created() {
     this.getNewFlashList();
+    this.changUI();
   },
   methods: {
+    changUI() {
+      if (this.$store.getters.getLanguageType == "Chinese") {
+        this.menu = this.menuZH;
+        this.pageItem = this.chineseItem;
+      } else if (this.$store.getters.getLanguageType == "English") {
+        this.menu = this.menuEN;
+        this.pageItem = this.englishItem;
+      }
+    },
     // async和await用于同步,就是按顺序执行
     async getNewFlashList() {
       let params = {

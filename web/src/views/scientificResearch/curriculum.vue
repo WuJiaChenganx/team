@@ -3,7 +3,7 @@
     <!-- default-active表示是当前选中的菜单的index -->
     <div class="curriculumContent">
       <div class="curriculumAside">
-        <div class="curriculumAsideTitle">科研教学</div>
+        <div class="curriculumAsideTitle">{{ pageItem.allTitle }}</div>
         <div class="curriculumAsideContent">
           <el-menu
             :default-active="this.$route.path"
@@ -15,7 +15,7 @@
           >
             <el-menu-item
               class="curriculumAsideItem"
-              v-for="(menuItem, menuIndex) in Menu"
+              v-for="(menuItem, menuIndex) in menu"
               :key="menuIndex"
               :index="menuItem.path"
             >
@@ -27,15 +27,15 @@
       </div>
       <div class="curriculumDetail">
         <div class="curriculumTitle">
-          <div class="title">课程教学</div>
+          <div class="title">{{ pageItem.subTitle }}</div>
           <div class="breadCrumb">
             <el-breadcrumb separator-class="el-icon-arrow-right">
-              <el-breadcrumb-item :to="{ path: '/home' }"
-                >首页</el-breadcrumb-item
-              >
+              <el-breadcrumb-item :to="{ path: '/home' }">{{
+                pageItem.home
+              }}</el-breadcrumb-item>
               <el-breadcrumb-item
                 :to="{ path: '/scientificResearch/curriculum' }"
-                >课程教学</el-breadcrumb-item
+                >{{ pageItem.curriculum }}</el-breadcrumb-item
               >
             </el-breadcrumb>
           </div>
@@ -71,13 +71,31 @@
 export default {
   data() {
     return {
-      title: "科研教学",
-      currentMenu: "课程教学",
-      Menu: [
+      pageItem: {},
+      chineseItem: {
+        allTitle: "科研概况",
+        subTitle: "课程教学",
+        home: "首页",
+        curriculum: "课程教学",
+      },
+      englishItem: {
+        allTitle: "Research",
+        subTitle: "Curriculum",
+        home: "home",
+        curriculum: "Curriculum",
+      },
+      menu: [],
+      menuZH: [
         { name: "科研方向", path: "/scientificResearch/direction" },
         { name: "科研项目", path: "/scientificResearch/project" },
         { name: "科研平台", path: "/scientificResearch/platform" },
         { name: "课程教学", path: "/scientificResearch/curriculum" },
+      ],
+      menuEN: [
+        { name: "Direction", path: "/scientificResearch/direction" },
+        { name: "Project", path: "/scientificResearch/project" },
+        { name: "Platform", path: "/scientificResearch/platform" },
+        { name: "Curriculum", path: "/scientificResearch/curriculum" },
       ],
       courses: [
         {
@@ -122,8 +140,20 @@ export default {
       ],
     };
   },
-  created() {},
-  methods: {},
+  created() {
+    this.changUI();
+  },
+  methods: {
+    changUI() {
+      if (this.$store.getters.getLanguageType == "Chinese") {
+        this.menu = this.menuZH;
+        this.pageItem = this.chineseItem;
+      } else if (this.$store.getters.getLanguageType == "English") {
+        this.menu = this.menuEN;
+        this.pageItem = this.englishItem;
+      }
+    },
+  },
 };
 </script>
 <style scoped>

@@ -128,10 +128,10 @@ const router = new VueRouter({
                 import ("../views/team/graduate.vue"),
         },
         {
-            path: "/team/studentInfo",
-            name: "学生详情",
+            path: "/team/memberInfo",
+            name: "成员详情",
             component: () =>
-                import ("../views/team/studentInfo.vue"),
+                import ("../views/team/memberInfo.vue"),
         },
         // 科研教学
         {

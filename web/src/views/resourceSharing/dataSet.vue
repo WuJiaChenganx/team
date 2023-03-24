@@ -3,7 +3,7 @@
     <!-- default-active表示是当前选中的菜单的index -->
     <div class="dataSetContent">
       <div class="dataSetAside">
-        <div class="dataSetAsideTitle">资源共享</div>
+        <div class="dataSetAsideTitle">{{ pageItem.allTitle }}</div>
         <div class="dataSetAsideContent">
           <el-menu
             :default-active="this.$route.path"
@@ -15,7 +15,7 @@
           >
             <el-menu-item
               class="dataSetAsideItem"
-              v-for="(menuItem, menuIndex) in Menu"
+              v-for="(menuItem, menuIndex) in menu"
               :key="menuIndex"
               :index="menuItem.path"
             >
@@ -27,15 +27,15 @@
       </div>
       <div class="dataSetDetail">
         <div class="dataSetTitle">
-          <div class="title">数据集</div>
+          <div class="title">{{ pageItem.subTitle }}</div>
           <div class="breadCrumb">
             <el-breadcrumb separator-class="el-icon-arrow-right">
-              <el-breadcrumb-item :to="{ path: '/home' }"
-                >首页</el-breadcrumb-item
-              >
-              <el-breadcrumb-item :to="{ path: '/resource/dataSet' }"
-                >数据集</el-breadcrumb-item
-              >
+              <el-breadcrumb-item :to="{ path: '/home' }">{{
+                pageItem.home
+              }}</el-breadcrumb-item>
+              <el-breadcrumb-item :to="{ path: '/resource/dataSet' }">{{
+                pageItem.dataSetList
+              }}</el-breadcrumb-item>
             </el-breadcrumb>
           </div>
         </div>
@@ -63,7 +63,7 @@
                 style="text-decoration: none"
                 :href="detailItem.fileUrl"
                 target="_blank"
-                >下载数据集</a
+                >{{ pageItem.download }}</a
               >
             </div>
           </div>
@@ -90,27 +90,32 @@ import { getDataSetURL } from "@/api/api";
 export default {
   data() {
     return {
-      Menu: [
+      pageItem: {},
+      chineseItem: {
+        allTitle: "资源共享",
+        subTitle: "数据集",
+        home: "首页",
+        dataSetList: "数据集列表",
+        download: "下载数据集",
+      },
+      englishItem: {
+        allTitle: "Resource",
+        subTitle: "Dataset",
+        home: "home",
+        dataSetList: "Dataset List",
+        download: "download",
+      },
+      menu: [],
+      menuZH: [
         { name: "仿真工具", path: "/resource/simulationTool" },
         { name: "数据集", path: "/resource/dataSet" },
       ],
-      // 需要展示页面数据
-      showPageContent: [
-        // {
-        //   title: "数据集1",
-        //   detail:
-        //     "简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介",
-        //   fileUrl:
-        //     "http://localhost:8186/teamWeb/resource/download/file/aaaa.pdf",
-        // },
-        // {
-        //   title: "数据集2",
-        //   detail:
-        //     "简介2简介2简介2简介2简介2简介2简介2简介2简介2简介2简介2简介2简介2简介2简介2简介2简介2简介2简介2简介2简介2简介2简介2简介2简介2简介2简介2简介2简介2简介2简介2简介2简介2简介2简介2简介2简介2简介2",
-        //   fileUrl:
-        //     "http://localhost:8186/teamWeb/resource/download/file/aaaa.pdf",
-        // },
+      menuEN: [
+        { name: "Tool", path: "/resource/simulationTool" },
+        { name: "Dataset", path: "/resource/dataSet" },
       ],
+      // 需要展示页面数据
+      showPageContent: [],
       // 总共要展示的数量
       total_number: 10,
       // 当前页面从1开始的这两个属性会在刚开始的时候就更新
@@ -118,10 +123,19 @@ export default {
     };
   },
   created() {
-    // 分页
     this.getDataSetList();
+    this.changUI();
   },
   methods: {
+    changUI() {
+      if (this.$store.getters.getLanguageType == "Chinese") {
+        this.menu = this.menuZH;
+        this.pageItem = this.chineseItem;
+      } else if (this.$store.getters.getLanguageType == "English") {
+        this.menu = this.menuEN;
+        this.pageItem = this.englishItem;
+      }
+    },
     // async和await用于同步,就是按顺序执行
     async getDataSetList() {
       let params = {

@@ -1,8 +1,10 @@
 <template>
   <div class="researchTeam">
     <div class="researchTeamTitle">
-      <div class="left-title">研究队伍</div>
-      <a @click="goTo('team/profile')" class="title-more">更多 +</a>
+      <div class="left-title">{{ pageItem.title }}</div>
+      <a @click="goTo('team/profile')" class="title-more"
+        >{{ pageItem.more }} +</a
+      >
     </div>
     <div id="swiper-member">
       <!-- 如果没有的话就不显示 -->
@@ -12,7 +14,7 @@
             class="swiper-slide"
             v-for="(teamItem, teamItemIndex) in teamCover"
             :key="teamItemIndex"
-            @click="gotoDetail(teamItem.id)"
+            @click="gotoDetail(teamItem)"
           >
             <div class="memberBox">
               <div class="member-img">
@@ -39,13 +41,24 @@ export default {
   data() {
     return {
       teamCover: [],
+      pageItem: {},
+      chineseItem: { title: "研究队伍", more: "更多" },
+      englishItem: { title: "News", more: "more" },
     };
   },
   created() {
     this.getTeamCoverList();
+    this.changUI();
   },
 
   methods: {
+    changUI() {
+      if (this.$store.getters.getLanguageType == "Chinese") {
+        this.pageItem = this.chineseItem;
+      } else if (this.$store.getters.getLanguageType == "English") {
+        this.pageItem = this.englishItem;
+      }
+    },
     // async和await用于同步,就是按顺序执行
     async getTeamCoverList() {
       let params = {};
@@ -76,10 +89,22 @@ export default {
         });
       }
     },
-    gotoDetail(id) {
+    gotoDetail(teamItem) {
+      if (teamItem.memberType == "teacher") {
+        // 跳转不覆盖页面
+        window.open(teamItem.pageUrl, "_blank");
+      } else {
+        this.$router.push({
+          name: "成员详情",
+          path: "/team/memberInfo",
+          query: {
+            id: teamItem.id,
+          },
+        });
+      }
       this.$router.push({
-        path: "/team/studentInfo",
-        name: "学生详情",
+        name: "成员详情",
+        path: "/team/memberInfo",
         query: {
           id,
         },

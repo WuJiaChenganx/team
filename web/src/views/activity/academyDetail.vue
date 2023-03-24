@@ -2,18 +2,18 @@
   <div class="academyDetailBackground">
     <div class="academyDetail">
       <div class="academyDetailTitle">
-        <div class="title">学术动态</div>
+        <div class="title">{{ pageItem.title }}</div>
         <div class="breadCrumb">
           <el-breadcrumb separator-class="el-icon-arrow-right">
-            <el-breadcrumb-item :to="{ path: '/home' }"
-              >首页</el-breadcrumb-item
-            >
-            <el-breadcrumb-item :to="{ path: '/activity/academy' }"
-              >学术动态</el-breadcrumb-item
-            >
-            <el-breadcrumb-item :to="{ path: '/activity/academyDetail' }"
-              >学术动态详情</el-breadcrumb-item
-            >
+            <el-breadcrumb-item :to="{ path: '/home' }">{{
+              pageItem.home
+            }}</el-breadcrumb-item>
+            <el-breadcrumb-item :to="{ path: '/activity/academy' }">{{
+              pageItem.academyList
+            }}</el-breadcrumb-item>
+            <el-breadcrumb-item :to="{ path: '/activity/academyDetail' }">{{
+              pageItem.academyDetail
+            }}</el-breadcrumb-item>
           </el-breadcrumb>
         </div>
       </div>
@@ -48,13 +48,34 @@ import { getActivityDetail } from "@/api/api";
 export default {
   data() {
     return {
+      pageItem: {},
+      chineseItem: {
+        title: "学术动态",
+        home: "首页",
+        academyList: "学术列表",
+        academyDetail: "详情",
+      },
+      englishItem: {
+        title: "Academy",
+        home: "Home",
+        academyList: "Academy List",
+        academyDetail: "Academy Detail",
+      },
       academyDetail: {},
     };
   },
   created() {
     this.getAcademyDetail(this.$route.query.id);
+    this.changUI();
   },
   methods: {
+    changUI() {
+      if (this.$store.getters.getLanguageType == "Chinese") {
+        this.pageItem = this.chineseItem;
+      } else if (this.$store.getters.getLanguageType == "English") {
+        this.pageItem = this.englishItem;
+      }
+    },
     // async和await用于同步,就是按顺序执行
     async getAcademyDetail(id) {
       // 从上一个路由获取的参数

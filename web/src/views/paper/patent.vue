@@ -3,7 +3,7 @@
     <!-- default-active表示是当前选中的菜单的index -->
     <div class="patentContent">
       <div class="patentAside">
-        <div class="patentAsideTitle">论文论著</div>
+        <div class="patentAsideTitle">{{ pageItem.allTitle }}</div>
         <div class="patentAsideContent">
           <el-menu
             :default-active="this.$route.path"
@@ -15,7 +15,7 @@
           >
             <el-menu-item
               class="patentAsideItem"
-              v-for="(menuItem, menuIndex) in Menu"
+              v-for="(menuItem, menuIndex) in menu"
               :key="menuIndex"
               :index="menuItem.path"
             >
@@ -27,15 +27,15 @@
       </div>
       <div class="patentDetail">
         <div class="patentTitle">
-          <div class="title">授权专利</div>
+          <div class="title">{{ pageItem.subTitle }}</div>
           <div class="breadCrumb">
             <el-breadcrumb separator-class="el-icon-arrow-right">
-              <el-breadcrumb-item :to="{ path: '/home' }"
-                >首页</el-breadcrumb-item
-              >
-              <el-breadcrumb-item :to="{ path: '/paper/patent' }"
-                >授权专利</el-breadcrumb-item
-              >
+              <el-breadcrumb-item :to="{ path: '/home' }">{{
+                pageItem.home
+              }}</el-breadcrumb-item>
+              <el-breadcrumb-item :to="{ path: '/paper/patent' }">{{
+                pageItem.patent
+              }}</el-breadcrumb-item>
             </el-breadcrumb>
           </div>
         </div>
@@ -73,12 +73,29 @@ import { getPatentURL } from "@/api/api";
 export default {
   data() {
     return {
-      title: "论文论著",
-      currentMenu: "授权专利",
-      Menu: [
+      pageItem: {},
+      chineseItem: {
+        allTitle: "论文论著",
+        subTitle: "授权专利",
+        home: "首页",
+        patent: "授权专利",
+      },
+      englishItem: {
+        allTitle: "Publication",
+        subTitle: "Patent",
+        home: "home",
+        patent: "Patent",
+      },
+      menu: [],
+      menuZH: [
         { name: "发表论文", path: "/paper/paper" },
         { name: "授权专利", path: "/paper/patent" },
         { name: "出版专著", path: "/paper/book" },
+      ],
+      menuEN: [
+        { name: "Paper", path: "/paper/paper" },
+        { name: "Patent", path: "/paper/patent" },
+        { name: "Book", path: "/paper/book" },
       ],
       patents: [],
       // 总共要展示的数量
@@ -89,8 +106,18 @@ export default {
   },
   created() {
     this.getPatentList();
+    this.changUI();
   },
   methods: {
+    changUI() {
+      if (this.$store.getters.getLanguageType == "Chinese") {
+        this.menu = this.menuZH;
+        this.pageItem = this.chineseItem;
+      } else if (this.$store.getters.getLanguageType == "English") {
+        this.menu = this.menuEN;
+        this.pageItem = this.englishItem;
+      }
+    },
     // async和await用于同步,就是按顺序执行
     async getPatentList() {
       let params = {

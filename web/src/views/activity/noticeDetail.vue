@@ -3,18 +3,18 @@
   <div class="noticeDetailBackground">
     <div class="noticeDetail">
       <div class="noticeDetailTitle">
-        <div class="title">通知公告</div>
+        <div class="title">{{ pageItem.title }}</div>
         <div class="breadCrumb">
           <el-breadcrumb separator-class="el-icon-arrow-right">
-            <el-breadcrumb-item :to="{ path: '/home' }"
-              >首页</el-breadcrumb-item
-            >
-            <el-breadcrumb-item :to="{ path: '/activity/notice' }"
-              >通知公告</el-breadcrumb-item
-            >
-            <el-breadcrumb-item :to="{ path: '/activity/noticeDetail' }"
-              >通知公告详情</el-breadcrumb-item
-            >
+            <el-breadcrumb-item :to="{ path: '/home' }">{{
+              pageItem.home
+            }}</el-breadcrumb-item>
+            <el-breadcrumb-item :to="{ path: '/activity/notice' }">{{
+              pageItem.noticeList
+            }}</el-breadcrumb-item>
+            <el-breadcrumb-item :to="{ path: '/activity/noticeDetail' }">{{
+              pageItem.noticeDetail
+            }}</el-breadcrumb-item>
           </el-breadcrumb>
         </div>
       </div>
@@ -37,13 +37,34 @@ import { getActivityDetail } from "@/api/api";
 export default {
   data() {
     return {
+      pageItem: {},
+      chineseItem: {
+        title: "通知公告",
+        home: "首页",
+        noticeList: "新闻列表",
+        noticeDetail: "详情",
+      },
+      englishItem: {
+        title: "Notices",
+        home: "Home",
+        noticeList: "Notices List",
+        noticeDetail: "Notice Detail",
+      },
       noticeDetail: {},
     };
   },
   created() {
     this.getNoticeDetail(this.$route.query.id);
+    this.changUI();
   },
   methods: {
+    changUI() {
+      if (this.$store.getters.getLanguageType == "Chinese") {
+        this.pageItem = this.chineseItem;
+      } else if (this.$store.getters.getLanguageType == "English") {
+        this.pageItem = this.englishItem;
+      }
+    },
     // async和await用于同步,就是按顺序执行
     async getNoticeDetail(id) {
       // 从上一个路由获取的参数

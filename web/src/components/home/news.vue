@@ -18,8 +18,10 @@
     <!-- 消息列表 -->
     <div class="newsList">
       <div class="newsListTitle">
-        <div class="left-title">新闻快讯</div>
-        <a class="title-more" @click="goTo('/activity/newFlash')">更多+</a>
+        <div class="left-title">{{ pageItem.title }}</div>
+        <a class="title-more" @click="goTo('/activity/newFlash')"
+          >{{ pageItem.more }}+</a
+        >
       </div>
       <div class="newsListContent">
         <div
@@ -45,12 +47,23 @@ export default {
     return {
       // 要展示的新闻信息(加载前还要处理过)
       newsList: [],
+      pageItem: {},
+      chineseItem: { title: "新闻快讯", more: "更多" },
+      englishItem: { title: "News", more: "more" },
     };
   },
   created() {
     this.getNewFlashList();
+    this.changUI();
   },
   methods: {
+    changUI() {
+      if (this.$store.getters.getLanguageType == "Chinese") {
+        this.pageItem = this.chineseItem;
+      } else if (this.$store.getters.getLanguageType == "English") {
+        this.pageItem = this.englishItem;
+      }
+    },
     // async和await用于同步,就是按顺序执行
     async getNewFlashList() {
       let params = {

@@ -3,7 +3,7 @@
     <!-- default-active表示是当前选中的菜单的index -->
     <div class="bookContent">
       <div class="bookAside">
-        <div class="bookAsideTitle">论文论著</div>
+        <div class="bookAsideTitle">{{ pageItem.allTitle }}</div>
         <div class="bookAsideContent">
           <el-menu
             :default-active="this.$route.path"
@@ -15,7 +15,7 @@
           >
             <el-menu-item
               class="bookAsideItem"
-              v-for="(menuItem, menuIndex) in Menu"
+              v-for="(menuItem, menuIndex) in menu"
               :key="menuIndex"
               :index="menuItem.path"
             >
@@ -27,15 +27,15 @@
       </div>
       <div class="bookDetail">
         <div class="bookTitle">
-          <div class="title">出版专著</div>
+          <div class="title">{{ pageItem.subTitle }}</div>
           <div class="breadCrumb">
             <el-breadcrumb separator-class="el-icon-arrow-right">
-              <el-breadcrumb-item :to="{ path: '/home' }"
-                >首页</el-breadcrumb-item
-              >
-              <el-breadcrumb-item :to="{ path: '/paper/book' }"
-                >出版专著</el-breadcrumb-item
-              >
+              <el-breadcrumb-item :to="{ path: '/home' }">{{
+                pageItem.home
+              }}</el-breadcrumb-item>
+              <el-breadcrumb-item :to="{ path: '/paper/book' }">{{
+                pageItem.book
+              }}</el-breadcrumb-item>
             </el-breadcrumb>
           </div>
         </div>
@@ -81,15 +81,31 @@ import { getBookURL } from "@/api/api";
 export default {
   data() {
     return {
-      title: "论文论著",
-      currentMenu: "出版专著",
-      Menu: [
+      pageItem: {},
+      chineseItem: {
+        allTitle: "论文论著",
+        subTitle: "出版专著",
+        home: "首页",
+        book: "出版专著",
+      },
+      englishItem: {
+        allTitle: "Publication",
+        subTitle: "Book",
+        home: "home",
+        book: "Book",
+      },
+      menu: [],
+      menuZH: [
         { name: "发表论文", path: "/paper/paper" },
         { name: "授权专利", path: "/paper/patent" },
         { name: "出版专著", path: "/paper/book" },
       ],
+      menuEN: [
+        { name: "Paper", path: "/paper/paper" },
+        { name: "Patent", path: "/paper/patent" },
+        { name: "Book", path: "/paper/book" },
+      ],
       books: [],
-
       // 总共要展示的数量
       total_number: 10,
       // 当前页面从1开始的这两个属性会在刚开始的时候就更新
@@ -98,8 +114,18 @@ export default {
   },
   created() {
     this.getBookList();
+    this.changUI();
   },
   methods: {
+    changUI() {
+      if (this.$store.getters.getLanguageType == "Chinese") {
+        this.menu = this.menuZH;
+        this.pageItem = this.chineseItem;
+      } else if (this.$store.getters.getLanguageType == "English") {
+        this.menu = this.menuEN;
+        this.pageItem = this.englishItem;
+      }
+    },
     // async和await用于同步,就是按顺序执行
     async getBookList() {
       let params = {

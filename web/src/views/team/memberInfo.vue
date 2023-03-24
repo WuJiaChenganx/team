@@ -3,7 +3,7 @@
     <!-- default-active表示是当前选中的菜单的index 当menuItem中的index和default-active设置的相同时对应的,menu就会亮-->
     <div class="studentInfoContent">
       <div class="studentInfoAside">
-        <div class="studentInfoAsideTitle">学生详情</div>
+        <div class="studentInfoAsideTitle">{{ pageItem.allTitle }}</div>
         <div class="studentInfoAsideContent">
           <el-menu
             :default-active="activeMenu"
@@ -15,7 +15,7 @@
           >
             <el-menu-item
               class="studentInfoAsideItem"
-              v-for="(menuItem, menuIndex) in Menu"
+              v-for="(menuItem, menuIndex) in menu"
               :key="menuIndex"
               :index="menuItem.path"
             >
@@ -27,15 +27,15 @@
       </div>
       <div class="studentInfoDetail">
         <div class="studentInfoTitle">
-          <div class="title">学生详情</div>
+          <div class="title">{{ pageItem.title1 }}</div>
           <div class="breadCrumb">
             <el-breadcrumb separator-class="el-icon-arrow-right">
-              <el-breadcrumb-item :to="{ path: '/home' }"
-                >首页</el-breadcrumb-item
-              >
-              <el-breadcrumb-item :to="{ path: '/team/studentInfo' }"
-                >学生详情</el-breadcrumb-item
-              >
+              <el-breadcrumb-item :to="{ path: '/home' }">{{
+                pageItem.home
+              }}</el-breadcrumb-item>
+              <el-breadcrumb-item :to="{ path: '/team/studentInfo' }">{{
+                pageItem.profile
+              }}</el-breadcrumb-item>
             </el-breadcrumb>
           </div>
         </div>
@@ -46,15 +46,17 @@
                 {{ studentInfo.name }}
               </div>
               <div class="studentEmail">
-                <!-- &nbsp;&nbsp;&nbsp;&nbsp; -->
-                <span style="font-weight: bold; padding-right: 1rem"
-                  >邮&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;箱:</span
-                >
+                <span
+                  style="font-weight: bold; padding-right: 1rem"
+                  v-html="pageItem.email"
+                ></span>
                 {{ studentInfo.email }}
               </div>
               <div class="studentDirection">
-                <span style="font-weight: bold; padding-right: 1rem"
-                  >研究方向:</span
+                <span
+                  style="font-weight: bold; padding-right: 1rem"
+                  v-html="pageItem.direction"
+                ></span
                 >{{ studentInfo.direction }}
               </div>
             </div>
@@ -63,7 +65,9 @@
             </div>
           </div>
           <div class="educationBackground">
-            <div class="educationBackgroundTitle">教育背景</div>
+            <div class="educationBackgroundTitle">
+              {{ pageItem.background }}
+            </div>
             <div
               class="educationItem"
               v-for="(
@@ -75,7 +79,7 @@
             </div>
           </div>
           <div class="paperList">
-            <div class="paperListTitle">论文列表</div>
+            <div class="paperListTitle">{{ pageItem.paperList }}</div>
             <div
               class="paperItem"
               v-for="(paperItem, paperIndex) in studentInfo.paperList"
@@ -96,12 +100,41 @@ import defaultImage from "@/assets/images/member/default.png";
 export default {
   data() {
     return {
-      Menu: [
+      pageItem: {},
+      chineseItem: {
+        allTitle: "成员详情",
+        title1: "成员信息",
+        home: "首页",
+        profile: "成员详情",
+        email: "邮&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;箱:",
+        direction: "研究方向:",
+        background: "履历",
+        paperList: "论文列表",
+      },
+      englishItem: {
+        allTitle: "Information",
+        title1: "Information",
+        home: "home",
+        profile: "Detail",
+        email: "email:",
+        direction: "direction:",
+        background: "Experiences",
+        paperList: "Paper List",
+      },
+      menu: [],
+      menuZH: [
         { name: "团队简介", path: "/team/profile" },
         { name: "导师", path: "/team/teacher" },
         { name: "博士生", path: "/team/doctor" },
         { name: "硕士生", path: "/team/master" },
         { name: "毕业生", path: "/team/graduate" },
+      ],
+      menuEN: [
+        { name: "Profile", path: "/team/profile" },
+        { name: "Teacher", path: "/team/teacher" },
+        { name: "Doctor", path: "/team/doctor" },
+        { name: "Master", path: "/team/master" },
+        { name: "Graduate", path: "/team/graduate" },
       ],
       activeMenu: this.$route.path,
       studentInfo: [],
@@ -109,8 +142,18 @@ export default {
   },
   created() {
     this.getStudentInfo(this.$route.query.id);
+    this.changUI();
   },
   methods: {
+    changUI() {
+      if (this.$store.getters.getLanguageType == "Chinese") {
+        this.menu = this.menuZH;
+        this.pageItem = this.chineseItem;
+      } else if (this.$store.getters.getLanguageType == "English") {
+        this.menu = this.menuEN;
+        this.pageItem = this.englishItem;
+      }
+    },
     // async和await用于同步,就是按顺序执行
     async getStudentInfo(id) {
       // 从上一个路由获取的参数

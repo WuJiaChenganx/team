@@ -2,18 +2,14 @@
   <div>
     <footer class="footer">
       <div class="container">
-        <span>版权所有 &copy;{{ CopyrightYear }} 群智感知与协同研究所</span>
-        <a
-          href="https://beian.miit.gov.cn/#/Integrated/index"
-          target="_blank"
-        ></a>
-        <a
-          href="http://www.beian.gov.cn/portal/registerSystemInfo"
-          target="_blank"
-        ></a>
-        <br />
-        <span>地址：杭州市西湖区留和路288号</span><br />
-        <span>电话：86-10-62601166</span> <span>邮箱：ictoffice@ict.ac.cn</span>
+        <div>版权所有 &copy;{{ CopyrightYear }} 群智感知与协同研究</div>
+        <div>
+          <a
+            href="http://www.beian.gov.cn/portal/registerSystemInfo"
+            target="_blank"
+            >浙ICP备2023007286号</a
+          >
+        </div>
       </div>
     </footer>
   </div>
@@ -29,23 +25,27 @@ export default {
 </script>
 <style>
 .footer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 15rem;
   background: #1d609c url(../../assets/images/background/zryy-footer-bg.png)
     no-repeat center center;
   background-size: cover !important;
-  padding: 36px 0 33px 0;
   text-align: center;
 }
-.footer span,
-.footer a {
+
+.container {
   display: inline-block;
-  font-size: 14px;
+  font-size: 16px;
   color: #e9f5ff;
   line-height: 26px;
 }
-.footer a {
-  margin-left: 10px;
+a {
+  text-decoration: none;
+  color: #e9f5ff;
 }
-.footer a:hover {
+a:hover {
   text-decoration: underline;
 }
 </style>

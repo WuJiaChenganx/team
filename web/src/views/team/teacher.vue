@@ -3,7 +3,7 @@
     <!-- default-active表示是当前选中的菜单的index -->
     <div class="teacherContent">
       <div class="teacherAside">
-        <div class="teacherAsideTitle">团队概况</div>
+        <div class="teacherAsideTitle">{{ pageItem.allTitle }}</div>
         <div class="teacherAsideContent">
           <el-menu
             :default-active="this.$route.path"
@@ -15,7 +15,7 @@
           >
             <el-menu-item
               class="teacherAsideItem"
-              v-for="(menuItem, menuIndex) in Menu"
+              v-for="(menuItem, menuIndex) in menu"
               :key="menuIndex"
               :index="menuItem.path"
             >
@@ -27,39 +27,32 @@
       </div>
       <div class="teacherDetail">
         <div class="teacherTitle">
-          <div class="title">导师</div>
+          <div class="title">{{ pageItem.subTitle }}</div>
           <div class="breadCrumb">
             <el-breadcrumb separator-class="el-icon-arrow-right">
-              <el-breadcrumb-item :to="{ path: '/home' }"
-                >首页</el-breadcrumb-item
-              >
-              <el-breadcrumb-item :to="{ path: '/team/teacher' }"
-                >导师</el-breadcrumb-item
-              >
+              <el-breadcrumb-item :to="{ path: '/home' }">{{
+                pageItem.home
+              }}</el-breadcrumb-item>
+              <el-breadcrumb-item :to="{ path: '/team/teacher' }">{{
+                pageItem.teacher
+              }}</el-breadcrumb-item>
             </el-breadcrumb>
           </div>
         </div>
         <div class="teacherItem">
-          <a
+          <div
             class="detailItem"
-            href="http://www.homepage.zjut.edu.cn/yxw/"
-            target="_blank"
+            v-for="(memberItem, index) in teacherCover"
+            :key="index"
+            @click="gotoDetail(memberItem)"
           >
             <div class="detailItemImg">
-              <img src="../../assets/images/teacherPhoto/yxw.jpg" />
+              <img :src="memberItem.picUrl" @error="setDefaultImage" />
             </div>
-            <div class="detailItemInfo">姚信威 教授</div>
-          </a>
-          <a
-            class="detailItem"
-            href="http://www.homepage.zjut.edu.cn/qiangli/"
-            target="_blank"
-          >
-            <div class="detailItemImg">
-              <img src="../../assets/images/teacherPhoto/lq.jpg" />
+            <div class="detailItemInfo">
+              {{ memberItem.name }} {{ memberItem.title }}
             </div>
-            <div class="detailItemInfo">李强 讲师</div>
-          </a>
+          </div>
         </div>
       </div>
     </div>
@@ -67,72 +60,84 @@
 </template>
 
 <script>
+import { getMemberCover } from "@/api/api";
+// 设置默认缺失的图片
+import defaultImage from "@/assets/images/member/default.png";
 export default {
   data() {
     return {
-      title: "团队概况",
-      currentMenu: "导师",
-      Menu: [
+      pageItem: {},
+      chineseItem: {
+        allTitle: "团队概况",
+        subTitle: "导师",
+        home: "首页",
+        teacher: "导师",
+      },
+      englishItem: {
+        allTitle: "Snapshot",
+        subTitle: "Teacher",
+        home: "home",
+        teacher: "Teacher",
+      },
+      menu: [],
+      menuZH: [
         { name: "团队简介", path: "/team/profile" },
         { name: "导师", path: "/team/teacher" },
         { name: "博士生", path: "/team/doctor" },
         { name: "硕士生", path: "/team/master" },
         { name: "毕业生", path: "/team/graduate" },
       ],
-      Info: [
-        {
-          id: 1,
-          name: "姚信威",
-          title: "教授",
-          picUrl: require("../../assets/images/activity/00.jpg"),
-        },
-        {
-          id: 2,
-          name: "李强",
-          title: "教授",
-          picUrl: require("../../assets/images/activity/01.jpg"),
-        },
-        {
-          id: 3,
-          name: "李强",
-          title: "教授",
-          picUrl: require("../../assets/images/activity/01.jpg"),
-        },
-        {
-          id: 4,
-          name: "李强",
-          title: "教授",
-          picUrl: require("../../assets/images/activity/01.jpg"),
-        },
-        {
-          id: 5,
-          name: "李强",
-          title: "教授",
-          picUrl: require("../../assets/images/activity/01.jpg"),
-        },
-        {
-          id: 6,
-          name: "李强",
-          title: "教授",
-          picUrl: require("../../assets/images/activity/01.jpg"),
-        },
-        {
-          id: 7,
-          name: "李强",
-          title: "教授",
-          picUrl: require("../../assets/images/activity/01.jpg"),
-        },
+      menuEN: [
+        { name: "Profile", path: "/team/profile" },
+        { name: "Teacher", path: "/team/teacher" },
+        { name: "Doctor", path: "/team/doctor" },
+        { name: "Master", path: "/team/master" },
+        { name: "Graduate", path: "/team/graduate" },
       ],
+      teacherCover: [],
     };
   },
-  created() {},
-  methods: {},
+
+  created() {
+    this.getMemberCoverList();
+    this.changUI();
+  },
+  methods: {
+    changUI() {
+      if (this.$store.getters.getLanguageType == "Chinese") {
+        this.menu = this.menuZH;
+        this.pageItem = this.chineseItem;
+      } else if (this.$store.getters.getLanguageType == "English") {
+        this.menu = this.menuEN;
+        this.pageItem = this.englishItem;
+      }
+    },
+    // async和await用于同步,就是按顺序执行
+    async getMemberCoverList() {
+      let params = {
+        start: 0,
+        end: 100,
+        memberType: "teacher",
+      };
+      await getMemberCover(params).then((res) => {
+        this.teacherCover = res.data;
+      });
+    },
+    // 设置默认缺失的图片
+    setDefaultImage(e) {
+      e.target.src = defaultImage;
+    },
+    gotoDetail(memberItem) {
+      window.open(memberItem.pageUrl, "_blank");
+    },
+  },
 };
 </script>
 <style scoped>
 /* PC端  */
 @media screen and (min-width: 1000px) {
   .teacher {
+    min-height: 450px;
     padding: 3rem 0;
     background: url(../../assets/images/background/contentBackground.jpg)
       no-repeat;
@@ -204,15 +209,18 @@ export default {
   .detailItem {
     cursor: pointer;
     text-decoration: none;
+    width: 20%;
+    box-sizing: border-box;
     padding: 1rem;
-    width: 13rem;
   }
-
+  .detailItemImg {
+    width: 100%;
+  }
   .detailItem img {
     height: 15rem;
+    width: 11rem;
   }
-
-  .detailItem .detailItemInfo {
+  .detailItemInfo {
     padding: 1rem 0;
   }
 }

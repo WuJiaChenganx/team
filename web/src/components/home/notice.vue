@@ -2,8 +2,10 @@
   <!-- 首页的通知公告-->
   <div class="notice">
     <div class="notice-title-box">
-      <div class="notice-title">通知公告</div>
-      <a class="title-more" @click="goTo('/activity/notice')">更多+</a>
+      <div class="notice-title">{{ pageItem.title }}</div>
+      <a class="title-more" @click="goTo('/activity/notice')"
+        >{{ pageItem.more }}+</a
+      >
     </div>
     <div class="notice-content-box">
       <div
@@ -29,12 +31,23 @@ export default {
     return {
       // 要展示的公告信息
       noticeList: [],
+      pageItem: {},
+      chineseItem: { title: "通知公告", more: "更多" },
+      englishItem: { title: "Notices", more: "more" },
     };
   },
   created() {
     this.getNoticeList();
+    this.changUI();
   },
   methods: {
+    changUI() {
+      if (this.$store.getters.getLanguageType == "Chinese") {
+        this.pageItem = this.chineseItem;
+      } else if (this.$store.getters.getLanguageType == "English") {
+        this.pageItem = this.englishItem;
+      }
+    },
     // async和await用于同步,就是按顺序执行
     async getNoticeList() {
       let params = {
