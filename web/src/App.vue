@@ -10,10 +10,10 @@
 <script>
 import navigationBar from "./components/public/navigationBar.vue";
 import myFooter from "./components/public/myFooter.vue";
+import { transformLanguage } from "@/uitls/language";
 // 导入组件
 export default {
   name: "app",
-
   data() {
     return {};
   },
@@ -24,6 +24,9 @@ export default {
   },
   methods: {},
   created() {},
+  async mounted() {
+    await transformLanguage("en");
+  },
 };
 </script>
 

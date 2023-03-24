@@ -24,8 +24,11 @@
           v-for="(newFlashItem, newFlashItemIndex) in newsFlashDetail.detail"
           :key="newFlashItemIndex"
         >
-          <div class="newFlashInfo">{{ newFlashItem.text }}</div>
+          <div class="newFlashInfo">
+            {{ newFlashItem.text }}
+          </div>
           <div
+            v-if="newFlashItem.picUrl.length"
             :class="newFlashItem.picUrl.length == 1 ? 'photoBox1' : 'photoBox2'"
           >
             <div
@@ -114,7 +117,7 @@ export default {
     line-height: 3rem;
     font-size: 1.6rem;
     text-indent: 2em;
-    padding-bottom: 2rem;
+    padding-bottom: 0.5rem;
   }
   .photoBox1 {
     width: 100%;
