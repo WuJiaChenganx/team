@@ -233,22 +233,24 @@ export default {
   .detailItem {
     word-wrap: break-word;
     word-break: break-all;
-    width: 100%;
-    height: auto;
     margin-top: 3rem;
     text-align: left;
-    font-family: 宋体;
     line-height: 3rem;
-    font-size: 1.6rem;
-    font-weight: bold;
-  }
-  .detailItemProjectName {
     font-size: 2rem;
   }
-  .detailItemProjectInfo {
-    font-weight: normal;
+  .detailItemProjectName {
+    font-size: 2.5rem;
+    font-weight: bold;
   }
-
+  .detailItemProjectResponser {
+    padding: 0.5rem 0;
+  }
+  .detailItemProjectType {
+    padding: 0.5rem 0;
+  }
+  .detailItemProjectTime {
+    padding: 0.5rem 0;
+  }
   /* 设置分页和底部的距离 */
   .paging {
     margin: 3rem 0;
@@ -314,16 +316,21 @@ export default {
     word-break: break-all;
     margin-top: 3rem;
     text-align: left;
-    font-family: 宋体;
     line-height: 3rem;
-    font-size: 1.6rem;
-    font-weight: bold;
+    font-size: 2.4rem;
   }
   .detailItemProjectName {
-    font-size: 2rem;
+    font-size: 2.5rem;
+    font-weight: bold;
   }
-  .detailItemProjectInfo {
-    font-weight: normal;
+  .detailItemProjectResponser {
+    padding: 0.8rem 0;
+  }
+  .detailItemProjectType {
+    padding: 0.8rem 0;
+  }
+  .detailItemProjectTime {
+    padding: 0.8rem 0;
   }
   /* 设置分页和底部的距离 */
   .paging {

@@ -2,7 +2,11 @@
   <div class="news">
     <!-- 轮播图 -->
     <div class="newsPhoto">
-      <el-carousel :interval="4000" indicator-position="outside" height="40rem">
+      <el-carousel
+        :interval="4000"
+        indicator-position="outside"
+        :height="height"
+      >
         <el-carousel-item
           v-for="(newsItem, newsItemIndex) in newsList"
           :key="newsItemIndex"
@@ -45,6 +49,7 @@ import { getNewFlashURL } from "@/api/api";
 export default {
   data() {
     return {
+      height: "40rem",
       // 要展示的新闻信息(加载前还要处理过)
       newsList: [],
       pageItem: {},
@@ -55,8 +60,27 @@ export default {
   created() {
     this.getNewFlashList();
     this.changUI();
+    this.changePhotoHeight();
   },
   methods: {
+    changePhotoHeight() {
+      var userAgentInfo = navigator.userAgent;
+      var Agents = new Array(
+        "Android",
+        "iPhone",
+        "SymbianOS",
+        "Windows Phone",
+        "iPad",
+        "iPod"
+      );
+      this.height = "40rem";
+      for (var v = 0; v < Agents.length; v++) {
+        if (userAgentInfo.indexOf(Agents[v]) > 0) {
+          this.height = "35rem";
+          break;
+        }
+      }
+    },
     changUI() {
       if (this.$store.getters.getLanguageType == "Chinese") {
         this.pageItem = this.chineseItem;
@@ -119,8 +143,9 @@ export default {
     background-color: rgba(0, 0, 0, 0.5);
     text-align: left;
     color: #fff;
-    height: 3rem;
-    line-height: 3rem;
+    height: 42px;
+    line-height: 42px;
+    font-size: 15px;
     text-indent: 2em;
     font-weight: bold;
     display: -webkit-box;
@@ -209,7 +234,7 @@ export default {
   /* 轮播图 */
   .newsPhoto {
     width: 90%;
-    padding-top: 2rem;
+    padding-top: 20px;
     margin: 0 auto;
   }
   .newsPhotoItem {
@@ -223,10 +248,15 @@ export default {
     background-color: rgba(0, 0, 0, 0.5);
     text-align: left;
     color: #fff;
-    height: 2.5rem;
-    line-height: 2.5rem;
+    height: 42px;
+    line-height: 42px;
+    font-size: 15px;
     text-indent: 1em;
     font-weight: bold;
+    display: -webkit-box;
+    /* 一行直接省略 */
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
   }
   .el-carousel__item img {
     width: 100%;

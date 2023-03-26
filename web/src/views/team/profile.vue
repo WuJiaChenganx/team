@@ -183,18 +183,21 @@ export default {
   .detail {
     word-wrap: break-word;
     word-break: break-all;
-    line-height: 3rem;
-    font-size: 1.6rem;
+    margin-top: 3rem;
     text-align: left;
+    line-height: 3rem;
+    font-size: 2rem;
   }
   .profile-title {
-    color: #0055a2;
+    color: #153c87;
     font-weight: bold;
-    font-size: 2rem;
-    padding: 1rem 0;
+    font-size: 2.5rem;
+    padding: 0.5rem 0;
   }
   .profile-info {
+    margin-top: 1rem;
     text-indent: 2em;
+    line-height: 3.5rem;
   }
 }
 /* 移动端 */
@@ -258,18 +261,21 @@ export default {
   .detail {
     word-wrap: break-word;
     word-break: break-all;
-    line-height: 3rem;
-    font-size: 1.6rem;
+    margin-top: 3rem;
     text-align: left;
+    line-height: 3rem;
+    font-size: 2rem;
   }
   .profile-title {
-    color: #0055a2;
+    color: #153c87;
     font-weight: bold;
-    font-size: 2rem;
-    padding: 1rem 0;
+    font-size: 2.5rem;
+    padding: 0.5rem 0;
   }
   .profile-info {
+    margin-top: 1rem;
     text-indent: 2em;
+    line-height: 3.5rem;
   }
 }
 </style>

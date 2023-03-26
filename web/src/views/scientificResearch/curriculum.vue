@@ -230,21 +230,22 @@ export default {
   .detailItem {
     word-wrap: break-word;
     word-break: break-all;
-    line-height: 3rem;
-    margin-top: 1.5rem;
+    margin-top: 3rem;
     text-align: left;
+    line-height: 3rem;
+    font-size: 2rem;
   }
   .detailItemCourseType {
-    font-size: 2rem;
+    font-size: 2.5rem;
     font-weight: bold;
   }
   .detailItemCourseProfile {
     padding: 0.5rem 0;
-    font-size: 1.6rem;
+    font-size: 2rem;
   }
   .detailItemCourseName {
     text-indent: 2em;
-    font-size: 1.6rem;
+    font-size: 2rem;
     padding: 0.5rem 0;
   }
 }
@@ -309,22 +310,24 @@ export default {
   .detailItem {
     word-wrap: break-word;
     word-break: break-all;
-    line-height: 3rem;
-    margin-top: 1.5rem;
+    margin-top: 3rem;
     text-align: left;
+    line-height: 3rem;
+    font-size: 2rem;
   }
   .detailItemCourseType {
-    font-size: 2rem;
+    font-size: 2.5rem;
     font-weight: bold;
+    padding: 0.5rem 0;
   }
   .detailItemCourseProfile {
-    padding: 0.5rem 0;
-    font-size: 1.6rem;
+    padding: 0.8rem 0;
+    font-size: 2.4rem;
   }
   .detailItemCourseName {
     text-indent: 2em;
-    font-size: 1.6rem;
-    padding: 0.5rem 0;
+    font-size: 2.2rem;
+    padding: 0.8rem 0;
   }
 }
 </style>

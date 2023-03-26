@@ -11,7 +11,7 @@
             mode="vertical"
             background-color="#fff"
             text-color="#000"
-            active-text-color="#fff"
+            active-text-color="#3D55A7"
           >
             <el-menu-item
               class="bookAsideItem"
@@ -166,6 +166,7 @@ export default {
   .bookAside {
     width: 25%;
   }
+
   .bookAsideTitle {
     background: url(../../assets/images/background/zryy-menu-t-bg.png) no-repeat;
     border-radius: 0.6rem;
@@ -178,6 +179,7 @@ export default {
     padding: 2rem 3rem;
     margin-bottom: 0.5rem;
   }
+
   .bookAsideItem {
     font-size: 2rem;
     text-align: left;
@@ -209,7 +211,7 @@ export default {
   }
   /* 选中侧边导航的背景颜色 */
   .el-menu-item.is-active {
-    background: #008cd6 !important;
+    background: #dbeeff !important;
   }
   /* 设置块和分页的距离 */
   .bookItem {

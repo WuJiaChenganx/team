@@ -193,21 +193,21 @@ export default {
   .detailItem {
     word-wrap: break-word;
     word-break: break-all;
-    margin-top: 2rem;
+    margin-top: 3rem;
+    text-align: left;
+    line-height: 3rem;
+    font-size: 2rem;
   }
   .detailItemTitle {
-    color: #0055a2;
+    color: #153c87;
     font-weight: bold;
-    font-size: 2rem;
-    text-align: left;
-    margin-bottom: 1rem;
+    font-size: 2.5rem;
+    padding: 0.5rem 0;
   }
-  /* 文字和图片的距离 */
   .detailItemInfo {
-    line-height: 3rem;
-    font-size: 1.8rem;
-    text-align: left;
+    margin-top: 1rem;
     text-indent: 2em;
+    line-height: 3.5rem;
   }
 }
 /* 移动端 */
@@ -267,25 +267,25 @@ export default {
     min-height: 450px;
     padding-bottom: 2rem;
   }
-  /*每个item之间的上边距 */
   .detailItem {
     word-wrap: break-word;
     word-break: break-all;
-    margin-top: 0.5rem;
+    margin-top: 3rem;
+    text-align: left;
+    line-height: 3rem;
+    font-size: 2rem;
   }
   .detailItemTitle {
-    color: #0055a2;
+    color: #153c87;
     font-weight: bold;
-    font-size: 2rem;
-    text-align: left;
-    margin-bottom: 1rem;
+    font-size: 2.5rem;
+    padding: 0.5rem 0;
   }
   /* 文字和图片的距离 */
   .detailItemInfo {
-    line-height: 3rem;
-    font-size: 1.8rem;
-    text-align: left;
+    margin-top: 1rem;
     text-indent: 2em;
+    line-height: 3.5rem;
   }
 }
 </style>

@@ -1,7 +1,6 @@
 <template>
   <div>
     <div class="firstContainer">
-      <!-- 内容展示 -->
       <div class="firstContainerContent">
         <news class="news"></news>
       </div>
@@ -23,10 +22,12 @@
           <researchTeam class="researchTeam"></researchTeam>
         </div>
         <div class="last-right">
-          <!-- 友情链接 -->
           <friendlyLink class="friendlyLink"></friendlyLink>
         </div>
       </div>
+    </div>
+    <div class="resizeAcademicTrend">
+      <resizeAcademicTrend></resizeAcademicTrend>
     </div>
   </div>
 </template>
@@ -38,6 +39,7 @@ import academicTrend from "./academicTrend.vue";
 import notice from "./notice.vue";
 import resourceSharing from "./resourceSharing.vue";
 import news from "./news.vue";
+import resizeAcademicTrend from "./resizeAcademicTrend.vue";
 export default {
   name: "home",
   components: {
@@ -47,6 +49,7 @@ export default {
     resourceSharing,
     researchTeam,
     friendlyLink,
+    resizeAcademicTrend,
   },
   data() {
     return {};
@@ -81,7 +84,6 @@ export default {
   .secondContainer .secondAllContent {
     width: 75%;
     margin: 0 auto;
-    height: 100%;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -133,7 +135,6 @@ export default {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    align-items: stretch;
   }
   .last-left {
     width: 65%;
@@ -154,6 +155,9 @@ export default {
     border: 1px solid #d1e4f0;
     border-radius: 4px;
     box-sizing: border-box;
+  }
+  .resizeAcademicTrend {
+    width: 100%;
   }
 }
 /* 移动端 */
@@ -178,7 +182,7 @@ export default {
   }
   .academicTrend {
     width: 100%;
-    padding: 1rem;
+    padding: 15px;
     margin-bottom: 0.2rem;
     border: 1px solid #d1e4f0;
     border-radius: 4px;
@@ -186,7 +190,7 @@ export default {
   }
   .notice {
     width: 100%;
-    padding: 1rem;
+    padding: 15px;
     margin-bottom: 0.2rem;
     border: 1px solid #d1e4f0;
     border-radius: 4px;
@@ -195,7 +199,7 @@ export default {
   .resourceSharing {
     /* PC端设置首页资源共享自动拉伸占领空白的位置 */
     width: 100%;
-    padding: 1rem;
+    padding: 15px;
     margin-bottom: 0.2rem;
     border: 1px solid #d1e4f0;
     border-radius: 4px;
@@ -214,7 +218,7 @@ export default {
   }
   .researchTeam {
     width: 100%;
-    padding: 1rem;
+    padding: 15px;
     margin-bottom: 0.2rem;
     border: 1px solid #d1e4f0;
     border-radius: 4px;
@@ -222,7 +226,7 @@ export default {
   }
   .friendlyLink {
     width: 100%;
-    padding: 1rem;
+    padding: 15px;
     margin-bottom: 0.2rem;
     border: 1px solid #d1e4f0;
     border-radius: 4px;

@@ -92,21 +92,51 @@ export default {
     height: 100%;
   }
   .academicTitle {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    margin-bottom: 2rem;
+    padding-bottom: 13px;
+    margin-bottom: 25px;
+    position: relative;
+    overflow: hidden;
+  }
+  .academicTitle::before {
+    width: 163px;
+    height: 39px;
+    bottom: 0;
+    left: 0;
+    top: -2px;
+    background: url(../../assets/images/background/zryy-l-title1.png) no-repeat
+      left center;
+  }
+  .academicTitle::before,
+  .academicTitle::after {
+    position: absolute;
+    content: "";
   }
   .left-title {
-    font-size: 2rem;
-    font-weight: bold;
+    display: inline-block;
+    font-size: 20px;
+    line-height: 26px;
+    font-style: italic;
     color: #003266;
+    font-weight: bold;
+    width: 100%;
+    text-align: left;
   }
   .academicTitle .title-more {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    display: inline-block;
     color: #7db0cb;
-    font-size: 1.6rem;
+    font-size: 16px;
+    line-height: 18px;
     cursor: pointer;
+  }
+  .academicTitle::after {
+    top: 0;
+    left: 160px;
+    right: 0;
+    height: 4px;
+    background: #deecf9;
   }
   .academicTrendItem {
     cursor: pointer;
@@ -188,21 +218,53 @@ export default {
 /* 移动端 */
 @media screen and (max-width: 1000px) {
   .academicTitle {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    margin-bottom: 2rem;
+    padding-bottom: 13px;
+    margin-bottom: 25px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .academicTitle::before {
+    width: 163px;
+    height: 39px;
+    bottom: 0;
+    left: 0;
+    top: -2px;
+    background: url(../../assets/images/background/zryy-l-title1.png) no-repeat
+      left center;
+  }
+  .academicTitle::before,
+  .academicTitle::after {
+    position: absolute;
+    content: "";
+    z-index: -1;
   }
   .left-title {
-    font-size: 2rem;
-    font-weight: bold;
+    display: inline-block;
+    font-size: 20px;
+    line-height: 26px;
+    font-style: italic;
     color: #003266;
+    font-weight: bold;
+    width: 100%;
+    text-align: left;
   }
   .academicTitle .title-more {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    display: inline-block;
     color: #7db0cb;
-    font-size: 1.6rem;
+    font-size: 16px;
+    line-height: 18px;
     cursor: pointer;
+  }
+  .academicTitle::after {
+    top: 0;
+    left: 160px;
+    right: 0;
+    height: 4px;
+    background: #deecf9;
   }
   .academicTrendItem {
     cursor: pointer;
@@ -213,12 +275,13 @@ export default {
   .academicTrend-row {
     display: flex;
     flex-direction: column;
-    margin-bottom: 1rem;
+    margin-bottom: 10px;
   }
 
   .academicTrend-img {
-    /* 图片满屏,高度自适应 */
     width: 100%;
+    max-height: 180px;
+    margin-bottom: 10px;
     overflow: hidden;
   }
   .academicTrend-img img {
@@ -246,15 +309,16 @@ export default {
   .title-box {
     text-align: left;
     color: #0055a2;
-    font-size: 1.8rem;
-    line-height: 3rem;
+    font-size: 17px;
+    line-height: 23px;
     font-weight: bold;
+    margin-bottom: 5px;
   }
   /* 中间的profile */
   .detail-box {
     color: #909090;
-    font-size: 1.6rem;
-    line-height: 3rem;
+    font-size: 13px;
+    line-height: 19px;
     text-align: left;
     word-wrap: break-word;
     word-break: break-all;
@@ -263,11 +327,12 @@ export default {
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
     overflow: hidden;
+    margin-bottom: 5px;
   }
   .time-box {
     text-align: right;
-    font-size: 1.6rem;
-    line-height: 3rem;
+    font-size: 14px;
+    line-height: 1;
     font-family: Arial;
     color: #828282;
   }

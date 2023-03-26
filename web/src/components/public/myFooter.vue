@@ -4,10 +4,8 @@
       <div class="container">
         <div>版权所有 &copy;{{ CopyrightYear }} 群智感知与协同研究</div>
         <div>
-          <a
-            href="http://www.beian.gov.cn/portal/registerSystemInfo"
-            target="_blank"
-            >浙ICP备2023007286号</a
+          <a href="https://beian.miit.gov.cn/" target="_blank"
+            >浙ICP备2023007286号-1</a
           >
         </div>
       </div>

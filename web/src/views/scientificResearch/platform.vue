@@ -205,19 +205,21 @@ export default {
   .detailItem {
     word-wrap: break-word;
     word-break: break-all;
-    line-height: 3rem;
-    margin-top: 1rem;
+    margin-top: 3rem;
     text-align: left;
+    line-height: 3rem;
+    font-size: 2rem;
   }
   .detailItemTitle {
     color: #153c87;
     font-weight: bold;
-    font-size: 1.8rem;
+    font-size: 2.5rem;
+    padding: 0.5rem 0;
   }
   .detailItemInfo {
+    margin-top: 1rem;
     text-indent: 2em;
-    font-size: 1.6rem;
-    line-height: 2.5rem;
+    line-height: 3.5rem;
   }
 }
 /* 移动端  */
@@ -277,22 +279,24 @@ export default {
     min-height: 450px;
     padding-bottom: 2rem;
   }
-
   .detailItem {
     word-wrap: break-word;
     word-break: break-all;
-    line-height: 3rem;
-    margin-top: 1rem;
+    margin-top: 3rem;
     text-align: left;
+    line-height: 3rem;
+    font-size: 2rem;
   }
   .detailItemTitle {
     color: #153c87;
     font-weight: bold;
-    font-size: 1.8rem;
+    font-size: 2.5rem;
+    padding: 0.5rem 0;
   }
   .detailItemInfo {
+    margin-top: 1rem;
     text-indent: 2em;
-    font-size: 1.6rem;
+    line-height: 3.5rem;
   }
 }
 </style>

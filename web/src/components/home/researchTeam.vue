@@ -1,8 +1,8 @@
 <template>
   <div class="researchTeam">
-    <div class="researchTeamTitle">
+    <div class="researchTitle">
       <div class="left-title">{{ pageItem.title }}</div>
-      <a @click="goTo('team/profile')" class="title-more"
+      <a class="title-more" @click="goTo('team/profile')"
         >{{ pageItem.more }} +</a
       >
     </div>
@@ -70,7 +70,7 @@ export default {
         loop: true,
         // 自动播放
         autoplay: {
-          delay: 1000,
+          delay: 1500,
         },
         // 间距%2的轮播图宽度
         spaceBetween: "2%",
@@ -102,13 +102,6 @@ export default {
           },
         });
       }
-      this.$router.push({
-        name: "成员详情",
-        path: "/team/memberInfo",
-        query: {
-          id,
-        },
-      });
     },
     // 设置默认缺失的图片
     setDefaultImage(e) {
@@ -120,24 +113,59 @@ export default {
 <style scoped>
 /* PC端 */
 @media screen and (min-width: 1000px) {
-  .researchTeamTitle {
-    width: 100%;
+  .researchTeam {
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    margin-bottom: 2rem;
+    flex-direction: column;
+    height: 100%;
   }
-  .left-title {
-    font-size: 2rem;
-    font-weight: bold;
-    color: #003266;
+  .researchTitle {
+    padding-bottom: 13px;
+    margin-bottom: 25px;
+    position: relative;
+    overflow: hidden;
   }
-  .researchTeamTitle .title-more {
-    color: #7db0cb;
-    font-size: 1.6rem;
-    cursor: pointer;
+  .researchTitle::before {
+    width: 163px;
+    height: 39px;
+    bottom: 0;
+    left: 0;
+    top: -2px;
+    background: url(../../assets/images/background/zryy-l-title1.png) no-repeat
+      left center;
   }
 
+  .researchTitle::before,
+  .researchTitle::after {
+    position: absolute;
+    content: "";
+  }
+  .left-title {
+    display: inline-block;
+    font-size: 20px;
+    line-height: 26px;
+    font-style: italic;
+    color: #003266;
+    font-weight: bold;
+    width: 100%;
+    text-align: left;
+  }
+  .researchTitle .title-more {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    display: inline-block;
+    color: #7db0cb;
+    font-size: 16px;
+    line-height: 18px;
+    cursor: pointer;
+  }
+  .researchTitle::after {
+    top: 0;
+    left: 160px;
+    right: 0;
+    height: 4px;
+    background: #deecf9;
+  }
   /* 轮播图css */
   .swiper-container {
     width: 100%;
@@ -158,16 +186,22 @@ export default {
     display: flex;
     flex-direction: column;
     cursor: pointer;
+    overflow: hidden;
   }
+
   .memberBox .member-img {
     overflow: hidden;
     margin-bottom: 1rem;
   }
+
   .member-img img {
-    overflow: hidden;
     /* 高度自适应 */
     width: 80%;
     height: 12.5rem;
+  }
+  .member-img:hover img {
+    transform: scale(1.05);
+    transition: all 0.5s;
   }
   .member-name {
     font-size: 1.5rem;
@@ -183,24 +217,60 @@ export default {
 
 /* 移动端 */
 @media screen and (max-width: 1000px) {
-  .researchTeamTitle {
-    width: 100%;
+  .researchTeam {
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    margin-bottom: 2rem;
+    flex-direction: column;
+    height: 100%;
   }
-  .left-title {
-    font-size: 2rem;
-    font-weight: bold;
-    color: #003266;
+  .researchTitle {
+    padding-bottom: 13px;
+    margin-bottom: 25px;
+    position: relative;
+    overflow: hidden;
   }
-  .researchTeamTitle .title-more {
-    color: #7db0cb;
-    font-size: 1.6rem;
-    cursor: pointer;
+  .researchTitle::before {
+    width: 163px;
+    height: 39px;
+    bottom: 0;
+    left: 0;
+    top: -2px;
+    background: url(../../assets/images/background/zryy-l-title1.png) no-repeat
+      left center;
   }
 
+  .researchTitle::before,
+  .researchTitle::after {
+    position: absolute;
+    content: "";
+    z-index: -1;
+  }
+  .left-title {
+    display: inline-block;
+    font-size: 20px;
+    line-height: 26px;
+    font-style: italic;
+    color: #003266;
+    font-weight: bold;
+    width: 100%;
+    text-align: left;
+  }
+  .researchTitle .title-more {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    display: inline-block;
+    color: #7db0cb;
+    font-size: 16px;
+    line-height: 18px;
+    cursor: pointer;
+  }
+  .researchTitle::after {
+    top: 0;
+    left: 160px;
+    right: 0;
+    height: 4px;
+    background: #deecf9;
+  }
   /* 轮播图css */
   .swiper-container {
     width: 100%;
@@ -221,6 +291,7 @@ export default {
     display: flex;
     flex-direction: column;
     cursor: pointer;
+    overflow: hidden;
   }
   .memberBox .member-img {
     overflow: hidden;
@@ -228,7 +299,8 @@ export default {
   }
   .member-img img {
     /* 高度自适应 */
-    width: 100%;
+    width: 80%;
+    height: 8rem;
   }
   .member-name {
     font-size: 1.5rem;
