@@ -24,7 +24,7 @@
       <div class="newsListTitle">
         <div class="left-title">{{ pageItem.title }}</div>
         <a class="title-more" @click="goTo('/activity/newFlash')"
-          >{{ pageItem.more }}+</a
+          >{{ pageItem.more }}>></a
         >
       </div>
       <div class="newsListContent">

@@ -6,14 +6,13 @@
       </div>
     </div>
     <div class="secondContainer">
-      <div class="secondAllContent">
-        <div class="second-left">
-          <academicTrend class="academicTrend"></academicTrend>
-        </div>
-        <div class="second-right">
-          <notice class="notice"></notice>
-          <resourceSharing class="resourceSharing"></resourceSharing>
-        </div>
+      <div class="secondContainerContent">
+        <academicTrend class="academicTrend"></academicTrend>
+      </div>
+    </div>
+    <div class="thirdContainer">
+      <div class="thirdContainerContent">
+        <direction class="direction"></direction>
       </div>
     </div>
     <div class="lastContainer">
@@ -26,20 +25,17 @@
         </div>
       </div>
     </div>
-    <div class="resizeAcademicTrend">
-      <resizeAcademicTrend></resizeAcademicTrend>
-    </div>
   </div>
 </template>
 
 <script>
 import friendlyLink from "./friendlyLink.vue";
 import researchTeam from "./researchTeam.vue";
-import academicTrend from "./academicTrend.vue";
 import notice from "./notice.vue";
 import resourceSharing from "./resourceSharing.vue";
 import news from "./news.vue";
-import resizeAcademicTrend from "./resizeAcademicTrend.vue";
+import academicTrend from "./academicTrend.vue";
+import direction from "./direction.vue";
 export default {
   name: "home",
   components: {
@@ -49,7 +45,8 @@ export default {
     resourceSharing,
     researchTeam,
     friendlyLink,
-    resizeAcademicTrend,
+    academicTrend,
+    direction,
   },
   data() {
     return {};
@@ -69,7 +66,6 @@ export default {
   /* 新闻背景蓝色 */
   .firstContainer {
     background: #deecf9;
-    margin-bottom: 2rem;
   }
   /* 新闻居中放内容 */
   .firstContainer .firstContainerContent {
@@ -78,86 +74,50 @@ export default {
     margin: 0 auto;
   }
 
-  .secondContainer {
-    margin-bottom: 2rem;
-  }
-  .secondContainer .secondAllContent {
-    width: 75%;
+  .secondContainer .secondContainerContent {
+    width: 80%;
+    margin: 2rem;
+    box-sizing: border-box;
     margin: 0 auto;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
   }
-  .second-left {
-    width: 65%;
-  }
-  .second-right {
+  .thirdContainer .thirdContainerContent {
+    width: 80%;
+    margin: 2rem;
+    box-sizing: border-box;
+    margin: 0 auto;
     display: flex;
-    flex-direction: column;
-    width: 33%;
-  }
-  .academicTrend {
-    width: 100%;
-    padding: 2rem;
-    border: 1px solid #d1e4f0;
-    border-radius: 4px;
-    box-sizing: border-box;
-  }
-  .notice {
-    /* PC端设置首页通知的最大高度这样好对齐 */
-    max-height: 36rem;
-    overflow: hidden;
-    width: 100%;
-    padding: 2rem;
-    border: 1px solid #d1e4f0;
-    border-radius: 4px;
-    box-sizing: border-box;
-    margin-bottom: 1rem;
-  }
-  .resourceSharing {
-    /* PC端设置首页资源共享自动拉伸占领空白的位置 */
-    flex: 1 1 auto;
-    overflow: hidden;
-    width: 100%;
-    padding: 2rem;
-    border: 1px solid #d1e4f0;
-    border-radius: 4px;
-    box-sizing: border-box;
+    flex-direction: row;
+    justify-content: space-between;
   }
   /* 我是最后一个容器 */
   .lastContainer {
-    background: #fff;
     margin-bottom: 2rem;
   }
   .lastContainer .lastAllContent {
-    width: 75%;
+    width: 80%;
     margin: 0 auto;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
   }
   .last-left {
-    width: 65%;
+    width: 68%;
   }
   .last-right {
-    width: 33%;
+    width: 30%;
   }
   .researchTeam {
     width: 100%;
-    padding: 2rem;
-    border: 1px solid #d1e4f0;
     border-radius: 4px;
     box-sizing: border-box;
   }
   .friendlyLink {
     width: 100%;
-    padding: 2rem;
     border: 1px solid #d1e4f0;
     border-radius: 4px;
-    box-sizing: border-box;
-  }
-  .resizeAcademicTrend {
-    width: 100%;
   }
 }
 /* 移动端 */
@@ -170,38 +130,26 @@ export default {
     margin-bottom: 0.2rem;
   }
 
-  .secondContainer .secondAllContent {
+  .secondContainer .secondContainerContent {
     display: block;
     margin-bottom: 0.2rem;
   }
-  .second-left {
-    width: 100%;
-  }
-  .second-right {
-    width: 100%;
-  }
+
   .academicTrend {
     width: 100%;
     padding: 15px;
     margin-bottom: 0.2rem;
-    border: 1px solid #d1e4f0;
     border-radius: 4px;
     box-sizing: border-box;
   }
-  .notice {
-    width: 100%;
-    padding: 15px;
+  .thirdContainer .thirdContainerContent {
+    display: block;
     margin-bottom: 0.2rem;
-    border: 1px solid #d1e4f0;
-    border-radius: 4px;
-    box-sizing: border-box;
   }
-  .resourceSharing {
-    /* PC端设置首页资源共享自动拉伸占领空白的位置 */
+  .direction {
     width: 100%;
     padding: 15px;
     margin-bottom: 0.2rem;
-    border: 1px solid #d1e4f0;
     border-radius: 4px;
     box-sizing: border-box;
   }
@@ -220,14 +168,12 @@ export default {
     width: 100%;
     padding: 15px;
     margin-bottom: 0.2rem;
-    border: 1px solid #d1e4f0;
     border-radius: 4px;
     box-sizing: border-box;
   }
   .friendlyLink {
-    width: 100%;
-    padding: 15px;
-    margin-bottom: 0.2rem;
+    margin: 15px;
+    margin-bottom: 2rem;
     border: 1px solid #d1e4f0;
     border-radius: 4px;
     box-sizing: border-box;

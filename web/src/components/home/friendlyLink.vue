@@ -2,9 +2,9 @@
   <div class="friendlyLink">
     <div class="link-title-box">
       <div class="link-title">{{ pageItem.title }}</div>
-      <a class="title-more">{{ pageItem.more }} +</a>
+      <a class="title-more">{{ pageItem.more }} >></a>
     </div>
-    <div id="link-content-box">
+    <div class="link-content-box">
       <div class="links">
         <a
           href="http://www.cs.zjut.edu.cn/html/index.html"
@@ -67,32 +67,61 @@ export default {
   height: 100%;
 }
 .link-title-box {
+  padding: 12px 20px 12px 15px;
+  margin-bottom: 20px;
+  position: relative;
   overflow: hidden;
-  margin-bottom: 2rem;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
 }
-
+.link-title-box::before,
+.link-title-box::after {
+  position: absolute;
+  content: "";
+  z-index: -1;
+  height: 50px;
+}
+.link-title-box::before {
+  width: 162px;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  background: url(../../assets/images/background/zryy-r-title1.png) no-repeat
+    left center;
+}
+.link-title-box::after {
+  top: 0px;
+  bottom: 0;
+  left: 162px;
+  right: 0;
+  background: url(../../assets/images/background/zryy-r-title2.png) no-repeat
+    top center;
+  background-size: 100% 50px !important;
+}
 .link-title {
   text-align: left;
-  font-size: 2.2rem;
+  font-size: 20px;
   font-weight: bold;
-  color: #003266;
+  color: #ffffff;
 }
 .title-more {
-  font-size: 1.4rem;
+  position: absolute;
+  right: 5px;
+  bottom: 0;
+  display: inline-block;
   color: #7db0cb;
-  line-height: 1.8rem;
+  font-size: 16px;
+  line-height: 18px;
   cursor: pointer;
 }
-
+.links {
+  padding: 2rem;
+  box-sizing: border-box;
+}
 .linkUrl {
   margin-bottom: 1rem;
   /* 去掉a标签自带的格式 */
   text-decoration: none;
   display: block;
-  font-size: 1.7rem;
+  font-size: 17px;
   color: #333333;
   overflow: hidden;
   white-space: nowrap;

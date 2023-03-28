@@ -47,7 +47,7 @@
             :key="directionItemIndex"
           >
             <div class="detailItemTitle">
-              ({{ directionItemIndex + 1 }}) {{ directionItem.title }}
+              {{ directionItemIndex + 1 }}. {{ directionItem.title }}
             </div>
             <div class="detailItemInfo">{{ directionItem.info }}</div>
           </div>

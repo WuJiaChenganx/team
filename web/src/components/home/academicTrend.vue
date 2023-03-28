@@ -1,14 +1,15 @@
 <template>
   <div class="academicTrend">
     <div class="academicTitle">
-      <div class="left-title">{{ pageItem.title }}</div>
-      <a class="title-more" @click="goTo('/activity/academy')"
-        >{{ pageItem.more }} +</a
+      <div class="title">{{ pageItem.title }}</div>
+      <p></p>
+      <a class="more" @click="goTo('/activity/academy')"
+        >{{ pageItem.more }} >></a
       >
     </div>
     <div class="academicTrendItem">
       <div
-        class="academicTrend-row"
+        class="academicTrend-item"
         v-for="(academyItem, index) in academyList"
         :key="index"
         @click="gotoDetail(academyItem.id)"
@@ -20,9 +21,6 @@
           <div class="title-box">{{ academyItem.title }}</div>
           <div class="detail-box">
             {{ academyItem.detail }}
-          </div>
-          <div class="time-box">
-            {{ academyItem.date }}-{{ academyItem.day }}
           </div>
         </div>
       </div>
@@ -87,224 +85,164 @@ export default {
 /* PC端 */
 @media screen and (min-width: 1000px) {
   .academicTrend {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
+    background-color: #ffffff;
   }
   .academicTitle {
-    padding-bottom: 13px;
-    margin-bottom: 25px;
+    margin-bottom: 40px;
     position: relative;
-    overflow: hidden;
   }
-  .academicTitle::before {
-    width: 163px;
-    height: 39px;
-    bottom: 0;
-    left: 0;
-    top: -2px;
-    background: url(../../assets/images/background/zryy-l-title1.png) no-repeat
-      left center;
+  .title {
+    width: 276px;
+    margin: 30px auto;
+    font-size: 33px;
+    color: #0055a2;
   }
-  .academicTitle::before,
-  .academicTitle::after {
+  .academicTitle p {
+    width: 276px;
+    font-size: 24px;
+    border-bottom: 1px solid #0055a2;
+    margin: 0 auto;
+    position: relative;
+  }
+  .academicTitle p:before {
+    width: 74px;
+    height: 5px;
     position: absolute;
+    left: 101px;
+    top: -2px;
+    background: #0055a2;
+    display: table;
     content: "";
   }
-  .left-title {
-    display: inline-block;
+  .more {
+    color: #0055a2;
     font-size: 20px;
-    line-height: 26px;
-    font-style: italic;
-    color: #003266;
-    font-weight: bold;
-    width: 100%;
-    text-align: left;
-  }
-  .academicTitle .title-more {
     position: absolute;
-    right: 0;
-    bottom: 0;
-    display: inline-block;
-    color: #7db0cb;
-    font-size: 16px;
-    line-height: 18px;
-    cursor: pointer;
-  }
-  .academicTitle::after {
-    top: 0;
-    left: 160px;
-    right: 0;
-    height: 4px;
-    background: #deecf9;
+    bottom: 20px;
+    right: 30px;
   }
   .academicTrendItem {
-    cursor: pointer;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-  }
-  /* 每一行 横着排列 */
-  .academicTrend-row {
     display: flex;
     flex-direction: row;
-    margin-bottom: 1rem;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  .academicTrend-item {
+    width: 49%;
+    margin-bottom: 25px;
+    display: flex;
+    flex-direction: row;
+    border: 1px solid #dfdfdf;
   }
 
   .academicTrend-img {
-    /* 固定宽高 */
-    height: 15rem;
-    width: 18rem;
-    margin-right: 2rem;
-    box-sizing: border-box;
+    width: 50%;
     overflow: hidden;
-    border: 1px solid #eee;
   }
   .academicTrend-img img {
-    width: 100%;
+    max-width: 100%;
     height: 100%;
+    box-sizing: border-box;
+    border: 1.5px solid #dfdfdf;
+  }
+  .academicTrend-item:hover img {
+    transform: scale(1.05);
+    transition: all 1s;
+  }
+  .academicTrend-text {
+    width: 50%;
+    box-sizing: border-box;
+    padding: 0 20px;
   }
 
-  .academicTrend-row:hover .academicTrend-img img {
-    transform: scale(1.1);
-    transition: all 0.5s;
-  }
-
-  .academicTrend-row:hover .title-box {
+  .academicTrend-item:hover .title-box {
     color: #ff2400;
   }
-  .academicTrend-row:hover .time-box {
-    color: #0055a2;
-  }
-
-  .academicTrend-text {
-    width: 70%;
-    height: 100%;
-    flex: 1 1 auto;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-  }
   .title-box {
-    text-align: left;
+    display: inline-block;
+    font-size: 16px;
+    line-height: 26px;
     color: #0055a2;
-    font-size: 1.8rem;
-    line-height: 2.5rem;
     font-weight: bold;
-  }
-  /* 中间的profile */
-  .detail-box {
-    color: #909090;
-    font-size: 1.6rem;
-    height: 7.5rem;
-    line-height: 2.5rem;
-    text-align: left;
-    word-wrap: break-word;
-    word-break: break-all;
-    /* 显示3行 */
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 3;
+    width: 100%;
     overflow: hidden;
+    text-align: left;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    line-clamp: 1;
+    -webkit-box-orient: vertical;
   }
-  .time-box {
-    text-align: right;
-    font-size: 1.6rem;
-    line-height: 2.5rem;
-    font-family: Arial;
-    color: #828282;
+  .detail-box {
+    color: #666666;
+    font-size: 14px;
+    line-height: 24px;
+    overflow: hidden;
+    text-align: left;
+    display: -webkit-box;
+    -webkit-line-clamp: 7;
+    line-clamp: 7;
+    -webkit-box-orient: vertical;
   }
 }
 /* 移动端 */
 @media screen and (max-width: 1000px) {
   .academicTitle {
-    padding-bottom: 13px;
-    margin-bottom: 25px;
+    margin-bottom: 20px;
     position: relative;
-    overflow: hidden;
   }
-
-  .academicTitle::before {
-    width: 163px;
-    height: 39px;
-    bottom: 0;
-    left: 0;
+  .title {
+    width: 276px;
+    margin: 20px auto;
+    font-size: 24px;
+    color: #0055a2;
+  }
+  .academicTitle p {
+    width: 276px;
+    font-size: 24px;
+    border-bottom: 1px solid #0055a2;
+    margin: 0 auto;
+    position: relative;
+  }
+  .academicTitle p:before {
+    width: 74px;
+    height: 5px;
+    position: absolute;
+    left: 101px;
     top: -2px;
-    background: url(../../assets/images/background/zryy-l-title1.png) no-repeat
-      left center;
-  }
-  .academicTitle::before,
-  .academicTitle::after {
-    position: absolute;
+    background: #0055a2;
+    display: table;
     content: "";
-    z-index: -1;
   }
-  .left-title {
-    display: inline-block;
-    font-size: 20px;
-    line-height: 26px;
-    font-style: italic;
-    color: #003266;
-    font-weight: bold;
-    width: 100%;
-    text-align: left;
-  }
-  .academicTitle .title-more {
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    display: inline-block;
-    color: #7db0cb;
+  .more {
+    color: #0055a2;
     font-size: 16px;
-    line-height: 18px;
-    cursor: pointer;
-  }
-  .academicTitle::after {
-    top: 0;
-    left: 160px;
+    position: absolute;
+    bottom: 20px;
     right: 0;
-    height: 4px;
-    background: #deecf9;
   }
   .academicTrendItem {
-    cursor: pointer;
     display: flex;
     flex-direction: column;
   }
-  /* 每一行 竖着排列 */
-  .academicTrend-row {
+  .academicTrend-item {
+    width: 100%;
+    margin-bottom: 10px;
     display: flex;
     flex-direction: column;
-    margin-bottom: 10px;
   }
 
   .academicTrend-img {
+    width: 100%;
+  }
+  .academicTrend-img img {
     width: 100%;
     max-height: 180px;
     margin-bottom: 10px;
     overflow: hidden;
   }
-  .academicTrend-img img {
-    width: 100%;
-    border: 1px solid #eee;
-  }
-
-  .academicTrend-row:hover .academicTrend-img img {
-    transform: scale(1.1);
-    transition: all 0.5s;
-  }
-
-  .academicTrend-row:hover .title-box {
-    color: #ff2400;
-  }
-  .academicTrend-row:hover .time-box {
-    color: #0055a2;
-  }
-
   .academicTrend-text {
     width: 100%;
-    display: flex;
-    flex-direction: column;
+    box-sizing: border-box;
   }
   .title-box {
     text-align: left;
@@ -314,7 +252,6 @@ export default {
     font-weight: bold;
     margin-bottom: 5px;
   }
-  /* 中间的profile */
   .detail-box {
     color: #909090;
     font-size: 13px;
@@ -322,19 +259,10 @@ export default {
     text-align: left;
     word-wrap: break-word;
     word-break: break-all;
-    /* 显示2行 */
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
     overflow: hidden;
-    margin-bottom: 5px;
-  }
-  .time-box {
-    text-align: right;
-    font-size: 14px;
-    line-height: 1;
-    font-family: Arial;
-    color: #828282;
   }
 }
 </style>

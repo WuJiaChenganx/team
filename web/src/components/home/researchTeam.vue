@@ -3,7 +3,7 @@
     <div class="researchTitle">
       <div class="left-title">{{ pageItem.title }}</div>
       <a class="title-more" @click="goTo('team/profile')"
-        >{{ pageItem.more }} +</a
+        >{{ pageItem.more }} >></a
       >
     </div>
     <div id="swiper-member">
@@ -43,7 +43,7 @@ export default {
       teamCover: [],
       pageItem: {},
       chineseItem: { title: "研究队伍", more: "更多" },
-      englishItem: { title: "News", more: "more" },
+      englishItem: { title: "Team", more: "more" },
     };
   },
   created() {
@@ -141,10 +141,10 @@ export default {
   }
   .left-title {
     display: inline-block;
-    font-size: 20px;
+    font-size: 26px;
     line-height: 26px;
     font-style: italic;
-    color: #003266;
+    color: #0055a2;
     font-weight: bold;
     width: 100%;
     text-align: left;
@@ -197,7 +197,7 @@ export default {
   .member-img img {
     /* 高度自适应 */
     width: 80%;
-    height: 12.5rem;
+    height: 15rem;
   }
   .member-img:hover img {
     transform: scale(1.05);
@@ -249,7 +249,7 @@ export default {
     font-size: 20px;
     line-height: 26px;
     font-style: italic;
-    color: #003266;
+    color: #0055a2;
     font-weight: bold;
     width: 100%;
     text-align: left;

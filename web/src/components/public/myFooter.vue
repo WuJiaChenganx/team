@@ -8,6 +8,25 @@
             >浙ICP备2023007286号-1</a
           >
         </div>
+        <div>
+          <a
+            target="_blank"
+            href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=33010602013006"
+            style="display: inline-block"
+          >
+            <img src="../../assets/images/footer/1.png" style="float: left" />
+            <p
+              style="
+                float: left;
+                height: 20px;
+                line-height: 20px;
+                margin: 0px 0px 0px 5px;
+              "
+            >
+              浙公网安备 33010602013006号
+            </p>
+          </a>
+        </div>
       </div>
     </footer>
   </div>

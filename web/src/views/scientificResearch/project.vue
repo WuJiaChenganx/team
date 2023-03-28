@@ -47,7 +47,7 @@
             :key="projectItem.id"
           >
             <div class="detailItemProjectName">
-              {{ projectItem.number }}.{{ pageItem.projectName }}:{{
+              {{ projectItem.number }}. {{ pageItem.projectName }}:{{
                 projectItem.projectName
               }}
             </div>

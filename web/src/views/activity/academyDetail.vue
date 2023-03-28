@@ -29,7 +29,7 @@
           </div>
           <div
             v-if="academyItem.picUrl.length"
-            :class="academyItem.picUrl.length == 1 ? 'photoBox1' : 'photoBox2'"
+            :class="academyItem.picUrl.length == 2 ? 'photoBox2' : 'photoBox1'"
           >
             <div
               v-for="(imgUrl, imgUrlIndex) in academyItem.picUrl"
