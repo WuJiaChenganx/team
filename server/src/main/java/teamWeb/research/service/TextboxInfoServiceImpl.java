@@ -47,7 +47,7 @@ public class TextboxInfoServiceImpl extends ServiceImpl<TextboxInfoMapper, Textb
         for (DirectionsBO directionsBO:
                 directionsBOList) {
             directionsBO.setPicUrl(Address.rootAddress()+directionsBO.getPictureUrl());
-            directionsBO.setInfo(directionsBO.getText());
+            directionsBO.setDetail(directionsBO.getText());
 
         }
         return BeanUtil.convert(directionsBOList,DirectionsDTO.class);

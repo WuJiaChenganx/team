@@ -6,23 +6,7 @@ public class DirectionsBO {
     private String pictureUrl;
 
     private String picUrl;
-    private String Info;
-
-    public String getPicUrl() {
-        return picUrl;
-    }
-
-    public void setPicUrl(String picUrl) {
-        this.picUrl = picUrl;
-    }
-
-    public String getInfo() {
-        return Info;
-    }
-
-    public void setInfo(String info) {
-        Info = info;
-    }
+    private String detail;
 
     public Integer getId() {
         return id;
@@ -46,5 +30,21 @@ public class DirectionsBO {
 
     public void setPictureUrl(String pictureUrl) {
         this.pictureUrl = pictureUrl;
+    }
+
+    public String getPicUrl() {
+        return picUrl;
+    }
+
+    public void setPicUrl(String picUrl) {
+        this.picUrl = picUrl;
+    }
+
+    public String getDetail() {
+        return detail;
+    }
+
+    public void setDetail(String detail) {
+        this.detail = detail;
     }
 }

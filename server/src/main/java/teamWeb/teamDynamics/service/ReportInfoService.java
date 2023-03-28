@@ -35,4 +35,6 @@ public interface ReportInfoService extends IService<ReportDO> {
     ReportBO getNews(Integer id);
 
     Integer sumReport(String type);
+
+    void updateViewCount(Integer id);
 }

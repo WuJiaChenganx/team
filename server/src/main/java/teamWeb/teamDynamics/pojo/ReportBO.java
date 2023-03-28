@@ -19,6 +19,15 @@ public class ReportBO {
     private String day;
     private List<NoticeFile> fileUrls;
     private String paperName;
+    private Integer pageView;
+
+    public Integer getPageView() {
+        return pageView;
+    }
+
+    public void setPageView(Integer pageView) {
+        this.pageView = pageView;
+    }
 
     public Integer getId() {
         return id;

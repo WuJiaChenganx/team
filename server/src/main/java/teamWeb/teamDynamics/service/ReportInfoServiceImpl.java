@@ -28,7 +28,7 @@ public class ReportInfoServiceImpl extends ServiceImpl<ReportMapper, ReportDO> i
         for (NoticeBO noticeBO:
                 noticeBOList) {
             List<String> picList = Collections.emptyList();
-            if(!(noticeBO.getPictureUrl() == null)) {
+            if(!(noticeBO.getPictureUrl() == null)&& !noticeBO.getPictureUrl().isEmpty()) {
                 picList = Arrays.asList(noticeBO.getPictureUrl().split(";"));
                 for (int i = 0; i < picList.size(); i++) {
                     picList.set(i, Address.rootAddress() + picList.get(i));
@@ -65,7 +65,7 @@ public class ReportInfoServiceImpl extends ServiceImpl<ReportMapper, ReportDO> i
         for (NoticeBO noticeBO:
                 noticeBOList) {
             List<String> picList = Collections.emptyList();
-            if(!(noticeBO.getPictureUrl() == null)) {
+            if(!(noticeBO.getPictureUrl() == null) && !noticeBO.getPictureUrl().isEmpty()) {
                 picList = Arrays.asList(noticeBO.getPictureUrl().split(";"));
                 for (int i = 0; i < picList.size(); i++) {
                     picList.set(i, Address.rootAddress() + picList.get(i));
@@ -133,7 +133,7 @@ public class ReportInfoServiceImpl extends ServiceImpl<ReportMapper, ReportDO> i
         for (ReportDetailBO reportDetailBO:
                 reportDetailBOList) {
             List<String> picList = Collections.emptyList();
-            if(!(reportDetailBO.getPictureUrl() == null)) {
+            if(!(reportDetailBO.getPictureUrl() == null)&& !reportDetailBO.getPictureUrl().isEmpty()) {
                 picList = Arrays.asList(reportDetailBO.getPictureUrl().split(";"));
                 for (int i = 0; i < picList.size(); i++) {
                     picList.set(i, Address.rootAddress() + picList.get(i));
@@ -154,5 +154,10 @@ public class ReportInfoServiceImpl extends ServiceImpl<ReportMapper, ReportDO> i
     public Integer sumReport(String type) {
 
         return reportMapper.sumReport(type);
+    }
+
+    @Override
+    public void updateViewCount(Integer id) {
+        reportMapper.updateViewCount(id);
     }
 }

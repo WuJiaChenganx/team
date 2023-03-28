@@ -4,7 +4,7 @@
 <mapper namespace="teamWeb.teamDynamics.mapper.ReportMapper">
     <select id="teamDynamic" resultType="teamWeb.teamDynamics.entity.ReportDO">
         select
-        `id`,`title`,`date`,`text`,`picture_url` AS pictureUrl,`r_class` AS `rClass`, paper_name AS `paperName`
+        `id`,`title`,`date`,`text`,`picture_url` AS pictureUrl,`r_class` AS `rClass`
         from report
         <where>
             `r_class`= "动态"
@@ -78,6 +78,7 @@
             id = ${id}
         </where>
     </select>
+
     <insert id="insertInfo">
         INSERT INTO report(`title`, `date`, `text`, `url`, `pictureurl`, `r_class`) VALUES ("${title}","${date}","${text}","${url}","${pictureUrl}", "${rClass}")
     </insert>
@@ -93,7 +94,7 @@
     </delete>
 
     <select id="reportDetail" resultType="teamWeb.teamDynamics.entity.ReportDO">
-        SELECT `id`,`title`, `date`, `text`, r_Class AS rClass, url, picture_url AS pictureUrl,paper_name AS `paperName`
+        SELECT `id`,`title`, `date`, `text`, r_Class AS rClass, url, picture_url AS pictureUrl, view_count AS pageView
         FROM report
         <where>
             id = ${id}
@@ -117,4 +118,8 @@
         ORDER BY section
     </select>
 
+    <update id="updateViewCount">
+        UPDATE report SET view_count = view_count+1
+        WHERE id = ${id}
+    </update>
 </mapper>

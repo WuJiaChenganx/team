@@ -2,7 +2,7 @@ package teamWeb.research.pojo;
 
 public class DirectionsDTO {
     private Integer id;
-    private String Info;
+    private String detail;
     private String picUrl;
 
     public Integer getId() {
@@ -13,12 +13,12 @@ public class DirectionsDTO {
         this.id = id;
     }
 
-    public String getInfo() {
-        return Info;
+    public String getDetail() {
+        return detail;
     }
 
-    public void setInfo(String info) {
-        Info = info;
+    public void setDetail(String detail) {
+        this.detail = detail;
     }
 
     public String getPicUrl() {

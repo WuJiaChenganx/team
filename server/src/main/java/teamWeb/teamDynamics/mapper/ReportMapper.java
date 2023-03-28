@@ -37,4 +37,6 @@ public interface ReportMapper extends BaseMapper<ReportDO> {
     Integer sumReport(String type);
 
     List<ReportDetailBO> reportTextDetail(Integer reportId);
+
+    void updateViewCount(Integer id);
 }

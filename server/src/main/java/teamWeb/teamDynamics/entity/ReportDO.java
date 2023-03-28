@@ -8,15 +8,8 @@ public class ReportDO {
     private String pictureUrl;
     private String text;
     private String rClass;
-    private String paperName;
 
-    public String getPaperName() {
-        return paperName;
-    }
-
-    public void setPaperName(String paperName) {
-        this.paperName = paperName;
-    }
+    private Integer pageView;
 
     public Integer getId() {
         return id;
@@ -72,5 +65,13 @@ public class ReportDO {
 
     public void setrClass(String rClass) {
         this.rClass = rClass;
+    }
+
+    public Integer getPageView() {
+        return pageView;
+    }
+
+    public void setPageView(Integer pageView) {
+        this.pageView = pageView;
     }
 }

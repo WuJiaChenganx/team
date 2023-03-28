@@ -139,6 +139,12 @@
         </dependency>
 
 
+        <!--redis-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+        </dependency>
+        
         <!--Slf4j 依赖-->
         <dependency>
             <groupId>org.slf4j</groupId>
