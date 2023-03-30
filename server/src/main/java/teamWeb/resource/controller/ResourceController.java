@@ -37,7 +37,7 @@ public class ResourceController {
     @GetMapping("/require-tool")
     public APIResponse emulation(@RequestParam(value="start") int start,
                                  @RequestParam(value="end") int end,
-                                 @RequestParam(value = "language") String language){
+                                 @RequestParam(value = "languageType") String language){
         Integer sum =null;
         List<ResourceBO> emulationDetail =null;
         List<ResourceDTO> resourceDTOList =null;
@@ -56,7 +56,7 @@ public class ResourceController {
     @GetMapping("/require-data")
     public APIResponse data(@RequestParam(value="start") int start,
                             @RequestParam(value="end") int end,
-                            @RequestParam(value = "language") String language){
+                            @RequestParam(value = "languageType") String language){
         Integer sum =null;
         List<ResourceBO> dataDetail =null;
         List<ResourceDTO> resourceDTOList =null;

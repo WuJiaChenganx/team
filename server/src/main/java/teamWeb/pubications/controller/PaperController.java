@@ -26,7 +26,7 @@ public class PaperController {
     @GetMapping("/require-paper")
     public APIResponse paper(@RequestParam(value="start") int start,
                              @RequestParam(value="end") int end,
-                             @RequestParam(value = "language") String language){
+                             @RequestParam(value = "languageType") String language){
         List<AllPaperBO> paperBOList = null;
         Integer sum = null;
         if (language.equals("Chinese")) {
@@ -42,7 +42,7 @@ public class PaperController {
     @GetMapping("/require-patent")
     public APIResponse patent(@RequestParam(value="start") int start,
                               @RequestParam(value="end") int end,
-                              @RequestParam(value = "language") String language){
+                              @RequestParam(value = "languageType") String language){
         List<AllPaperBO> patentList = null;
         Integer sum = null;
         if (language.equals("Chinese")) {
@@ -58,7 +58,7 @@ public class PaperController {
     @GetMapping("/require-monograph")
     public APIResponse monograph(@RequestParam(value="start") int start,
                                  @RequestParam(value="end") int end,
-                                 @RequestParam(value = "language") String language){
+                                 @RequestParam(value = "languageType") String language){
         Integer sum =null;
         List<AllMonographBO> monographBOList = null;
         if (language.equals("Chinese")) {

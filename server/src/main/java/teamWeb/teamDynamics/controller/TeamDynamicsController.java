@@ -77,8 +77,10 @@ public class TeamDynamicsController {
         if (languageType.equals("Chinese")){
             news = reportInfoService.getNews(id);
             reportInfoService.updateViewCount(id);
+            reportInfoService.updateEnViewCount(id);
         }else if (languageType.equals("English")){
             news = reportInfoService.enGetNews(id);
+            reportInfoService.updateViewCount(id);
             reportInfoService.updateEnViewCount(id);
         }
         return APIResponse.success(news);
