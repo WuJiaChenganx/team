@@ -35,21 +35,49 @@ public class TeamController {
     @GetMapping("/require-member")
     public APIResponse member(@RequestParam(value="start",defaultValue = "0") int start,
                                  @RequestParam(value="end",defaultValue = "10") int end,
-                                 @RequestParam(value = "memberType") String memberType){
-        List<MemberBO> allMemberBOList = memberInfoService.allMember(start, end,memberType);
-        List<MemberDTO> allMemberDTOList = BeanUtil.convert(allMemberBOList, MemberDTO.class);
-        return APIResponse.success(allMemberDTOList,memberInfoService.sumMember(memberType));
+                                 @RequestParam(value = "memberType") String memberType,
+                              @RequestParam(value = "languageType") String languageType){
+        List<MemberBO> allMemberBOList =null;
+        List<MemberDTO> allMemberDTOList =null;
+        Integer sum =null;
+
+        if (languageType.equals("Chinese")) {
+            allMemberBOList = memberInfoService.allMember(start, end, memberType);
+            allMemberDTOList = BeanUtil.convert(allMemberBOList, MemberDTO.class);
+            sum = memberInfoService.sumMember(memberType);
+        }else if(languageType.equals("English")){
+            allMemberBOList = memberInfoService.enAllMember(start, end, memberType);
+            allMemberDTOList = BeanUtil.convert(allMemberBOList, MemberDTO.class);
+            sum = memberInfoService.sumEnMember(memberType);
+        }
+        return APIResponse.success(allMemberDTOList,sum);
     }
 
+
     @GetMapping("/require-homeMember")
-    public APIResponse homeMember(){
-        List<MemberBO> homeMemberList = memberInfoService.homeMember();
-        List<MemberDTO> homeMemberDTOList = BeanUtil.convert(homeMemberList, MemberDTO.class);
+    public APIResponse homeMember(@RequestParam(value = "languageType") String languageType){
+        List<MemberBO> homeMemberList = null;
+        List<MemberDTO> homeMemberDTOList = null;
+        if (languageType.equals("Chinese")) {
+            homeMemberList = memberInfoService.homeMember();
+            homeMemberDTOList = BeanUtil.convert(homeMemberList, MemberDTO.class);
+        }else if (languageType.equals("English")){
+            homeMemberList = memberInfoService.enHomeMember();
+            homeMemberDTOList = BeanUtil.convert(homeMemberList, MemberDTO.class);
+        }
         return APIResponse.success(homeMemberDTOList);
     }
+
+
     @GetMapping("/require-detail")
-    public APIResponse memberDetail(@RequestParam(value = "id") Integer id){
-        MemberBO member = memberInfoService.memberDetail(id);
+    public APIResponse memberDetail(@RequestParam(value = "id") Integer id,
+                                    @RequestParam(value = "languageType") String languageType){
+        MemberBO member = null;
+        if (languageType.equals("Chinese")) {
+            member = memberInfoService.memberDetail(id);
+        }else if (languageType.equals("English")){
+            member = memberInfoService.enMemberDetail(id);
+        }
         return APIResponse.success(member);
     }
 

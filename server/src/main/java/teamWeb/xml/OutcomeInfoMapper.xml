@@ -11,6 +11,17 @@
         order by date desc limit ${start},${end}
     </select>
 
+    <select id="enPaperDetail" resultType="teamWeb.pubications.entity.OutcomeInfo">
+        select `id`,`title`,`date`,`url`,`pictureUrl`,`p_class` AS pClass,`detail`,`keyword`
+        from en_outcome
+        <where>
+            p_class = "论文"
+        </where>
+        order by date desc limit ${start},${end}
+    </select>
+
+
+
     <select id="patentDetail" resultType="teamWeb.pubications.entity.OutcomeInfo">
         select `id`,`title`,`p_class` AS pClass
         from outcome
@@ -19,6 +30,17 @@
         </where>
         order by date desc limit ${start},${end}
     </select>
+
+    <select id="enPatentDetail" resultType="teamWeb.pubications.entity.OutcomeInfo">
+        select `id`,`title`,`p_class` AS pClass
+        from en_outcome
+        <where>
+            p_class = "专利"
+        </where>
+        order by date desc limit ${start},${end}
+    </select>
+
+
 
     <select id="monographDetail" resultType="teamWeb.pubications.entity.OutcomeInfo">
         select `id`,`title`,`date`,`author`,`pub`,`pictureUrl`,`p_class` AS pClass
@@ -29,8 +51,25 @@
         order by date desc limit ${start},${end}
     </select>
 
+    <select id="enMonographDetail" resultType="teamWeb.pubications.entity.OutcomeInfo">
+        select `id`,`title`,`date`,`author`,`pub`,`pictureUrl`,`p_class` AS pClass
+        from en_outcome
+        <where>
+            p_class = "专著"
+        </where>
+        order by date desc limit ${start},${end}
+    </select>
+
+
     <select id="sumOutcome" resultType="int">
         SELECT COUNT(*) FROM outcome
+        <where>
+            p_class = "${type}"
+        </where>
+    </select>
+
+    <select id="sumEnOutcome" resultType="int">
+        SELECT COUNT(*) FROM en_outcome
         <where>
             p_class = "${type}"
         </where>

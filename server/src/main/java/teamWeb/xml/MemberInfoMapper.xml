@@ -11,6 +11,18 @@
         order by comeInDate,name limit ${start},${end}
     </select>
 
+    <select id="enAllMember" resultType="teamWeb.teamSurvey.entity.MemberDO">
+        select `id`,`pictureUrl`,`edu`,`name`,m_class AS mClass,pageUrl, `come_in_year` AS comeInDate
+        from en_member
+        <where>
+            m_class = "${memberType}"
+        </where>
+        order by comeInDate,name limit ${start},${end}
+    </select>
+
+
+
+
     <select id="getAllDetail" resultType="teamWeb.teamSurvey.entity.MemberDO">
         select *
         <where>
@@ -28,6 +40,13 @@
         SELECT COUNT(*) FROM member
         WHERE m_class = "${memberType}"
     </select>
+
+    <select id="sumMember" resultType="int">
+        SELECT COUNT(*) FROM en_member
+        WHERE m_class = "${memberType}"
+    </select>
+
+
     <select id="memberDetail" resultType="teamWeb.teamSurvey.pojo.MemberBO">
         SELECT id, name, m_class AS memberType, email, research AS direction, pictureUrl
         FROM member
@@ -36,15 +55,41 @@
         </where>
     </select>
 
+    <select id="enMemberDetail" resultType="teamWeb.teamSurvey.pojo.MemberBO">
+        SELECT id, name, m_class AS memberType, email, research AS direction, pictureUrl
+        FROM en_member
+        <where>
+            id = ${id}
+        </where>
+    </select>
+
+
     <select id="allPaper" resultType="teamWeb.teamSurvey.entity.PaperDO">
         SELECT member_paper_map.member_id, p.name, p.id AS id
         FROM member_paper_map join paper p on member_paper_map.paper_id = p.id
         WHERE member_id = ${memberId}
     </select>
 
+    <select id="enAllPaper" resultType="teamWeb.teamSurvey.entity.PaperDO">
+        SELECT en_member_en_paper_map.member_id, p.name, p.id AS id
+        FROM en_member_en_paper_map join en_paper p on en_member_en_paper_map.paper_id = p.id
+        WHERE member_id = ${memberId}
+    </select>
+
+
+
     <select id="allEducation" resultType="teamWeb.teamSurvey.entity.EducationDO">
         SELECT e.id AS id,e.time, e.experience, member_education_map.member_id
         FROM member_education_map join education e on e.id = member_education_map.education_id
+        <where>
+            member_id= ${memberId}
+        </where>
+        ORDER BY e.time DESC
+    </select>
+
+    <select id="enAllEducation" resultType="teamWeb.teamSurvey.entity.EducationDO">
+        SELECT e.id AS id,e.time, e.experience, en_member_en_education_map.member_id
+        FROM en_member_en_education_map join en_education e on e.id = en_member_en_education_map.education_id
         <where>
             member_id= ${memberId}
         </where>

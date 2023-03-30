@@ -22,4 +22,11 @@ public interface OutcomeInfoService extends IService<OutcomeInfo> {
     void deleteInfo(OutcomeInfo outcomeInfo);
 
     Integer sumOutcome(String type);
+    Integer sumEnOutcome(String type);
+
+    List<AllPaperBO> enPaperDetail(int start, int end);
+
+    List<AllPaperBO> enPatentDetail(int start, int end);
+
+    List<AllMonographBO> enMonographDetail(int start, int end);
 }

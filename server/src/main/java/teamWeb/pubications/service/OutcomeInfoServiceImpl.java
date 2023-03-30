@@ -30,6 +30,19 @@ public class OutcomeInfoServiceImpl extends ServiceImpl<OutcomeInfoMapper, Outco
         }
         return allPaperBOList;
     }
+    @Override
+    public List<AllPaperBO> enPaperDetail(int start, int end) {
+        List<AllPaperBO> allPaperBOList = BeanUtil.convert(outcomeInfoMapper.enPaperDetail(start,end-start),AllPaperBO.class);
+        Integer numberIndex = 1;
+        for (AllPaperBO allPaperBO:
+                allPaperBOList) {
+            allPaperBO.setNumber(start+numberIndex);
+            numberIndex = numberIndex+1;
+        }
+        return allPaperBOList;
+    }
+
+
 
     @Override
     public List<AllPaperBO> patentDetail(int start, int end) {
@@ -42,6 +55,35 @@ public class OutcomeInfoServiceImpl extends ServiceImpl<OutcomeInfoMapper, Outco
         }
         return allPaperBOList;
     }
+    @Override
+    public List<AllPaperBO> enPatentDetail(int start, int end) {
+        List<AllPaperBO> allPaperBOList = BeanUtil.convert(outcomeInfoMapper.enPatentDetail(start,end-start),AllPaperBO.class);
+        Integer numberIndex = 1;
+        for (AllPaperBO allPaperBO:
+                allPaperBOList) {
+            allPaperBO.setNumber(start+numberIndex);
+            numberIndex = numberIndex+1;
+        }
+        return allPaperBOList;
+    }
+
+    @Override
+    public List<AllMonographBO> enMonographDetail(int start, int end) {
+        List<AllMonographBO> allMonographBOList = BeanUtil.convert(outcomeInfoMapper.enMonographDetail(start,end-start),AllMonographBO.class);
+
+        Integer numberIndex = 1;
+
+        for (AllMonographBO allMonographBO:
+                allMonographBOList) {
+            if(!allMonographBO.getPictureUrl().equals("")) {
+                allMonographBO.setPictureUrl(Address.rootAddress() + allMonographBO.getPictureUrl());
+            }
+            allMonographBO.setNumber(start+numberIndex);
+            numberIndex = numberIndex+1;
+        }
+        return allMonographBOList;
+    }
+
 
     @Override
     public List<AllMonographBO> monographDetail(int start, int end) {
@@ -63,6 +105,11 @@ public class OutcomeInfoServiceImpl extends ServiceImpl<OutcomeInfoMapper, Outco
     @Override
     public Integer sumOutcome(String type) {
         return outcomeInfoMapper.sumOutcome(type);
+    }
+
+    @Override
+    public Integer sumEnOutcome(String type) {
+        return outcomeInfoMapper.sumEnOutcome(type);
     }
 
     @Override

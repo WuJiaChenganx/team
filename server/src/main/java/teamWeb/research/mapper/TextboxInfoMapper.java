@@ -43,4 +43,16 @@ public interface TextboxInfoMapper extends BaseMapper<TextboxInfo> {
     Integer sumTextbox(String type);
 
     Integer sumProject();
+
+    List<ProjectDO> getEnProject(int start, int end);
+
+    Integer sumEnProject();
+
+    List<TextboxInfo> getEnDire(int start, int end);
+
+    Integer sumEnTextbox(String type);
+
+    List<TextboxInfo> getEnData(int start, int end);
+
+    List<TextboxInfo> getEnEmulation(int start, int end);
 }

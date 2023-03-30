@@ -22,4 +22,12 @@ public interface MemberInfoService extends IService<MemberDO> {
     Integer sumMember(String memberType);
 
     List<MemberBO> homeMember();
+
+    List<MemberBO> enAllMember(int start, int end, String memberType);
+
+    Integer sumEnMember(String memberType);
+
+    List<MemberBO> enHomeMember();
+
+    MemberBO enMemberDetail(Integer id);
 }

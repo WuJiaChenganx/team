@@ -24,28 +24,51 @@ public class ProjectController {
     TextboxInfoService textboxInfoService;
 
     @RequestMapping("/require-project")
-    public APIResponse projecting(@RequestParam(value="start") int start,@RequestParam(value="end") int end){
-        List<ProjectBO> projectDetail = textboxInfoService.projectDetail(start,end);
-        return APIResponse.success(projectDetail,textboxInfoService.sumProject());
+    public APIResponse projecting(@RequestParam(value="start") int start,
+                                  @RequestParam(value="end") int end,
+                                  @RequestParam(value = "languageType") String languageType){
+        Integer sum =null;
+        List<ProjectBO> projectDetail = null;
+        if (languageType.equals("Chinese")) {
+             projectDetail = textboxInfoService.projectDetail(start, end);
+             sum = textboxInfoService.sumProject();
+        }else if(languageType.equals("English")) {
+            projectDetail = textboxInfoService.enProjectDetail(start,end);
+            sum = textboxInfoService.sumEnProject();
+        }
+        return APIResponse.success(projectDetail,sum);
     }
 
 
     @RequestMapping("/require-direction")
-    public APIResponse direction(@RequestParam(value="start",defaultValue = "0") int start,@RequestParam(value="end",defaultValue = "10") int end){
-        List<DirectionsDTO> direDetail = textboxInfoService.direDetail(start,end);
-        return APIResponse.success(direDetail,textboxInfoService.sumTextbox("科研方向"));
+    public APIResponse direction(@RequestParam(value="start",defaultValue = "0") int start,
+                                 @RequestParam(value="end",defaultValue = "10") int end,
+                                 @RequestParam(value = "languageType") String languageType){
+        Integer sum =null;
+        List<DirectionsDTO> direDetail = null;
+        if (languageType.equals("Chinese")) {
+            direDetail = textboxInfoService.direDetail(start, end);
+            sum = textboxInfoService.sumTextbox("科研方向");
+        }else if (languageType.equals("English")){
+            direDetail = textboxInfoService.enDireDetail(start,end);
+            sum = textboxInfoService.sumEnTextbox("科研方向");
+        }
+        return APIResponse.success(direDetail,sum);
     }
 
     @RequestMapping("/require-platform")
-    public APIResponse platform(@RequestParam(value="start",defaultValue = "0") int start,@RequestParam(value="end",defaultValue = "10") int end){
+    public APIResponse platform(@RequestParam(value="start",defaultValue = "0") int start,
+                                @RequestParam(value="end",defaultValue = "10") int end,
+                                @RequestParam(value = "languageType") String languageType){
         List<PlatformDTO> platformDetail = textboxInfoService.platformDetail(start,end);
-        return APIResponse.success(platformDetail,textboxInfoService.sumTextbox("科研平台"));
+        return APIResponse.success(platformDetail,textboxInfoService.sumEnTextbox("科研平台"));
     }
 
 
     @GetMapping("/require-courses")
-    public APIResponse course() {
-        List<CoursePageBO> teachDetail = textboxInfoService.teachDetail();
-        return APIResponse.success(teachDetail,textboxInfoService.sumTextbox("课程教学"));
+    public APIResponse course(@RequestParam(value = "languageType") String languageType) {
+        List<CoursePageBO> teachDetail=null;
+        teachDetail = textboxInfoService.teachDetail();
+        return APIResponse.success(teachDetail,textboxInfoService.sumEnTextbox("课程教学"));
     }
 }

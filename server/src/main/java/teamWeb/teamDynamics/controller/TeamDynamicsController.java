@@ -26,12 +26,15 @@ public class TeamDynamicsController {
                                  @RequestParam(value="end") Integer end,
                                  @RequestParam(value = "languageType") String languageType){
         List<NoticeBO> allNotice = null;
+        Integer sum =null;
         if (languageType.equals("Chinese")) {
             allNotice = reportInfoService.noticeDetail(start, end);
+            sum = reportInfoService.sumReport("通知");
         }else if (languageType.equals("English")){
             allNotice = reportInfoService.enNoticeDetail(start,end);
+            sum = reportInfoService.sumEnReport("通知");
         }
-        return APIResponse.success(allNotice,reportInfoService.sumEnReport("通知"));
+        return APIResponse.success(allNotice,sum);
     }
 
     @GetMapping("/require-academicDynamics")
@@ -39,12 +42,15 @@ public class TeamDynamicsController {
                                            @RequestParam(value="end") Integer end,
                                            @RequestParam(value = "languageType") String languageType){
         List<NoticeBO> teamDynamics = null;
+        Integer sum =null;
         if (languageType.equals("Chinese")) {
             teamDynamics = reportInfoService.teamDynamicsDetail(start, end);
+            sum = reportInfoService.sumReport("动态");
         }else if (languageType.equals("English")){
             teamDynamics = reportInfoService.enTeamDynamicsDetail(start,end);
+            sum = reportInfoService.sumEnReport("动态");
         }
-        return APIResponse.success(teamDynamics,reportInfoService.sumEnReport("动态"));
+        return APIResponse.success(teamDynamics,sum);
     }
 
 
@@ -52,13 +58,16 @@ public class TeamDynamicsController {
     public APIResponse allNews(@RequestParam(value="start") Integer start,
                                @RequestParam(value="end") Integer end,
                                @RequestParam(value = "languageType") String languageType){
+        Integer sum =null;
         List<NoticeBO> allNewsBOList = null;
         if (languageType.equals("Chinese")) {
             allNewsBOList = reportInfoService.mediaDetail(start, end);
+            sum = reportInfoService.sumReport("媒体");
         }else if (languageType.equals("English")){
             allNewsBOList = reportInfoService.enMediaDetail(start,end);
+            sum = reportInfoService.sumEnReport("媒体");
         }
-        return APIResponse.success(allNewsBOList,reportInfoService.sumEnReport("媒体"));
+        return APIResponse.success(allNewsBOList,sum);
     }
 
     @GetMapping(value = "/require-detail")

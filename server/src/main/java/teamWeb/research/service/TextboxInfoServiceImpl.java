@@ -38,6 +38,37 @@ public class TextboxInfoServiceImpl extends ServiceImpl<TextboxInfoMapper, Textb
         return projectBOList;
     }
 
+    @Override
+    public List<ProjectBO> enProjectDetail(int start, int end) {
+        List<ProjectBO> projectBOList = BeanUtil.convert(textboxInfoMapper.getEnProject(start,end-start),ProjectBO.class);
+        Integer numberIndex = 1;
+        for (ProjectBO projectBO:
+                projectBOList) {
+            projectBO.setNumber(start+numberIndex);
+            numberIndex = numberIndex+1;
+        }
+        return projectBOList;
+    }
+
+    @Override
+    public Integer sumEnProject() {
+        return textboxInfoMapper.sumEnProject();
+    }
+
+    @Override
+    public List<DirectionsDTO> enDireDetail(int start, int end) {
+        List<DirectionsBO> directionsBOList = BeanUtil.convert(textboxInfoMapper.getEnDire(start,end-start),DirectionsBO.class);
+
+
+        for (DirectionsBO directionsBO:
+                directionsBOList) {
+            directionsBO.setPicUrl(Address.rootAddress()+directionsBO.getPictureUrl());
+            directionsBO.setDetail(directionsBO.getText());
+
+        }
+        return BeanUtil.convert(directionsBOList,DirectionsDTO.class);
+    }
+
 
     @Override
     public List<DirectionsDTO> direDetail(int start, int end) {
@@ -133,6 +164,34 @@ public class TextboxInfoServiceImpl extends ServiceImpl<TextboxInfoMapper, Textb
     @Override
     public Integer sumTextbox(String type) {
         return textboxInfoMapper.sumTextbox(type);
+    }
+
+    @Override
+    public Integer sumEnTextbox(String type) {
+        return textboxInfoMapper.sumEnTextbox(type);
+    }
+
+    @Override
+    public List<ResourceBO> enDataDetail(int start, int end) {
+        List<ResourceBO> resourceBOList = BeanUtil.convert(textboxInfoMapper.getEnData(start,end-start),ResourceBO.class);
+        for (ResourceBO resourceBO:
+                resourceBOList) {
+            resourceBO.setDetail(resourceBO.getText());
+            resourceBO.setText("");
+        }
+        return resourceBOList;
+    }
+
+    @Override
+    public List<ResourceBO> enEmulationDetail(int start, int end) {
+        List<ResourceBO> resourceBOList = BeanUtil.convert(textboxInfoMapper.getEnEmulation(start,end-start),ResourceBO.class);
+        for (ResourceBO resourceBO:
+                resourceBOList) {
+            resourceBO.setDetail(resourceBO.getText());
+            resourceBO.setText("");
+        }
+        return resourceBOList;
+
     }
 
 }

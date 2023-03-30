@@ -8,6 +8,14 @@
         order by time desc limit ${start},${end}
     </select>
 
+    <select id="getEnProject" resultType="teamWeb.research.entity.ProjectDO">
+        select `id`,project_name AS projectName, responser, project_type AS projectType, `time`, project_info AS projectInfo
+        from en_project
+        order by time desc limit ${start},${end}
+    </select>
+
+
+
     <select id="getData" resultType="teamWeb.research.entity.TextboxInfo">
         select `id`,`text`,`tClass`,`title`, fileUrl
         from textbox
@@ -16,6 +24,16 @@
         </where>
         order by sDate desc limit ${start},${end}
     </select>
+    <select id="getEnData" resultType="teamWeb.research.entity.TextboxInfo">
+        select `id`,`text`,`tClass`,`title`, fileUrl
+        from en_textbox
+        <where>
+            tClass = "数据集"
+        </where>
+        order by sDate desc limit ${start},${end}
+    </select>
+
+
 
     <select id="getDire" resultType="teamWeb.research.entity.TextboxInfo">
         select `id`,`text`,`pictureUrl`,`tClass`,title
@@ -25,6 +43,16 @@
         </where>
         limit ${start},${end}
     </select>
+
+    <select id="getEnDire" resultType="teamWeb.research.entity.TextboxInfo">
+        select `id`,`text`,`pictureUrl`,`tClass`,title
+        from en_textbox
+        <where>
+            tClass = "科研方向"
+        </where>
+        limit ${start},${end}
+    </select>
+
 
     <select id="getPlatform" resultType="teamWeb.research.entity.TextboxInfo">
         select `id`,`text`,`pictureUrl`,`tClass`,title
@@ -53,10 +81,22 @@
         SELECT COUNT(*) FROM project
     </select>
 
+    <select id="sumEnProject" resultType="int">
+        SELECT COUNT(*) FROM en_project
+    </select>
+
+
     <select id="sumTextbox" resultType="int">
         SELECT COUNT(*) FROM textbox
         WHERE tClass = "${type}"
     </select>
+
+    <select id="sumEnTextbox" resultType="int">
+        SELECT COUNT(*) FROM en_textbox
+        WHERE tClass = "${type}"
+    </select>
+
+
     <select id="getEmulation" resultType="teamWeb.research.entity.TextboxInfo">
         select `id`,`text`,`fileUrl`,`tClass`, title
         from textbox
@@ -65,6 +105,16 @@
         </where>
         limit ${start},${end}
     </select>
+    <select id="getEnEmulation" resultType="teamWeb.research.entity.TextboxInfo">
+        select `id`,`text`,`fileUrl`,`tClass`, title
+        from en_textbox
+        <where>
+            tClass = "仿真工具"
+        </where>
+        limit ${start},${end}
+    </select>
+
+
 
     <select id="getRelation" resultType="teamWeb.homepage.entity.RelationInfo">
         select id, email,address,pictureUrl,phone

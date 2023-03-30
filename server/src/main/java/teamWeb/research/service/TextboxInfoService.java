@@ -37,4 +37,16 @@ public interface TextboxInfoService extends IService<TextboxInfo> {
     Integer sumProject();
 
     Integer sumTextbox(String type);
+
+    List<ProjectBO> enProjectDetail(int start, int end);
+
+    Integer sumEnProject();
+
+    List<DirectionsDTO> enDireDetail(int start, int end);
+
+    Integer sumEnTextbox(String type);
+
+    List<ResourceBO> enDataDetail(int start, int end);
+
+    List<ResourceBO> enEmulationDetail(int start, int end);
 }
