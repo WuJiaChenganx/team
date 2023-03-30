@@ -50,7 +50,7 @@
               <img :src="memberItem.picUrl" @error="setDefaultImage" />
             </div>
             <div class="detailItemInfo">
-              {{ memberItem.name }} {{ memberItem.title }}
+              {{ memberItem.name }} <br />{{ memberItem.title }}
             </div>
           </div>
         </div>
