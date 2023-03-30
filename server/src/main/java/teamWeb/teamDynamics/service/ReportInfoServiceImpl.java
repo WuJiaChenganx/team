@@ -35,7 +35,11 @@ public class ReportInfoServiceImpl extends ServiceImpl<ReportMapper, ReportDO> i
                 }
             }
             noticeBO.setPicUrl(picList);
-            noticeBO.setDay(noticeBO.getDate().split("-")[2]);
+
+            List<String> times = Arrays.asList(noticeBO.getDate().split("-"));
+            if (times.size()>=3) {
+                noticeBO.setDay(noticeBO.getDate().split("-")[2]);
+            }
             noticeBO.setDate(noticeBO.getDate().substring(0, 7));
             noticeBO.setDetail(noticeBO.getText());
             noticeBO.setText("");
@@ -48,6 +52,16 @@ public class ReportInfoServiceImpl extends ServiceImpl<ReportMapper, ReportDO> i
         List<NoticeBO> noticeBOList = BeanUtil.convert(reportMapper.notice(start,end-start),NoticeBO.class);
         for (NoticeBO noticeBO:
                 noticeBOList) {
+
+            List<String> picList = Collections.emptyList();
+            if(!(noticeBO.getPictureUrl() == null)&& !noticeBO.getPictureUrl().isEmpty()) {
+                picList = Arrays.asList(noticeBO.getPictureUrl().split(";"));
+                for (int i = 0; i < picList.size(); i++) {
+                    picList.set(i, Address.rootAddress() + picList.get(i));
+                }
+            }
+            noticeBO.setPicUrl(picList);
+
             List<String> times = Arrays.asList(noticeBO.getDate().split("-"));
             if (times.size()>=3) {
                 noticeBO.setDay(noticeBO.getDate().split("-")[2]);
@@ -159,5 +173,121 @@ public class ReportInfoServiceImpl extends ServiceImpl<ReportMapper, ReportDO> i
     @Override
     public void updateViewCount(Integer id) {
         reportMapper.updateViewCount(id);
+    }
+
+    @Override
+    public List<NoticeBO> enTeamDynamicsDetail(Integer start, Integer end) {
+        List<NoticeBO> noticeBOList = BeanUtil.convert(reportMapper.enTeamDynamic(start,end-start),NoticeBO.class);
+        for (NoticeBO noticeBO:
+                noticeBOList) {
+            List<String> picList = Collections.emptyList();
+            if(!(noticeBO.getPictureUrl() == null)&& !noticeBO.getPictureUrl().isEmpty()) {
+                picList = Arrays.asList(noticeBO.getPictureUrl().split(";"));
+                for (int i = 0; i < picList.size(); i++) {
+                    picList.set(i, Address.rootAddress() + picList.get(i));
+                }
+            }
+            noticeBO.setPicUrl(picList);
+
+            List<String> times = Arrays.asList(noticeBO.getDate().split("-"));
+            if (times.size()>=3) {
+                noticeBO.setDay(noticeBO.getDate().split("-")[2]);
+            }
+            noticeBO.setDate(noticeBO.getDate().substring(0, 7));
+            noticeBO.setDetail(noticeBO.getText());
+            noticeBO.setText("");
+        }
+        return noticeBOList;
+    }
+
+    @Override
+    public List<NoticeBO> enNoticeDetail(Integer start, Integer end) {
+        List<NoticeBO> noticeBOList = BeanUtil.convert(reportMapper.enNotice(start,end-start),NoticeBO.class);
+        for (NoticeBO noticeBO:
+                noticeBOList) {
+
+            List<String> picList = Collections.emptyList();
+            if(!(noticeBO.getPictureUrl() == null)&& !noticeBO.getPictureUrl().isEmpty()) {
+                picList = Arrays.asList(noticeBO.getPictureUrl().split(";"));
+                for (int i = 0; i < picList.size(); i++) {
+                    picList.set(i, Address.rootAddress() + picList.get(i));
+                }
+            }
+            noticeBO.setPicUrl(picList);
+
+            List<String> times = Arrays.asList(noticeBO.getDate().split("-"));
+            if (times.size()>=3) {
+                noticeBO.setDay(noticeBO.getDate().split("-")[2]);
+            }
+            noticeBO.setDate(noticeBO.getDate().substring(0, 7));
+            noticeBO.setDetail(noticeBO.getText());
+            noticeBO.setText("");
+        }
+        return noticeBOList;
+    }
+
+    @Override
+    public Integer sumEnReport(String type) {
+        return reportMapper.sumReport(type);
+    }
+
+    @Override
+    public List<NoticeBO> enMediaDetail(Integer start, Integer end) {
+        List<NoticeBO> noticeBOList = BeanUtil.convert(reportMapper.enMedia(start,end-start),NoticeBO.class);
+        for (NoticeBO noticeBO:
+                noticeBOList) {
+            List<String> picList = Collections.emptyList();
+            if(!(noticeBO.getPictureUrl() == null) && !noticeBO.getPictureUrl().isEmpty()) {
+                picList = Arrays.asList(noticeBO.getPictureUrl().split(";"));
+                for (int i = 0; i < picList.size(); i++) {
+                    picList.set(i, Address.rootAddress() + picList.get(i));
+                }
+            }
+            noticeBO.setPicUrl(picList);
+            List<String> times = Arrays.asList(noticeBO.getDate().split("-"));
+            if (times.size()>=3) {
+                noticeBO.setDay(noticeBO.getDate().split("-")[2]);
+            }
+            noticeBO.setDate(noticeBO.getDate().substring(0, 7));
+            noticeBO.setDetail(noticeBO.getText());
+            noticeBO.setText("");
+        }
+        return noticeBOList;
+
+    }
+
+    @Override
+    public ReportBO enGetNews(Integer id) {
+        ReportDO reportDO = reportMapper.enReportDetail(id);
+        ReportBO reportBO = BeanUtil.convert(reportDO,ReportBO.class);
+        Integer reportId = reportBO.getId();
+
+        reportBO.setFileUrls(reportMapper.allEnFileUrl(reportId));
+
+        List<ReportDetailBO> reportDetailBOList = reportMapper.reportEnTextDetail(reportId);
+
+        for (ReportDetailBO reportDetailBO:
+                reportDetailBOList) {
+            List<String> picList = Collections.emptyList();
+            if(!(reportDetailBO.getPictureUrl() == null)&& !reportDetailBO.getPictureUrl().isEmpty()) {
+                picList = Arrays.asList(reportDetailBO.getPictureUrl().split(";"));
+                for (int i = 0; i < picList.size(); i++) {
+                    picList.set(i, Address.rootAddress() + picList.get(i));
+                }
+            }
+            reportDetailBO.setPicUrl(picList);
+        }
+
+
+        reportBO.setDetail(BeanUtil.convert(reportDetailBOList, ReportDetailDTO.class));
+
+        reportBO.setDay(reportBO.getDate().split("-")[2]);
+        reportBO.setDate(reportBO.getDate().substring(0, 7));
+        return reportBO;
+    }
+
+    @Override
+    public void updateEnViewCount(Integer id) {
+        reportMapper.updateEnViewCount(id);
     }
 }

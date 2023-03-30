@@ -37,4 +37,16 @@ public interface ReportInfoService extends IService<ReportDO> {
     Integer sumReport(String type);
 
     void updateViewCount(Integer id);
+
+    List<NoticeBO> enTeamDynamicsDetail(Integer start, Integer end);
+
+    List<NoticeBO> enNoticeDetail(Integer start, Integer end);
+
+    Integer sumEnReport(String type);
+
+    List<NoticeBO> enMediaDetail(Integer start, Integer end);
+
+    ReportBO enGetNews(Integer id);
+
+    void updateEnViewCount(Integer id);
 }

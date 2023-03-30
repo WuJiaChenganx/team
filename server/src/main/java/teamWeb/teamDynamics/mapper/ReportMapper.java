@@ -39,4 +39,19 @@ public interface ReportMapper extends BaseMapper<ReportDO> {
     List<ReportDetailBO> reportTextDetail(Integer reportId);
 
     void updateViewCount(Integer id);
+
+    List<ReportDO> enTeamDynamic(int start, int end);
+
+    List<ReportDO> enNotice(int start, int end);
+
+    List<ReportDO> enMedia(int start, int end);
+
+    ReportDO enReportDetail(Integer id);
+
+
+    List<NoticeFile> allEnFileUrl(Integer reportId);
+
+    List<ReportDetailBO> reportEnTextDetail(Integer reportId);
+
+    void updateEnViewCount(Integer id);
 }
