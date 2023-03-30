@@ -56,6 +56,7 @@ export default {
         // 定义参数
         start: 0,
         end: 4,
+        languageType: this.$store.getters.getLanguageType,
       };
       await getAcademyURL(params).then((res) => {
         this.academyList = res.data;
@@ -120,6 +121,7 @@ export default {
     position: absolute;
     bottom: 20px;
     right: 30px;
+    cursor: pointer;
   }
   .academicTrendItem {
     display: flex;
@@ -134,7 +136,9 @@ export default {
     flex-direction: row;
     border: 1px solid #dfdfdf;
   }
-
+  .academicTrend-item {
+    cursor: pointer;
+  }
   .academicTrend-img {
     width: 50%;
     overflow: hidden;
@@ -184,8 +188,8 @@ export default {
     -webkit-box-orient: vertical;
   }
 }
-/* 移动端 */
-@media screen and (max-width: 1000px) {
+/* 移动端 大尺寸*/
+@media screen and (min-width: 500px) and (max-width: 1000px) {
   .academicTitle {
     margin-bottom: 20px;
     position: relative;
@@ -236,9 +240,88 @@ export default {
   }
   .academicTrend-img img {
     width: 100%;
-    max-height: 180px;
+    max-height: 400px;
     margin-bottom: 10px;
+  }
+  .academicTrend-text {
+    width: 100%;
+    box-sizing: border-box;
+  }
+  .title-box {
+    text-align: left;
+    color: #0055a2;
+    font-size: 17px;
+    line-height: 23px;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  .detail-box {
+    color: #909090;
+    font-size: 13px;
+    line-height: 19px;
+    text-align: left;
+    word-wrap: break-word;
+    word-break: break-all;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
     overflow: hidden;
+  }
+}
+/* 移动端 小尺寸*/
+@media screen and (max-width: 500px) {
+  .academicTitle {
+    margin-bottom: 20px;
+    position: relative;
+  }
+  .title {
+    width: 276px;
+    margin: 20px auto;
+    font-size: 24px;
+    color: #0055a2;
+  }
+  .academicTitle p {
+    width: 276px;
+    font-size: 24px;
+    border-bottom: 1px solid #0055a2;
+    margin: 0 auto;
+    position: relative;
+  }
+  .academicTitle p:before {
+    width: 74px;
+    height: 5px;
+    position: absolute;
+    left: 101px;
+    top: -2px;
+    background: #0055a2;
+    display: table;
+    content: "";
+  }
+  .more {
+    color: #0055a2;
+    font-size: 16px;
+    position: absolute;
+    bottom: 20px;
+    right: 0;
+  }
+  .academicTrendItem {
+    display: flex;
+    flex-direction: column;
+  }
+  .academicTrend-item {
+    width: 100%;
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .academicTrend-img {
+    width: 100%;
+  }
+  .academicTrend-img img {
+    width: 100%;
+    max-height: 210px;
+    margin-bottom: 10px;
   }
   .academicTrend-text {
     width: 100%;

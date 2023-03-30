@@ -159,6 +159,7 @@ export default {
       // 从上一个路由获取的参数
       let params = {
         id: id,
+        languageType: this.$store.getters.getLanguageType,
       };
       await getMemberDetail(params).then((res) => {
         this.studentInfo = res.data;

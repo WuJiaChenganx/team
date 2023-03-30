@@ -1,51 +1,53 @@
 <template>
-  <!-- 公告详情 -->
-  <div class="noticeDetailBackground">
-    <div class="noticeDetail">
-      <div class="noticeDetailTitle">
+  <div class="projectDetailBackground">
+    <div class="projectDetail">
+      <div class="projectDetailTitle">
         <div class="title">{{ pageItem.title }}</div>
         <div class="breadCrumb">
           <el-breadcrumb separator-class="el-icon-arrow-right">
             <el-breadcrumb-item :to="{ path: '/home' }">{{
               pageItem.home
             }}</el-breadcrumb-item>
-            <el-breadcrumb-item :to="{ path: '/activity/notice' }">{{
-              pageItem.noticeList
+            <el-breadcrumb-item :to="{ path: '/scientificResearch/project' }">{{
+              pageItem.project
             }}</el-breadcrumb-item>
-            <el-breadcrumb-item :to="{ path: '/activity/noticeDetail' }">{{
-              pageItem.noticeDetail
-            }}</el-breadcrumb-item>
+            <el-breadcrumb-item
+              :to="{ path: '/scientificResearch/projectDetail' }"
+              >{{ pageItem.projectDetail }}</el-breadcrumb-item
+            >
           </el-breadcrumb>
         </div>
       </div>
-      <div class="noticeDetailContent">
+      <div class="projectDetailContent">
         <div class="titleContent">
-          <div class="noticeTitle">{{ noticeDetail.title }}</div>
+          <div class="projectTitle">
+            {{ projectDetail.title }}
+          </div>
           <div>
             <span class="publicationDate">
-              {{ pageItem.publicationDate }}{{ noticeDetail.date }}-{{
-                noticeDetail.day
+              {{ pageItem.publicationDate }}{{ projectDetail.date }}-{{
+                projectDetail.day
               }}
             </span>
             <span class="pageView"
-              >{{ pageItem.pageView }}{{ noticeDetail.pageView }}</span
+              >{{ pageItem.pageView }}{{ projectDetail.pageView }}</span
             >
           </div>
         </div>
         <div
-          class="noticeDetailItem"
-          v-for="(noticeItem, noticeItemIndex) in noticeDetail.detail"
-          :key="noticeItemIndex"
+          class="projectDetailItem"
+          v-for="(projectItem, projectItemIndex) in projectDetail.detail"
+          :key="projectItemIndex"
         >
-          <div class="noticeInfo">
-            {{ noticeItem.text }}
+          <div class="projectInfo">
+            {{ projectItem.text }}
           </div>
           <div
-            v-if="noticeItem.picUrl.length"
-            :class="noticeItem.picUrl.length == 2 ? 'photoBox2' : 'photoBox1'"
+            v-if="projectItem.picUrl.length"
+            :class="projectItem.picUrl.length == 2 ? 'photoBox2' : 'photoBox1'"
           >
             <div
-              v-for="(imgUrl, imgUrlIndex) in noticeItem.picUrl"
+              v-for="(imgUrl, imgUrlIndex) in projectItem.picUrl"
               :key="imgUrlIndex"
             >
               <img :src="imgUrl" />
@@ -63,26 +65,25 @@ export default {
     return {
       pageItem: {},
       chineseItem: {
-        title: "通知公告",
+        title: "科研项目",
         home: "首页",
-        noticeList: "新闻列表",
-        noticeDetail: "新闻详情",
+        project: "科研项目",
+        projectDetail: "项目详情",
         publicationDate: "发布时间: ",
         pageView: "浏览量: ",
       },
       englishItem: {
-        title: "Notices",
+        title: "Project",
         home: "Home",
-        noticeList: "Notices List",
-        noticeDetail: "Notice Detail",
+        project: "Project List",
+        projectDetail: "Project Detail",
         publicationDate: "Publication Date: ",
         pageView: "Views: ",
       },
-      noticeDetail: {},
+      projectDetail: {},
     };
   },
   created() {
-    this.getNoticeDetail(this.$route.query.id);
     this.changUI();
   },
   methods: {
@@ -94,14 +95,13 @@ export default {
       }
     },
     // async和await用于同步,就是按顺序执行
-    async getNoticeDetail(id) {
+    async getProjectDetail(id) {
       // 从上一个路由获取的参数
       let params = {
         id: id,
-        languageType: this.$store.getters.getLanguageType,
       };
       await getActivityDetail(params).then((res) => {
-        this.noticeDetail = res.data;
+        this.projectDetail = res.data;
       });
     },
   },
@@ -110,11 +110,12 @@ export default {
 <style lang="scss" scoped>
 /* PC端  */
 @media screen and (min-width: 1000px) {
-  .noticeDetailBackground {
+  .projectDetailBackground {
     padding: 3rem 0;
     background: #eef7fe;
   }
-  .noticeDetail {
+
+  .projectDetail {
     width: 75%;
     /* 内容里面缩进 */
     padding: 0 3rem;
@@ -123,7 +124,7 @@ export default {
     background-color: #fff;
     border: 1px solid #dfdfdf;
   }
-  .noticeDetailTitle {
+  .projectDetailTitle {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -138,8 +139,7 @@ export default {
   .breadCrumb {
     padding-top: 1rem;
   }
-
-  .noticeDetailContent {
+  .projectDetailContent {
     min-height: 600px;
     padding-bottom: 2rem;
   }
@@ -147,12 +147,13 @@ export default {
     margin-bottom: 10px;
     border-bottom: 1px solid #dfdfdf;
   }
-  .noticeTitle {
+  .projectTitle {
+    margin-top: 25px;
     color: #0055a2;
     line-height: 3rem;
     font-size: 2.5rem;
     text-align: center;
-    padding: 2rem;
+    margin: 2rem;
   }
   .publicationDate {
     font-size: 16px;
@@ -167,7 +168,7 @@ export default {
     display: inline-block;
     color: #999;
   }
-  .noticeInfo {
+  .projectInfo {
     word-wrap: break-word;
     word-break: break-all;
     text-align: left;
@@ -203,17 +204,17 @@ export default {
 
 /* 移动端  */
 @media screen and (max-width: 1000px) {
-  .noticeDetailBackground {
+  .projectDetailBackground {
     background: #eef7fe;
   }
-  .noticeDetail {
+  .projectDetail {
     width: 100%;
     padding: 0 1.5rem;
     box-sizing: border-box;
     background-color: #fff;
     border: 1px solid #dfdfdf;
   }
-  .noticeDetailTitle {
+  .projectDetailTitle {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -228,7 +229,7 @@ export default {
   .breadCrumb {
     padding-top: 1rem;
   }
-  .noticeDetailContent {
+  .projectDetailContent {
     min-height: 450px;
     padding-bottom: 2rem;
   }
@@ -236,7 +237,7 @@ export default {
     margin-bottom: 10px;
     border-bottom: 1px solid #dfdfdf;
   }
-  .noticeTitle {
+  .projectTitle {
     color: #0055a2;
     line-height: 24px;
     font-size: 16px;
@@ -256,7 +257,7 @@ export default {
     display: inline-block;
     color: #999;
   }
-  .noticeInfo {
+  .projectInfo {
     word-wrap: break-word;
     word-break: break-all;
     text-align: left;

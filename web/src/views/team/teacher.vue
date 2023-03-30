@@ -118,6 +118,7 @@ export default {
         start: 0,
         end: 100,
         memberType: "teacher",
+        languageType: this.$store.getters.getLanguageType,
       };
       await getMemberCover(params).then((res) => {
         this.teacherCover = res.data;
@@ -137,10 +138,11 @@ export default {
 /* PC端  */
 @media screen and (min-width: 1000px) {
   .teacher {
-    min-height: 450px;
     padding: 3rem 0;
+    box-sizing: border-box;
     background: url(../../assets/images/background/contentBackground.jpg)
       no-repeat;
+    min-height: calc(100vh - 35.762rem);
   }
 
   .teacherContent {
@@ -178,6 +180,7 @@ export default {
     box-sizing: border-box;
     background-color: #fff;
     border: 1px solid #dfdfdf;
+    min-height: calc(100vh - 35.762rem - 6rem);
   }
 
   .teacherTitle {

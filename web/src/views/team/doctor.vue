@@ -117,6 +117,7 @@ export default {
         start: 0,
         end: 100,
         memberType: "doctor",
+        languageType: this.$store.getters.getLanguageType,
       };
       await getMemberCover(params).then((res) => {
         this.studentCover = res.data;
@@ -142,10 +143,11 @@ export default {
 /* PC端  */
 @media screen and (min-width: 1000px) {
   .doctor {
-    min-height: 450px;
     padding: 3rem 0;
+    box-sizing: border-box;
     background: url(../../assets/images/background/contentBackground.jpg)
       no-repeat;
+    min-height: calc(100vh - 35.762rem);
   }
 
   .doctorContent {
@@ -183,6 +185,7 @@ export default {
     box-sizing: border-box;
     background-color: #fff;
     border: 1px solid #dfdfdf;
+    min-height: calc(100vh - 35.762rem - 6rem);
   }
 
   .doctorTitle {
@@ -206,7 +209,6 @@ export default {
   }
 
   .doctorItem {
-    width: 100%;
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;

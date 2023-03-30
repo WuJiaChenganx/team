@@ -54,6 +54,7 @@ export default {
         // 定义参数
         start: 0,
         end: 3,
+        languageType: this.$store.getters.getLanguageType,
       };
       await getNoticeURL(params).then((res) => {
         this.noticeList = res.data;

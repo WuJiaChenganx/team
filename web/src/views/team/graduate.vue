@@ -117,6 +117,7 @@ export default {
         start: 0,
         end: 100,
         memberType: "graduate",
+        languageType: this.$store.getters.getLanguageType,
       };
       await getMemberCover(params).then((res) => {
         this.studentCover = res.data;

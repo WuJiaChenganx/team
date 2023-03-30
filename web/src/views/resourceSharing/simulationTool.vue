@@ -68,7 +68,7 @@
             </div>
           </div>
         </div>
-        <div class="paging">
+        <div class="paging" v-show="total_number">
           <!-- page-size展示的选择每页显示个数的选项,页面变动触发的事件是current-change后面的函数,total表示总共的数量 current-page表示当前页数-->
           <el-pagination
             background
@@ -116,7 +116,7 @@ export default {
       ],
       showPageContent: [],
       // 总共要展示的数量
-      total_number: 10,
+      total_number: 0,
       // 当前页面从1开始的这两个属性会在刚开始的时候就更新
       current_index: 1,
     };
@@ -141,6 +141,7 @@ export default {
         // 定义参数
         start: (this.current_index - 1) * 10,
         end: this.current_index * 10,
+        languageType: this.$store.getters.getLanguageType,
       };
 
       await getSimulationToolURL(params).then((res) => {
@@ -161,8 +162,10 @@ export default {
 @media screen and (min-width: 1000px) {
   .simulationTool {
     padding: 3rem 0;
+    box-sizing: border-box;
     background: url(../../assets/images/background/contentBackground.jpg)
       no-repeat;
+    min-height: calc(100vh - 35.762rem);
   }
 
   .simulationToolContent {
@@ -200,6 +203,8 @@ export default {
     box-sizing: border-box;
     background-color: #fff;
     border: 1px solid #dfdfdf;
+    position: relative;
+    min-height: calc(100vh - 35.762rem - 6rem);
   }
 
   .simulationToolTitle {
@@ -226,7 +231,6 @@ export default {
     display: flex;
     flex-direction: column;
     margin-bottom: 3rem;
-    min-height: 600px;
   }
 
   .simulationTool-row {
@@ -263,7 +267,10 @@ export default {
   }
   /* 设置分页和底部的距离 */
   .paging {
-    margin-bottom: 3rem;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, 0);
+    bottom: 3rem;
   }
 }
 /* 移动端  */
@@ -271,6 +278,7 @@ export default {
   .simulationTool {
     background: url(../../assets/images/background/contentBackground.jpg)
       no-repeat;
+    min-height: calc(100vh - 36rem);
   }
 
   .simulationToolContent {
@@ -297,6 +305,8 @@ export default {
     box-sizing: border-box;
     background-color: #fff;
     border: 1px solid #dfdfdf;
+    position: relative;
+    min-height: calc(100vh - 36rem - 112px);
   }
 
   .simulationToolTitle {
@@ -323,7 +333,6 @@ export default {
     display: flex;
     flex-direction: column;
     margin-bottom: 3rem;
-    min-height: 450px;
   }
 
   .simulationTool-row {
@@ -360,7 +369,10 @@ export default {
   }
   /* 设置分页和底部的距离 */
   .paging {
-    margin-bottom: 3rem;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, 0);
+    bottom: 3rem;
   }
 }
 </style>

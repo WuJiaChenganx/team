@@ -151,6 +151,12 @@ const router = new VueRouter({
                 import ("../views/scientificResearch/project.vue"),
         },
         {
+            path: "/scientificResearch/projectDetail",
+            name: "项目详情",
+            component: () =>
+                import ("../views/scientificResearch/projectDetail.vue"),
+        },
+        {
             path: "/scientificResearch/platform",
             name: "科研平台",
             component: () =>
@@ -178,4 +184,9 @@ const router = new VueRouter({
         },
     ],
 });
+// 跳转后自动返回页面顶部
+router.afterEach(() => {
+    window.scrollTo(0, 0);
+});
+
 export default router;

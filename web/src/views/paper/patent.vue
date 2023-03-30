@@ -9,7 +9,7 @@
             :default-active="this.$route.path"
             router
             mode="vertical"
-            background-color="#ffffff"
+            background-color="#fff"
             text-color="#000"
             active-text-color="#fff"
           >
@@ -124,6 +124,7 @@ export default {
         // 定义参数
         start: (this.current_index - 1) * 10,
         end: this.current_index * 10,
+        languageType: this.$store.getters.getLanguageType,
       };
       await getPatentURL(params).then((res) => {
         this.patents = res.data;

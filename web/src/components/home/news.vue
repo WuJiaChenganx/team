@@ -94,6 +94,7 @@ export default {
         // 定义参数
         start: 0,
         end: 5,
+        languageType: this.$store.getters.getLanguageType,
       };
       await getNewFlashURL(params).then((res) => {
         this.newsList = res.data;
@@ -105,6 +106,7 @@ export default {
         name: "新闻快讯详情",
         query: {
           id: id,
+          languageType: this.$store.getters.getLanguageType,
         },
       });
     },

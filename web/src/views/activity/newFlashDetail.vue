@@ -18,7 +18,21 @@
         </div>
       </div>
       <div class="newFlashDetailContent">
-        <div class="newFlashTitle">{{ newsFlashDetail.title }}</div>
+        <div class="titleContent">
+          <div class="newFlashTitle">
+            {{ newsFlashDetail.title }}
+          </div>
+          <div>
+            <span class="publicationDate">
+              {{ pageItem.publicationDate }}{{ newsFlashDetail.date }}-{{
+                newsFlashDetail.day
+              }}
+            </span>
+            <span class="pageView"
+              >{{ pageItem.pageView }}{{ newsFlashDetail.pageView }}</span
+            >
+          </div>
+        </div>
         <div
           class="newFlashDetailItem"
           v-for="(newFlashItem, newFlashItemIndex) in newsFlashDetail.detail"
@@ -29,7 +43,7 @@
           </div>
           <div
             v-if="newFlashItem.picUrl.length"
-            :class="newFlashItem.picUrl.length == 1 ? 'photoBox1' : 'photoBox2'"
+            :class="newFlashItem.picUrl.length == 2 ? 'photoBox2' : 'photoBox1'"
           >
             <div
               v-for="(imgUrl, imgUrlIndex) in newFlashItem.picUrl"
@@ -53,13 +67,17 @@ export default {
         title: "新闻快讯",
         home: "首页",
         newFlashList: "新闻列表",
-        newFlashDetail: "详情",
+        newFlashDetail: "新闻详情",
+        publicationDate: "发布时间: ",
+        pageView: "浏览量: ",
       },
       englishItem: {
         title: "News",
         home: "Home",
         newFlashList: "News List",
         newFlashDetail: "News Detail",
+        publicationDate: "Publication Date: ",
+        pageView: "Views: ",
       },
       newsFlashDetail: {},
     };
@@ -81,6 +99,7 @@ export default {
       // 从上一个路由获取的参数
       let params = {
         id: id,
+        languageType: this.$store.getters.getLanguageType,
       };
       await getActivityDetail(params).then((res) => {
         this.newsFlashDetail = res.data;
@@ -124,21 +143,39 @@ export default {
     min-height: 600px;
     padding-bottom: 2rem;
   }
+  .titleContent {
+    margin-bottom: 10px;
+    border-bottom: 1px solid #dfdfdf;
+  }
   .newFlashTitle {
+    margin-top: 25px;
     color: #0055a2;
     line-height: 3rem;
     font-size: 2.5rem;
     text-align: center;
-    padding: 2rem;
+    margin: 2rem;
+  }
+  .publicationDate {
+    font-size: 16px;
+    margin: 10px 0;
+    display: inline-block;
+    margin-right: 10px;
+    color: #999;
+  }
+  .pageView {
+    font-size: 16px;
+    margin: 10px 0;
+    display: inline-block;
+    color: #999;
   }
   .newFlashInfo {
     word-wrap: break-word;
     word-break: break-all;
     text-align: left;
     line-height: 3rem;
-    font-size: 1.6rem;
+    font-size: 2rem;
     text-indent: 2em;
-    padding-bottom: 0.5rem;
+    padding-bottom: 5px;
   }
   .photoBox1 {
     width: 100%;
@@ -196,21 +233,38 @@ export default {
     min-height: 450px;
     padding-bottom: 2rem;
   }
+  .titleContent {
+    margin-bottom: 10px;
+    border-bottom: 1px solid #dfdfdf;
+  }
   .newFlashTitle {
     color: #0055a2;
-    line-height: 3rem;
-    font-size: 2rem;
+    line-height: 24px;
+    font-size: 16px;
     text-align: center;
-    padding: 2rem;
+    padding: 1rem;
+  }
+  .publicationDate {
+    font-size: 14px;
+    margin: 5px 0;
+    display: inline-block;
+    margin-right: 10px;
+    color: #999;
+  }
+  .pageView {
+    font-size: 14px;
+    margin: 5px 0;
+    display: inline-block;
+    color: #999;
   }
   .newFlashInfo {
     word-wrap: break-word;
     word-break: break-all;
     text-align: left;
-    line-height: 3rem;
-    font-size: 1.6rem;
+    line-height: 24px;
+    font-size: 16px;
     text-indent: 2em;
-    padding-bottom: 2rem;
+    padding-bottom: 5px;
   }
 
   .photoBox1 {
