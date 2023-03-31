@@ -48,7 +48,7 @@
 
 
     <select id="memberDetail" resultType="teamWeb.teamSurvey.pojo.MemberBO">
-        SELECT id, name, m_class AS memberType, email, research AS direction, pictureUrl
+        SELECT id, name, m_class AS mClass, email, research AS direction, pictureUrl
         FROM member
         <where>
             id = ${id}
@@ -56,7 +56,7 @@
     </select>
 
     <select id="enMemberDetail" resultType="teamWeb.teamSurvey.pojo.MemberBO">
-        SELECT id, name, m_class AS memberType, email, research AS direction, pictureUrl
+        SELECT id, name, m_class AS mClass, email, research AS direction, pictureUrl
         FROM en_member
         <where>
             id = ${id}
