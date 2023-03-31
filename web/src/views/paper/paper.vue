@@ -9,7 +9,7 @@
             :default-active="this.$route.path"
             router
             mode="vertical"
-            background-color="#ffffff"
+            background-color="#fff"
             text-color="#000"
             active-text-color="#fff"
           >
@@ -128,6 +128,7 @@ export default {
         // 定义参数
         start: (this.current_index - 1) * 15,
         end: this.current_index * 15,
+        languageType: this.$store.getters.getLanguageType,
       };
       await getPaperURL(params).then((res) => {
         this.papers = res.data;

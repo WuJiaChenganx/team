@@ -129,6 +129,7 @@ export default {
         // 定义参数
         start: (this.current_index - 1) * 10,
         end: this.current_index * 10,
+        languageType: this.$store.getters.getLanguageType,
       };
       await getNewFlashURL(params).then((res) => {
         this.newsList = res.data;

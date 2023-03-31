@@ -26,7 +26,7 @@
           @click="goTo(item.path)"
         >
           <div class="navTitle">{{ item.title }}</div>
-          <div class="subNav" style="position: absolute; z-index: 9999">
+          <div class="subNav">
             <!-- 在点击函数中需要加入stop防止冒泡 -->
             <div
               class="subNavItem"
@@ -163,10 +163,13 @@ export default {
   methods: {
     // 这里更新store里面的东西
     changeLanguage(languageType) {
-      // dispatch调用vuex的action里面的方法
-      this.$store.dispatch("updateLanguageType", languageType);
-      // 这里刷新一个使得created()里面的函数根据语言重新渲染,实现切换,但是渲染过程中要把state对象保存否则就算之前切换了语言都会失效
-      location.reload();
+      // 如果不同将languageType存起来然后通过刷新保存到sessionStorage
+      if (this.$store.getters.getLanguageType != languageType) {
+        // dispatch调用vuex的action里面的方法
+        this.$store.dispatch("updateLanguageType", languageType);
+        // 这里刷新一个使得created()里面的函数根据语言重新渲染,实现切换,但是渲染过程中要把state对象保存否则就算之前切换了语言都会失效
+        location.reload();
+      }
     },
     changUI() {
       if (this.$store.getters.getLanguageType == "Chinese") {
@@ -189,7 +192,7 @@ export default {
   },
 };
 </script>
-<style scoped>
+<style lang="scss" scoped>
 /* 背景图以及图片还需要更新 */
 .header {
   background: url(../../assets/images/background/headBackground.jpg) no-repeat;
@@ -244,6 +247,8 @@ export default {
   .navItem {
     cursor: pointer;
     width: 15%;
+    height: 5rem;
+    overflow: hidden;
   }
 
   .navTitle {
@@ -264,26 +269,27 @@ export default {
     /* 隐藏元素 */
     cursor: pointer;
     width: 15%;
-    line-height: 5rem;
     font-size: 1.8rem;
     font-weight: bold;
-    display: none;
     color: #fff;
     background-color: #0055a2;
   }
 
   .navItem:hover .subNav {
-    display: block;
+    position: absolute;
+    z-index: 9999;
+    .subNavItem {
+      max-height: 5rem;
+      line-height: 5rem;
+    }
   }
-
   .subNavItem {
-    height: 5rem;
     text-align: center;
-    /* 垂直对齐 */
-    line-height: 5rem;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
     color: #fff;
   }
-
   .subNavItem:hover {
     background-color: #008cd6;
   }

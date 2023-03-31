@@ -11,7 +11,7 @@
             mode="vertical"
             background-color="#fff"
             text-color="#000"
-            active-text-color="#3D55A7"
+            active-text-color="#fff"
           >
             <el-menu-item
               class="bookAsideItem"
@@ -132,6 +132,7 @@ export default {
         // 定义参数
         start: (this.current_index - 1) * 3,
         end: this.current_index * 3,
+        languageType: this.$store.getters.getLanguageType,
       };
       await getBookURL(params).then((res) => {
         this.books = res.data;
@@ -211,7 +212,7 @@ export default {
   }
   /* 选中侧边导航的背景颜色 */
   .el-menu-item.is-active {
-    background: #dbeeff !important;
+    background: #008cd6 !important;
   }
   /* 设置块和分页的距离 */
   .bookItem {

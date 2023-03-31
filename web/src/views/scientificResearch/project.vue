@@ -45,6 +45,7 @@
             class="detailItem"
             v-for="projectItem in projects"
             :key="projectItem.id"
+            @click="gotoDetail()"
           >
             <div class="detailItemProjectName">
               {{ projectItem.number }}. {{ pageItem.projectName }}:{{
@@ -145,6 +146,7 @@ export default {
         // 定义参数
         start: (this.current_index - 1) * 10,
         end: this.current_index * 10,
+        languageType: this.$store.getters.getLanguageType,
       };
       await getProjectURL(params).then((res) => {
         this.projects = res.data;
@@ -155,6 +157,12 @@ export default {
       // 传入的val是当前页的页码
       this.current_index = val;
       this.getProjectList();
+    },
+    gotoDetail() {
+      this.$router.push({
+        path: "/scientificResearch/projectDetail",
+        name: "项目详情",
+      });
     },
   },
 };
@@ -237,6 +245,9 @@ export default {
     text-align: left;
     line-height: 3rem;
     font-size: 2rem;
+  }
+  .detailItem:hover {
+    cursor: pointer;
   }
   .detailItemProjectName {
     font-size: 2.5rem;

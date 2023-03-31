@@ -18,7 +18,21 @@
         </div>
       </div>
       <div class="academyDetailContent">
-        <div class="academyTitle">{{ academyDetail.title }}</div>
+        <div class="titleContent">
+          <div class="academyTitle">
+            {{ academyDetail.title }}
+          </div>
+          <div>
+            <span class="publicationDate">
+              {{ pageItem.publicationDate }}{{ academyDetail.date }}-{{
+                academyDetail.day
+              }}
+            </span>
+            <span class="pageView"
+              >{{ pageItem.pageView }}{{ academyDetail.pageView }}</span
+            >
+          </div>
+        </div>
         <div
           class="academyDetailItem"
           v-for="(academyItem, academyItemIndex) in academyDetail.detail"
@@ -53,13 +67,17 @@ export default {
         title: "学术动态",
         home: "首页",
         academyList: "学术列表",
-        academyDetail: "详情",
+        academyDetail: "学术详情",
+        publicationDate: "发布时间: ",
+        pageView: "浏览量: ",
       },
       englishItem: {
         title: "Academy",
         home: "Home",
         academyList: "Academy List",
         academyDetail: "Academy Detail",
+        publicationDate: "Publication Date: ",
+        pageView: "Views: ",
       },
       academyDetail: {},
     };
@@ -81,6 +99,7 @@ export default {
       // 从上一个路由获取的参数
       let params = {
         id: id,
+        languageType: this.$store.getters.getLanguageType,
       };
       await getActivityDetail(params).then((res) => {
         this.academyDetail = res.data;
@@ -125,21 +144,39 @@ export default {
     min-height: 600px;
     padding-bottom: 2rem;
   }
+  .titleContent {
+    margin-bottom: 10px;
+    border-bottom: 1px solid #dfdfdf;
+  }
   .academyTitle {
+    margin-top: 25px;
     color: #0055a2;
     line-height: 3rem;
     font-size: 2.5rem;
     text-align: center;
-    padding: 2rem;
+    margin: 2rem;
+  }
+  .publicationDate {
+    font-size: 16px;
+    margin: 10px 0;
+    display: inline-block;
+    margin-right: 10px;
+    color: #999;
+  }
+  .pageView {
+    font-size: 16px;
+    margin: 10px 0;
+    display: inline-block;
+    color: #999;
   }
   .academyInfo {
     word-wrap: break-word;
     word-break: break-all;
     text-align: left;
     line-height: 3rem;
-    font-size: 1.6rem;
+    font-size: 2rem;
     text-indent: 2em;
-    padding-bottom: 0.5rem;
+    padding-bottom: 5px;
   }
   .photoBox1 {
     width: 100%;
@@ -197,21 +234,38 @@ export default {
     min-height: 450px;
     padding-bottom: 2rem;
   }
+  .titleContent {
+    margin-bottom: 10px;
+    border-bottom: 1px solid #dfdfdf;
+  }
   .academyTitle {
     color: #0055a2;
-    line-height: 3rem;
-    font-size: 2rem;
+    line-height: 24px;
+    font-size: 16px;
     text-align: center;
-    padding: 2rem;
+    padding: 1rem;
+  }
+  .publicationDate {
+    font-size: 14px;
+    margin: 5px 0;
+    display: inline-block;
+    margin-right: 10px;
+    color: #999;
+  }
+  .pageView {
+    font-size: 14px;
+    margin: 5px 0;
+    display: inline-block;
+    color: #999;
   }
   .academyInfo {
     word-wrap: break-word;
     word-break: break-all;
     text-align: left;
-    line-height: 3rem;
-    font-size: 1.6rem;
+    line-height: 24px;
+    font-size: 16px;
     text-indent: 2em;
-    padding-bottom: 2rem;
+    padding-bottom: 5px;
   }
   .photoBox1 {
     width: 100%;
