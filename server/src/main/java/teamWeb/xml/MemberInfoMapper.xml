@@ -41,7 +41,7 @@
         WHERE m_class = "${memberType}"
     </select>
 
-    <select id="sumMember" resultType="int">
+    <select id="sumEnMember" resultType="int">
         SELECT COUNT(*) FROM en_member
         WHERE m_class = "${memberType}"
     </select>
