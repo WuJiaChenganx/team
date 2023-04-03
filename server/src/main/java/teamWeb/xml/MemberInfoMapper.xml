@@ -22,6 +22,16 @@
 
 
 
+    <select id="student" resultType="teamWeb.teamSurvey.entity.MemberDO">
+        select `id`,`pictureUrl`,`edu`,`name`,m_class AS mClass,pageUrl, `come_in_year` AS comeInDate
+        from member
+        <where>
+            come_in_year = "${comeInYear}"
+        </where>
+        order by comeInDate,name
+    </select>
+
+
 
     <select id="getAllDetail" resultType="teamWeb.teamSurvey.entity.MemberDO">
         select *

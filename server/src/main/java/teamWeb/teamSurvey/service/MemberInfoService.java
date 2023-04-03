@@ -30,4 +30,6 @@ public interface MemberInfoService extends IService<MemberDO> {
     List<MemberBO> enHomeMember();
 
     MemberBO enMemberDetail(Integer id);
+
+    List<MemberBO> student(Integer comeInYear);
 }

@@ -45,7 +45,18 @@ public class MemberInfoServiceImpl extends ServiceImpl<MemberInfoMapper, MemberD
         return memberBO;
     }
 
-
+    @Override
+    public List<MemberBO> student(Integer comeInYear) {
+        List<MemberDO> memberDOList = memberInfoMapper.student(comeInYear);
+        List<MemberBO> memberBOList = BeanUtil.convert(memberDOList, MemberBO.class);
+        for (MemberBO memberBO:
+                memberBOList) {
+            memberBO.setTitle(memberBO.getEdu());
+            memberBO.setMemberType(memberBO.getmClass());
+            memberBO.setPicUrl(Address.rootAddress() + memberBO.getPictureUrl());
+        }
+        return memberBOList;
+    }
 
 
     @Override

@@ -35,4 +35,6 @@ public interface MemberInfoMapper extends BaseMapper<MemberDO> {
     List<PaperDO> enAllPaper(Integer memberId);
 
     List<EducationDO> enAllEducation(Integer memberId);
+
+    List<MemberDO> student(Integer comeInYear);
 }
