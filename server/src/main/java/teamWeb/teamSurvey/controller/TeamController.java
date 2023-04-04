@@ -52,16 +52,18 @@ public class TeamController {
         return APIResponse.success(allMemberDTOList,sum);
     }
 
+
     @GetMapping("require-student")
     public APIResponse student(@RequestParam(value = "comeInYear") Integer comeInYear,
-                               @RequestParam(value = "languageType") String languageType){
+                               @RequestParam(value = "languageType") String languageType,
+                               @RequestParam(value = "memberType" ) String memberType){
         List<MemberBO> allMemberBOList =null;
         List<MemberDTO> allMemberDTOList =null;
         if (languageType.equals("Chinese")) {
-            allMemberBOList = memberInfoService.student(comeInYear);
+            allMemberBOList = memberInfoService.student(comeInYear,memberType);
             allMemberDTOList = BeanUtil.convert(allMemberBOList, MemberDTO.class);
         }else if(languageType.equals("English")){
-            allMemberBOList = memberInfoService.student(comeInYear);
+            allMemberBOList = memberInfoService.student(comeInYear,memberType);
             allMemberDTOList = BeanUtil.convert(allMemberBOList, MemberDTO.class);
         }
         return APIResponse.success(allMemberDTOList);

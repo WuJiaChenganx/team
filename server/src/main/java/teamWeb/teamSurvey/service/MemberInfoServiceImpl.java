@@ -46,8 +46,8 @@ public class MemberInfoServiceImpl extends ServiceImpl<MemberInfoMapper, MemberD
     }
 
     @Override
-    public List<MemberBO> student(Integer comeInYear) {
-        List<MemberDO> memberDOList = memberInfoMapper.student(comeInYear);
+    public List<MemberBO> student(Integer comeInYear,String memberType) {
+        List<MemberDO> memberDOList = memberInfoMapper.student(comeInYear,memberType);
         List<MemberBO> memberBOList = BeanUtil.convert(memberDOList, MemberBO.class);
         for (MemberBO memberBO:
                 memberBOList) {
@@ -76,10 +76,11 @@ public class MemberInfoServiceImpl extends ServiceImpl<MemberInfoMapper, MemberD
 
     @Override
     public List<MemberBO> allMember(int start, int end, String memberType) {
-        List<MemberDO> memberDOList = memberInfoMapper.allMember(start, end-start, memberType);
-        List<MemberBO> memberBOList = BeanUtil.convert(memberDOList, MemberBO.class);
+        List<MemberBO> memberBOList = memberInfoMapper.allMember(start, end-start, memberType);
         for (MemberBO memberBO:
                 memberBOList) {
+            Integer memberBOId = memberBO.getId();
+            memberBO.setInfo(memberInfoMapper.teacherInfo(memberBOId));
             memberBO.setTitle(memberBO.getEdu());
             memberBO.setMemberType(memberBO.getmClass());
             memberBO.setPicUrl(Address.rootAddress() + memberBO.getPictureUrl());
@@ -98,10 +99,9 @@ public class MemberInfoServiceImpl extends ServiceImpl<MemberInfoMapper, MemberD
 
     @Override
     public List<MemberBO> homeMember() {
-        List<MemberDO> memberDOList = memberInfoMapper.allMember(0, 1000, "teacher");
-        memberDOList.addAll(memberInfoMapper.allMember(0, 1000, "doctor"));
-        memberDOList.addAll(memberInfoMapper.allMember(0, 1000, "master"));
-        List<MemberBO> memberBOList = BeanUtil.convert(memberDOList, MemberBO.class);
+        List<MemberBO> memberBOList = memberInfoMapper.allMember(0, 1000, "teacher");
+        memberBOList.addAll(memberInfoMapper.allMember(0, 1000, "doctor"));
+        memberBOList.addAll(memberInfoMapper.allMember(0, 1000, "master"));
         for (MemberBO memberBO:
                 memberBOList) {
             memberBO.setTitle(memberBO.getEdu());

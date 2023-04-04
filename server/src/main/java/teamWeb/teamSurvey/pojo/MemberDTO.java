@@ -14,6 +14,15 @@ public class MemberDTO {
     private String memberType;
     private String title;
     private String pageUrl;
+    private List<String> info;
+
+    public List<String> getInfo() {
+        return info;
+    }
+
+    public void setInfo(List<String> info) {
+        this.info = info;
+    }
 
     public String getPageUrl() {
         return pageUrl;

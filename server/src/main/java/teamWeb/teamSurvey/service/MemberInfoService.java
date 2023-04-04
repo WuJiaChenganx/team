@@ -31,5 +31,5 @@ public interface MemberInfoService extends IService<MemberDO> {
 
     MemberBO enMemberDetail(Integer id);
 
-    List<MemberBO> student(Integer comeInYear);
+    List<MemberBO> student(Integer comeInYear,String memberType);
 }

@@ -64,7 +64,7 @@
     </select>
 
     <select id="teachDetail" resultType="teamWeb.research.pojo.CoursePageBO">
-        select `id`,`text` AS profile,title AS courseType, `tClass`
+        select `id`,`text` AS profile,title, `tClass`
         from textbox
         <where>
             tClass = "课程教学"

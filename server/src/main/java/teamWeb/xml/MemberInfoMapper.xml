@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="teamWeb.teamSurvey.mapper.MemberInfoMapper">
-    <select id="allMember" resultType="teamWeb.teamSurvey.entity.MemberDO">
+    <select id="allMember" resultType="teamWeb.teamSurvey.pojo.MemberBO">
         select `id`,`pictureUrl`,`edu`,`name`,m_class AS mClass,pageUrl, `come_in_year` AS comeInDate
         from member
         <where>
@@ -20,13 +20,20 @@
         order by comeInDate,name limit ${start},${end}
     </select>
 
+    <select id="teacherInfo" resultType="String">
+        SELECT info,de_index
+        FROM teacher_detail_member_map join teacher_detail on teacher_detail_member_map.detail_id = teacher_detail.id
+        WHERE teacher_id= ${memberBOId}
+        ORDER by de_index
+    </select>
+
 
 
     <select id="student" resultType="teamWeb.teamSurvey.entity.MemberDO">
         select `id`,`pictureUrl`,`edu`,`name`,m_class AS mClass,pageUrl, `come_in_year` AS comeInDate
         from member
         <where>
-            come_in_year = "${comeInYear}"
+            come_in_year = "${comeInYear}"and m_class ="${memberType}"
         </where>
         order by comeInDate,name
     </select>

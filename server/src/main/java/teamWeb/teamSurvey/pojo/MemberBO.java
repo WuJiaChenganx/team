@@ -33,12 +33,21 @@ public class MemberBO {
     private String memberType;
 
     private String direction;
+    private List<String> info;
 
     private List<EducationDO> educationList;
 
     private List<PaperDO> paperList;
 
     private Integer comeInDate;
+
+    public List<String> getInfo() {
+        return info;
+    }
+
+    public void setInfo(List<String> info) {
+        this.info = info;
+    }
 
     public Integer getComeInDate() {
         return comeInDate;

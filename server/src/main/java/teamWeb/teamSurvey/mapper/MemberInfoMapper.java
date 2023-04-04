@@ -16,7 +16,7 @@ public interface MemberInfoMapper extends BaseMapper<MemberDO> {
 
     void deleteInfo(Integer id);
 
-    List<MemberDO> allMember(int start, int end, String memberType);
+    List<MemberBO> allMember(int start, int end, String memberType);
 
     MemberBO memberDetail(Integer id);
 
@@ -36,5 +36,7 @@ public interface MemberInfoMapper extends BaseMapper<MemberDO> {
 
     List<EducationDO> enAllEducation(Integer memberId);
 
-    List<MemberDO> student(Integer comeInYear);
+    List<MemberDO> student(Integer comeInYear,String memberType);
+
+    List<String> teacherInfo(Integer memberBOId);
 }
