@@ -33,7 +33,7 @@
         select `id`,`pictureUrl`,`edu`,`name`,m_class AS mClass,pageUrl, `come_in_year` AS comeInDate
         from member
         <where>
-            come_in_year = "${comeInYear}"and m_class ="${memberType}"
+            m_class ="${memberType}"
         </where>
         order by comeInDate,name
     </select>

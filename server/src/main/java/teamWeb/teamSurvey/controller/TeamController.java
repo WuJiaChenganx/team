@@ -16,6 +16,7 @@ import teamWeb.utils.BeanUtil;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/teamWeb/teamSurvey")
@@ -54,19 +55,15 @@ public class TeamController {
 
 
     @GetMapping("require-student")
-    public APIResponse student(@RequestParam(value = "comeInYear") Integer comeInYear,
-                               @RequestParam(value = "languageType") String languageType,
+    public APIResponse student(@RequestParam(value = "languageType") String languageType,
                                @RequestParam(value = "memberType" ) String memberType){
-        List<MemberBO> allMemberBOList =null;
-        List<MemberDTO> allMemberDTOList =null;
+        Map<Integer,List<MemberDTO>> allMemberMap =null;
         if (languageType.equals("Chinese")) {
-            allMemberBOList = memberInfoService.student(comeInYear,memberType);
-            allMemberDTOList = BeanUtil.convert(allMemberBOList, MemberDTO.class);
+            allMemberMap = memberInfoService.student(memberType);
         }else if(languageType.equals("English")){
-            allMemberBOList = memberInfoService.student(comeInYear,memberType);
-            allMemberDTOList = BeanUtil.convert(allMemberBOList, MemberDTO.class);
+            allMemberMap = memberInfoService.student(memberType);
         }
-        return APIResponse.success(allMemberDTOList);
+        return APIResponse.success(allMemberMap);
     }
 
     @GetMapping("/require-homeMember")

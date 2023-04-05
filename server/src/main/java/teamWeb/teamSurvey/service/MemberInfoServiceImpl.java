@@ -6,10 +6,13 @@ import org.springframework.stereotype.Service;
 import teamWeb.teamSurvey.entity.MemberDO;
 import teamWeb.teamSurvey.mapper.MemberInfoMapper;
 import teamWeb.teamSurvey.pojo.MemberBO;
+import teamWeb.teamSurvey.pojo.MemberDTO;
 import teamWeb.utils.Address;
 import teamWeb.utils.BeanUtil;
 
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 public class MemberInfoServiceImpl extends ServiceImpl<MemberInfoMapper, MemberDO> implements MemberInfoService {
@@ -46,16 +49,19 @@ public class MemberInfoServiceImpl extends ServiceImpl<MemberInfoMapper, MemberD
     }
 
     @Override
-    public List<MemberBO> student(Integer comeInYear,String memberType) {
-        List<MemberDO> memberDOList = memberInfoMapper.student(comeInYear,memberType);
+    public Map<Integer, List<MemberDTO>> student(String memberType) {
+        List<MemberDO> memberDOList = memberInfoMapper.student(memberType);
         List<MemberBO> memberBOList = BeanUtil.convert(memberDOList, MemberBO.class);
+
         for (MemberBO memberBO:
                 memberBOList) {
             memberBO.setTitle(memberBO.getEdu());
             memberBO.setMemberType(memberBO.getmClass());
             memberBO.setPicUrl(Address.rootAddress() + memberBO.getPictureUrl());
         }
-        return memberBOList;
+        List<MemberDTO> memberDTOList = BeanUtil.convert(memberBOList,MemberDTO.class);
+        Map<Integer, List<MemberDTO>> memberMap = memberDTOList.stream().collect(Collectors.groupingBy(memberDTO -> memberDTO.getComeInDate()));
+        return memberMap;
     }
 
 

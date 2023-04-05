@@ -3,8 +3,10 @@ package teamWeb.teamSurvey.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import teamWeb.teamSurvey.entity.MemberDO;
 import teamWeb.teamSurvey.pojo.MemberBO;
+import teamWeb.teamSurvey.pojo.MemberDTO;
 
 import java.util.List;
+import java.util.Map;
 
 public interface MemberInfoService extends IService<MemberDO> {
     // List<MemberDO> memberDetail(String name);
@@ -31,5 +33,5 @@ public interface MemberInfoService extends IService<MemberDO> {
 
     MemberBO enMemberDetail(Integer id);
 
-    List<MemberBO> student(Integer comeInYear,String memberType);
+    Map<Integer, List<MemberDTO>> student(String memberType);
 }
