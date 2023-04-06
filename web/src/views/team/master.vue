@@ -249,7 +249,7 @@ export default {
   }
   /* 最后一行左对齐 */
   .masterItem:last-child {
-    justify-content: flex-start;
+    justify-content: start;
   }
   .detailItemImg {
     width: 100%;

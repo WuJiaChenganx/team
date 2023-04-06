@@ -51,6 +51,7 @@
               <img :src="principalItem.picUrl" @error="setDefaultImage" />
             </div>
             <div class="princiPalInfo">
+              <div class="principalName">{{ principalItem.name }}</div>
               <div
                 class="princiPalInfoItem"
                 v-for="(
@@ -58,6 +59,7 @@
                 ) in principalItem.info"
                 :key="princiPalInfoIndex"
               >
+                <span class="dot"></span>
                 {{ princiPalInfoItem }}
               </div>
             </div>
@@ -75,11 +77,13 @@
               <img :src="teacherItem.picUrl" @error="setDefaultImage" />
             </div>
             <div class="teacherInfo">
+              <div class="teacherName">{{ teacherItem.name }}</div>
               <div
                 class="teacherInfoItem"
                 v-for="(teacherInfoItem, teacherInfoIndex) in teacherItem.info"
                 :key="teacherInfoIndex"
               >
+                <span class="dot"></span>
                 {{ teacherInfoItem }}
               </div>
             </div>
@@ -286,13 +290,34 @@ export default {
     width: 100%;
     height: 100%;
   }
+
   /* 负责人信息 */
   .princiPalInfo {
     background: #dbeeff;
     width: 65%;
+    padding: 0 10px;
     border: 1px solid #ccc;
   }
+  .principalName {
+    font-size: 20px;
+    text-align: left;
+  }
+  .dot {
+    position: relative;
+    padding-left: 20px;
+  }
+  .dot::before {
+    content: "";
+    position: absolute;
+    top: 6px;
+    left: 0;
+    width: 6px;
+    height: 6px;
+    background-color: #000;
+    border-radius: 50%;
+  }
   .princiPalInfoItem {
+    text-align: left;
     margin: 10px 0;
     font-size: 16px;
     display: -webkit-box;
@@ -326,9 +351,15 @@ export default {
   .teacherInfo {
     background: #dbeeff;
     width: 65%;
+    padding: 0 10px;
     border: 1px solid #ccc;
   }
+  .teacherName {
+    font-size: 20px;
+    text-align: left;
+  }
   .teacherInfoItem {
+    text-align: left;
     margin: 10px 0;
     font-size: 16px;
     display: -webkit-box;
@@ -425,9 +456,29 @@ export default {
   .princiPalInfo {
     background: #dbeeff;
     width: 70%;
+    padding: 0 10px;
     border: 1px solid #ccc;
   }
+  .principalName {
+    font-size: 20px;
+    text-align: left;
+  }
+  .dot {
+    position: relative;
+    padding-left: 20px;
+  }
+  .dot::before {
+    content: "";
+    position: absolute;
+    top: 6px;
+    left: 0;
+    width: 6px;
+    height: 6px;
+    background-color: #000;
+    border-radius: 50%;
+  }
   .princiPalInfoItem {
+    text-align: left;
     margin: 5px 0;
     font-size: 16px;
     display: -webkit-box;
@@ -459,9 +510,15 @@ export default {
   .teacherInfo {
     background: #dbeeff;
     width: 70%;
+    padding: 0 10px;
     border: 1px solid #ccc;
   }
+  .teacherName {
+    font-size: 20px;
+    text-align: left;
+  }
   .teacherInfoItem {
+    text-align: left;
     margin: 5px 0;
     font-size: 16px;
     display: -webkit-box;

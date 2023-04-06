@@ -220,7 +220,13 @@ export default {
   .el-menu-item.is-active {
     background: #008cd6 !important;
   }
-
+  .subTitle {
+    font-size: 20px;
+    font-weight: bold;
+    color: #444444;
+    text-align: left;
+    margin: 10px 0;
+  }
   .doctorItem {
     width: 100%;
     display: flex;
@@ -239,7 +245,10 @@ export default {
   .detailItem:last-child {
     margin-right: 0;
   }
-
+  /* 最后一行左对齐 */
+  .doctorItem:last-child {
+    justify-content: start;
+  }
   .detailItemImg {
     width: 100%;
   }

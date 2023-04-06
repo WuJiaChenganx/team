@@ -52,7 +52,9 @@
                 <img :src="memberItem.picUrl" @error="setDefaultImage" />
               </div>
               <div class="detailItemInfo">
-                {{ memberItem.comeInDate }}级 {{ memberItem.name }}
+                {{ memberItem.title }}
+                <br />
+                {{ memberItem.name }}
               </div>
             </div>
           </div>
@@ -254,7 +256,7 @@ export default {
     width: 70%;
   }
 
-  .detailItem .detailItemInfo {
+  .detailItemInfo {
     padding: 1rem 0;
   }
 }

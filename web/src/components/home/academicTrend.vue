@@ -12,7 +12,7 @@
         <div class="leftTitle"><span>动态回顾</span></div>
         <div
           class="leftItem"
-          v-for="(leftAcademyItem, leftIndex) in academyList"
+          v-for="(leftAcademyItem, leftIndex) in academyPastList"
           :key="leftIndex"
           @click="gotoDetail(leftAcademyItem.id)"
         >
@@ -31,7 +31,7 @@
         <div class="rightTitle"><span>活动预告</span></div>
         <div
           class="rightItem"
-          v-for="(rightItem, rightIndex) in academyList"
+          v-for="(rightItem, rightIndex) in academyFutureList"
           :key="rightIndex"
         >
           <span>{{ rightItem.date }}-{{ rightItem.day }}</span>
@@ -48,14 +48,16 @@ import { getAcademyURL } from "@/api/api";
 export default {
   data() {
     return {
-      academyList: [],
+      academyPastList: [],
+      academyFutureList: [],
       pageItem: {},
       chineseItem: { title: "学术动态", more: "更多" },
       englishItem: { title: "Academy", more: "more" },
     };
   },
   created() {
-    this.getAcademyList();
+    this.getAcademyPastList();
+    this.getAcademyFutureList();
     this.changUI();
   },
   methods: {
@@ -67,15 +69,28 @@ export default {
       }
     },
     // async和await用于同步,就是按顺序执行
-    async getAcademyList() {
+    async getAcademyPastList() {
       let params = {
         // 定义参数
         start: 0,
         end: 4,
         languageType: this.$store.getters.getLanguageType,
+        DateType: "回顾",
       };
       await getAcademyURL(params).then((res) => {
-        this.academyList = res.data;
+        this.academyPastList = res.data;
+      });
+    },
+    async getAcademyFutureList() {
+      let params = {
+        // 定义参数
+        start: 0,
+        end: 4,
+        languageType: this.$store.getters.getLanguageType,
+        DateType: "预告",
+      };
+      await getAcademyURL(params).then((res) => {
+        this.academyFutureList = res.data;
       });
     },
     gotoDetail(id) {
