@@ -11,8 +11,10 @@ import teamWeb.teamSurvey.pojo.MemberBO;
 import teamWeb.utils.Address;
 import teamWeb.utils.BeanUtil;
 
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 
@@ -24,7 +26,11 @@ public class ReportInfoServiceImpl extends ServiceImpl<ReportMapper, ReportDO> i
 
     @Override
     public List<NoticeBO> teamDynamicsDetail(int start, int end) {
-        List<NoticeBO> noticeBOList = BeanUtil.convert(reportMapper.teamDynamic(start,end-start),NoticeBO.class);
+        Date date = new Date();
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        String nowDate = formatter.format(date);
+
+        List<NoticeBO> noticeBOList = BeanUtil.convert(reportMapper.teamDynamic(start,end-start,nowDate),NoticeBO.class);
         for (NoticeBO noticeBO:
                 noticeBOList) {
             List<String> picList = Collections.emptyList();

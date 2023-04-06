@@ -9,6 +9,7 @@ import teamWeb.homepage.entity.RelationInfo;
 import teamWeb.research.entity.TextboxInfo;
 import teamWeb.teamSurvey.pojo.MemberBO;
 import teamWeb.teamSurvey.pojo.MemberDTO;
+import teamWeb.teamSurvey.pojo.Student;
 import teamWeb.teamSurvey.service.MemberInfoService;
 import teamWeb.research.service.TextboxInfoService;
 import teamWeb.utils.APIResponse;
@@ -57,13 +58,13 @@ public class TeamController {
     @GetMapping("require-student")
     public APIResponse student(@RequestParam(value = "languageType") String languageType,
                                @RequestParam(value = "memberType" ) String memberType){
-        Map<Integer,List<MemberDTO>> allMemberMap =null;
+        List<Student> allMemberList =null;
         if (languageType.equals("Chinese")) {
-            allMemberMap = memberInfoService.student(memberType);
+            allMemberList = memberInfoService.student(memberType);
         }else if(languageType.equals("English")){
-            allMemberMap = memberInfoService.student(memberType);
+            allMemberList = memberInfoService.student(memberType);
         }
-        return APIResponse.success(allMemberMap);
+        return APIResponse.success(allMemberList);
     }
 
     @GetMapping("/require-homeMember")

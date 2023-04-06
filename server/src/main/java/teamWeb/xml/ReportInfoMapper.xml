@@ -7,7 +7,7 @@
         `id`,`title`,`date`,`text`,`picture_url` AS pictureUrl,`r_class` AS `rClass`
         from report
         <where>
-            `r_class`= "动态"
+            `r_class`= "动态",date &lt;= ${nowDate}
         </where>
         order by date desc limit ${start},${end}
     </select>

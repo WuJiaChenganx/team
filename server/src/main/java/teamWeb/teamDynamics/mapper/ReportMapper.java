@@ -9,7 +9,7 @@ import teamWeb.teamDynamics.pojo.ReportDetailBO;
 import java.util.List;
 
 public interface ReportMapper extends BaseMapper<ReportDO> {
-    List<ReportDO> teamDynamic(int start, int end);
+    List<ReportDO> teamDynamic(int start, int end,String nowDate);
 
     List<ReportDO> notice(int start, int end);
 

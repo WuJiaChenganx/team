@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import teamWeb.teamSurvey.entity.MemberDO;
 import teamWeb.teamSurvey.pojo.MemberBO;
 import teamWeb.teamSurvey.pojo.MemberDTO;
+import teamWeb.teamSurvey.pojo.Student;
 
 import java.util.List;
 import java.util.Map;
@@ -33,5 +34,5 @@ public interface MemberInfoService extends IService<MemberDO> {
 
     MemberBO enMemberDetail(Integer id);
 
-    Map<Integer, List<MemberDTO>> student(String memberType);
+    List<Student> student(String memberType);
 }

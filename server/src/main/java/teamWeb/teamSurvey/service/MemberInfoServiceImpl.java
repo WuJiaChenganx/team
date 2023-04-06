@@ -7,9 +7,12 @@ import teamWeb.teamSurvey.entity.MemberDO;
 import teamWeb.teamSurvey.mapper.MemberInfoMapper;
 import teamWeb.teamSurvey.pojo.MemberBO;
 import teamWeb.teamSurvey.pojo.MemberDTO;
+import teamWeb.teamSurvey.pojo.Student;
 import teamWeb.utils.Address;
 import teamWeb.utils.BeanUtil;
 
+import java.text.SimpleDateFormat;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -49,9 +52,11 @@ public class MemberInfoServiceImpl extends ServiceImpl<MemberInfoMapper, MemberD
     }
 
     @Override
-    public Map<Integer, List<MemberDTO>> student(String memberType) {
+    public List<Student> student(String memberType) {
         List<MemberDO> memberDOList = memberInfoMapper.student(memberType);
         List<MemberBO> memberBOList = BeanUtil.convert(memberDOList, MemberBO.class);
+
+
 
         for (MemberBO memberBO:
                 memberBOList) {
@@ -61,7 +66,9 @@ public class MemberInfoServiceImpl extends ServiceImpl<MemberInfoMapper, MemberD
         }
         List<MemberDTO> memberDTOList = BeanUtil.convert(memberBOList,MemberDTO.class);
         Map<Integer, List<MemberDTO>> memberMap = memberDTOList.stream().collect(Collectors.groupingBy(memberDTO -> memberDTO.getComeInDate()));
-        return memberMap;
+        List<Student> list = memberMap.entrySet().stream().sorted(Comparator.comparing(e -> e.getKey()))
+                .map(e -> new Student(e.getKey(), e.getValue())).collect(Collectors.toList());
+        return list;
     }
 
 
