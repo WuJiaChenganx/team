@@ -40,11 +40,12 @@ public class TeamDynamicsController {
     @GetMapping("/require-academicDynamics")
     public APIResponse allacademicDynamics(@RequestParam(value="start") Integer start,
                                            @RequestParam(value="end") Integer end,
-                                           @RequestParam(value = "languageType") String languageType){
+                                           @RequestParam(value = "languageType") String languageType,
+                                           @RequestParam(value = "DateType") String dateType){
         List<NoticeBO> teamDynamics = null;
         Integer sum =null;
         if (languageType.equals("Chinese")) {
-            teamDynamics = reportInfoService.teamDynamicsDetail(start, end);
+            teamDynamics = reportInfoService.teamDynamicsDetail(start, end,dateType);
             sum = reportInfoService.sumReport("动态");
         }else if (languageType.equals("English")){
             teamDynamics = reportInfoService.enTeamDynamicsDetail(start,end);
@@ -52,6 +53,8 @@ public class TeamDynamicsController {
         }
         return APIResponse.success(teamDynamics,sum);
     }
+
+
 
 
     @GetMapping("/require-news")

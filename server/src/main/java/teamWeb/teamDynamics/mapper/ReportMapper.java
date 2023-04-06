@@ -34,7 +34,7 @@ public interface ReportMapper extends BaseMapper<ReportDO> {
 
     List<NoticeFile> allFileUrl(Integer reportId);
 
-    Integer sumReport(String type);
+    Integer sumReport(String type,String nowDate);
 
     List<ReportDetailBO> reportTextDetail(Integer reportId);
 
@@ -54,4 +54,6 @@ public interface ReportMapper extends BaseMapper<ReportDO> {
     List<ReportDetailBO> reportEnTextDetail(Integer reportId);
 
     void updateEnViewCount(Integer id);
+
+    List<ReportDO> teamDynamiced(int start, int end, String nowDate);
 }

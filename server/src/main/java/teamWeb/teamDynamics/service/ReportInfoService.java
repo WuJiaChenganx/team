@@ -12,7 +12,7 @@ import java.util.List;
 public interface ReportInfoService extends IService<ReportDO> {
 
 
-    List<NoticeBO> teamDynamicsDetail(int start, int end);
+    List<NoticeBO> teamDynamicsDetail(int start, int end,String dateType);
 
     List<NoticeBO> noticeDetail(int start, int end);
 

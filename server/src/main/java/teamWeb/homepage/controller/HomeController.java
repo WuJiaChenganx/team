@@ -29,7 +29,7 @@ public class HomeController {
 
     @RequestMapping("/teamDynamics")
     public APIResponse teamDynamics(@RequestParam(value="start",defaultValue = "0") int start,@RequestParam(value="end",defaultValue = "10") int end){
-        List<NoticeBO> teamDynamicsDetail = reportInfoService.teamDynamicsDetail(start,end);
+        List<NoticeBO> teamDynamicsDetail = reportInfoService.teamDynamicsDetail(start,end,"回顾");
         return APIResponse.success(teamDynamicsDetail);
     }
 

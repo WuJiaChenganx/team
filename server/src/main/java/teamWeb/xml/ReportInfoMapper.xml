@@ -2,12 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="teamWeb.teamDynamics.mapper.ReportMapper">
-    <select id="teamDynamic" resultType="teamWeb.teamDynamics.entity.ReportDO">
+    <select id="teamDynamiced" resultType="teamWeb.teamDynamics.entity.ReportDO">
         select
         `id`,`title`,`date`,`text`,`picture_url` AS pictureUrl,`r_class` AS `rClass`
         from report
         <where>
-            `r_class`= "动态",date &lt;= ${nowDate}
+            `r_class`= "动态" and `date` &lt; "${nowDate}"
         </where>
         order by date desc limit ${start},${end}
     </select>
@@ -23,10 +23,20 @@
     </select>
 
 
+    <select id="teamDynamic" resultType="teamWeb.teamDynamics.entity.ReportDO">
+        select
+        `id`,`title`,`date`,`text`,`picture_url` AS pictureUrl,`r_class` AS `rClass`
+        from report
+        <where>
+            `r_class`= "动态" and `date` >= "${nowDate}"
+        </where>
+        order by date desc limit ${start},${end}
+    </select>
+
 
     <select id="sumReport" resultType="int">
         SELECT COUNT(*) FROM report
-        WHERE r_class="${type}"
+        WHERE r_class="${type}" and `date` &lt; "${nowDate}"
     </select>
     <select id="sumEnReport" resultType="int">
         SELECT COUNT(*) FROM en_report

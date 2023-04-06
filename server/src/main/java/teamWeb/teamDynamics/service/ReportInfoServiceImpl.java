@@ -25,12 +25,17 @@ public class ReportInfoServiceImpl extends ServiceImpl<ReportMapper, ReportDO> i
     private ReportMapper reportMapper;
 
     @Override
-    public List<NoticeBO> teamDynamicsDetail(int start, int end) {
+    public List<NoticeBO> teamDynamicsDetail(int start, int end,String dateType) {
         Date date = new Date();
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         String nowDate = formatter.format(date);
+        List<NoticeBO> noticeBOList = null;
+        if(dateType.equals("预告")){
+            noticeBOList = BeanUtil.convert(reportMapper.teamDynamic(start,end-start,nowDate),NoticeBO.class);
+        }else{
+            noticeBOList = BeanUtil.convert(reportMapper.teamDynamiced(start,end-start,nowDate),NoticeBO.class);
+        }
 
-        List<NoticeBO> noticeBOList = BeanUtil.convert(reportMapper.teamDynamic(start,end-start,nowDate),NoticeBO.class);
         for (NoticeBO noticeBO:
                 noticeBOList) {
             List<String> picList = Collections.emptyList();
@@ -52,6 +57,8 @@ public class ReportInfoServiceImpl extends ServiceImpl<ReportMapper, ReportDO> i
         }
         return noticeBOList;
     }
+
+
 
     @Override
     public List<NoticeBO> noticeDetail(int start, int end) {
@@ -172,8 +179,10 @@ public class ReportInfoServiceImpl extends ServiceImpl<ReportMapper, ReportDO> i
 
     @Override
     public Integer sumReport(String type) {
-
-        return reportMapper.sumReport(type);
+        Date date = new Date();
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        String nowDate = formatter.format(date);
+        return reportMapper.sumReport(type,nowDate);
     }
 
     @Override
@@ -234,7 +243,10 @@ public class ReportInfoServiceImpl extends ServiceImpl<ReportMapper, ReportDO> i
 
     @Override
     public Integer sumEnReport(String type) {
-        return reportMapper.sumReport(type);
+        Date date = new Date();
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        String nowDate = formatter.format(date);
+        return reportMapper.sumReport(type,nowDate);
     }
 
     @Override
