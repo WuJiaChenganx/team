@@ -111,17 +111,15 @@ export default {
         { name: "科研方向", path: "/scientificResearch/direction" },
         { name: "科研项目", path: "/scientificResearch/project" },
         { name: "科研平台", path: "/scientificResearch/platform" },
-        { name: "课程教学", path: "/scientificResearch/curriculum" },
       ],
       menuEN: [
         { name: "Direction", path: "/scientificResearch/direction" },
         { name: "Project", path: "/scientificResearch/project" },
         { name: "Platform", path: "/scientificResearch/platform" },
-        { name: "Curriculum", path: "/scientificResearch/curriculum" },
       ],
       projects: [],
       // 总共要展示的数量
-      total_number: 10,
+      total_number: 0,
       // 当前页面从1开始的这两个属性会在刚开始的时候就更新
       current_index: 1,
     };
@@ -228,6 +226,16 @@ export default {
   .breadCrumb {
     padding-top: 1rem;
   }
+  /* 不被选中时的颜色 */
+  .el-breadcrumb ::v-deep .el-breadcrumb__inner {
+    color: #999 !important;
+    font-weight: 400 !important;
+  }
+  /* 被选中时的颜色 */
+  .el-breadcrumb__item:last-child ::v-deep .el-breadcrumb__inner {
+    color: black !important;
+    font-weight: 800 !important;
+  }
   /* 选中侧边导航的背景颜色 */
   .el-menu-item.is-active {
     background: #008cd6 !important;
@@ -313,6 +321,16 @@ export default {
   }
   .breadCrumb {
     padding-top: 1rem;
+  }
+  /* 不被选中时的颜色 */
+  .el-breadcrumb ::v-deep .el-breadcrumb__inner {
+    color: #999 !important;
+    font-weight: 400 !important;
+  }
+  /* 被选中时的颜色 */
+  .el-breadcrumb__item:last-child ::v-deep .el-breadcrumb__inner {
+    color: black !important;
+    font-weight: 800 !important;
   }
   /* 选中侧边导航的背景颜色 */
   .el-menu-item.is-active {

@@ -73,30 +73,20 @@ export default {
     return {
       pageItem: {},
       chineseItem: {
-        allTitle: "科研概况",
+        allTitle: "教育育人",
         subTitle: "课程教学",
         home: "首页",
         curriculum: "课程教学",
       },
       englishItem: {
-        allTitle: "Research",
+        allTitle: "Education",
         subTitle: "Curriculum",
         home: "home",
         curriculum: "Curriculum",
       },
       menu: [],
-      menuZH: [
-        { name: "科研方向", path: "/scientificResearch/direction" },
-        { name: "科研项目", path: "/scientificResearch/project" },
-        { name: "科研平台", path: "/scientificResearch/platform" },
-        { name: "课程教学", path: "/scientificResearch/curriculum" },
-      ],
-      menuEN: [
-        { name: "Direction", path: "/scientificResearch/direction" },
-        { name: "Project", path: "/scientificResearch/project" },
-        { name: "Platform", path: "/scientificResearch/platform" },
-        { name: "Curriculum", path: "/scientificResearch/curriculum" },
-      ],
+      menuZH: [{ name: "课程教学", path: "/education/curriculum" }],
+      menuEN: [{ name: "Curriculum", path: "/education/curriculum" }],
       courses: [
         {
           courseType: " 本科生教学",
@@ -217,6 +207,16 @@ export default {
   .breadCrumb {
     padding-top: 1rem;
   }
+  /* 不被选中时的颜色 */
+  .el-breadcrumb ::v-deep .el-breadcrumb__inner {
+    color: #999 !important;
+    font-weight: 400 !important;
+  }
+  /* 被选中时的颜色 */
+  .el-breadcrumb__item:last-child ::v-deep .el-breadcrumb__inner {
+    color: black !important;
+    font-weight: 800 !important;
+  }
   /* 选中侧边导航的背景颜色 */
   .el-menu-item.is-active {
     background: #008cd6 !important;
@@ -296,6 +296,16 @@ export default {
   }
   .breadCrumb {
     padding-top: 1rem;
+  }
+  /* 不被选中时的颜色 */
+  .el-breadcrumb ::v-deep .el-breadcrumb__inner {
+    color: #999 !important;
+    font-weight: 400 !important;
+  }
+  /* 被选中时的颜色 */
+  .el-breadcrumb__item:last-child ::v-deep .el-breadcrumb__inner {
+    color: black !important;
+    font-weight: 800 !important;
   }
   /* 选中侧边导航的背景颜色 */
   .el-menu-item.is-active {

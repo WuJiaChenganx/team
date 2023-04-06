@@ -48,10 +48,8 @@
             target="_blank"
           >
             <div class="detailItemPaperName">
-              {{ detailItem.number }}. {{ detailItem.title }}
-            </div>
-            <div class="detailItemPaperKeyWord">
-              关键词: {{ detailItem.keyword }}
+              <span class="dot"></span>
+              {{ detailItem.title }}
             </div>
           </a>
         </div>
@@ -103,7 +101,7 @@ export default {
       ],
       papers: [],
       // 总共要展示的数量
-      total_number: 10,
+      total_number: 0,
       // 当前页面从1开始的这两个属性会在刚开始的时候就更新
       current_index: 1,
     };
@@ -204,6 +202,16 @@ export default {
   .breadCrumb {
     padding-top: 1rem;
   }
+  /* 不被选中时的颜色 */
+  .el-breadcrumb ::v-deep .el-breadcrumb__inner {
+    color: #999 !important;
+    font-weight: 400 !important;
+  }
+  /* 被选中时的颜色 */
+  .el-breadcrumb__item:last-child ::v-deep .el-breadcrumb__inner {
+    color: black !important;
+    font-weight: 800 !important;
+  }
   /* 选中侧边导航的背景颜色 */
   .el-menu-item.is-active {
     background: #008cd6 !important;
@@ -226,12 +234,22 @@ export default {
     color: black;
   }
   .detailItemPaperName {
-    color: #0055a2;
-    font-weight: bold;
-    font-size: 2rem;
+    color: #333;
+    font-size: 18px;
   }
-  .detailItem:hover .detailItemPaperKeyWord {
-    font-weight: bold;
+  .dot {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #333; /* 设置颜色 */
+    margin-right: 5px; /* 设置小圆点与文字之间的距离 */
+  }
+  .detailItem:hover .detailItemPaperName {
+    color: #0055a2;
+  }
+  .detailItem:hover .dot {
+    background-color: #0055a2;
   }
   /* 设置分页和底部的距离 */
   .paging {
@@ -286,6 +304,16 @@ export default {
   .breadCrumb {
     padding-top: 1rem;
   }
+  /* 不被选中时的颜色 */
+  .el-breadcrumb ::v-deep .el-breadcrumb__inner {
+    color: #999 !important;
+    font-weight: 400 !important;
+  }
+  /* 被选中时的颜色 */
+  .el-breadcrumb__item:last-child ::v-deep .el-breadcrumb__inner {
+    color: black !important;
+    font-weight: 800 !important;
+  }
   /* 选中侧边导航的背景颜色 */
   .el-menu-item.is-active {
     background: #008cd6 !important;
@@ -308,17 +336,16 @@ export default {
     color: black;
   }
   .detailItemPaperName {
-    color: #0055a2;
-    font-size: 2rem;
-    font-weight: bold;
+    color: black;
+    font-size: 16px;
   }
-  .detailItemPaperDetail {
-    font-weight: normal;
-    /* 显示3行 */
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 3;
-    overflow: hidden;
+  .dot {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: black; /* 设置颜色 */
+    margin-right: 5px; /* 设置小圆点与文字之间的距离 */
   }
   /* 设置分页和底部的距离 */
   .paging {

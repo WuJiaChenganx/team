@@ -20,7 +20,7 @@
               :index="menuItem.path"
             >
               <i class="el-icon-sunny"></i>
-              <span>{{ menuItem.name }}</span>
+              <span v-html="menuItem.name"></span>
             </el-menu-item>
           </el-menu>
         </div>
@@ -71,7 +71,7 @@ export default {
       menu: [],
       menuZH: [
         { name: "团队简介", path: "/team/profile" },
-        { name: "导师", path: "/team/teacher" },
+        { name: "导&nbsp;&nbsp;&nbsp;&nbsp;师", path: "/team/teacher" },
         { name: "博士生", path: "/team/doctor" },
         { name: "硕士生", path: "/team/master" },
         { name: "毕业生", path: "/team/graduate" },
@@ -170,6 +170,16 @@ export default {
   .breadCrumb {
     padding-top: 1rem;
   }
+  /* 不被选中时的颜色 */
+  .el-breadcrumb ::v-deep .el-breadcrumb__inner {
+    color: #999 !important;
+    font-weight: 400 !important;
+  }
+  /* 被选中时的颜色 */
+  .el-breadcrumb__item:last-child ::v-deep .el-breadcrumb__inner {
+    color: black !important;
+    font-weight: 800 !important;
+  }
   /* 选中侧边导航的背景颜色 */
   .el-menu-item.is-active {
     background: #008cd6 !important;
@@ -247,6 +257,16 @@ export default {
   }
   .breadCrumb {
     padding-top: 1rem;
+  }
+  /* 不被选中时的颜色 */
+  .el-breadcrumb ::v-deep .el-breadcrumb__inner {
+    color: #999 !important;
+    font-weight: 400 !important;
+  }
+  /* 被选中时的颜色 */
+  .el-breadcrumb__item:last-child ::v-deep .el-breadcrumb__inner {
+    color: black !important;
+    font-weight: 800 !important;
   }
   /* 选中侧边导航的背景颜色 */
   .el-menu-item.is-active {

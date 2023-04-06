@@ -73,8 +73,8 @@ export function getActivityDetail(params) {
     });
 }
 
-// 通过memberType获取不同类型的学生信息
-// memberType 的值为 'teacher', 'master', 'doctor', 'graduate'
+// 通过memberType获取不同类型的老师信息
+// memberType 的值为 'teacher','principal'
 // 例如teamWeb / teamSurvey / require - member ? start = 0 & end = 2 & memberType = teacher
 export function getMemberCover(params) {
     return request({
@@ -83,6 +83,16 @@ export function getMemberCover(params) {
         params,
     });
 }
+// 获得学生信息
+// 参数如右边languageType=Chinese&memberType=master&start=0&end=100
+export function getStudentCover(params) {
+    return request({
+        url: "/api/teamWeb/teamSurvey/require-student",
+        method: "GET",
+        params,
+    });
+}
+
 // 获取学生信息详情(参数是id)
 export function getMemberDetail(params) {
     return request({

@@ -20,7 +20,7 @@
               :index="menuItem.path"
             >
               <i class="el-icon-sunny"></i>
-              <span>{{ menuItem.name }}</span>
+              <span v-html="menuItem.name"></span>
             </el-menu-item>
           </el-menu>
         </div>
@@ -39,18 +39,21 @@
             </el-breadcrumb>
           </div>
         </div>
-        <div class="graduateItem">
-          <div
-            class="detailItem"
-            v-for="(memberItem, index) in studentCover"
-            :key="index"
-            @click="gotoDetail(memberItem.id)"
-          >
-            <div class="detailItemImg">
-              <img :src="memberItem.picUrl" @error="setDefaultImage" />
-            </div>
-            <div class="detailItemInfo">
-              {{ memberItem.comeInDate }}级 {{ memberItem.name }}
+        <div v-for="(item, index) in studentCover" :key="index">
+          <div class="subTitle">{{ item.title }}级毕业生</div>
+          <div class="graduateItem">
+            <div
+              class="detailItem"
+              v-for="(memberItem, index) in item.memberInfo"
+              :key="index"
+              @click="gotoDetail(memberItem.id)"
+            >
+              <div class="detailItemImg">
+                <img :src="memberItem.picUrl" @error="setDefaultImage" />
+              </div>
+              <div class="detailItemInfo">
+                {{ memberItem.comeInDate }}级 {{ memberItem.name }}
+              </div>
             </div>
           </div>
         </div>
@@ -60,7 +63,7 @@
 </template>
 
 <script>
-import { getMemberCover } from "@/api/api";
+import { getStudentCover } from "@/api/api";
 // 设置默认缺失的图片
 import defaultImage from "@/assets/images/member/default.png";
 export default {
@@ -82,7 +85,7 @@ export default {
       menu: [],
       menuZH: [
         { name: "团队简介", path: "/team/profile" },
-        { name: "导师", path: "/team/teacher" },
+        { name: "导&nbsp;&nbsp;&nbsp;&nbsp;师", path: "/team/teacher" },
         { name: "博士生", path: "/team/doctor" },
         { name: "硕士生", path: "/team/master" },
         { name: "毕业生", path: "/team/graduate" },
@@ -98,7 +101,7 @@ export default {
     };
   },
   created() {
-    this.getMemberCoverList();
+    this.getStudentList();
     this.changUI();
   },
   methods: {
@@ -112,14 +115,14 @@ export default {
       }
     },
     // async和await用于同步,就是按顺序执行
-    async getMemberCoverList() {
+    async getStudentList() {
       let params = {
         start: 0,
         end: 100,
         memberType: "graduate",
         languageType: this.$store.getters.getLanguageType,
       };
-      await getMemberCover(params).then((res) => {
+      await getStudentCover(params).then((res) => {
         this.studentCover = res.data;
       });
     },
@@ -201,31 +204,54 @@ export default {
   .breadCrumb {
     padding-top: 1rem;
   }
+  /* 不被选中时的颜色 */
+  .el-breadcrumb ::v-deep .el-breadcrumb__inner {
+    color: #999 !important;
+    font-weight: 400 !important;
+  }
+  /* 被选中时的颜色 */
+  .el-breadcrumb__item:last-child ::v-deep .el-breadcrumb__inner {
+    color: black !important;
+    font-weight: 800 !important;
+  }
   /* 选中侧边导航的背景颜色 */
   .el-menu-item.is-active {
     background: #008cd6 !important;
   }
-
+  .subTitle {
+    font-size: 20px;
+    font-weight: bold;
+    color: #444444;
+    text-align: left;
+    margin: 10px 0;
+  }
   .graduateItem {
     width: 100%;
     display: flex;
     flex-wrap: wrap;
+    justify-content: space-between;
     padding: 3rem 0;
   }
   .detailItem {
     cursor: pointer;
     text-decoration: none;
-    width: 20%;
+    flex: 0 0 calc(20% - 10px); /* 每个元素占据20%的宽度，同时减去10px的margin-right */
+    margin-right: 10px; /* 设置右外边距 */
     box-sizing: border-box;
-    padding: 1rem;
   }
-
+  /* 取消最后一个元素的右外边距 */
+  .detailItem:last-child {
+    margin-right: 0;
+  }
+  /* 最后一行左对齐 */
+  .graduateItem:last-child {
+    justify-content: flex-start;
+  }
   .detailItemImg {
     width: 100%;
   }
   .detailItem img {
-    height: 13.5rem;
-    width: 9rem;
+    width: 70%;
   }
 
   .detailItem .detailItemInfo {
@@ -279,6 +305,16 @@ export default {
   }
   .breadCrumb {
     padding-top: 1rem;
+  }
+  /* 不被选中时的颜色 */
+  .el-breadcrumb ::v-deep .el-breadcrumb__inner {
+    color: #999 !important;
+    font-weight: 400 !important;
+  }
+  /* 被选中时的颜色 */
+  .el-breadcrumb__item:last-child ::v-deep .el-breadcrumb__inner {
+    color: black !important;
+    font-weight: 800 !important;
   }
   /* 选中侧边导航的背景颜色 */
   .el-menu-item.is-active {

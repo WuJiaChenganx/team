@@ -1,32 +1,9 @@
 <template>
   <div class="newFlash">
     <div class="newFlashContent">
-      <div class="newFlashAside">
-        <div class="newFlashAsideTitle">{{ pageItem.allTitle }}</div>
-        <div class="newFlashAsideContent">
-          <el-menu
-            :default-active="this.$route.path"
-            router
-            mode="vertical"
-            background-color="#ffffff"
-            text-color="#000"
-            active-text-color="#fff"
-          >
-            <el-menu-item
-              class="newFlashAsideItem"
-              v-for="(menuItem, menuIndex) in menu"
-              :key="menuIndex"
-              :index="menuItem.path"
-            >
-              <i class="el-icon-sunny"></i>
-              <span>{{ menuItem.name }}</span>
-            </el-menu-item>
-          </el-menu>
-        </div>
-      </div>
       <div class="newFlashDetail">
         <div class="newFlashTitle">
-          <div class="title">{{ pageItem.subTitle }}</div>
+          <div class="title">{{ pageItem.title }}</div>
           <div class="breadCrumb">
             <el-breadcrumb separator-class="el-icon-arrow-right">
               <el-breadcrumb-item :to="{ path: '/home' }">{{
@@ -79,32 +56,19 @@ export default {
     return {
       pageItem: {},
       chineseItem: {
-        allTitle: "团队动态",
-        subTitle: "新闻快讯",
+        title: "新闻快讯",
         home: "首页",
         newsList: "新闻列表",
       },
       englishItem: {
-        allTitle: "Activity",
-        subTitle: "News",
+        title: "News",
         home: "Home",
         newsList: "News List",
       },
-      menu: [],
-      menuZH: [
-        { name: "新闻快讯", path: "/activity/newFlash" },
-        { name: "学术动态", path: "/activity/academy" },
-        { name: "通知公告", path: "/activity/notice" },
-      ],
-      menuEN: [
-        { name: "News", path: "/activity/newFlash" },
-        { name: "Academy", path: "/activity/academy" },
-        { name: "Notices", path: "/activity/notice" },
-      ],
       // 要展示的新闻信息
       newsList: [],
       // 总共要展示的数量
-      total_number: 10,
+      total_number: 0,
       // 当前页面从1开始的这两个属性会在刚开始的时候就更新
       current_index: 1,
     };
@@ -116,10 +80,8 @@ export default {
   methods: {
     changUI() {
       if (this.$store.getters.getLanguageType == "Chinese") {
-        this.menu = this.menuZH;
         this.pageItem = this.chineseItem;
       } else if (this.$store.getters.getLanguageType == "English") {
-        this.menu = this.menuEN;
         this.pageItem = this.englishItem;
       }
     },
@@ -158,38 +120,15 @@ export default {
 @media screen and (min-width: 1000px) {
   .newFlash {
     padding: 3rem 0;
-    background: url(../../assets/images/background/contentBackground.jpg)
-      no-repeat;
+    background-color: #eef7fe;
   }
   .newFlashContent {
     width: 75%;
     margin: 0 auto;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
   }
-  .newFlashAside {
-    width: 25%;
-  }
-  .newFlashAsideTitle {
-    background: url(../../assets/images/background/zryy-menu-t-bg.png) no-repeat;
-    border-radius: 0.6rem;
-    background-size: cover !important;
-    font-weight: bold;
-    color: #fff;
-    font-size: 2rem;
-    line-height: 3rem;
-    height: 3rem;
-    padding: 2rem 3rem;
-    margin-bottom: 0.5rem;
-  }
-  .newFlashAsideItem {
-    font-size: 2rem;
-    text-align: left;
-    cursor: pointer;
-  }
+
   .newFlashDetail {
-    width: 73%;
+    width: 100%;
     padding: 0 3rem;
     box-sizing: border-box;
     background-color: #fff;
@@ -209,10 +148,6 @@ export default {
   }
   .breadCrumb {
     padding-top: 1rem;
-  }
-  /* 选中侧边导航的背景颜色 */
-  .el-menu-item.is-active {
-    background: #008cd6 !important;
   }
 
   /* 不被选中时的颜色 */
@@ -318,18 +253,6 @@ export default {
     display: flex;
     flex-direction: column;
   }
-  .newFlashAside {
-    width: 100%;
-  }
-  /* 不显示侧边导航栏上面的标题 */
-  .newFlashAsideTitle {
-    display: none;
-  }
-  .newFlashAsideItem {
-    font-size: 2rem;
-    text-align: center;
-    cursor: pointer;
-  }
   .newFlashDetail {
     width: 100%;
     padding: 0 1.5rem;
@@ -352,10 +275,6 @@ export default {
   }
   .breadCrumb {
     padding-top: 1rem;
-  }
-  /* 选中侧边导航的背景颜色 */
-  .el-menu-item.is-active {
-    background: #008cd6 !important;
   }
   /* 不被选中时的颜色 */
   .el-breadcrumb ::v-deep .el-breadcrumb__inner {
@@ -436,15 +355,6 @@ export default {
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
     overflow: hidden;
-  }
-  .newFlash-row:hover {
-    border-bottom: 1px solid #0055a2;
-  }
-  .newFlash-row:hover .newFlash-title {
-    color: #0055a2;
-  }
-  .newFlash-row:hover .newFlash-date {
-    background-color: #0055a2;
   }
 }
 </style>

@@ -25,7 +25,7 @@
           class="navItem"
           @click="goTo(item.path)"
         >
-          <div class="navTitle">{{ item.title }}</div>
+          <div class="navTitle" v-html="item.title"></div>
           <div class="subNav">
             <!-- 在点击函数中需要加入stop防止冒泡 -->
             <div
@@ -33,9 +33,8 @@
               v-for="(menu, menuIndex) in item.subMenu"
               :key="menuIndex"
               @click.stop="goTo(menu.path)"
-            >
-              {{ menu.title }}
-            </div>
+              v-html="menu.title"
+            ></div>
           </div>
         </div>
       </div>
@@ -60,31 +59,26 @@ export default {
             { title: "科研方向", path: "/scientificResearch/direction" },
             { title: "科研项目", path: "/scientificResearch/project" },
             { title: "科研平台", path: "/scientificResearch/platform" },
-            { title: "课程教学", path: "/scientificResearch/curriculum" },
           ],
         },
         {
-          title: "团队动态",
-          path: "/activity",
-          subMenu: [
-            { title: "新闻快讯", path: "/activity/newFlash" },
-            { title: "学术动态", path: "/activity/academy" },
-            { title: "通知公告", path: "/activity/notice" },
-          ],
+          title: "教育育人",
+          path: "/education",
+          subMenu: [{ title: "课程教学", path: "/education/curriculum" }],
         },
         {
-          title: "团队概况",
+          title: "团队成员",
           path: "/team",
           subMenu: [
             { title: "团队简介", path: "/team/profile" },
-            { title: "导师", path: "/team/teacher" },
+            { title: "导&nbsp;&nbsp;&nbsp;&nbsp;师", path: "/team/teacher" },
             { title: "博士生", path: "/team/doctor" },
             { title: "研究生", path: "/team/master" },
             { title: "毕业生", path: "/team/graduate" },
           ],
         },
         {
-          title: "论文论著",
+          title: "论文著作",
           path: "/paper",
           subMenu: [
             { title: "发表论文", path: "/paper/paper" },
@@ -113,17 +107,13 @@ export default {
             { title: "Direction", path: "/scientificResearch/direction" },
             { title: "Project", path: "/scientificResearch/project" },
             { title: "Platform", path: "/scientificResearch/platform" },
-            { title: "Curriculum", path: "/scientificResearch/curriculum" },
           ],
         },
+
         {
-          title: "Activity",
-          path: "/activity",
-          subMenu: [
-            { title: "News", path: "/activity/newFlash" },
-            { title: "Academy", path: "/activity/academy" },
-            { title: "Notices", path: "/activity/notice" },
-          ],
+          title: "Education",
+          path: "/education",
+          subMenu: [{ title: "Curriculum", path: "/education/curriculum" }],
         },
         {
           title: "Snapshot",

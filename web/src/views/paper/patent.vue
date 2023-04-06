@@ -46,7 +46,7 @@
             :key="detailIndex"
           >
             <div class="detailItemInfo">
-              [ {{ detailItem.number }} ]
+              <span class="dot"></span>
               {{ detailItem.title }}
             </div>
           </div>
@@ -57,7 +57,7 @@
             background
             layout="prev, pager, next"
             @current-change="handleCurrentChange"
-            :page-size="10"
+            :page-size="15"
             :total="total_number"
             :current-page="current_index"
           >
@@ -99,7 +99,7 @@ export default {
       ],
       patents: [],
       // 总共要展示的数量
-      total_number: 10,
+      total_number: 0,
       // 当前页面从1开始的这两个属性会在刚开始的时候就更新
       current_index: 1,
     };
@@ -122,8 +122,8 @@ export default {
     async getPatentList() {
       let params = {
         // 定义参数
-        start: (this.current_index - 1) * 10,
-        end: this.current_index * 10,
+        start: (this.current_index - 1) * 15,
+        end: this.current_index * 15,
         languageType: this.$store.getters.getLanguageType,
       };
       await getPatentURL(params).then((res) => {
@@ -200,6 +200,16 @@ export default {
   .breadCrumb {
     padding-top: 1rem;
   }
+  /* 不被选中时的颜色 */
+  .el-breadcrumb ::v-deep .el-breadcrumb__inner {
+    color: #999 !important;
+    font-weight: 400 !important;
+  }
+  /* 被选中时的颜色 */
+  .el-breadcrumb__item:last-child ::v-deep .el-breadcrumb__inner {
+    color: black !important;
+    font-weight: 800 !important;
+  }
   /* 选中侧边导航的背景颜色 */
   .el-menu-item.is-active {
     background: #008cd6 !important;
@@ -213,17 +223,34 @@ export default {
   }
 
   .detailItem {
-    padding: 1rem 0;
+    display: block;
     word-wrap: break-word;
     word-break: break-all;
-    margin-top: 1rem;
+    margin-top: 2.5rem;
     text-align: left;
     line-height: 3rem;
-    font-size: 2rem;
-    border-bottom: 1px solid #eee;
+    font-size: 1.6rem;
+    text-decoration: none;
+    color: black;
   }
-  .detailItem:hover {
-    font-weight: bold;
+
+  .detailItemInfo {
+    color: #333;
+    font-size: 18px;
+  }
+  .dot {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #333; /* 设置颜色 */
+    margin-right: 5px; /* 设置小圆点与文字之间的距离 */
+  }
+  .detailItem:hover .detailItemInfo {
+    color: #0055a2;
+  }
+  .detailItem:hover .dot {
+    background-color: #0055a2;
   }
 
   /* 设置分页和底部的距离 */
@@ -279,6 +306,16 @@ export default {
   .breadCrumb {
     padding-top: 1rem;
   }
+  /* 不被选中时的颜色 */
+  .el-breadcrumb ::v-deep .el-breadcrumb__inner {
+    color: #999 !important;
+    font-weight: 400 !important;
+  }
+  /* 被选中时的颜色 */
+  .el-breadcrumb__item:last-child ::v-deep .el-breadcrumb__inner {
+    color: black !important;
+    font-weight: 800 !important;
+  }
   /* 选中侧边导航的背景颜色 */
   .el-menu-item.is-active {
     background: #008cd6 !important;
@@ -292,14 +329,28 @@ export default {
   }
 
   .detailItem {
-    padding: 1rem 0;
+    display: block;
     word-wrap: break-word;
     word-break: break-all;
-    margin-top: 1rem;
+    margin-top: 2.5rem;
     text-align: left;
     line-height: 3rem;
-    font-size: 2rem;
-    border-bottom: 1px solid #eee;
+    font-size: 1.6rem;
+    text-decoration: none;
+    color: black;
+  }
+
+  .detailItemInfo {
+    color: black;
+    font-size: 16px;
+  }
+  .dot {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: black; /* 设置颜色 */
+    margin-right: 5px; /* 设置小圆点与文字之间的距离 */
   }
   /* 设置分页和底部的距离 */
   .paging {

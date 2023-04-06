@@ -7,36 +7,20 @@
         >{{ pageItem.more }} >></a
       >
     </div>
-    <div class="academicTrendDetail">
-      <div class="leftAcademicTrend">
-        <div class="leftTitle"><span>动态回顾</span></div>
-        <div
-          class="leftItem"
-          v-for="(leftAcademyItem, leftIndex) in academyList"
-          :key="leftIndex"
-          @click="gotoDetail(leftAcademyItem.id)"
-        >
-          <div class="leftImg">
-            <img :src="leftAcademyItem.picUrl[0]" />
-          </div>
-          <div class="leftText">
-            <div class="title-box">{{ leftAcademyItem.title }}</div>
-            <div class="detail-box">
-              {{ leftAcademyItem.detail }}
-            </div>
-          </div>
+    <div class="academicTrendItem">
+      <div
+        class="academicTrend-item"
+        v-for="(academyItem, index) in academyList"
+        :key="index"
+        @click="gotoDetail(academyItem.id)"
+      >
+        <div class="academicTrend-img">
+          <img :src="academyItem.picUrl[0]" />
         </div>
-      </div>
-      <div class="rightAcademicTrend">
-        <div class="rightTitle"><span>活动预告</span></div>
-        <div
-          class="rightItem"
-          v-for="(rightItem, rightIndex) in academyList"
-          :key="rightIndex"
-        >
-          <span>{{ rightItem.date }}-{{ rightItem.day }}</span>
-          <div>
-            {{ rightItem.title }}
+        <div class="academicTrend-text">
+          <div class="title-box">{{ academyItem.title }}</div>
+          <div class="detail-box">
+            {{ academyItem.detail }}
           </div>
         </div>
       </div>
@@ -102,7 +86,6 @@ export default {
 /* PC端 */
 @media screen and (min-width: 1000px) {
   .academicTrend {
-    width: 100%;
     background-color: #ffffff;
   }
   .academicTitle {
@@ -140,63 +123,43 @@ export default {
     right: 30px;
     cursor: pointer;
   }
-  .academicTrendDetail {
+  .academicTrendItem {
     display: flex;
     flex-direction: row;
-    width: 100%;
-  }
-  .leftAcademicTrend {
-    width: 50%;
-    display: flex;
-    flex-direction: column;
-    margin-right: 10px;
-  }
-  .leftTitle {
-    font-size: 20px;
-    text-align: left;
-  }
-  .leftTitle::before {
-    content: "";
-    display: inline-block; /* 将伪元素设置为行内块元素 */
-    vertical-align: middle; /* 垂直居中对齐 */
-    width: 30px; /* 伪元素宽度 */
-    height: 30px; /* 伪元素高度 */
-    background-image: url("../../assets/images/activity/done.png");
-    background-size: contain; /* 等比例缩小 */
-    background-repeat: no-repeat;
-    background-position: center center; /* 图片居中 */
-    margin-right: 10px; /* 可选，为伪元素和文字之间留出一定的间隔 */
-  }
-  .leftItem {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
+    flex-wrap: wrap;
     justify-content: space-between;
-    margin-top: 12px;
+  }
+  .academicTrend-item {
+    width: 49%;
+    margin-bottom: 25px;
+    display: flex;
+    flex-direction: row;
+    border: 1px solid #dfdfdf;
+  }
+  .academicTrend-item {
     cursor: pointer;
   }
-
-  .leftImg {
-    width: 20%;
-    height: 10rem;
+  .academicTrend-img {
+    width: 50%;
+    overflow: hidden;
   }
-  .leftImg img {
+  .academicTrend-img img {
     max-width: 100%;
     height: 100%;
     box-sizing: border-box;
     border: 1.5px solid #dfdfdf;
   }
-  .leftItem:hover img {
+  .academicTrend-item:hover img {
     transform: scale(1.05);
     transition: all 1s;
   }
-  .leftText {
-    flex: 1 0 70%;
+  .academicTrend-text {
+    width: 50%;
     box-sizing: border-box;
     padding: 0 20px;
   }
 
-  .leftItem:hover .title-box {
+  .academicTrend-item:hover .title-box {
     color: #ff2400;
   }
   .title-box {
@@ -220,52 +183,9 @@ export default {
     overflow: hidden;
     text-align: left;
     display: -webkit-box;
-    -webkit-line-clamp: 3;
-    line-clamp: 3;
+    -webkit-line-clamp: 7;
+    line-clamp: 7;
     -webkit-box-orient: vertical;
-  }
-
-  .rightAcademicTrend {
-    width: 50%;
-    display: flex;
-    flex-direction: column;
-    margin-right: 10px;
-  }
-  .rightTitle {
-    font-size: 20px;
-    text-align: left;
-  }
-  .rightTitle::before {
-    content: "";
-    display: inline-block; /* 将伪元素设置为行内块元素 */
-    vertical-align: middle; /* 垂直居中对齐 */
-    width: 30px; /* 伪元素宽度 */
-    height: 30px; /* 伪元素高度 */
-    background-image: url("../../assets/images/activity/upcoming.png");
-    background-size: contain; /* 等比例缩小 */
-    background-repeat: no-repeat;
-    background-position: center center; /* 图片居中 */
-    margin-right: 10px; /* 可选，为伪元素和文字之间留出一定的间隔 */
-  }
-
-  .rightItem {
-    margin: 10px 0;
-  }
-  .rightItem span {
-    color: #666;
-    font-size: 16px;
-    padding-right: 20px;
-    border-right: 1px solid #c2c2c2;
-    line-height: 20px;
-    float: left;
-  }
-
-  .rightItem div {
-    color: #666;
-    font-size: 16px;
-    padding-left: 20px;
-    line-height: 20px;
-    float: left;
   }
 }
 /* 移动端 大尺寸*/
@@ -304,7 +224,7 @@ export default {
     bottom: 20px;
     right: 0;
   }
-  .academicTrendDetail {
+  .academicTrendItem {
     display: flex;
     flex-direction: column;
   }
@@ -384,7 +304,7 @@ export default {
     bottom: 20px;
     right: 0;
   }
-  .academicTrendDetail {
+  .academicTrendItem {
     display: flex;
     flex-direction: column;
   }

@@ -105,7 +105,7 @@ export default {
       // 要展示的公告信息
       noticeList: [],
       // 总共公告的数量
-      total_number: 10,
+      total_number: 0,
       // 当前页面从1开始的这两个属性会在刚开始的时候就更新
       current_index: 1,
     };

@@ -162,11 +162,17 @@ const router = new VueRouter({
             component: () =>
                 import ("../views/scientificResearch/platform.vue"),
         },
+        // 教育育人
         {
-            path: "/scientificResearch/curriculum",
+            path: "/education",
+            name: "教育育人",
+            redirect: "/education/curriculum",
+        },
+        {
+            path: "/education/curriculum",
             name: "课程教学",
             component: () =>
-                import ("../views/scientificResearch/curriculum.vue"),
+                import ("../views/education/curriculum.vue"),
         },
         // 测试用
         {
