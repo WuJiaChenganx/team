@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import teamWeb.research.entity.ProjectInfo;
 import teamWeb.research.entity.TextboxInfo;
 import teamWeb.research.pojo.CoursePageBO;
 import teamWeb.research.pojo.DirectionsDTO;
@@ -23,7 +24,7 @@ public class ProjectController {
     @Autowired
     TextboxInfoService textboxInfoService;
 
-    @RequestMapping("/require-project")
+    @GetMapping("/require-project")
     public APIResponse projecting(@RequestParam(value="start") int start,
                                   @RequestParam(value="end") int end,
                                   @RequestParam(value = "languageType") String languageType){
@@ -39,8 +40,15 @@ public class ProjectController {
         return APIResponse.success(projectDetail,sum);
     }
 
+    @GetMapping("/require-projectDetail")
+    public APIResponse projectDetail(@RequestParam(value = "languageType") String languageType,
+                                     @RequestParam(value = "projectId") Integer projectId){
+        ProjectBO projectBO = textboxInfoService.projectInfo(projectId);
+        return APIResponse.success(projectBO);
+    }
 
-    @RequestMapping("/require-direction")
+
+    @GetMapping("/require-direction")
     public APIResponse direction(@RequestParam(value="start",defaultValue = "0") int start,
                                  @RequestParam(value="end",defaultValue = "10") int end,
                                  @RequestParam(value = "languageType") String languageType){

@@ -3,17 +3,30 @@
 
 <mapper namespace="teamWeb.research.mapper.TextboxInfoMapper">
     <select id="getProject" resultType="teamWeb.research.entity.ProjectDO">
-        select `id`,project_name AS projectName, responser, project_type AS projectType, `time`, project_info AS projectInfo
+        select `id`,project_name AS projectName, responser, project_type AS projectType, `time`
         from project
         order by time desc limit ${start},${end}
     </select>
 
     <select id="getEnProject" resultType="teamWeb.research.entity.ProjectDO">
-        select `id`,project_name AS projectName, responser, project_type AS projectType, `time`, project_info AS projectInfo
+        select `id`,project_name AS projectName, responser, project_type AS projectType, `time`
         from en_project
         order by time desc limit ${start},${end}
     </select>
 
+
+
+    <select id="projectTitle" resultType="teamWeb.research.entity.ProjectDO">
+        select `id`,project_name AS projectName, responser, project_type AS projectType, `time`
+        from project
+        WHERE `id` = ${projectId}
+    </select>
+
+    <select id="projectInfo" resultType="teamWeb.research.entity.ProjectInfo">
+        SELECT `info`,p.id
+        FROM project_info_project_map m join project_info p on m.info_id = p.id
+        WHERE m.project_id = ${projectId}
+    </select>
 
 
     <select id="getData" resultType="teamWeb.research.entity.TextboxInfo">

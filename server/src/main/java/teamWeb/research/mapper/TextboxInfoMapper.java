@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import teamWeb.homepage.entity.RelationInfo;
 import teamWeb.research.entity.CourseDO;
 import teamWeb.research.entity.ProjectDO;
+import teamWeb.research.entity.ProjectInfo;
 import teamWeb.research.entity.TextboxInfo;
 import teamWeb.research.pojo.CoursePageBO;
 
@@ -55,4 +56,8 @@ public interface TextboxInfoMapper extends BaseMapper<TextboxInfo> {
     List<TextboxInfo> getEnData(int start, int end);
 
     List<TextboxInfo> getEnEmulation(int start, int end);
+
+    ProjectDO projectTitle(Integer projectId);
+
+    List<ProjectInfo> projectInfo(Integer projectId);
 }

@@ -49,4 +49,6 @@ public interface TextboxInfoService extends IService<TextboxInfo> {
     List<ResourceBO> enDataDetail(int start, int end);
 
     List<ResourceBO> enEmulationDetail(int start, int end);
+
+    ProjectBO projectInfo(Integer projectId);
 }
