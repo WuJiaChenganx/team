@@ -5,6 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import teamWeb.homepage.entity.RelationInfo;
 import teamWeb.pubications.pojo.AllPaperBO;
+import teamWeb.research.entity.ProjectDO;
+import teamWeb.research.entity.ProjectInfo;
 import teamWeb.research.entity.TextboxInfo;
 import teamWeb.research.mapper.TextboxInfoMapper;
 import teamWeb.research.pojo.*;
@@ -14,6 +16,8 @@ import teamWeb.teamSurvey.pojo.MemberBO;
 import teamWeb.utils.Address;
 import teamWeb.utils.BeanUtil;
 
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 @Service
 public class TextboxInfoServiceImpl extends ServiceImpl<TextboxInfoMapper, TextboxInfo> implements TextboxInfoService {
@@ -194,6 +198,29 @@ public class TextboxInfoServiceImpl extends ServiceImpl<TextboxInfoMapper, Textb
         }
         return resourceBOList;
 
+    }
+
+    @Override
+    public ProjectBO projectInfo(Integer projectId) {
+        ProjectDO projectDO = textboxInfoMapper.projectTitle(projectId);
+        ProjectBO projectBO = BeanUtil.convert(projectDO,ProjectBO.class);
+        List<ProjectInfo> projectInfoList = textboxInfoMapper.projectInfo(projectId);
+        for (ProjectInfo projectInfo:
+        projectInfoList){
+            List<String> picList = Collections.emptyList();
+            if(!(projectInfo.getPicture() == null)&& !projectInfo.getPicture().isEmpty()) {
+                picList = Arrays.asList(projectInfo.getPicture().split(";"));
+                for (int i = 0; i < picList.size(); i++) {
+                    picList.set(i, Address.rootAddress() + picList.get(i));
+                }
+            }
+            projectInfo.setPic(picList);
+        }
+
+        if(projectInfoList != null) {
+            projectBO.setProjectInfoList(projectInfoList);
+        }
+        return projectBO;
     }
 
 }

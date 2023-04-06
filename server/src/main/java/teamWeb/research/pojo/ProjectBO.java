@@ -1,21 +1,18 @@
 package teamWeb.research.pojo;
 
+import teamWeb.research.entity.ProjectInfo;
+
+import java.util.List;
+
 public class ProjectBO {
     private Integer id;
     private String projectName;
     private String responser;
     private String projectType;
     private String time;
-    private String projectInfo;
+    private List<ProjectInfo> projectInfoList;
     private Integer number;
 
-    public Integer getNumber() {
-        return number;
-    }
-
-    public void setNumber(Integer number) {
-        this.number = number;
-    }
 
     public Integer getId() {
         return id;
@@ -57,11 +54,19 @@ public class ProjectBO {
         this.time = time;
     }
 
-    public String getProjectInfo() {
-        return projectInfo;
+    public List<ProjectInfo> getProjectInfoList() {
+        return projectInfoList;
     }
 
-    public void setProjectInfo(String projectInfo) {
-        this.projectInfo = projectInfo;
+    public void setProjectInfoList(List<ProjectInfo> projectInfoList) {
+        this.projectInfoList = projectInfoList;
+    }
+
+    public Integer getNumber() {
+        return number;
+    }
+
+    public void setNumber(Integer number) {
+        this.number = number;
     }
 }
