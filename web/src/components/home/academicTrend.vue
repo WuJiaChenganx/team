@@ -7,7 +7,7 @@
         >{{ pageItem.more }} >></a
       >
     </div>
-    <div class="academicTrendDetail">
+    <div class="academicTrendDetail animation" data-aos="fade-up">
       <div class="leftAcademicTrend">
         <div class="leftTitle"><span>动态回顾</span></div>
         <div
@@ -44,6 +44,8 @@
   </div>
 </template>
 <script>
+import AOS from "aos";
+import "aos/dist/aos.css";
 import { getAcademyURL } from "@/api/api";
 export default {
   data() {
@@ -56,6 +58,11 @@ export default {
     };
   },
   created() {
+    // 在 mounted 钩子中初始化 AOS
+    AOS.init({
+      offset: 50, // 触发动画的位置距离窗口底部的距离
+      duration: 800, // 动画持续时间
+    });
     this.getAcademyPastList();
     this.getAcademyFutureList();
     this.changUI();
@@ -114,6 +121,11 @@ export default {
 };
 </script>
 <style scoped>
+.animation {
+  opacity: 0;
+  transform: translateY(50px);
+  transition: all 0.8s ease-in-out;
+}
 /* PC端 */
 @media screen and (min-width: 1000px) {
   .academicTrend {

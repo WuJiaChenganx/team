@@ -1,5 +1,5 @@
 <template>
-  <div class="direction">
+  <div class="direction animation" data-aos="fade-up">
     <div class="directionTitle">
       <div class="title">{{ pageItem.title }}</div>
       <p></p>
@@ -9,7 +9,9 @@
     </div>
     <div class="directionItem">
       <div
-        class="direction-item"
+        class="direction-item animation"
+        data-aos="fade-up"
+        :data-aos-delay="delayTime[index]"
         v-for="(item, index) in directions"
         :key="index"
         @click="goTo('/scientificResearch/direction')"
@@ -24,6 +26,8 @@
   </div>
 </template>
 <script>
+import AOS from "aos";
+import "aos/dist/aos.css";
 export default {
   data() {
     return {
@@ -44,9 +48,15 @@ export default {
       pageItem: {},
       chineseItem: { title: "研究方向", more: "更多" },
       englishItem: { title: "Direction", more: "more" },
+      delayTime: [0, 250, 500],
     };
   },
   created() {
+    // 在 mounted 钩子中初始化 AOS
+    AOS.init({
+      offset: 50, // 触发动画的位置距离窗口底部的距离
+      duration: 1000, // 动画持续时间
+    });
     this.changUI();
   },
   methods: {
@@ -70,6 +80,11 @@ export default {
 };
 </script>
 <style scoped>
+.animation {
+  opacity: 0;
+  transform: translateY(50px);
+  transition: all 0.8s ease-in-out;
+}
 /* PC端 */
 @media screen and (min-width: 1000px) {
   .direction {

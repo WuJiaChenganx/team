@@ -29,6 +29,8 @@
 </template>
 
 <script>
+// import AOS from "aos";
+// import "aos/dist/aos.css";
 import friendlyLink from "./friendlyLink.vue";
 import researchTeam from "./researchTeam.vue";
 import notice from "./notice.vue";
@@ -51,7 +53,14 @@ export default {
   data() {
     return {};
   },
-  created() {},
+  mounted() {
+    // AOS.init({
+    //   offset: 250,
+    //   duration: 800, // 动画持续时间
+    //   easing: "ease-in-out",
+    // });
+  },
+
   methods: {},
 };
 </script>
@@ -60,6 +69,11 @@ export default {
   margin: 0;
   padding: 0;
 }
+// .animation {
+//   opacity: 0;
+//   transform: translateY(50px);
+//   transition: all 0.5s ease-in-out;
+// }
 
 /* PC端  */
 @media screen and (min-width: 1000px) {
@@ -76,7 +90,6 @@ export default {
 
   .secondContainer .secondContainerContent {
     width: 80%;
-    margin: 2rem;
     box-sizing: border-box;
     margin: 0 auto;
     display: flex;
@@ -85,7 +98,6 @@ export default {
   }
   .thirdContainer .thirdContainerContent {
     width: 80%;
-    margin: 2rem;
     box-sizing: border-box;
     margin: 0 auto;
     display: flex;
