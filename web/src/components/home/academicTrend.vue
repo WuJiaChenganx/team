@@ -11,7 +11,9 @@
       <div class="leftAcademicTrend">
         <div class="leftTitle"><span>动态回顾</span></div>
         <div
-          class="leftItem"
+          class="leftItem animation"
+          data-aos="fade-up"
+          :data-aos-delay="delayTime[leftIndex]"
           v-for="(leftAcademyItem, leftIndex) in academyPastList"
           :key="leftIndex"
           @click="gotoDetail(leftAcademyItem.id)"
@@ -55,12 +57,13 @@ export default {
       pageItem: {},
       chineseItem: { title: "学术动态", more: "更多" },
       englishItem: { title: "Academy", more: "more" },
+      delayTime: [0, 50, 100, 150],
     };
   },
   created() {
     // 在 mounted 钩子中初始化 AOS
     AOS.init({
-      offset: 50, // 触发动画的位置距离窗口底部的距离
+      offset: 100, // 触发动画的位置距离窗口底部的距离
       duration: 800, // 动画持续时间
     });
     this.getAcademyPastList();
@@ -297,6 +300,10 @@ export default {
 }
 /* 移动端 大尺寸*/
 @media screen and (min-width: 500px) and (max-width: 1000px) {
+  .academicTrend {
+    width: 100%;
+    background-color: #ffffff;
+  }
   .academicTitle {
     margin-bottom: 20px;
     position: relative;
@@ -335,55 +342,133 @@ export default {
     display: flex;
     flex-direction: column;
   }
-  .academicTrend-item {
+  .leftAcademicTrend {
     width: 100%;
-    margin-bottom: 10px;
     display: flex;
     flex-direction: column;
+    margin-right: 10px;
+  }
+  .leftTitle {
+    font-size: 20px;
+    text-align: left;
+  }
+  .leftTitle::before {
+    content: "";
+    display: inline-block; /* 将伪元素设置为行内块元素 */
+    vertical-align: middle; /* 垂直居中对齐 */
+    width: 30px; /* 伪元素宽度 */
+    height: 30px; /* 伪元素高度 */
+    background-image: url("../../assets/images/activity/done.png");
+    background-size: contain; /* 等比例缩小 */
+    background-repeat: no-repeat;
+    background-position: center center; /* 图片居中 */
+    margin-right: 10px; /* 可选，为伪元素和文字之间留出一定的间隔 */
+  }
+  .leftItem {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 12px;
+    cursor: pointer;
   }
 
-  .academicTrend-img {
-    width: 100%;
+  .leftImg {
+    width: 50%;
+    height: 200px;
   }
-  .academicTrend-img img {
-    width: 100%;
-    max-height: 400px;
-    margin-bottom: 10px;
-  }
-  .academicTrend-text {
-    width: 100%;
+  .leftImg img {
+    max-width: 100%;
+    height: 100%;
     box-sizing: border-box;
+    border: 1.5px solid #dfdfdf;
   }
+  .leftItem:hover img {
+    transform: scale(1.05);
+    transition: all 1s;
+  }
+  .leftText {
+    flex: 1 0 70%;
+    box-sizing: border-box;
+    padding: 0 20px;
+  }
+
   .title-box {
     text-align: left;
     color: #0055a2;
-    font-size: 17px;
-    line-height: 23px;
+    font-size: 24px;
+    line-height: 30px;
     font-weight: bold;
     margin-bottom: 5px;
   }
   .detail-box {
     color: #909090;
-    font-size: 13px;
-    line-height: 19px;
+    font-size: 22px;
+    line-height: 30px;
     text-align: left;
     word-wrap: break-word;
     word-break: break-all;
     display: -webkit-box;
     -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
+    -webkit-line-clamp: 5;
     overflow: hidden;
+  }
+  .rightAcademicTrend {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+  }
+  .rightTitle {
+    font-size: 20px;
+    text-align: left;
+  }
+  .rightTitle::before {
+    content: "";
+    display: inline-block; /* 将伪元素设置为行内块元素 */
+    vertical-align: middle; /* 垂直居中对齐 */
+    width: 30px; /* 伪元素宽度 */
+    height: 30px; /* 伪元素高度 */
+    background-image: url("../../assets/images/activity/upcoming.png");
+    background-size: contain; /* 等比例缩小 */
+    background-repeat: no-repeat;
+    background-position: center center; /* 图片居中 */
+    margin-right: 10px; /* 可选，为伪元素和文字之间留出一定的间隔 */
+  }
+
+  .rightItem {
+    margin: 10px 0;
+  }
+  .rightItem span {
+    color: #666;
+    font-size: 16px;
+    padding-right: 20px;
+    border-right: 1px solid #c2c2c2;
+    line-height: 20px;
+    float: left;
+  }
+
+  .rightItem div {
+    color: #666;
+    font-size: 16px;
+    padding-left: 20px;
+    line-height: 20px;
+    float: left;
   }
 }
 /* 移动端 小尺寸*/
 @media screen and (max-width: 500px) {
+  .academicTrend {
+    width: 100%;
+    background-color: #ffffff;
+  }
   .academicTitle {
     margin-bottom: 20px;
     position: relative;
   }
   .title {
     width: 276px;
-    margin: 20px auto;
+    margin: 15px auto;
     font-size: 24px;
     color: #0055a2;
   }
@@ -415,37 +500,69 @@ export default {
     display: flex;
     flex-direction: column;
   }
-  .academicTrend-item {
+  .leftAcademicTrend {
     width: 100%;
-    margin-bottom: 10px;
     display: flex;
     flex-direction: column;
+    margin-right: 10px;
+  }
+  .leftTitle {
+    font-size: 20px;
+    text-align: left;
+  }
+  .leftTitle::before {
+    content: "";
+    display: inline-block; /* 将伪元素设置为行内块元素 */
+    vertical-align: middle; /* 垂直居中对齐 */
+    width: 30px; /* 伪元素宽度 */
+    height: 30px; /* 伪元素高度 */
+    background-image: url("../../assets/images/activity/done.png");
+    background-size: contain; /* 等比例缩小 */
+    background-repeat: no-repeat;
+    background-position: center center; /* 图片居中 */
+    margin-right: 10px; /* 可选，为伪元素和文字之间留出一定的间隔 */
+  }
+  .leftItem {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 12px;
+    cursor: pointer;
   }
 
-  .academicTrend-img {
-    width: 100%;
+  .leftImg {
+    width: 30%;
+    height: 80px;
   }
-  .academicTrend-img img {
-    width: 100%;
-    max-height: 210px;
-    margin-bottom: 10px;
-  }
-  .academicTrend-text {
-    width: 100%;
+  .leftImg img {
+    max-width: 100%;
+    height: 100%;
     box-sizing: border-box;
+    border: 1.5px solid #dfdfdf;
   }
+  .leftItem:hover img {
+    transform: scale(1.05);
+    transition: all 1s;
+  }
+  .leftText {
+    flex: 1 0 70%;
+    box-sizing: border-box;
+    padding: 0 20px;
+  }
+
   .title-box {
     text-align: left;
     color: #0055a2;
-    font-size: 17px;
-    line-height: 23px;
+    font-size: 14px;
+    line-height: 18px;
     font-weight: bold;
     margin-bottom: 5px;
   }
   .detail-box {
     color: #909090;
-    font-size: 13px;
-    line-height: 19px;
+    font-size: 14px;
+    line-height: 18px;
     text-align: left;
     word-wrap: break-word;
     word-break: break-all;
@@ -453,6 +570,48 @@ export default {
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
     overflow: hidden;
+  }
+  .rightAcademicTrend {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+  }
+  .rightTitle {
+    font-size: 20px;
+    text-align: left;
+  }
+  .rightTitle::before {
+    content: "";
+    display: inline-block; /* 将伪元素设置为行内块元素 */
+    vertical-align: middle; /* 垂直居中对齐 */
+    width: 30px; /* 伪元素宽度 */
+    height: 30px; /* 伪元素高度 */
+    background-image: url("../../assets/images/activity/upcoming.png");
+    background-size: contain; /* 等比例缩小 */
+    background-repeat: no-repeat;
+    background-position: center center; /* 图片居中 */
+    margin-right: 10px; /* 可选，为伪元素和文字之间留出一定的间隔 */
+  }
+
+  .rightItem {
+    margin: 10px 0;
+  }
+  .rightItem span {
+    color: #666;
+    font-size: 16px;
+    padding-right: 20px;
+    border-right: 1px solid #c2c2c2;
+    line-height: 20px;
+    float: left;
+  }
+
+  .rightItem div {
+    color: #666;
+    font-size: 16px;
+    padding-left: 20px;
+    line-height: 20px;
+    float: left;
   }
 }
 </style>

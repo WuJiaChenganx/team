@@ -64,21 +64,14 @@ export default {
   },
   methods: {
     changePhotoHeight() {
-      var userAgentInfo = navigator.userAgent;
-      var Agents = new Array(
-        "Android",
-        "iPhone",
-        "SymbianOS",
-        "Windows Phone",
-        "iPad",
-        "iPod"
-      );
-      this.height = "40rem";
-      for (var v = 0; v < Agents.length; v++) {
-        if (userAgentInfo.indexOf(Agents[v]) > 0) {
-          this.height = "35rem";
-          break;
-        }
+      if (
+        /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+          navigator.userAgent
+        )
+      ) {
+        this.height = "35rem";
+      } else {
+        this.height = "40rem";
       }
     },
     changUI() {

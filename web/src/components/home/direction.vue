@@ -54,7 +54,7 @@ export default {
   created() {
     // 在 mounted 钩子中初始化 AOS
     AOS.init({
-      offset: 50, // 触发动画的位置距离窗口底部的距离
+      offset: 100, // 触发动画的位置距离窗口底部的距离
       duration: 1000, // 动画持续时间
     });
     this.changUI();
