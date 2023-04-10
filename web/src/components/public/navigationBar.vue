@@ -25,7 +25,7 @@
           class="navItem"
           @click="goTo(item.path)"
         >
-          <div class="navTitle" v-html="item.title"></div>
+          <div class="navTitle" v-html="item.title" ref="navTitle"></div>
           <div class="subNav">
             <!-- 在点击函数中需要加入stop防止冒泡 -->
             <div
@@ -51,6 +51,7 @@ export default {
         {
           title: "首页",
           path: "/home",
+          subMenu: [],
         },
         {
           title: "科研概况",
@@ -99,6 +100,7 @@ export default {
         {
           title: "Home",
           path: "/home",
+          subMenu: [],
         },
         {
           title: "Research",
@@ -151,6 +153,32 @@ export default {
   },
 
   methods: {
+    keepColor() {
+      // DOM 加载完成之后执行该方案
+      this.$nextTick(() => {
+        var navigation = this.navigationZH;
+        var navTitles = this.$refs.navTitle;
+        let fullPath = window.location.href;
+        // 取地址栏的url后面的部分
+        let path = fullPath.substring(fullPath.indexOf("#") + 1);
+        for (var i = 0; i < navigation.length; i++) {
+          // 在改变颜色之前先刷一遍改为蓝色
+          navTitles[i].style.backgroundColor = "#0055A2";
+        }
+        // 导航模块的长度
+        for (var i = 0; i < navigation.length; i++) {
+          var subMenu = navigation[i].subMenu;
+          for (var j = 0; j < subMenu.length; j++) {
+            if (path == subMenu[j].path) {
+              navTitles[i].style.backgroundColor = "#008cd6";
+            }
+          }
+          if (path == navigation[i].path) {
+            navTitles[i].style.backgroundColor = "#008cd6";
+          }
+        }
+      });
+    },
     // 这里更新store里面的东西
     changeLanguage(languageType) {
       // 如果不同将languageType存起来然后通过刷新保存到sessionStorage
@@ -179,6 +207,12 @@ export default {
   },
   created() {
     this.changUI();
+  },
+  watch: {
+    // 地址栏URL的变化就执行颜色改变函数
+    $route(to, from) {
+      this.keepColor();
+    },
   },
 };
 </script>

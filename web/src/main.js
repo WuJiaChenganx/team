@@ -6,10 +6,6 @@ import axios from "axios";
 import router from "./router/index";
 import "lib-flexible";
 import store from "./store/index";
-// import AOS from "aos";
-// import "aos/dist/aos.css";
-// 动画全局注册
-// Vue.use(AOS.init());
 // baseURL后端接口前面的东西,如果写成/就是页面上面的URL
 axios.defaults.baseURL = "/";
 // 将axios作为全局的自定义属性,每个组件可以在内部直接访问
