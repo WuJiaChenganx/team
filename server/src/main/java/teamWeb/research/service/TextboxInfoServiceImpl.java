@@ -138,7 +138,7 @@ public class TextboxInfoServiceImpl extends ServiceImpl<TextboxInfoMapper, Textb
 
 
     @Override
-    public List<RelationInfo> getRelation() {
+    public List<RelationInfo> relationDetail() {
         return textboxInfoMapper.getRelation();
     }
 

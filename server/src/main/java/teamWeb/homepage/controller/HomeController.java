@@ -49,7 +49,7 @@ public class HomeController {
 
     @RequestMapping("/relation")
     public APIResponse relation(){
-        List<RelationInfo> relation = textboxInfoService.getRelation();
+        List<RelationInfo> relation = textboxInfoService.relationDetail();
         return APIResponse.success(relation);
     }
 }

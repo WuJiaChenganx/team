@@ -27,10 +27,9 @@ public class TeamController {
     @Autowired
     MemberInfoService memberInfoService;
 
-    @RequestMapping("/brief")
+    @RequestMapping("/require-brief")
     public APIResponse brief(){
         List<TextboxInfo> briefDetail = textboxInfoService.briefDetail();
-
         return APIResponse.success(briefDetail);
     }
 
@@ -94,11 +93,9 @@ public class TeamController {
         return APIResponse.success(member);
     }
 
-    @RequestMapping("/relation")
+    @RequestMapping("/require-relation")
     public APIResponse relation(){
-        List<RelationInfo> getRelation = textboxInfoService.getRelation();
-        return APIResponse.success(getRelation);
+        List<RelationInfo> relationDetail = textboxInfoService.relationDetail();
+        return APIResponse.success(relationDetail);
     }
-
-
 }

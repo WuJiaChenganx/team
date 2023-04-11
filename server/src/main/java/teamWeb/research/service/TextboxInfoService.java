@@ -24,7 +24,7 @@ public interface TextboxInfoService extends IService<TextboxInfo> {
 
     List<ResourceBO> dataDetail(int start, int end);
 
-    List<RelationInfo> getRelation();
+    List<RelationInfo> relationDetail();
 
     List<TextboxInfo> getText(int id);
 
@@ -51,4 +51,5 @@ public interface TextboxInfoService extends IService<TextboxInfo> {
     List<ResourceBO> enEmulationDetail(int start, int end);
 
     ProjectBO projectInfo(Integer projectId);
+
 }
