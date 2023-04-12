@@ -43,7 +43,7 @@
 
 
     <select id="monographDetail" resultType="teamWeb.pubications.entity.OutcomeInfo">
-        select `id`,`title`,`date`,`author`,`pub`,`pictureUrl`,`p_class` AS pClass
+        select `id`,`title`,`date`,`author`,`pub`,`pictureUrl`,`p_class` AS pClass,`url`
         from outcome
         <where>
             p_class = "专著"

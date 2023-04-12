@@ -9,6 +9,15 @@ public class AllMonographBO {
     private String pictureUrl;
 
     private Integer number;
+    private String url;
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
 
     public Integer getNumber() {
         return number;
