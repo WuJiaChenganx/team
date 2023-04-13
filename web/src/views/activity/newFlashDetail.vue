@@ -53,6 +53,15 @@
             </div>
           </div>
         </div>
+        <div class="newFlashUrl" v-if="newsFlashDetail.url">
+          相关报道:
+          <a
+            :href="newsFlashDetail.url"
+            style="text-decoration: none; color: #034ea1"
+            target="_blank"
+            v-text="newsFlashDetail.url"
+          ></a>
+        </div>
       </div>
     </div>
   </div>
@@ -210,6 +219,15 @@ export default {
       height: 100%;
     }
   }
+  .newFlashUrl {
+    word-wrap: break-word;
+    word-break: break-all;
+    text-align: left;
+    line-height: 3rem;
+    font-size: 2rem;
+    text-indent: 2em;
+    margin-top: 10px;
+  }
 }
 
 /* 移动端  */
@@ -283,7 +301,7 @@ export default {
     text-align: left;
     line-height: 24px;
     font-size: 16px;
-    text-indent: 2em;
+    text-indent: 1.5em;
     padding-bottom: 5px;
   }
 
@@ -308,6 +326,15 @@ export default {
       width: 100%;
       height: 100%;
     }
+  }
+  .newFlashUrl {
+    word-wrap: break-word;
+    word-break: break-all;
+    text-align: left;
+    line-height: 3rem;
+    font-size: 2rem;
+    text-indent: 1em;
+    margin-top: 5px;
   }
 }
 </style>

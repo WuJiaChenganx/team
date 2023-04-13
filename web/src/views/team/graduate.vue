@@ -5,14 +5,7 @@
       <div class="graduateAside">
         <div class="graduateAsideTitle">{{ pageItem.allTitle }}</div>
         <div class="graduateAsideContent">
-          <el-menu
-            :default-active="this.$route.path"
-            router
-            mode="vertical"
-            background-color="#ffffff"
-            text-color="#000"
-            active-text-color="#fff"
-          >
+          <el-menu :default-active="this.$route.path" router text-color="#000">
             <el-menu-item
               class="graduateAsideItem"
               v-for="(menuItem, menuIndex) in menu"
@@ -162,29 +155,35 @@ export default {
   }
 
   .graduateAside {
-    width: 25%;
+    width: 255px;
+    margin-right: 20px;
   }
   .graduateAsideTitle {
+    width: 255px;
+    height: 78px;
+    line-height: 78px;
     background: url(../../assets/images/background/zryy-menu-t-bg.png) no-repeat;
     border-radius: 0.6rem;
     background-size: cover !important;
     font-weight: bold;
     color: #fff;
-    font-size: 2rem;
-    line-height: 3rem;
-    height: 3rem;
-    padding: 2rem 3rem;
-    margin-bottom: 0.5rem;
+    font-size: 24px;
+  }
+  .graduateAsideContent {
+    width: 255px;
+    background-color: #f9fbfd;
   }
   .graduateAsideItem {
-    font-size: 2rem;
+    height: 52px;
+    line-height: 52px;
+    font-size: 16px;
     text-align: left;
     cursor: pointer;
+    border-bottom: 1px solid #dfdfdf;
   }
 
   .graduateDetail {
-    min-height: 600px;
-    width: 73%;
+    flex: 1 1 auto;
     padding: 0 3rem;
     box-sizing: border-box;
     background-color: #fff;
@@ -216,9 +215,16 @@ export default {
     color: black !important;
     font-weight: 800 !important;
   }
+  /* 侧边栏悬浮的背景颜色 */
+  .el-menu-item:hover {
+    font-weight: bold;
+    background-color: #fff;
+  }
   /* 选中侧边导航的背景颜色 */
   .el-menu-item.is-active {
-    background: #008cd6 !important;
+    font-weight: bold;
+    color: #034ea1;
+    background: #eee;
   }
   .subTitle {
     font-size: 20px;
@@ -262,27 +268,43 @@ export default {
 }
 /* 移动端  */
 @media screen and (max-width: 1000px) {
-  .graduate {
-    background: url(../../assets/images/background/contentBackground.jpg)
-      no-repeat;
-  }
-
-  .graduateContent {
-    display: flex;
-    flex-direction: column;
-  }
-
   .graduateAside {
-    width: 100%;
+    background: url(../../assets/images/background/contentBackground.jpg) center
+      0 no-repeat;
+    background-size: cover;
   }
-  /* 不显示侧边导航栏上面的标题 */
   .graduateAsideTitle {
-    display: none;
+    font-size: 20px;
+    padding: 10px 1.6%;
+    line-height: 30px;
+    font-weight: bold;
+    text-align: left;
+    color: #014da1;
   }
-  .graduateAsideItem {
+  /* 菜单横向排列 */
+  .el-menu {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0) !important;
+  }
+
+  .el-menu-item {
+    padding: 0 !important;
+    border: 1px solid #ccc;
+    width: 30%;
+    line-height: 36px;
+    height: 40px;
+    margin: 0 1.6% 15px;
     font-size: 2rem;
     text-align: center;
     cursor: pointer;
+    background-color: #fff;
+  }
+
+  .el-icon-sunny {
+    display: none;
   }
 
   .graduateDetail {
@@ -297,13 +319,14 @@ export default {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    padding: 2rem 0;
+    padding: 10px 0;
     border-bottom: 1px solid #dfdfdf;
   }
   .title {
     color: #333333;
     font-weight: bold;
-    font-size: 2.5rem;
+    font-size: 20px;
+    line-height: 30px;
   }
   .breadCrumb {
     padding-top: 1rem;
@@ -320,9 +343,18 @@ export default {
   }
   /* 选中侧边导航的背景颜色 */
   .el-menu-item.is-active {
-    background: #008cd6 !important;
+    background: #014da1;
+    color: #fff;
+    font-weight: bold;
+    border: #014da1 solid 1px;
   }
-
+  .subTitle {
+    font-size: 16px;
+    font-weight: bold;
+    color: #444444;
+    text-align: left;
+    margin: 10px 0;
+  }
   .graduateItem {
     display: flex;
     flex-direction: column;
@@ -343,100 +375,4 @@ export default {
     padding: 1rem 0;
   }
 }
-/* .resourceSharing {
-  padding: 30px 0 50px 0;
-  background: url(../../assets/images/background/contentBackground.jpg)
-    no-repeat;
-  width: 100%;
-  height: auto;
-}
-
-.resourceContent {
-  width: 75%;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
-
-.aside {
-  width: 25%;
-  height: auto;
-  padding: 0 15px;
-  float: left;
-}
-
-.asideTitle {
-  background: url(../../assets/images/background/zryy-menu-t-bg.png) no-repeat
-    center;
-  border-radius: 6px;
-  background-size: cover !important;
-  font-weight: bold;
-  color: #fff;
-  font-size: 22px;
-  line-height: 30px;
-  height: 30px;
-  padding: 20px 30px;
-  margin-bottom: 10px;
-}
-
-.asideContent {
-  height: auto;
-  border: 1px solid #eee;
-}
-
-.currentTitle {
-  float: left;
-  color: #333333;
-  font-weight: bold;
-  font-size: 25px;
-}
-
-.contentItem {
-  font-weight: bold;
-  font-size: 20px;
-  text-align: left;
-  cursor: pointer;
-  padding: 0 20px;
-  border-bottom: 1px solid #eee;
-}
-
-.el-menu-item.is-active {
-  background: #008cd6 !important;
-}
-
-.details {
-  float: left;
-  position: relative;
-  padding: 0 15px;
-  width: 75%;
-  height: auto;
-  background-color: #fff;
-  border: 1px solid #dfdfdf;
-}
-
-.detailTitle {
-  height: 30px;
-  border-bottom: 1px solid #dfdfdf;
-  padding-top: 32px;
-  padding-bottom: 20px;
-  margin-bottom: 20px;
-}
-
-.detailItem {
-  float: left;
-  padding: 10px;
-  width: 200px;
-  height: auto;
-}
-
-.detailItem img {
-  width: 200px;
-  height: 230px;
-}
-
-.detailItem .memberInfo {
-  width: 100%;
-  padding: 10px 0;
-} */
 </style>

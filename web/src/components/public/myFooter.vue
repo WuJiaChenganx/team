@@ -14,7 +14,10 @@
             href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=33010602013006"
             style="display: inline-block"
           >
-            <img src="../../assets/images/footer/1.png" style="float: left" />
+            <img
+              src="../../assets/images/footer/badge.png"
+              style="float: left"
+            />
             <p
               style="
                 float: left;

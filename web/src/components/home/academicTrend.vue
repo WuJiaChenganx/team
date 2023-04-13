@@ -32,7 +32,8 @@
       <div class="rightAcademicTrend">
         <div class="rightTitle"><span>活动预告</span></div>
         <div
-          class="rightItem"
+          class="rightItem animation"
+          data-aos="fade-up"
           v-for="(rightItem, rightIndex) in academyFutureList"
           :key="rightIndex"
         >
@@ -191,7 +192,7 @@ export default {
     vertical-align: middle; /* 垂直居中对齐 */
     width: 30px; /* 伪元素宽度 */
     height: 30px; /* 伪元素高度 */
-    background-image: url("../../assets/images/activity/done.png");
+    background-image: url("../../assets/images/background/done.png");
     background-size: contain; /* 等比例缩小 */
     background-repeat: no-repeat;
     background-position: center center; /* 图片居中 */
@@ -271,7 +272,7 @@ export default {
     vertical-align: middle; /* 垂直居中对齐 */
     width: 30px; /* 伪元素宽度 */
     height: 30px; /* 伪元素高度 */
-    background-image: url("../../assets/images/activity/upcoming.png");
+    background-image: url("../../assets/images/background/upcoming.png");
     background-size: contain; /* 等比例缩小 */
     background-repeat: no-repeat;
     background-position: center center; /* 图片居中 */
@@ -358,7 +359,7 @@ export default {
     vertical-align: middle; /* 垂直居中对齐 */
     width: 30px; /* 伪元素宽度 */
     height: 30px; /* 伪元素高度 */
-    background-image: url("../../assets/images/activity/done.png");
+    background-image: url("../../assets/images/background/done.png");
     background-size: contain; /* 等比例缩小 */
     background-repeat: no-repeat;
     background-position: center center; /* 图片居中 */
@@ -429,7 +430,7 @@ export default {
     vertical-align: middle; /* 垂直居中对齐 */
     width: 30px; /* 伪元素宽度 */
     height: 30px; /* 伪元素高度 */
-    background-image: url("../../assets/images/activity/upcoming.png");
+    background-image: url("../../assets/images/background/upcoming.png");
     background-size: contain; /* 等比例缩小 */
     background-repeat: no-repeat;
     background-position: center center; /* 图片居中 */
@@ -442,7 +443,7 @@ export default {
   .rightItem span {
     color: #666;
     font-size: 16px;
-    padding-right: 20px;
+    padding-right: 15px;
     border-right: 1px solid #c2c2c2;
     line-height: 20px;
     float: left;
@@ -451,7 +452,7 @@ export default {
   .rightItem div {
     color: #666;
     font-size: 16px;
-    padding-left: 20px;
+    padding-left: 15px;
     line-height: 20px;
     float: left;
   }
@@ -516,7 +517,7 @@ export default {
     vertical-align: middle; /* 垂直居中对齐 */
     width: 30px; /* 伪元素宽度 */
     height: 30px; /* 伪元素高度 */
-    background-image: url("../../assets/images/activity/done.png");
+    background-image: url("../../assets/images/background/done.png");
     background-size: contain; /* 等比例缩小 */
     background-repeat: no-repeat;
     background-position: center center; /* 图片居中 */
@@ -587,7 +588,7 @@ export default {
     vertical-align: middle; /* 垂直居中对齐 */
     width: 30px; /* 伪元素宽度 */
     height: 30px; /* 伪元素高度 */
-    background-image: url("../../assets/images/activity/upcoming.png");
+    background-image: url("../../assets/images/background/upcoming.png");
     background-size: contain; /* 等比例缩小 */
     background-repeat: no-repeat;
     background-position: center center; /* 图片居中 */
@@ -599,9 +600,7 @@ export default {
   }
   .rightItem span {
     color: #666;
-    font-size: 16px;
-    padding-right: 20px;
-    border-right: 1px solid #c2c2c2;
+    font-size: 18px;
     line-height: 20px;
     float: left;
   }
@@ -609,8 +608,8 @@ export default {
   .rightItem div {
     color: #666;
     font-size: 16px;
-    padding-left: 20px;
-    line-height: 20px;
+    text-align: left;
+    line-height: 30px;
     float: left;
   }
 }
