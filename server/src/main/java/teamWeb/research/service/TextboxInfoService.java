@@ -14,7 +14,7 @@ public interface TextboxInfoService extends IService<TextboxInfo> {
 
     List<ProjectBO> projectDetail(int start, int end);
 
-    List<DirectionsDTO> direDetail(int start, int end);
+    List<DirectionsDTO> direDetail();
 
     List<PlatformDTO> platformDetail(int start, int end);
 
@@ -52,4 +52,5 @@ public interface TextboxInfoService extends IService<TextboxInfo> {
 
     ProjectBO projectInfo(Integer projectId);
 
+    String sumDire();
 }

@@ -15,7 +15,7 @@ public interface TextboxInfoMapper extends BaseMapper<TextboxInfo> {
 
     List<TextboxInfo> getProjected(int start, int end);
 
-    List<TextboxInfo> getDire(int start, int end);
+    List<TextboxInfo> getDire();
 
     List<TextboxInfo> getPlatform(int start, int end);
 
@@ -60,4 +60,7 @@ public interface TextboxInfoMapper extends BaseMapper<TextboxInfo> {
     ProjectDO projectTitle(Integer projectId);
 
     List<ProjectInfo> projectInfo(Integer projectId);
+
+    String sumDire();
+
 }

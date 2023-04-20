@@ -49,17 +49,15 @@ public class ProjectController {
 
 
     @GetMapping("/require-direction")
-    public APIResponse direction(@RequestParam(value="start",defaultValue = "0") int start,
-                                 @RequestParam(value="end",defaultValue = "10") int end,
-                                 @RequestParam(value = "languageType") String languageType){
-        Integer sum =null;
+    public APIResponse direction(@RequestParam(value = "languageType") String languageType){
+        String sum =null;
         List<DirectionsDTO> direDetail = null;
         if (languageType.equals("Chinese")) {
-            direDetail = textboxInfoService.direDetail(start, end);
-            sum = textboxInfoService.sumTextbox("科研方向");
+            direDetail = textboxInfoService.direDetail();
+            sum = textboxInfoService.sumDire();
         }else if (languageType.equals("English")){
-            direDetail = textboxInfoService.enDireDetail(start,end);
-            sum = textboxInfoService.sumEnTextbox("科研方向");
+            // direDetail = textboxInfoService.enDireDetail(start,end);
+            // sum = textboxInfoService.sumEnTextbox("科研方向");
         }
         return APIResponse.success(direDetail,sum);
     }

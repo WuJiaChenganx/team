@@ -77,9 +77,8 @@ public class TextboxInfoServiceImpl extends ServiceImpl<TextboxInfoMapper, Textb
 
 
     @Override
-    public List<DirectionsDTO> direDetail(int start, int end) {
-        List<DirectionsBO> directionsBOList = BeanUtil.convert(textboxInfoMapper.getDire(start,end-start),DirectionsBO.class);
-
+    public List<DirectionsDTO> direDetail() {
+        List<DirectionsBO> directionsBOList = BeanUtil.convert(textboxInfoMapper.getDire(),DirectionsBO.class);
 
         for (DirectionsBO directionsBO:
                 directionsBOList) {
@@ -221,6 +220,11 @@ public class TextboxInfoServiceImpl extends ServiceImpl<TextboxInfoMapper, Textb
             projectBO.setProjectInfoList(projectInfoList);
         }
         return projectBO;
+    }
+
+    @Override
+    public String sumDire() {
+        return textboxInfoMapper.sumDire();
     }
 
 }

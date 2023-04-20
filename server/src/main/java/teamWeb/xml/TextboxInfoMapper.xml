@@ -54,7 +54,6 @@
         <where>
             tClass = "科研方向"
         </where>
-        limit ${start},${end}
     </select>
 
     <select id="getEnDire" resultType="teamWeb.research.entity.TextboxInfo">
@@ -141,6 +140,11 @@
         </where>
     </select>
 
+    <select id="sumDire" resultType="String">
+        SELECT `text`
+        FROM textbox
+        WHERE tClass = "方向总结"
+    </select>
 
     <insert id="insertInfo">
         INSERT INTO textbox(`title`, `text`,`fileUrl`,`tClass`,`pictureUrl`,`sDate`,`eDate`) VALUES ("${title}", "${text}","${fileUrl}","${tClass}","${pictureUrl}","${sDate}","${eDate}")
