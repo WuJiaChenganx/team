@@ -5,8 +5,17 @@ public class DirectionsBO {
     private String text;
     private String pictureUrl;
 
+    private String title;
     private String picUrl;
     private String detail;
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
     public Integer getId() {
         return id;

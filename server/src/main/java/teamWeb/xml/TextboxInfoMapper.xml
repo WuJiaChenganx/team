@@ -49,7 +49,7 @@
 
 
     <select id="getDire" resultType="teamWeb.research.entity.TextboxInfo">
-        select `id`,`text`,`pictureUrl`,`tClass`,title
+        select `id`,`text`,`pictureUrl`,`tClass`,`title`
         from textbox
         <where>
             tClass = "科研方向"
