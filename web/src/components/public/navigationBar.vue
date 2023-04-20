@@ -63,7 +63,7 @@ export default {
           ],
         },
         {
-          title: "教育育人",
+          title: "教学育人",
           path: "/education",
           subMenu: [{ title: "课程教学", path: "/education/curriculum" }],
         },
@@ -270,7 +270,7 @@ export default {
 
   .navItem {
     cursor: pointer;
-    width: 15%;
+    flex: 1 1 auto;
     height: 5rem;
     overflow: hidden;
   }
@@ -289,10 +289,10 @@ export default {
     background-color: #008cd6;
   }
 
-  .navItem .subNav {
+  .subNav {
     /* 隐藏元素 */
     cursor: pointer;
-    width: 15%;
+    width: 17.025%;
     font-size: 1.8rem;
     font-weight: bold;
     color: #fff;
@@ -362,7 +362,7 @@ export default {
   }
 
   .navItem {
-    width: 15%;
+    flex: 1 1 auto;
   }
 
   .navTitle {
@@ -375,35 +375,9 @@ export default {
     color: #fff;
   }
 
-  /* .navItem:hover {
-    background-color: #008cd6;
-  } */
-
-  .navItem .subNav {
-    /* 隐藏元素 */
-    /* width: 15%;
-    line-height: 5rem;
-    font-size: 1rem;
-    font-weight: bold; */
+  /* 隐藏子菜单元素 */
+  .subNav {
     display: none;
-    /* color: #fff;
-    background-color: #0055a2; */
   }
-
-  /* .navItem:hover .subNav {
-    display: block;
-  } */
-
-  /* .subNavItem {
-    height: 5rem;
-    text-align: center; */
-  /* 垂直对齐 */
-  /* line-height: 5rem;
-    color: #fff;
-  } */
-
-  /* .subNavItem:hover {
-    background-color: #008cd6;
-  } */
 }
 </style>

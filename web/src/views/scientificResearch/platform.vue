@@ -5,14 +5,7 @@
       <div class="platformAside">
         <div class="platformAsideTitle">{{ pageItem.allTitle }}</div>
         <div class="platformAsideContent">
-          <el-menu
-            :default-active="this.$route.path"
-            router
-            mode="vertical"
-            background-color="#ffffff"
-            text-color="#000"
-            active-text-color="#fff"
-          >
+          <el-menu :default-active="this.$route.path" router text-color="#000">
             <el-menu-item
               class="platformAsideItem"
               v-for="(menuItem, menuIndex) in menu"
@@ -147,28 +140,35 @@ export default {
   }
 
   .platformAside {
-    width: 25%;
+    width: 255px;
+    margin-right: 20px;
   }
   .platformAsideTitle {
+    width: 255px;
+    height: 78px;
+    line-height: 78px;
     background: url(../../assets/images/background/zryy-menu-t-bg.png) no-repeat;
     border-radius: 0.6rem;
     background-size: cover !important;
     font-weight: bold;
     color: #fff;
-    font-size: 2rem;
-    line-height: 3rem;
-    height: 3rem;
-    padding: 2rem 3rem;
-    margin-bottom: 0.5rem;
+    font-size: 24px;
+  }
+  .platformAsideContent {
+    width: 255px;
+    background-color: #f9fbfd;
   }
   .platformAsideItem {
-    font-size: 2rem;
+    height: 52px;
+    line-height: 52px;
+    font-size: 16px;
     text-align: left;
     cursor: pointer;
+    border-bottom: 1px solid #dfdfdf;
   }
 
   .platformDetail {
-    width: 73%;
+    flex: 1 1 auto;
     padding: 0 3rem;
     box-sizing: border-box;
     background-color: #fff;
@@ -200,9 +200,16 @@ export default {
     color: black !important;
     font-weight: 800 !important;
   }
+  /* 侧边栏悬浮的背景颜色 */
+  .el-menu-item:hover {
+    font-weight: bold;
+    background-color: #fff;
+  }
   /* 选中侧边导航的背景颜色 */
   .el-menu-item.is-active {
-    background: #008cd6 !important;
+    font-weight: bold;
+    color: #034ea1;
+    background: #eee;
   }
 
   .platformItem {
@@ -232,29 +239,44 @@ export default {
 }
 /* 移动端  */
 @media screen and (max-width: 1000px) {
-  .platform {
-    background: url(../../assets/images/background/contentBackground.jpg)
-      no-repeat;
-  }
-
-  .platformContent {
-    display: flex;
-    flex-direction: column;
-  }
-
   .platformAside {
-    width: 100%;
+    background: url(../../assets/images/background/contentBackground.jpg) center
+      0 no-repeat;
+    background-size: cover;
   }
-  /* 不显示侧边导航栏上面的标题 */
   .platformAsideTitle {
-    display: none;
+    font-size: 20px;
+    padding: 10px 1.6%;
+    line-height: 30px;
+    font-weight: bold;
+    text-align: left;
+    color: #014da1;
   }
-  .platformAsideItem {
+  /* 菜单横向排列 */
+  .el-menu {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0) !important;
+  }
+
+  .el-menu-item {
+    padding: 0 !important;
+    border: 1px solid #ccc;
+    width: 30%;
+    line-height: 36px;
+    height: 40px;
+    margin: 0 1.6% 15px;
     font-size: 2rem;
     text-align: center;
     cursor: pointer;
+    background-color: #fff;
   }
 
+  .el-icon-sunny {
+    display: none;
+  }
   .platformDetail {
     width: 100%;
     padding: 0 1.5rem;
@@ -267,13 +289,14 @@ export default {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    padding: 2rem 0;
+    padding: 10px 0;
     border-bottom: 1px solid #dfdfdf;
   }
   .title {
     color: #333333;
     font-weight: bold;
-    font-size: 2.5rem;
+    font-size: 20px;
+    line-height: 30px;
   }
   .breadCrumb {
     padding-top: 1rem;
@@ -290,7 +313,10 @@ export default {
   }
   /* 选中侧边导航的背景颜色 */
   .el-menu-item.is-active {
-    background: #008cd6 !important;
+    background: #014da1;
+    color: #fff;
+    font-weight: bold;
+    border: #014da1 solid 1px;
   }
 
   .platformItem {

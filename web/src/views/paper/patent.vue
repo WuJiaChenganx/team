@@ -5,14 +5,7 @@
       <div class="patentAside">
         <div class="patentAsideTitle">{{ pageItem.allTitle }}</div>
         <div class="patentAsideContent">
-          <el-menu
-            :default-active="this.$route.path"
-            router
-            mode="vertical"
-            background-color="#fff"
-            text-color="#000"
-            active-text-color="#fff"
-          >
+          <el-menu :default-active="this.$route.path" router text-color="#000">
             <el-menu-item
               class="patentAsideItem"
               v-for="(menuItem, menuIndex) in menu"
@@ -40,16 +33,18 @@
           </div>
         </div>
         <div class="patentItem">
-          <div
+          <a
             class="detailItem"
             v-for="(detailItem, detailIndex) in patents"
             :key="detailIndex"
+            :href="detailItem.url"
+            target="_blank"
           >
             <div class="detailItemInfo">
               <span class="dot"></span>
               {{ detailItem.title }}
             </div>
-          </div>
+          </a>
         </div>
         <div class="paging">
           <!-- page-size展示的选择每页显示个数的选项,页面变动触发的事件是current-change后面的函数,total表示总共的数量 current-page表示当前页数-->
@@ -75,7 +70,7 @@ export default {
     return {
       pageItem: {},
       chineseItem: {
-        allTitle: "论文论著",
+        allTitle: "论文著作",
         subTitle: "授权专利",
         home: "首页",
         patent: "授权专利",
@@ -157,28 +152,35 @@ export default {
   }
 
   .patentAside {
-    width: 25%;
+    width: 255px;
+    margin-right: 20px;
   }
   .patentAsideTitle {
+    width: 255px;
+    height: 78px;
+    line-height: 78px;
     background: url(../../assets/images/background/zryy-menu-t-bg.png) no-repeat;
     border-radius: 0.6rem;
     background-size: cover !important;
     font-weight: bold;
     color: #fff;
-    font-size: 2rem;
-    line-height: 3rem;
-    height: 3rem;
-    padding: 2rem 3rem;
-    margin-bottom: 0.5rem;
+    font-size: 24px;
+  }
+  .patentAsideContent {
+    width: 255px;
+    background-color: #f9fbfd;
   }
   .patentAsideItem {
-    font-size: 2rem;
+    height: 52px;
+    line-height: 52px;
+    font-size: 16px;
     text-align: left;
     cursor: pointer;
+    border-bottom: 1px solid #dfdfdf;
   }
 
   .patentDetail {
-    width: 73%;
+    flex: 1 1 auto;
     padding: 0 3rem;
     box-sizing: border-box;
     background-color: #fff;
@@ -210,14 +212,18 @@ export default {
     color: black !important;
     font-weight: 800 !important;
   }
-  /* 选中侧边导航的背景颜色 */
+  /* 侧边栏悬浮的背景颜色 */
+  .el-menu-item:hover {
+    font-weight: bold;
+    background-color: #fff;
+  } /* 选中侧边导航的背景颜色 */
   .el-menu-item.is-active {
-    background: #008cd6 !important;
+    font-weight: bold;
+    color: #034ea1;
+    background: #eee;
   }
   /* 设置块和分页的距离 */
   .patentItem {
-    display: flex;
-    flex-direction: column;
     margin-bottom: 3rem;
     min-height: 600px;
   }
@@ -260,29 +266,43 @@ export default {
 }
 /* 移动端  */
 @media screen and (max-width: 1000px) {
-  .patent {
-    background: url(../../assets/images/background/contentBackground.jpg)
-      no-repeat;
-  }
-
-  .patentContent {
-    display: flex;
-    flex-direction: column;
-  }
-
   .patentAside {
-    width: 100%;
+    background: url(../../assets/images/background/contentBackground.jpg) center
+      0 no-repeat;
+    background-size: cover;
   }
-  /* 不显示侧边导航栏上面的标题 */
+
   .patentAsideTitle {
-    display: none;
+    font-size: 20px;
+    padding: 10px 1.6%;
+    line-height: 30px;
+    font-weight: bold;
+    text-align: left;
+    color: #014da1;
   }
-  .patentAsideItem {
+  /* 菜单横向排列 */
+  .el-menu {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0) !important;
+  }
+  .el-menu-item {
+    padding: 0 !important;
+    border: 1px solid #ccc;
+    width: 30%;
+    line-height: 36px;
+    height: 40px;
+    margin: 0 1.6% 15px;
     font-size: 2rem;
     text-align: center;
     cursor: pointer;
+    background-color: #fff;
   }
-
+  .el-icon-sunny {
+    display: none;
+  }
   .patentDetail {
     width: 100%;
     padding: 0 1.5rem;
@@ -295,13 +315,14 @@ export default {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    padding: 2rem 0;
+    padding: 10px 0;
     border-bottom: 1px solid #dfdfdf;
   }
   .title {
     color: #333333;
     font-weight: bold;
-    font-size: 2.5rem;
+    font-size: 20px;
+    line-height: 30px;
   }
   .breadCrumb {
     padding-top: 1rem;
@@ -318,7 +339,10 @@ export default {
   }
   /* 选中侧边导航的背景颜色 */
   .el-menu-item.is-active {
-    background: #008cd6 !important;
+    background: #014da1;
+    color: #fff;
+    font-weight: bold;
+    border: #014da1 solid 1px;
   }
   /* 设置块和分页的距离 */
   .patentItem {
