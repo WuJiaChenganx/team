@@ -31,15 +31,15 @@ public class TextboxInfoServiceImpl extends ServiceImpl<TextboxInfoMapper, Textb
     }
 
     @Override
-    public List<ProjectBO> projectDetail(int start, int end) {
-        List<ProjectBO> projectBOList = BeanUtil.convert(textboxInfoMapper.getProject(start,end-start),ProjectBO.class);
-
-
+    public List<ProjectBO> projectDetail(int start, int end,String direType) {
+        List<ProjectBO> projectBOList = BeanUtil.convert(textboxInfoMapper.getProject(start,end-start,direType),ProjectBO.class);
         Integer numberIndex = 1;
         for (ProjectBO projectBO:
                 projectBOList) {
             projectBO.setNumber(start+numberIndex);
             numberIndex = numberIndex+1;
+            projectBO.setProjectInfoList(textboxInfoMapper.projectInfo(projectBO.getId()));
+
         }
         return projectBOList;
     }
@@ -162,8 +162,8 @@ public class TextboxInfoServiceImpl extends ServiceImpl<TextboxInfoMapper, Textb
     }
 
     @Override
-    public Integer sumProject() {
-        return textboxInfoMapper.sumProject();
+    public Integer sumProject(String direType) {
+        return textboxInfoMapper.sumProject(direType);
     }
 
     @Override

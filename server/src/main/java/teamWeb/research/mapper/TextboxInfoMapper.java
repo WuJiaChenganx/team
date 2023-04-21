@@ -11,7 +11,7 @@ import teamWeb.research.pojo.CoursePageBO;
 import java.util.List;
 
 public interface TextboxInfoMapper extends BaseMapper<TextboxInfo> {
-    List<ProjectDO> getProject(int start, int end);
+    List<ProjectDO> getProject(int start, int end,String direType);
 
     List<TextboxInfo> getProjected(int start, int end);
 
@@ -43,7 +43,7 @@ public interface TextboxInfoMapper extends BaseMapper<TextboxInfo> {
 
     Integer sumTextbox(String type);
 
-    Integer sumProject();
+    Integer sumProject(String direType);
 
     List<ProjectDO> getEnProject(int start, int end);
 

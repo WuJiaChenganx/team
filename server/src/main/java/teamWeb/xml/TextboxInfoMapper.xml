@@ -5,6 +5,7 @@
     <select id="getProject" resultType="teamWeb.research.entity.ProjectDO">
         select `id`,project_name AS projectName, responser, project_type AS projectType, `time`
         from project
+        WHERE project_dire =  "${direType}"
         order by time desc limit ${start},${end}
     </select>
 
@@ -91,6 +92,7 @@
 
     <select id="sumProject" resultType="int">
         SELECT COUNT(*) FROM project
+        WHERE project_dire = "${direType}"
     </select>
 
     <select id="sumEnProject" resultType="int">

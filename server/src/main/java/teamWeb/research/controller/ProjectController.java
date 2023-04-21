@@ -27,12 +27,13 @@ public class ProjectController {
     @GetMapping("/require-project")
     public APIResponse projecting(@RequestParam(value="start") int start,
                                   @RequestParam(value="end") int end,
-                                  @RequestParam(value = "languageType") String languageType){
+                                  @RequestParam(value = "languageType") String languageType,
+                                  @RequestParam(value = "type") String direType){
         Integer sum =null;
         List<ProjectBO> projectDetail = null;
         if (languageType.equals("Chinese")) {
-             projectDetail = textboxInfoService.projectDetail(start, end);
-             sum = textboxInfoService.sumProject();
+             projectDetail = textboxInfoService.projectDetail(start, end,direType);
+             sum = textboxInfoService.sumProject(direType);
         }else if(languageType.equals("English")) {
             projectDetail = textboxInfoService.enProjectDetail(start,end);
             sum = textboxInfoService.sumEnProject();

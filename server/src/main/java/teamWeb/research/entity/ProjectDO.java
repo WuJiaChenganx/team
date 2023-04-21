@@ -7,6 +7,15 @@ public class ProjectDO {
     private String projectType;
     private String time;
     private String projectInfo;
+    private String projectDire;
+
+    public String getProjectDire() {
+        return projectDire;
+    }
+
+    public void setProjectDire(String projectDire) {
+        this.projectDire = projectDire;
+    }
 
     public String getResponser() {
         return responser;

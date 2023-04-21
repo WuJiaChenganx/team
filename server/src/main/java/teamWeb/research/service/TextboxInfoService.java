@@ -12,7 +12,7 @@ public interface TextboxInfoService extends IService<TextboxInfo> {
 
     List<TextboxInfo> briefDetail();
 
-    List<ProjectBO> projectDetail(int start, int end);
+    List<ProjectBO> projectDetail(int start, int end,String direType);
 
     List<DirectionsDTO> direDetail();
 
@@ -34,7 +34,7 @@ public interface TextboxInfoService extends IService<TextboxInfo> {
 
     void deleteInfo(TextboxInfo textboxInfo);
 
-    Integer sumProject();
+    Integer sumProject(String direType);
 
     Integer sumTextbox(String type);
 

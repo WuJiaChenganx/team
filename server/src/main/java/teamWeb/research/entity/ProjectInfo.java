@@ -9,6 +9,7 @@ public class ProjectInfo {
     private String picture;
     private List<String> pic;
 
+
     public List<String> getPic() {
         return pic;
     }
