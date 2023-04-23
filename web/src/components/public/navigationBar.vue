@@ -71,21 +71,45 @@ export default {
           path: "/scientificResearch",
           subMenu: [
             { title: "科研方向", path: "/scientificResearch/direction" },
-            { title: "科研项目", path: "/scientificResearch/project" },
+            // 路由还需要改过(英文版内容还没有添加)
+            {
+              title: "横向项目",
+              path: "/scientificResearch/transverseProject",
+            },
+            // 路由还需要改过(英文版内容还没有添加)
+            { title: "纵向项目", path: "/scientificResearch/verticalProject" },
             { title: "科研平台", path: "/scientificResearch/platform" },
           ],
         },
         {
           title: "教学育人",
           path: "/education",
-          subMenu: [{ title: "课程教学", path: "/education/curriculum" }],
+          subMenu: [
+            { title: "课程教学", path: "/education/curriculum" },
+            // 路由还需要改过(英文版内容还没有添加)
+            { title: "教学成果", path: "/education/achievement" },
+          ],
+        },
+        // 路由还需要改过(英文版内容还没有添加)
+        {
+          title: "获奖情况",
+          path: "/prize",
+          subMenu: [
+            { title: "团队荣誉", path: "/prize/teamPrize" },
+            { title: "个人荣誉", path: "/prize/personalPrize" },
+            { title: "项目获奖", path: "/prize/projectPrize" },
+          ],
         },
         {
           title: "团队成员",
           path: "/team",
           subMenu: [
             { title: "团队简介", path: "/team/profile" },
+            // 路由还需要改过(英文版内容还没有添加)
+            { title: "交流合作", path: "/team/profile" },
             { title: "导&nbsp;&nbsp;&nbsp;&nbsp;师", path: "/team/teacher" },
+            // 路由还需要改过(英文版内容还没有添加)
+            { title: "顾问团", path: "/team/doctor" },
             { title: "博士生", path: "/team/doctor" },
             { title: "研究生", path: "/team/master" },
             { title: "毕业生", path: "/team/graduate" },

@@ -180,7 +180,7 @@ const router = new VueRouter({
             path: "/test",
             name: "测试",
             component: () =>
-                import ("../components/home/resourceSharing.vue"),
+                import ("../views/navigation.vue"),
         },
     ],
 });

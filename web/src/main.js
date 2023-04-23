@@ -16,8 +16,8 @@ Vue.config.productionTip = false;
 Vue.use(ElementUI);
 
 new Vue({
-  // 导入App组件
-  render: (h) => h(App),
-  router: router,
-  store,
+    // 导入App组件
+    render: (h) => h(App),
+    router: router,
+    store,
 }).$mount("#app"); //使用mount挂载到index上
