@@ -8,11 +8,12 @@
             <el-breadcrumb-item :to="{ path: '/home' }">{{
               pageItem.home
             }}</el-breadcrumb-item>
-            <el-breadcrumb-item :to="{ path: '/scientificResearch/project' }">{{
-              pageItem.project
-            }}</el-breadcrumb-item>
             <el-breadcrumb-item
-              :to="{ path: '/scientificResearch/projectDetail' }"
+              :to="{ path: '/scientificResearch/lateralProject' }"
+              >{{ pageItem.project }}</el-breadcrumb-item
+            >
+            <el-breadcrumb-item
+              :to="{ path: '/scientificResearch/lateralDetail' }"
               >{{ pageItem.projectDetail }}</el-breadcrumb-item
             >
           </el-breadcrumb>
@@ -59,7 +60,7 @@
   </div>
 </template>
 <script>
-import { getActivityDetail } from "@/api/api";
+import { getProjectDetail } from "@/api/api";
 export default {
   data() {
     return {
@@ -67,7 +68,7 @@ export default {
       chineseItem: {
         title: "科研项目",
         home: "首页",
-        project: "科研项目",
+        project: "横向项目",
         projectDetail: "项目详情",
         publicationDate: "发布时间: ",
         pageView: "浏览量: ",
@@ -98,9 +99,10 @@ export default {
     async getProjectDetail(id) {
       // 从上一个路由获取的参数
       let params = {
-        id: id,
+        projectId: id,
+        languageType: this.$store.getters.getLanguageType,
       };
-      await getActivityDetail(params).then((res) => {
+      await getProjectDetail(params).then((res) => {
         this.projectDetail = res.data;
       });
     },

@@ -118,6 +118,7 @@ export default {
       menuZH: [
         { name: "团队简介", path: "/team/profile" },
         { name: "导&nbsp;&nbsp;&nbsp;&nbsp;师", path: "/team/teacher" },
+        { name: "顾问团", path: "/team/consultor" },
         { name: "博士生", path: "/team/doctor" },
         { name: "硕士生", path: "/team/master" },
         { name: "毕业生", path: "/team/graduate" },
@@ -125,6 +126,7 @@ export default {
       menuEN: [
         { name: "Profile", path: "/team/profile" },
         { name: "Teacher", path: "/team/teacher" },
+        { name: "Consultor", path: "/team/consultor" },
         { name: "Doctor", path: "/team/doctor" },
         { name: "Master", path: "/team/master" },
         { name: "Graduate", path: "/team/graduate" },

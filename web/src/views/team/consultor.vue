@@ -1,13 +1,13 @@
 <template>
-  <div class="master">
+  <div class="consultor">
     <!-- default-active表示是当前选中的菜单的index -->
-    <div class="masterContent">
-      <div class="masterAside">
-        <div class="masterAsideTitle">{{ pageItem.allTitle }}</div>
-        <div class="masterAsideContent">
+    <div class="consultorContent">
+      <div class="consultorAside">
+        <div class="consultorAsideTitle">{{ pageItem.allTitle }}</div>
+        <div class="consultorAsideContent">
           <el-menu :default-active="this.$route.path" router text-color="#000">
             <el-menu-item
-              class="masterAsideItem"
+              class="consultorAsideItem"
               v-for="(menuItem, menuIndex) in menu"
               :key="menuIndex"
               :index="menuItem.path"
@@ -18,36 +18,42 @@
           </el-menu>
         </div>
       </div>
-      <div class="masterDetail">
-        <div class="masterTitle">
+      <div class="consultorDetail">
+        <div class="consultorTitle">
           <div class="title">{{ pageItem.subTitle }}</div>
           <div class="breadCrumb">
             <el-breadcrumb separator-class="el-icon-arrow-right">
               <el-breadcrumb-item :to="{ path: '/home' }">{{
                 pageItem.home
               }}</el-breadcrumb-item>
-              <el-breadcrumb-item :to="{ path: '/team/master' }">{{
-                pageItem.master
+              <el-breadcrumb-item :to="{ path: '/team/consultor' }">{{
+                pageItem.consultor
               }}</el-breadcrumb-item>
             </el-breadcrumb>
           </div>
         </div>
-        <div v-for="(item, index) in studentCover" :key="index">
-          <div class="subTitle">{{ item.title }}级研究生</div>
-          <div class="masterItem">
-            <div
-              class="detailItem"
-              v-for="(memberItem, index) in item.memberInfo"
-              :key="index"
-              @click="gotoDetail(memberItem.id)"
-            >
-              <div class="detailItemImg">
-                <img :src="memberItem.picUrl" @error="setDefaultImage" />
-              </div>
-              <div class="detailItemInfo">
-                {{ memberItem.title }}
-                <br />
-                {{ memberItem.name }}
+        <div class="subTitle">顾问团:</div>
+        <div class="consultors">
+          <div
+            class="consultorItem"
+            v-for="(consultorItem, consultorIndex) in consultorCover"
+            :key="consultorIndex"
+            @click="gotoDetail(consultorItem)"
+          >
+            <div class="consultorImg">
+              <img :src="consultorItem.picUrl" @error="setDefaultImage" />
+            </div>
+            <div class="consultorInfo">
+              <div class="consultorName">{{ consultorItem.name }}</div>
+              <div
+                class="consultorInfoItem"
+                v-for="(
+                  consultorInfoItem, consultorInfoIndex
+                ) in consultorItem.info"
+                :key="consultorInfoIndex"
+              >
+                <span class="dot"></span>
+                {{ consultorInfoItem }}
               </div>
             </div>
           </div>
@@ -58,7 +64,7 @@
 </template>
 
 <script>
-import { getStudentCover } from "@/api/api";
+import { getMemberCover } from "@/api/api";
 // 设置默认缺失的图片
 import defaultImage from "@/assets/images/member/default.png";
 export default {
@@ -67,15 +73,15 @@ export default {
       pageItem: {},
       chineseItem: {
         allTitle: "团队概况",
-        subTitle: "硕士生",
+        subTitle: "顾问团",
         home: "首页",
-        master: "硕士生",
+        consultor: "顾问团",
       },
       englishItem: {
         allTitle: "Snapshot",
-        subTitle: "Master",
+        subTitle: "consultor",
         home: "home",
-        master: "Master",
+        consultor: "consultor",
       },
       menu: [],
       menuZH: [
@@ -94,11 +100,12 @@ export default {
         { name: "Master", path: "/team/master" },
         { name: "Graduate", path: "/team/graduate" },
       ],
-      studentCover: [],
+      consultorCover: [],
     };
   },
+
   created() {
-    this.getStudentList();
+    this.getconsultorCoverList();
     this.changUI();
   },
   methods: {
@@ -111,17 +118,17 @@ export default {
         this.pageItem = this.englishItem;
       }
     },
-
     // async和await用于同步,就是按顺序执行
-    async getStudentList() {
+    async getconsultorCoverList() {
       let params = {
         start: 0,
         end: 100,
-        memberType: "master",
+        memberType: "consultor",
         languageType: this.$store.getters.getLanguageType,
+        memberType: "counselor",
       };
-      await getStudentCover(params).then((res) => {
-        this.studentCover = res.data;
+      await getMemberCover(params).then((res) => {
+        this.consultorCover = res.data;
       });
     },
 
@@ -129,14 +136,8 @@ export default {
     setDefaultImage(e) {
       e.target.src = defaultImage;
     },
-    gotoDetail(id) {
-      this.$router.push({
-        path: "/team/memberInfo",
-        name: "成员详情",
-        query: {
-          id: id,
-        },
-      });
+    gotoDetail(memberItem) {
+      window.open(memberItem.pageUrl, "_blank");
     },
   },
 };
@@ -144,13 +145,15 @@ export default {
 <style scoped>
 /* PC端  */
 @media screen and (min-width: 1000px) {
-  .master {
+  .consultor {
     padding: 3rem 0;
+    box-sizing: border-box;
     background: url(../../assets/images/background/contentBackground.jpg)
       no-repeat;
+    min-height: calc(100vh - 35.762rem);
   }
 
-  .masterContent {
+  .consultorContent {
     width: 75%;
     margin: 0 auto;
     display: flex;
@@ -158,11 +161,11 @@ export default {
     justify-content: space-between;
   }
 
-  .masterAside {
+  .consultorAside {
     width: 255px;
     margin-right: 20px;
   }
-  .masterAsideTitle {
+  .consultorAsideTitle {
     width: 255px;
     height: 78px;
     line-height: 78px;
@@ -173,11 +176,11 @@ export default {
     color: #fff;
     font-size: 24px;
   }
-  .masterAsideContent {
+  .consultorAsideContent {
     width: 255px;
     background-color: #f9fbfd;
   }
-  .masterAsideItem {
+  .consultorAsideItem {
     height: 52px;
     line-height: 52px;
     font-size: 16px;
@@ -186,15 +189,16 @@ export default {
     border-bottom: 1px solid #dfdfdf;
   }
 
-  .masterDetail {
+  .consultorDetail {
     flex: 1 1 auto;
     padding: 0 3rem;
     box-sizing: border-box;
     background-color: #fff;
     border: 1px solid #dfdfdf;
+    min-height: calc(100vh - 35.762rem - 6rem);
   }
 
-  .masterTitle {
+  .consultorTitle {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -237,47 +241,73 @@ export default {
     text-align: left;
     margin: 10px 0;
   }
-  .masterItem {
-    width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    padding: 3rem 0;
+
+  .dot {
+    position: relative;
+    padding-left: 20px;
   }
-  .detailItem {
-    cursor: pointer;
-    text-decoration: none;
-    flex: 0 0 calc(20% - 10px); /* 每个元素占据20%的宽度，同时减去10px的margin-right */
-    margin-right: 10px; /* 设置右外边距 */
-    box-sizing: border-box;
-  }
-  /* 取消最后一个元素的右外边距 */
-  .detailItem:last-child {
-    margin-right: 0;
-  }
-  /* 最后一行左对齐 */
-  .masterItem:last-child {
-    justify-content: start;
-  }
-  .detailItemImg {
-    width: 100%;
-  }
-  .detailItem img {
-    width: 70%;
+  .dot::before {
+    content: "";
+    position: absolute;
+    top: 6px;
+    left: 0;
+    width: 6px;
+    height: 6px;
+    background-color: #000;
+    border-radius: 50%;
   }
 
-  .detailItemInfo {
-    padding: 1rem 0;
+  .consultors {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  .consultorItem {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    cursor: pointer;
+  }
+  /* 顾问团图片 */
+  .consultorImg {
+    height: 190px;
+    border: 1px solid #ccc;
+    margin-right: 10px;
+  }
+  .consultorImg img {
+    width: 100%;
+    height: 100%;
+  }
+  /* 顾问团信息 */
+  .consultorInfo {
+    background: #dbeeff;
+    flex: 1 1 auto;
+    padding: 0 10px;
+    border: 1px solid #ccc;
+  }
+  .consultorName {
+    font-size: 20px;
+    text-align: left;
+  }
+  .consultorInfoItem {
+    text-align: left;
+    margin: 10px 0;
+    font-size: 16px;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
   }
 }
-/* 移动端  */
+/* 移动端 */
 @media screen and (max-width: 1000px) {
-  .masterAside {
+  .consultorAside {
     background: url(../../assets/images/background/contentBackground.jpg) center
       0 no-repeat;
     background-size: cover;
   }
-  .masterAsideTitle {
+  .consultorAsideTitle {
     font-size: 20px;
     padding: 10px 1.6%;
     line-height: 30px;
@@ -311,7 +341,7 @@ export default {
     display: none;
   }
 
-  .masterDetail {
+  .consultorDetail {
     width: 100%;
     padding: 0 1.5rem;
     box-sizing: border-box;
@@ -319,7 +349,7 @@ export default {
     border: 1px solid #dfdfdf;
   }
 
-  .masterTitle {
+  .consultorTitle {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -359,24 +389,60 @@ export default {
     text-align: left;
     margin: 10px 0;
   }
-  .masterItem {
+
+  .dot {
+    position: relative;
+    padding-left: 20px;
+  }
+  .dot::before {
+    content: "";
+    position: absolute;
+    top: 6px;
+    left: 0;
+    width: 6px;
+    height: 6px;
+    background-color: #000;
+    border-radius: 50%;
+  }
+  .consultors {
     display: flex;
     flex-direction: column;
-    padding: 2rem 0;
   }
-  .detailItem {
+  .consultorItem {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    margin: 5px 0;
     cursor: pointer;
-    text-decoration: none;
-    margin-bottom: 2rem;
   }
-
-  .detailItem img {
-    width: 20rem;
-    height: 23rem;
+  /* 顾问团图片 */
+  .consultorImg {
+    height: 165px;
+    border: 1px solid #ccc;
+    margin-right: 10px;
   }
-
-  .detailItem .detailItemInfo {
-    padding: 1rem 0;
+  .consultorImg img {
+    height: 100%;
+  }
+  /* 顾问团信息 */
+  .consultorInfo {
+    background: #dbeeff;
+    flex: 1 1 auto;
+    padding: 0 10px;
+    border: 1px solid #ccc;
+  }
+  .consultorName {
+    font-size: 20px;
+    text-align: left;
+  }
+  .consultorInfoItem {
+    text-align: left;
+    margin: 5px 0;
+    font-size: 16px;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
   }
 }
 </style>

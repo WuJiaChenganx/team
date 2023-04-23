@@ -74,7 +74,7 @@ export default {
             // 路由还需要改过(英文版内容还没有添加)
             {
               title: "横向项目",
-              path: "/scientificResearch/transverseProject",
+              path: "/scientificResearch/lateralProject",
             },
             // 路由还需要改过(英文版内容还没有添加)
             { title: "纵向项目", path: "/scientificResearch/verticalProject" },
@@ -106,10 +106,10 @@ export default {
           subMenu: [
             { title: "团队简介", path: "/team/profile" },
             // 路由还需要改过(英文版内容还没有添加)
-            { title: "交流合作", path: "/team/profile" },
+            // { title: "交流合作", path: "/team/coordination" },
             { title: "导&nbsp;&nbsp;&nbsp;&nbsp;师", path: "/team/teacher" },
             // 路由还需要改过(英文版内容还没有添加)
-            { title: "顾问团", path: "/team/doctor" },
+            { title: "顾问团", path: "/team/consultor" },
             { title: "博士生", path: "/team/doctor" },
             { title: "研究生", path: "/team/master" },
             { title: "毕业生", path: "/team/graduate" },
@@ -144,7 +144,14 @@ export default {
           path: "/scientificResearch",
           subMenu: [
             { title: "Direction", path: "/scientificResearch/direction" },
-            { title: "Project", path: "/scientificResearch/project" },
+            {
+              title: "lateral-project",
+              path: "/scientificResearch/lateralProject",
+            },
+            {
+              title: "vertical-project",
+              path: "/scientificResearch/verticalProject",
+            },
             { title: "Platform", path: "/scientificResearch/platform" },
           ],
         },
@@ -160,6 +167,7 @@ export default {
           subMenu: [
             { title: "Profile", path: "/team/profile" },
             { title: "Teacher", path: "/team/teacher" },
+            { title: "Consultor", path: "/team/consultor" },
             { title: "Doctor", path: "/team/doctor" },
             { title: "Master", path: "/team/master" },
             { title: "Graduate", path: "/team/graduate" },
@@ -346,7 +354,7 @@ export default {
   .subNav {
     /* 隐藏元素 */
     cursor: pointer;
-    width: 17.025%;
+    width: 14.6%;
     font-size: 1.8rem;
     font-weight: bold;
     color: #fff;

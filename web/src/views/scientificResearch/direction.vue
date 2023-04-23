@@ -73,12 +73,20 @@ export default {
       menu: [],
       menuZH: [
         { name: "科研方向", path: "/scientificResearch/direction" },
-        { name: "科研项目", path: "/scientificResearch/project" },
+        { name: "横向项目", path: "/scientificResearch/lateralProject" },
+        { name: "纵向项目", path: "/scientificResearch/verticalProject" },
         { name: "科研平台", path: "/scientificResearch/platform" },
       ],
       menuEN: [
         { name: "Direction", path: "/scientificResearch/direction" },
-        { name: "Project", path: "/scientificResearch/project" },
+        {
+          name: "lateral-project",
+          path: "/scientificResearch/lateralProject",
+        },
+        {
+          name: "vertical-project",
+          path: "/scientificResearch/verticalProject",
+        },
         { name: "Platform", path: "/scientificResearch/platform" },
       ],
       directions: [

@@ -83,7 +83,7 @@ export default {
         allTitle: "科研概况",
         subTitle: "科研项目",
         home: "首页",
-        project: "科研项目",
+        project: "纵向项目",
         projectName: "项目名称",
         projectResponser: "项目负责人",
         projectType: "项目类型",
@@ -93,7 +93,7 @@ export default {
         allTitle: "Research",
         subTitle: "Project",
         home: "home",
-        project: "Project",
+        project: "vertical-project",
         projectName: "Name",
         projectResponser: "Responser",
         projectType: "Type",
@@ -102,12 +102,20 @@ export default {
       menu: [],
       menuZH: [
         { name: "科研方向", path: "/scientificResearch/direction" },
-        { name: "科研项目", path: "/scientificResearch/project" },
+        { name: "横向项目", path: "/scientificResearch/lateralProject" },
+        { name: "纵向项目", path: "/scientificResearch/verticalProject" },
         { name: "科研平台", path: "/scientificResearch/platform" },
       ],
       menuEN: [
         { name: "Direction", path: "/scientificResearch/direction" },
-        { name: "Project", path: "/scientificResearch/project" },
+        {
+          name: "lateral-project",
+          path: "/scientificResearch/lateralProject",
+        },
+        {
+          name: "vertical-project",
+          path: "/scientificResearch/verticalProject",
+        },
         { name: "Platform", path: "/scientificResearch/platform" },
       ],
       projects: [],
@@ -138,6 +146,7 @@ export default {
         start: (this.current_index - 1) * 10,
         end: this.current_index * 10,
         languageType: this.$store.getters.getLanguageType,
+        type: "lengthways",
       };
       await getProjectURL(params).then((res) => {
         this.projects = res.data;
@@ -151,8 +160,8 @@ export default {
     },
     gotoDetail() {
       this.$router.push({
-        path: "/scientificResearch/projectDetail",
-        name: "项目详情",
+        path: "/scientificResearch/verticalDetail",
+        name: "纵向项目详情",
       });
     },
   },

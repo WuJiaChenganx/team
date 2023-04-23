@@ -110,7 +110,14 @@ export function getProjectURL(params) {
         params,
     });
 }
-
+// 项目详情
+export function getProjectDetail(params) {
+    return request({
+        url: "/api/teamWeb/project/require-projectDetail",
+        method: "GET",
+        params,
+    });
+}
 // 首页团队详情(不需要参数全部传)
 export function getHomeMember(params) {
     return request({
