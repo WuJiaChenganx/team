@@ -39,7 +39,7 @@
             background
             layout="prev, pager, next"
             @current-change="handleCurrentChange"
-            :page-size="5"
+            :page-size="10"
             :total="total_number"
             :current-page="current_index"
           >
@@ -92,6 +92,7 @@ export default {
         start: (this.current_index - 1) * 10,
         end: this.current_index * 10,
         languageType: this.$store.getters.getLanguageType,
+        DateType: "回顾",
       };
       await getAcademyURL(params).then((res) => {
         this.academyList = res.data;

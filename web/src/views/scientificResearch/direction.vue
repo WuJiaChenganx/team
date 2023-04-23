@@ -225,12 +225,13 @@ export default {
   .detailItemTitle {
     color: #153c87;
     font-weight: bold;
-    font-size: 2.5rem;
+    font-size: 2.2rem;
     padding: 0.5rem 0;
   }
   .detailItemDetail {
     margin-top: 1rem;
     text-indent: 2em;
+    font-size: 2rem;
     line-height: 3.5rem;
     margin-bottom: 1rem;
   }

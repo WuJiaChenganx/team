@@ -3,9 +3,7 @@
     <div class="academicTitle">
       <div class="title">{{ pageItem.title }}</div>
       <p></p>
-      <a class="more" @click="goTo('/activity/academy')"
-        >{{ pageItem.more }} >></a
-      >
+      <a class="more" @click="goTo('/activity/academy')">{{ pageItem.more }}</a>
     </div>
     <div class="academicTrendDetail animation" data-aos="fade-up">
       <div class="leftAcademicTrend">
@@ -34,12 +32,13 @@
         <div
           class="rightItem animation"
           data-aos="fade-up"
-          v-for="(rightItem, rightIndex) in academyFutureList"
+          v-for="(rightAcademyItem, rightIndex) in academyFutureList"
           :key="rightIndex"
+          @click="gotoDetail(rightAcademyItem.id)"
         >
-          <span>{{ rightItem.date }}-{{ rightItem.day }}</span>
+          <span>{{ rightAcademyItem.date }}-{{ rightAcademyItem.day }}</span>
           <div>
-            {{ rightItem.title }}
+            {{ rightAcademyItem.title }}
           </div>
         </div>
       </div>
@@ -56,7 +55,7 @@ export default {
       academyPastList: [],
       academyFutureList: [],
       pageItem: {},
-      chineseItem: { title: "学术动态", more: "更多" },
+      chineseItem: { title: "学术动态", more: "more" },
       englishItem: { title: "Academy", more: "more" },
       delayTime: [0, 50, 100, 150],
     };
@@ -83,8 +82,10 @@ export default {
     async getAcademyPastList() {
       let params = {
         // 定义参数
-        start: 0,
-        end: 4,
+        // start: 0,
+        // end: 4,
+        start: 1,
+        end: 5,
         languageType: this.$store.getters.getLanguageType,
         DateType: "回顾",
       };
@@ -134,47 +135,51 @@ export default {
 @media screen and (min-width: 1000px) {
   .academicTrend {
     width: 100%;
-    background-color: #ffffff;
   }
   .academicTitle {
-    margin-bottom: 40px;
+    width: 100%;
+    font-size: 18px;
+    margin-bottom: 10px;
     position: relative;
+    background-color: #fff;
   }
   .title {
-    width: 276px;
-    margin: 30px auto;
-    font-size: 33px;
+    width: 164px;
+    margin: 0 auto;
+    padding: 20px 0;
+    font-size: 18px;
     color: #0055a2;
   }
   .academicTitle p {
-    width: 276px;
+    width: 164px;
     font-size: 24px;
     border-bottom: 1px solid #0055a2;
     margin: 0 auto;
     position: relative;
   }
   .academicTitle p:before {
-    width: 74px;
+    width: 50px;
     height: 5px;
     position: absolute;
-    left: 101px;
+    left: 57px;
     top: -2px;
     background: #0055a2;
     display: table;
     content: "";
   }
   .more {
-    color: #0055a2;
-    font-size: 20px;
+    color: #333;
+    font-size: 14px;
     position: absolute;
-    bottom: 20px;
-    right: 30px;
+    bottom: 28px;
+    right: calc(17.5% + 10px);
     cursor: pointer;
   }
   .academicTrendDetail {
     display: flex;
     flex-direction: row;
-    width: 100%;
+    width: 65%;
+    margin: 0 auto;
   }
   .leftAcademicTrend {
     width: 50%;
@@ -208,8 +213,8 @@ export default {
   }
 
   .leftImg {
-    width: 20%;
-    height: 10rem;
+    width: 15rem;
+    height: 12rem;
   }
   .leftImg img {
     max-width: 100%;
@@ -224,7 +229,8 @@ export default {
   .leftText {
     flex: 1 0 70%;
     box-sizing: border-box;
-    padding: 0 20px;
+    padding-left: 20px;
+    padding-right: 10px;
   }
 
   .leftItem:hover .title-box {
@@ -251,8 +257,8 @@ export default {
     overflow: hidden;
     text-align: left;
     display: -webkit-box;
-    -webkit-line-clamp: 3;
-    line-clamp: 3;
+    -webkit-line-clamp: 4;
+    line-clamp: 4;
     -webkit-box-orient: vertical;
   }
 
@@ -260,7 +266,6 @@ export default {
     width: 50%;
     display: flex;
     flex-direction: column;
-    margin-right: 10px;
   }
   .rightTitle {
     font-size: 20px;
@@ -281,6 +286,7 @@ export default {
 
   .rightItem {
     margin: 10px 0;
+    cursor: pointer;
   }
   .rightItem span {
     color: #666;
@@ -464,7 +470,8 @@ export default {
     background-color: #ffffff;
   }
   .academicTitle {
-    margin-bottom: 20px;
+    font-size: 20px;
+    margin-bottom: 10px;
     position: relative;
   }
   .title {

@@ -255,7 +255,7 @@ export default {
   .detailItem {
     word-wrap: break-word;
     word-break: break-all;
-    margin-top: 3rem;
+    margin-top: 1rem;
     text-align: left;
     line-height: 3rem;
     font-size: 2rem;
@@ -264,8 +264,9 @@ export default {
     cursor: pointer;
   }
   .detailItemProjectName {
-    font-size: 2.5rem;
     font-weight: bold;
+    font-size: 2.2rem;
+    padding: 0.5rem 0;
   }
   .detailItemProjectResponser {
     padding: 0.5rem 0;

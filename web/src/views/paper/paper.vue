@@ -33,18 +33,19 @@
           </div>
         </div>
         <div class="paperItem">
-          <a
+          <div
             class="detailItem"
             v-for="(detailItem, detailIndex) in papers"
             :key="detailIndex"
-            :href="detailItem.url"
-            target="_blank"
           >
             <div class="detailItemPaperName">
               <span class="dot"></span>
               {{ detailItem.title }}
+              <a :href="detailItem.url" target="_blank" class="paperDetailUrl">
+                [ 详情 ]
+              </a>
             </div>
-          </a>
+          </div>
         </div>
         <div class="paging">
           <!-- page-size展示的选择每页显示个数的选项,页面变动触发的事件是current-change后面的函数,total表示总共的数量 current-page表示当前页数-->
@@ -251,12 +252,12 @@ export default {
     background-color: #333; /* 设置颜色 */
     margin-right: 5px; /* 设置小圆点与文字之间的距离 */
   }
-  .detailItem:hover .detailItemPaperName {
-    color: #0055a2;
+  .paperDetailUrl {
+    text-decoration: none;
+    color: #034ea1;
+    font-style: italic;
   }
-  .detailItem:hover .dot {
-    background-color: #0055a2;
-  }
+
   /* 设置分页和底部的距离 */
   .paging {
     margin-bottom: 3rem;
@@ -371,6 +372,11 @@ export default {
     border-radius: 50%;
     background-color: black; /* 设置颜色 */
     margin-right: 5px; /* 设置小圆点与文字之间的距离 */
+  }
+  .paperDetailUrl {
+    text-decoration: none;
+    color: #034ea1;
+    font-style: italic;
   }
   /* 设置分页和底部的距离 */
   .paging {

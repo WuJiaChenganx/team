@@ -2,16 +2,29 @@
   <div>
     <div class="header">
       <div class="headerContent">
-        <div class="headerLogo">
-          <logo></logo>
+        <div class="leftBox">
+          <div class="headerLogo">
+            <logo></logo>
+          </div>
+          <div class="text">
+            <div class="chineseName">群智感知与协同研究组</div>
+            <div class="englishName">Crowdsensing and Coordination</div>
+          </div>
         </div>
-        <div class="text">
+        <div class="rightBox">
           <div class="languageBtn">
+            <span
+              ><a
+                href="http://www.cs.zjut.edu.cn/html/index.html"
+                target="_blank"
+                style="text-decoration: none"
+                >学院主页</a
+              >
+            </span>
+            |
             <span @click="changeLanguage('Chinese')">Chinese</span> |
             <span @click="changeLanguage('English')">English</span>
           </div>
-          <div class="chineseName">群智感知与协同研究组</div>
-          <div class="englishName">Crowdsensing and Coordination</div>
         </div>
       </div>
     </div>
@@ -219,16 +232,31 @@ export default {
 <style lang="scss" scoped>
 /* 背景图以及图片还需要更新 */
 .header {
-  background: url(../../assets/images/background/headBackground.jpg) no-repeat;
+  height: 10rem;
+  display: flex;
+  // 子元素垂直居中
+  align-items: center;
   background-size: cover !important;
+  background: url(../../assets/images/background/headBg.jpg) no-repeat top
+    center;
+  // background: #0a3f8d;
 }
 /* PC端 */
 @media screen and (min-width: 1000px) {
   .headerContent {
-    width: 100%;
+    width: 65%;
+    margin: 0 auto;
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: space-between;
+  }
+  .leftBox {
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+  }
+  .headerLogo {
+    width: 9rem;
   }
   .text {
     text-align: left;
@@ -236,33 +264,35 @@ export default {
     flex-direction: column;
     justify-content: center;
     color: #fff;
-    font-weight: bold;
   }
   .chineseName {
-    font-size: 3rem;
+    font-size: 2.4rem;
     font-family: cursive;
   }
   .englishName {
-    font-size: 2.5rem;
+    font-size: 1.6rem;
     font-family: cursive;
   }
-  .languageBtn {
-    font-size: 2rem;
+  .rightBox {
+    display: flex;
+    // 子元素垂直居中
+    align-items: center;
   }
-  .headerLogo {
-    width: 18rem;
+  .languageBtn {
+    font-size: 1.6rem;
+    color: #fff;
   }
 
   /* 导航栏 */
   .navBackground {
-    height: 5rem;
+    height: 4rem;
     background-color: #0055a2;
   }
 
   .nav {
     margin: 0 auto;
     width: 100%;
-    height: 5rem;
+    height: 4rem;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
@@ -271,7 +301,7 @@ export default {
   .navItem {
     cursor: pointer;
     flex: 1 1 auto;
-    height: 5rem;
+    height: 4rem;
     overflow: hidden;
   }
 
@@ -279,7 +309,7 @@ export default {
     /* 水平对齐 */
     text-align: center;
     /* 垂直对齐 */
-    line-height: 5rem;
+    line-height: 4rem;
     font-size: 1.8rem;
     font-weight: bold;
     color: #fff;
@@ -303,8 +333,8 @@ export default {
     position: absolute;
     z-index: 9999;
     .subNavItem {
-      max-height: 5rem;
-      line-height: 5rem;
+      max-height: 4rem;
+      line-height: 4rem;
     }
   }
   .subNavItem {
@@ -325,37 +355,51 @@ export default {
     display: flex;
     flex-direction: row;
   }
-
+  .leftBox {
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+    margin-right: 5px;
+  }
+  .headerLogo {
+    width: 8rem;
+  }
   .text {
     text-align: left;
     display: flex;
     flex-direction: column;
     justify-content: center;
     color: #fff;
-    font-weight: bold;
+    // font-weight: bold;
   }
   .chineseName {
-    font-size: 3.2rem;
+    font-size: 2.4rem;
+    font-family: cursive;
   }
   .englishName {
-    font-size: 2.3rem;
+    font-size: 1.6rem;
+    font-family: cursive;
+  }
+  .rightBox {
+    display: flex;
+    // 子元素垂直居中
+    align-items: center;
   }
   .languageBtn {
-    font-size: 2rem;
+    font-size: 1.6rem;
+    color: #fff;
   }
-  .headerLogo {
-    width: 18rem;
-  }
+
   /* 导航栏 */
   .navBackground {
-    height: 5rem;
+    height: 4rem;
     background-color: #0055a2;
   }
 
   .nav {
     margin: 0 auto;
     width: 100%;
-    height: 5rem;
+    height: 4rem;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
@@ -369,7 +413,7 @@ export default {
     /* 水平对齐 */
     text-align: center;
     /* 垂直对齐 */
-    line-height: 5rem;
+    line-height: 4rem;
     font-size: 1rem;
     font-weight: bold;
     color: #fff;
