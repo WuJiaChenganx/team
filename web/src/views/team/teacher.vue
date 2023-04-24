@@ -111,6 +111,7 @@ export default {
       menuZH: [
         { name: "团队简介", path: "/team/profile" },
         { name: "导&nbsp;&nbsp;&nbsp;&nbsp;师", path: "/team/teacher" },
+        { name: "顾问团", path: "/team/consultor" },
         { name: "博士生", path: "/team/doctor" },
         { name: "硕士生", path: "/team/master" },
         { name: "毕业生", path: "/team/graduate" },
@@ -118,6 +119,7 @@ export default {
       menuEN: [
         { name: "Profile", path: "/team/profile" },
         { name: "Teacher", path: "/team/teacher" },
+        { name: "Consultor", path: "/team/consultor" },
         { name: "Doctor", path: "/team/doctor" },
         { name: "Master", path: "/team/master" },
         { name: "Graduate", path: "/team/graduate" },
@@ -278,19 +280,18 @@ export default {
   .principals {
     display: flex;
     flex-direction: row;
-    width: 100%;
     justify-content: space-between;
   }
   .principalItem {
     display: flex;
     flex-direction: row;
-    width: 49%;
-    margin: 10px 0;
+    width: 100%;
     cursor: pointer;
   }
   /* 负责人图片 */
   .principalImg {
-    width: 30%;
+    height: 190px;
+    border: 1px solid #ccc;
     margin-right: 10px;
   }
   .principalImg img {
@@ -301,7 +302,7 @@ export default {
   /* 负责人信息 */
   .princiPalInfo {
     background: #dbeeff;
-    width: 65%;
+    flex: 1 1 auto;
     padding: 0 10px;
     border: 1px solid #ccc;
   }
@@ -337,17 +338,19 @@ export default {
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-between;
+    margin-bottom: 30px;
   }
   .teacherItem {
     display: flex;
     flex-direction: row;
-    width: 49%;
-    margin: 10px 0;
+    width: 100%;
+    margin: 5px 0;
     cursor: pointer;
   }
   /* 教师成员图片 */
   .teacherImg {
-    width: 30%;
+    height: 190px;
+    border: 1px solid #ccc;
     margin-right: 10px;
   }
   .teacherImg img {
@@ -357,7 +360,7 @@ export default {
   /* 教师成员信息 */
   .teacherInfo {
     background: #dbeeff;
-    width: 65%;
+    flex: 1 1 auto;
     padding: 0 10px;
     border: 1px solid #ccc;
   }
@@ -477,17 +480,17 @@ export default {
   }
   /* 负责人图片 */
   .principalImg {
-    width: 30%;
+    height: 165px;
+    border: 1px solid #ccc;
     margin-right: 10px;
   }
   .principalImg img {
-    width: 100%;
     height: 100%;
   }
   /* 负责人信息 */
   .princiPalInfo {
     background: #dbeeff;
-    width: 70%;
+    flex: 1 1 auto;
     padding: 0 10px;
     border: 1px solid #ccc;
   }
@@ -521,6 +524,7 @@ export default {
   .teachers {
     display: flex;
     flex-direction: column;
+    margin-bottom: 10px;
   }
   .teacherItem {
     display: flex;
@@ -531,17 +535,17 @@ export default {
   }
   /* 教师成员图片 */
   .teacherImg {
-    width: 30%;
+    height: 165px;
+    border: 1px solid #ccc;
     margin-right: 10px;
   }
   .teacherImg img {
-    width: 100%;
     height: 100%;
   }
   /* 教师成员信息 */
   .teacherInfo {
     background: #dbeeff;
-    width: 70%;
+    flex: 1 1 auto;
     padding: 0 10px;
     border: 1px solid #ccc;
   }

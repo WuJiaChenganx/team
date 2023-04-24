@@ -110,6 +110,12 @@ const router = new VueRouter({
                 import ("../views/team/teacher.vue"),
         },
         {
+            path: "/team/consultor",
+            name: "顾问团",
+            component: () =>
+                import ("../views/team/consultor.vue"),
+        },
+        {
             path: "/team/doctor",
             name: "博士生",
             component: () =>
@@ -145,16 +151,28 @@ const router = new VueRouter({
                 import ("../views/scientificResearch/direction.vue"),
         },
         {
-            path: "/scientificResearch/project",
-            name: "科研项目",
+            path: "/scientificResearch/lateralProject",
+            name: "横向项目",
             component: () =>
-                import ("../views/scientificResearch/project.vue"),
+                import ("../views/scientificResearch/lateralProject.vue"),
         },
         {
             path: "/scientificResearch/projectDetail",
-            name: "项目详情",
+            name: "横向项目详情",
             component: () =>
-                import ("../views/scientificResearch/projectDetail.vue"),
+                import ("../views/scientificResearch/lateralDetail.vue"),
+        },
+        {
+            path: "/scientificResearch/verticalProject",
+            name: "纵向项目",
+            component: () =>
+                import ("../views/scientificResearch/verticalProject.vue"),
+        },
+        {
+            path: "/scientificResearch/projectDetail",
+            name: "纵向项目详情",
+            component: () =>
+                import ("../views/scientificResearch/verticalDetail.vue"),
         },
         {
             path: "/scientificResearch/platform",
@@ -180,7 +198,7 @@ const router = new VueRouter({
             path: "/test",
             name: "测试",
             component: () =>
-                import ("../components/home/resourceSharing.vue"),
+                import ("../views/navigation.vue"),
         },
     ],
 });

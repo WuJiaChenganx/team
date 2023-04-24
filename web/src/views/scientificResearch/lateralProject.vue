@@ -1,56 +1,72 @@
 <template>
-  <div class="master">
+  <div class="project">
     <!-- default-active表示是当前选中的菜单的index -->
-    <div class="masterContent">
-      <div class="masterAside">
-        <div class="masterAsideTitle">{{ pageItem.allTitle }}</div>
-        <div class="masterAsideContent">
+    <div class="projectContent">
+      <div class="projectAside">
+        <div class="projectAsideTitle">{{ pageItem.allTitle }}</div>
+        <div class="projectAsideContent">
           <el-menu :default-active="this.$route.path" router text-color="#000">
             <el-menu-item
-              class="masterAsideItem"
+              class="projectAsideItem"
               v-for="(menuItem, menuIndex) in menu"
               :key="menuIndex"
               :index="menuItem.path"
             >
               <i class="el-icon-sunny"></i>
-              <span v-html="menuItem.name"></span>
+              <span>{{ menuItem.name }}</span>
             </el-menu-item>
           </el-menu>
         </div>
       </div>
-      <div class="masterDetail">
-        <div class="masterTitle">
+      <div class="projectDetail">
+        <div class="projectTitle">
           <div class="title">{{ pageItem.subTitle }}</div>
           <div class="breadCrumb">
             <el-breadcrumb separator-class="el-icon-arrow-right">
               <el-breadcrumb-item :to="{ path: '/home' }">{{
                 pageItem.home
               }}</el-breadcrumb-item>
-              <el-breadcrumb-item :to="{ path: '/team/master' }">{{
-                pageItem.master
-              }}</el-breadcrumb-item>
+              <el-breadcrumb-item
+                :to="{ path: '/scientificResearch/project' }"
+                >{{ pageItem.project }}</el-breadcrumb-item
+              >
             </el-breadcrumb>
           </div>
         </div>
-        <div v-for="(item, index) in studentCover" :key="index">
-          <div class="subTitle">{{ item.title }}级研究生</div>
-          <div class="masterItem">
-            <div
-              class="detailItem"
-              v-for="(memberItem, index) in item.memberInfo"
-              :key="index"
-              @click="gotoDetail(memberItem.id)"
-            >
-              <div class="detailItemImg">
-                <img :src="memberItem.picUrl" @error="setDefaultImage" />
-              </div>
-              <div class="detailItemInfo">
-                {{ memberItem.title }}
-                <br />
-                {{ memberItem.name }}
-              </div>
+        <div class="projectItem">
+          <div
+            class="detailItem"
+            v-for="projectItem in projects"
+            :key="projectItem.id"
+            @click="gotoDetail()"
+          >
+            <div class="detailItemProjectName">
+              {{ projectItem.number }}. {{ pageItem.projectName }}:{{
+                projectItem.projectName
+              }}
+            </div>
+            <div class="detailItemProjectResponser">
+              {{ pageItem.projectResponser }}: {{ projectItem.responser }}
+            </div>
+            <div class="detailItemProjectType">
+              {{ pageItem.projectType }}: {{ projectItem.projectType }}
+            </div>
+            <div class="detailItemProjectTime">
+              {{ pageItem.projectTime }}: {{ projectItem.time }}
             </div>
           </div>
+        </div>
+        <div class="paging">
+          <!-- page-size展示的选择每页显示个数的选项,页面变动触发的事件是current-change后面的函数,total表示总共的数量 current-page表示当前页数-->
+          <el-pagination
+            background
+            layout="prev, pager, next"
+            @current-change="handleCurrentChange"
+            :page-size="10"
+            :total="total_number"
+            :current-page="current_index"
+          >
+          </el-pagination>
         </div>
       </div>
     </div>
@@ -58,47 +74,59 @@
 </template>
 
 <script>
-import { getStudentCover } from "@/api/api";
-// 设置默认缺失的图片
-import defaultImage from "@/assets/images/member/default.png";
+import { getProjectURL } from "@/api/api";
 export default {
   data() {
     return {
       pageItem: {},
       chineseItem: {
-        allTitle: "团队概况",
-        subTitle: "硕士生",
+        allTitle: "科研概况",
+        subTitle: "科研项目",
         home: "首页",
-        master: "硕士生",
+        project: "横向项目",
+        projectName: "项目名称",
+        projectResponser: "项目负责人",
+        projectType: "项目类型",
+        projectTime: "起止时间",
       },
       englishItem: {
-        allTitle: "Snapshot",
-        subTitle: "Master",
+        allTitle: "Research",
+        subTitle: "Project",
         home: "home",
-        master: "Master",
+        project: "lateral-project",
+        projectName: "Name",
+        projectResponser: "Responser",
+        projectType: "Type",
+        projectTime: "Time",
       },
       menu: [],
       menuZH: [
-        { name: "团队简介", path: "/team/profile" },
-        { name: "导&nbsp;&nbsp;&nbsp;&nbsp;师", path: "/team/teacher" },
-        { name: "顾问团", path: "/team/consultor" },
-        { name: "博士生", path: "/team/doctor" },
-        { name: "硕士生", path: "/team/master" },
-        { name: "毕业生", path: "/team/graduate" },
+        { name: "科研方向", path: "/scientificResearch/direction" },
+        { name: "横向项目", path: "/scientificResearch/lateralProject" },
+        { name: "纵向项目", path: "/scientificResearch/verticalProject" },
+        { name: "科研平台", path: "/scientificResearch/platform" },
       ],
       menuEN: [
-        { name: "Profile", path: "/team/profile" },
-        { name: "Teacher", path: "/team/teacher" },
-        { name: "Consultor", path: "/team/consultor" },
-        { name: "Doctor", path: "/team/doctor" },
-        { name: "Master", path: "/team/master" },
-        { name: "Graduate", path: "/team/graduate" },
+        { name: "Direction", path: "/scientificResearch/direction" },
+        {
+          name: "lateral-project",
+          path: "/scientificResearch/lateralProject",
+        },
+        {
+          name: "vertical-project",
+          path: "/scientificResearch/verticalProject",
+        },
+        { name: "Platform", path: "/scientificResearch/platform" },
       ],
-      studentCover: [],
+      projects: [],
+      // 总共要展示的数量
+      total_number: 0,
+      // 当前页面从1开始的这两个属性会在刚开始的时候就更新
+      current_index: 1,
     };
   },
   created() {
-    this.getStudentList();
+    this.getProjectList();
     this.changUI();
   },
   methods: {
@@ -111,31 +139,29 @@ export default {
         this.pageItem = this.englishItem;
       }
     },
-
     // async和await用于同步,就是按顺序执行
-    async getStudentList() {
+    async getProjectList() {
       let params = {
-        start: 0,
-        end: 100,
-        memberType: "master",
+        // 定义参数
+        start: (this.current_index - 1) * 10,
+        end: this.current_index * 10,
         languageType: this.$store.getters.getLanguageType,
+        type: "crosswise",
       };
-      await getStudentCover(params).then((res) => {
-        this.studentCover = res.data;
+      await getProjectURL(params).then((res) => {
+        this.projects = res.data;
+        this.total_number = res.sum;
       });
     },
-
-    // 设置默认缺失的图片
-    setDefaultImage(e) {
-      e.target.src = defaultImage;
+    handleCurrentChange(val) {
+      // 传入的val是当前页的页码
+      this.current_index = val;
+      this.getProjectList();
     },
-    gotoDetail(id) {
+    gotoDetail() {
       this.$router.push({
-        path: "/team/memberInfo",
-        name: "成员详情",
-        query: {
-          id: id,
-        },
+        path: "/scientificResearch/lateralDetail",
+        name: "横向项目详情",
       });
     },
   },
@@ -144,13 +170,13 @@ export default {
 <style scoped>
 /* PC端  */
 @media screen and (min-width: 1000px) {
-  .master {
+  .project {
     padding: 3rem 0;
     background: url(../../assets/images/background/contentBackground.jpg)
       no-repeat;
   }
 
-  .masterContent {
+  .projectContent {
     width: 75%;
     margin: 0 auto;
     display: flex;
@@ -158,11 +184,11 @@ export default {
     justify-content: space-between;
   }
 
-  .masterAside {
+  .projectAside {
     width: 255px;
     margin-right: 20px;
   }
-  .masterAsideTitle {
+  .projectAsideTitle {
     width: 255px;
     height: 78px;
     line-height: 78px;
@@ -173,11 +199,11 @@ export default {
     color: #fff;
     font-size: 24px;
   }
-  .masterAsideContent {
+  .projectAsideContent {
     width: 255px;
     background-color: #f9fbfd;
   }
-  .masterAsideItem {
+  .projectAsideItem {
     height: 52px;
     line-height: 52px;
     font-size: 16px;
@@ -186,7 +212,7 @@ export default {
     border-bottom: 1px solid #dfdfdf;
   }
 
-  .masterDetail {
+  .projectDetail {
     flex: 1 1 auto;
     padding: 0 3rem;
     box-sizing: border-box;
@@ -194,7 +220,7 @@ export default {
     border: 1px solid #dfdfdf;
   }
 
-  .masterTitle {
+  .projectTitle {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -230,54 +256,49 @@ export default {
     color: #034ea1;
     background: #eee;
   }
-  .subTitle {
-    font-size: 20px;
-    font-weight: bold;
-    color: #444444;
-    text-align: left;
-    margin: 10px 0;
-  }
-  .masterItem {
-    width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    padding: 3rem 0;
-  }
-  .detailItem {
-    cursor: pointer;
-    text-decoration: none;
-    flex: 0 0 calc(20% - 10px); /* 每个元素占据20%的宽度，同时减去10px的margin-right */
-    margin-right: 10px; /* 设置右外边距 */
-    box-sizing: border-box;
-  }
-  /* 取消最后一个元素的右外边距 */
-  .detailItem:last-child {
-    margin-right: 0;
-  }
-  /* 最后一行左对齐 */
-  .masterItem:last-child {
-    justify-content: start;
-  }
-  .detailItemImg {
-    width: 100%;
-  }
-  .detailItem img {
-    width: 70%;
+  .projectItem {
+    min-height: 600px;
+    padding-bottom: 2rem;
   }
 
-  .detailItemInfo {
-    padding: 1rem 0;
+  .detailItem {
+    word-wrap: break-word;
+    word-break: break-all;
+    margin-top: 1rem;
+    text-align: left;
+    line-height: 3rem;
+    font-size: 2rem;
+  }
+  .detailItem:hover {
+    cursor: pointer;
+  }
+  .detailItemProjectName {
+    font-weight: bold;
+    font-size: 2.2rem;
+    padding: 0.5rem 0;
+  }
+  .detailItemProjectResponser {
+    padding: 0.5rem 0;
+  }
+  .detailItemProjectType {
+    padding: 0.5rem 0;
+  }
+  .detailItemProjectTime {
+    padding: 0.5rem 0;
+  }
+  /* 设置分页和底部的距离 */
+  .paging {
+    margin: 3rem 0;
   }
 }
 /* 移动端  */
 @media screen and (max-width: 1000px) {
-  .masterAside {
+  .projectAside {
     background: url(../../assets/images/background/contentBackground.jpg) center
       0 no-repeat;
     background-size: cover;
   }
-  .masterAsideTitle {
+  .projectAsideTitle {
     font-size: 20px;
     padding: 10px 1.6%;
     line-height: 30px;
@@ -310,16 +331,14 @@ export default {
   .el-icon-sunny {
     display: none;
   }
-
-  .masterDetail {
+  .projectDetail {
     width: 100%;
     padding: 0 1.5rem;
     box-sizing: border-box;
     background-color: #fff;
     border: 1px solid #dfdfdf;
   }
-
-  .masterTitle {
+  .projectTitle {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -345,6 +364,11 @@ export default {
     color: black !important;
     font-weight: 800 !important;
   }
+  /* 被选中时的颜色 */
+  .el-breadcrumb__item:last-child ::v-deep .el-breadcrumb__inner {
+    color: black !important;
+    font-weight: 800 !important;
+  }
   /* 选中侧边导航的背景颜色 */
   .el-menu-item.is-active {
     background: #014da1;
@@ -352,31 +376,34 @@ export default {
     font-weight: bold;
     border: #014da1 solid 1px;
   }
-  .subTitle {
-    font-size: 16px;
-    font-weight: bold;
-    color: #444444;
-    text-align: left;
-    margin: 10px 0;
-  }
-  .masterItem {
-    display: flex;
-    flex-direction: column;
-    padding: 2rem 0;
+  .projectItem {
+    min-height: 450px;
+    padding-bottom: 2rem;
   }
   .detailItem {
-    cursor: pointer;
-    text-decoration: none;
-    margin-bottom: 2rem;
+    word-wrap: break-word;
+    word-break: break-all;
+    margin-top: 3rem;
+    text-align: left;
+    line-height: 3rem;
+    font-size: 2.4rem;
   }
-
-  .detailItem img {
-    width: 20rem;
-    height: 23rem;
+  .detailItemProjectName {
+    font-size: 2.5rem;
+    font-weight: bold;
   }
-
-  .detailItem .detailItemInfo {
-    padding: 1rem 0;
+  .detailItemProjectResponser {
+    padding: 0.8rem 0;
+  }
+  .detailItemProjectType {
+    padding: 0.8rem 0;
+  }
+  .detailItemProjectTime {
+    padding: 0.8rem 0;
+  }
+  /* 设置分页和底部的距离 */
+  .paging {
+    margin: 3rem 0;
   }
 }
 </style>
