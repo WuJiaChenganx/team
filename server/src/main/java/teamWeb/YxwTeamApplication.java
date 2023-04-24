@@ -12,6 +12,7 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
         FileProperties.class
 }
 )
+
 @MapperScan({"teamWeb.*.mapper", "teamWeb.mapper"})
 public class YxwTeamApplication {
 
@@ -19,6 +20,5 @@ public class YxwTeamApplication {
         SpringApplication.run(YxwTeamApplication.class, args);
         System.out.println("\n-----------------------------------------ヾ(◍°∇°◍)ﾉﾞヾ(◍°∇°◍)ﾉﾞ                     启动成功                     ヾ(◍°∇°◍)ﾉﾞヾ(◍°∇°◍)ﾉﾞ-----------------------------------------");
     }
-
 
 }

@@ -4,15 +4,12 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import teamWeb.homepage.entity.RelationInfo;
-import teamWeb.pubications.pojo.AllPaperBO;
 import teamWeb.research.entity.ProjectDO;
 import teamWeb.research.entity.ProjectInfo;
 import teamWeb.research.entity.TextboxInfo;
 import teamWeb.research.mapper.TextboxInfoMapper;
 import teamWeb.research.pojo.*;
 import teamWeb.resource.pojo.ResourceBO;
-import teamWeb.teamDynamics.pojo.NoticeBO;
-import teamWeb.teamSurvey.pojo.MemberBO;
 import teamWeb.utils.Address;
 import teamWeb.utils.BeanUtil;
 
@@ -24,6 +21,7 @@ public class TextboxInfoServiceImpl extends ServiceImpl<TextboxInfoMapper, Textb
 
     @Autowired
     TextboxInfoMapper textboxInfoMapper;
+
 
     @Override
     public List<TextboxInfo> briefDetail() {
@@ -226,5 +224,6 @@ public class TextboxInfoServiceImpl extends ServiceImpl<TextboxInfoMapper, Textb
     public String sumDire() {
         return textboxInfoMapper.sumDire();
     }
+
 
 }
