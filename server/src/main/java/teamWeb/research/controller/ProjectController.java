@@ -59,6 +59,7 @@ public class ProjectController {
         }else if (languageType.equals("English")){
             // direDetail = textboxInfoService.enDireDetail(start,end);
             // sum = textboxInfoService.sumEnTextbox("科研方向");
+            sum=" ";
         }
         return APIResponse.success(direDetail,sum);
     }
