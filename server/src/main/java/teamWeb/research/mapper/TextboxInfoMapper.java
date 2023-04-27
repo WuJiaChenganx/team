@@ -19,7 +19,7 @@ public interface TextboxInfoMapper extends BaseMapper<TextboxInfo> {
 
     List<TextboxInfo> getPlatform(int start, int end);
 
-    List<CoursePageBO> teachDetail();
+    List<CoursePageBO> teachDetail(int start,int end,String type);
 
     List<CourseDO> allCourse(Integer id);
 
@@ -63,4 +63,5 @@ public interface TextboxInfoMapper extends BaseMapper<TextboxInfo> {
 
     String sumDire();
 
+    Integer sumCourse(String type);
 }
