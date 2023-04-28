@@ -126,7 +126,7 @@ export default {
   }
   .newsTitle {
     font-size: 18px;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
     position: relative;
   }
   .title {
@@ -166,7 +166,7 @@ export default {
   }
   /* 轮播图 */
   .newsPhoto {
-    width: 500px;
+    width: 800px;
   }
   .newsPhotoItem {
     cursor: pointer;
@@ -193,29 +193,6 @@ export default {
     width: 100%;
     height: 100%;
   }
-  /* 新闻列表 */
-  /* .newsList {
-    width: 42%;
-    padding: 0 1rem;
-    box-sizing: border-box;
-  } */
-  /* .newsListTitle {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    padding-bottom: 2rem;
-  } */
-  /* .left-title {
-    font-size: 2rem;
-    font-weight: bold;
-    color: #003266;
-  }
-  .title-more {
-    color: #7db0cb;
-    font-size: 1.6rem;
-    cursor: pointer;
-  } */
   .newsListContent {
     display: flex;
     flex: 1 1 auto;
@@ -226,7 +203,6 @@ export default {
   }
   .news-row {
     cursor: pointer;
-    /* height: 6rem; */
     display: flex;
     flex-direction: row;
   }
@@ -378,7 +354,6 @@ export default {
   }
   .news-row {
     cursor: pointer;
-    /* height: 8rem; */
     display: flex;
     flex-direction: row;
   }

@@ -94,7 +94,7 @@ export default {
   }
   .directionTitle {
     font-size: 18px;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
     position: relative;
   }
   .title {

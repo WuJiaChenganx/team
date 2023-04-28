@@ -1,53 +1,53 @@
 <template>
-  <div class="master">
+  <div class="undergraduate">
     <!-- default-active表示是当前选中的菜单的index -->
-    <div class="masterContent">
-      <div class="masterAside">
-        <div class="masterAsideTitle">{{ pageItem.allTitle }}</div>
-        <div class="masterAsideContent">
+    <div class="undergraduateContent">
+      <div class="undergraduateAside">
+        <div class="undergraduateAsideTitle">{{ pageItem.allTitle }}</div>
+        <div class="undergraduateAsideContent">
           <el-menu :default-active="this.$route.path" router text-color="#000">
             <el-menu-item
-              class="masterAsideItem"
+              class="undergraduateAsideItem"
               v-for="(menuItem, menuIndex) in menu"
               :key="menuIndex"
               :index="menuItem.path"
             >
               <i class="el-icon-sunny"></i>
-              <span v-html="menuItem.name"></span>
+              <span>{{ menuItem.name }}</span>
             </el-menu-item>
           </el-menu>
         </div>
       </div>
-      <div class="masterDetail">
-        <div class="masterTitle">
+      <div class="undergraduateDetail">
+        <div class="undergraduateTitle">
           <div class="title">{{ pageItem.subTitle }}</div>
           <div class="breadCrumb">
             <el-breadcrumb separator-class="el-icon-arrow-right">
               <el-breadcrumb-item :to="{ path: '/home' }">{{
                 pageItem.home
               }}</el-breadcrumb-item>
-              <el-breadcrumb-item :to="{ path: '/team/master' }">{{
-                pageItem.master
+              <el-breadcrumb-item :to="{ path: '/education/undergraduate' }">{{
+                pageItem.undergraduate
               }}</el-breadcrumb-item>
             </el-breadcrumb>
           </div>
         </div>
-        <div v-for="(item, index) in studentCover" :key="index">
-          <div class="subTitle">{{ item.title }}级研究生</div>
-          <div class="masterItem">
+        <div class="undergraduateItem">
+          <div
+            class="detailItem"
+            v-for="courseItem in courses"
+            :key="courseItem.courseType"
+          >
+            <div class="detailItemCourseType">
+              {{ courseItem.courseType }}
+            </div>
+            <div class="detailItemCourseProfile">{{ courseItem.profile }}</div>
             <div
-              class="detailItem"
-              v-for="(memberItem, index) in item.memberInfo"
-              :key="index"
-              @click="gotoDetail(memberItem.id)"
+              v-for="courseListItem in courseItem.courseList"
+              :key="courseListItem.id"
             >
-              <div class="detailItemImg">
-                <img :src="memberItem.picUrl" @error="setDefaultImage" />
-              </div>
-              <div class="detailItemInfo">
-                {{ memberItem.title }}
-                <br />
-                {{ memberItem.name }}
+              <div class="detailItemCourseName">
+                {{ courseListItem.id }}. {{ courseListItem.courseName }}
               </div>
             </div>
           </div>
@@ -58,47 +58,60 @@
 </template>
 
 <script>
-import { getStudentCover } from "@/api/api";
-// 设置默认缺失的图片
-import defaultImage from "@/assets/images/member/default.png";
 export default {
   data() {
     return {
       pageItem: {},
       chineseItem: {
-        allTitle: "团队概况",
-        subTitle: "硕士生",
+        allTitle: "教育教学",
+        subTitle: "课程教学",
         home: "首页",
-        master: "硕士生",
+        undergraduate: "课程教学",
       },
       englishItem: {
-        allTitle: "Snapshot",
-        subTitle: "Master",
+        allTitle: "Education",
+        subTitle: "undergraduate",
         home: "home",
-        master: "Master",
+        undergraduate: "undergraduate",
       },
       menu: [],
       menuZH: [
-        { name: "团队简介", path: "/team/profile" },
-        { name: "顾&nbsp;&nbsp;&nbsp;&nbsp;问", path: "/team/consultor" },
-        { name: "导&nbsp;&nbsp;&nbsp;&nbsp;师", path: "/team/teacher" },
-        { name: "博士生", path: "/team/doctor" },
-        { name: "硕士生", path: "/team/master" },
-        { name: "毕业生", path: "/team/graduate" },
+        { name: "本科生教学", path: "/education/undergraduate" },
+        { name: "研究生教学", path: "/education/graduate" },
+        { name: "教学成果", path: "/education/achievements" },
       ],
       menuEN: [
-        { name: "Profile", path: "/team/profile" },
-        { name: "Consultor", path: "/team/consultor" },
-        { name: "Teacher", path: "/team/teacher" },
-        { name: "Doctor", path: "/team/doctor" },
-        { name: "Master", path: "/team/master" },
-        { name: "Graduate", path: "/team/graduate" },
+        { name: "undergraduate", path: "/education/undergraduate" },
+        { name: "graduate", path: "/education/graduate" },
+        { name: "achievements", path: "/education/achievements" },
       ],
-      studentCover: [],
+      courses: [
+        {
+          courseType: " 本科生教学",
+          profile:
+            "主讲:《人工智能导论》、《Principles of Computer Networks》(《计算机网络原理》留学生)、《计算机网络原理》、《无线传感器网络》",
+          courseList: [
+            {
+              id: 1,
+              courseName:
+                "教育部2018年第一批产学合作协同育人项目，“基于Python的程序设计课程教学改革”，2019.02-2020.02，项目负责人，排名：1/4；",
+            },
+            {
+              id: 2,
+              courseName:
+                "浙江工业大学校级教学改革项目，“物联网工程专业国际化人才培养模式的创新与实践”，2015.08-2016.12，项目负责人，排名1/6；",
+            },
+            {
+              id: 3,
+              courseName:
+                "2018全国高校计算机教育大会优秀论文奖，“面向国际化人才培养的物联网工程专业课程体系改革探索-以浙江工业大学为例”，2018.04，教育部高等学校计算机类专业教学指导委员会，排名：1/4；",
+            },
+          ],
+        },
+      ],
     };
   },
   created() {
-    this.getStudentList();
     this.changUI();
   },
   methods: {
@@ -111,46 +124,19 @@ export default {
         this.pageItem = this.englishItem;
       }
     },
-
-    // async和await用于同步,就是按顺序执行
-    async getStudentList() {
-      let params = {
-        start: 0,
-        end: 100,
-        memberType: "master",
-        languageType: this.$store.getters.getLanguageType,
-      };
-      await getStudentCover(params).then((res) => {
-        this.studentCover = res.data;
-      });
-    },
-
-    // 设置默认缺失的图片
-    setDefaultImage(e) {
-      e.target.src = defaultImage;
-    },
-    gotoDetail(id) {
-      this.$router.push({
-        path: "/team/memberInfo",
-        name: "成员详情",
-        query: {
-          id: id,
-        },
-      });
-    },
   },
 };
 </script>
 <style scoped>
 /* PC端  */
 @media screen and (min-width: 1000px) {
-  .master {
+  .undergraduate {
     padding: 3rem 0;
     background: url(../../assets/images/background/contentBackground.jpg)
       no-repeat;
   }
 
-  .masterContent {
+  .undergraduateContent {
     width: 75%;
     margin: 0 auto;
     display: flex;
@@ -158,11 +144,11 @@ export default {
     justify-content: space-between;
   }
 
-  .masterAside {
+  .undergraduateAside {
     width: 255px;
     margin-right: 20px;
   }
-  .masterAsideTitle {
+  .undergraduateAsideTitle {
     width: 255px;
     height: 78px;
     line-height: 78px;
@@ -173,11 +159,11 @@ export default {
     color: #fff;
     font-size: 24px;
   }
-  .masterAsideContent {
+  .undergraduateAsideContent {
     width: 255px;
     background-color: #f9fbfd;
   }
-  .masterAsideItem {
+  .undergraduateAsideItem {
     height: 52px;
     line-height: 52px;
     font-size: 16px;
@@ -186,7 +172,7 @@ export default {
     border-bottom: 1px solid #dfdfdf;
   }
 
-  .masterDetail {
+  .undergraduateDetail {
     flex: 1 1 auto;
     padding: 0 3rem;
     box-sizing: border-box;
@@ -194,7 +180,7 @@ export default {
     border: 1px solid #dfdfdf;
   }
 
-  .masterTitle {
+  .undergraduateTitle {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -230,54 +216,43 @@ export default {
     color: #034ea1;
     background: #eee;
   }
-  .subTitle {
-    font-size: 20px;
-    font-weight: bold;
-    color: #444444;
-    text-align: left;
-    margin: 10px 0;
-  }
-  .masterItem {
-    width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    padding: 3rem 0;
-  }
-  .detailItem {
-    cursor: pointer;
-    text-decoration: none;
-    flex: 0 0 calc(20% - 10px); /* 每个元素占据20%的宽度，同时减去10px的margin-right */
-    margin-right: 10px; /* 设置右外边距 */
-    box-sizing: border-box;
-  }
-  /* 取消最后一个元素的右外边距 */
-  .detailItem:last-child {
-    margin-right: 0;
-  }
-  /* 最后一行左对齐 */
-  .masterItem:last-child {
-    justify-content: start;
-  }
-  .detailItemImg {
-    width: 100%;
-  }
-  .detailItem img {
-    width: 70%;
+
+  .undergraduateItem {
+    min-height: 600px;
+    padding-bottom: 2rem;
   }
 
-  .detailItemInfo {
-    padding: 1rem 0;
+  .detailItem {
+    word-wrap: break-word;
+    word-break: break-all;
+    margin-top: 3rem;
+    text-align: left;
+    line-height: 3rem;
+    font-size: 2rem;
+  }
+  .detailItemCourseType {
+    font-size: 2.5rem;
+    font-weight: bold;
+  }
+  .detailItemCourseProfile {
+    padding: 0.5rem 0;
+    font-size: 2rem;
+  }
+  .detailItemCourseName {
+    text-indent: 2em;
+    font-size: 2rem;
+    padding: 0.5rem 0;
   }
 }
 /* 移动端  */
 @media screen and (max-width: 1000px) {
-  .masterAside {
+  .undergraduateAside {
     background: url(../../assets/images/background/contentBackground.jpg) center
       0 no-repeat;
     background-size: cover;
   }
-  .masterAsideTitle {
+
+  .undergraduateAsideTitle {
     font-size: 20px;
     padding: 10px 1.6%;
     line-height: 30px;
@@ -306,12 +281,11 @@ export default {
     cursor: pointer;
     background-color: #fff;
   }
-
   .el-icon-sunny {
     display: none;
   }
 
-  .masterDetail {
+  .undergraduateDetail {
     width: 100%;
     padding: 0 1.5rem;
     box-sizing: border-box;
@@ -319,13 +293,14 @@ export default {
     border: 1px solid #dfdfdf;
   }
 
-  .masterTitle {
+  .undergraduateTitle {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     padding: 10px 0;
     border-bottom: 1px solid #dfdfdf;
   }
+
   .title {
     color: #333333;
     font-weight: bold;
@@ -352,31 +327,32 @@ export default {
     font-weight: bold;
     border: #014da1 solid 1px;
   }
-  .subTitle {
-    font-size: 16px;
-    font-weight: bold;
-    color: #444444;
-    text-align: left;
-    margin: 10px 0;
+  .undergraduateItem {
+    min-height: 450px;
+    padding-bottom: 2rem;
   }
-  .masterItem {
-    display: flex;
-    flex-direction: column;
-    padding: 2rem 0;
-  }
+
   .detailItem {
-    cursor: pointer;
-    text-decoration: none;
-    margin-bottom: 2rem;
+    word-wrap: break-word;
+    word-break: break-all;
+    margin-top: 3rem;
+    text-align: left;
+    line-height: 3rem;
+    font-size: 2rem;
   }
-
-  .detailItem img {
-    width: 20rem;
-    height: 23rem;
+  .detailItemCourseType {
+    font-size: 2.5rem;
+    font-weight: bold;
+    padding: 0.5rem 0;
   }
-
-  .detailItem .detailItemInfo {
-    padding: 1rem 0;
+  .detailItemCourseProfile {
+    padding: 0.8rem 0;
+    font-size: 2.4rem;
+  }
+  .detailItemCourseName {
+    text-indent: 2em;
+    font-size: 2.2rem;
+    padding: 0.8rem 0;
   }
 }
 </style>
