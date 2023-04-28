@@ -18,7 +18,7 @@ public interface TextboxInfoService extends IService<TextboxInfo> {
 
     List<PlatformDTO> platformDetail(int start, int end);
 
-    List<CoursePageBO> teachDetail();
+    List<CoursePageBO> teachDetail(int start,int end,String type);
 
     List<ResourceBO> emulationDetail(int start, int end);
 
@@ -54,4 +54,5 @@ public interface TextboxInfoService extends IService<TextboxInfo> {
 
     String sumDire();
 
+    Integer sumCourse(String type);
 }

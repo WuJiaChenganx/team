@@ -100,13 +100,14 @@ public class TextboxInfoServiceImpl extends ServiceImpl<TextboxInfoMapper, Textb
     }
 
     @Override
-    public List<CoursePageBO> teachDetail() {
-        List<CoursePageBO> CoursePageBOList = textboxInfoMapper.teachDetail();
-        for (CoursePageBO coursePageBO:
-                CoursePageBOList) {
-            Integer courseId = coursePageBO.getId();
-            coursePageBO.setCourseList(textboxInfoMapper.allCourse(courseId));
-        }
+    public List<CoursePageBO> teachDetail(int start,int end,String type) {
+        List<CoursePageBO> CoursePageBOList = textboxInfoMapper.teachDetail(start,end-start,type);
+//        for (CoursePageBO coursePageBO:
+//                CoursePageBOList) {
+//            Integer courseId = coursePageBO.getId();
+//            coursePageBO.setCourseList(textboxInfoMapper.allCourse(courseId));
+//        }
+
         return CoursePageBOList;
     }
 
@@ -223,6 +224,11 @@ public class TextboxInfoServiceImpl extends ServiceImpl<TextboxInfoMapper, Textb
     @Override
     public String sumDire() {
         return textboxInfoMapper.sumDire();
+    }
+
+    @Override
+    public Integer sumCourse(String type) {
+        return textboxInfoMapper.sumCourse(type);
     }
 
 

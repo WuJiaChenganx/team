@@ -6,16 +6,17 @@ import java.util.List;
 
 public class CoursePageBO {
     private Integer id;
-    private String title;
-    private String profile;
-    private List<CourseDO> courseList;
+    private String courseName;
+    private String teacher;
 
-    public String getTitle() {
-        return title;
+    private String target;
+
+    public String getTarget() {
+        return target;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setTarget(String target) {
+        this.target = target;
     }
 
     public Integer getId() {
@@ -26,19 +27,19 @@ public class CoursePageBO {
         this.id = id;
     }
 
-    public String getProfile() {
-        return profile;
+    public String getCourseName() {
+        return courseName;
     }
 
-    public void setProfile(String profile) {
-        this.profile = profile;
+    public void setCourseName(String courseName) {
+        this.courseName = courseName;
     }
 
-    public List<CourseDO> getCourseList() {
-        return courseList;
+    public String getTeacher() {
+        return teacher;
     }
 
-    public void setCourseList(List<CourseDO> courseList) {
-        this.courseList = courseList;
+    public void setTeacher(String teacher) {
+        this.teacher = teacher;
     }
 }

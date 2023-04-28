@@ -77,11 +77,10 @@
     </select>
 
     <select id="teachDetail" resultType="teamWeb.research.pojo.CoursePageBO">
-        select `id`,`text` AS profile,title, `tClass`
-        from textbox
-        <where>
-            tClass = "课程教学"
-        </where>
+        SELECT `id`,`course_name` AS courseName,teacher,target
+        FROM course
+        WHERE type="${type}"
+        LIMIT ${start,end}
     </select>
 
     <select id="allCourse" resultType="teamWeb.research.entity.CourseDO">
@@ -99,6 +98,10 @@
         SELECT COUNT(*) FROM en_project
     </select>
 
+    <select id="sumCourse" resultType="int">
+        SELECT COUNT(*) FROM course
+        WHERE type = "${type}"
+    </select>
 
     <select id="sumTextbox" resultType="int">
         SELECT COUNT(*) FROM textbox

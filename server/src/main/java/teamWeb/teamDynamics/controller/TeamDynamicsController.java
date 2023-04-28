@@ -55,8 +55,6 @@ public class TeamDynamicsController {
     }
 
 
-
-
     @GetMapping("/require-news")
     public APIResponse allNews(@RequestParam(value="start") Integer start,
                                @RequestParam(value="end") Integer end,

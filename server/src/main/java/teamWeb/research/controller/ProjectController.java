@@ -73,10 +73,7 @@ public class ProjectController {
     }
 
 
-    @GetMapping("/require-courses")
-    public APIResponse course(@RequestParam(value = "languageType") String languageType) {
-        List<CoursePageBO> teachDetail=null;
-        teachDetail = textboxInfoService.teachDetail();
-        return APIResponse.success(teachDetail,textboxInfoService.sumEnTextbox("课程教学"));
-    }
+
+
+
 }
