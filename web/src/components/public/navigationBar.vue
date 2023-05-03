@@ -82,37 +82,12 @@ export default {
           ],
         },
         {
-          title: "教学育人",
-          path: "/education",
-          subMenu: [
-            { title: "课程教学", path: "/education/curriculum" },
-            // 路由还需要改过(英文版内容还没有添加)
-            { title: "教学成果", path: "/education/achievement" },
-          ],
-        },
-        // 路由还需要改过(英文版内容还没有添加)
-        {
-          title: "获奖情况",
+          title: "成果荣誉",
           path: "/prize",
           subMenu: [
             { title: "团队荣誉", path: "/prize/teamPrize" },
             { title: "个人荣誉", path: "/prize/personalPrize" },
             { title: "项目获奖", path: "/prize/projectPrize" },
-          ],
-        },
-        {
-          title: "团队成员",
-          path: "/team",
-          subMenu: [
-            { title: "团队简介", path: "/team/profile" },
-            // 路由还需要改过(英文版内容还没有添加)
-            // { title: "交流合作", path: "/team/coordination" },
-            { title: "导&nbsp;&nbsp;&nbsp;&nbsp;师", path: "/team/teacher" },
-            // 路由还需要改过(英文版内容还没有添加)
-            { title: "顾问团", path: "/team/consultor" },
-            { title: "博士生", path: "/team/doctor" },
-            { title: "研究生", path: "/team/master" },
-            { title: "毕业生", path: "/team/graduate" },
           ],
         },
         {
@@ -122,6 +97,35 @@ export default {
             { title: "发表论文", path: "/paper/paper" },
             { title: "授权专利", path: "/paper/patent" },
             { title: "出版专著", path: "/paper/book" },
+          ],
+        },
+        {
+          title: "教育教学",
+          path: "/education",
+          subMenu: [
+            { title: "本科生教育", path: "/education/undergraduate" },
+            { title: "研究生教育", path: "/education/graduate" },
+            { title: "教学成果", path: "/education/achievements" },
+          ],
+        },
+        {
+          title: "团队成员",
+          path: "/team",
+          subMenu: [
+            { title: "团队简介", path: "/team/profile" },
+            { title: "顾&nbsp;&nbsp;&nbsp;&nbsp;问", path: "/team/consultor" },
+            { title: "导&nbsp;&nbsp;&nbsp;&nbsp;师", path: "/team/teacher" },
+            { title: "博士生", path: "/team/doctor" },
+            { title: "研究生", path: "/team/master" },
+            { title: "毕业生", path: "/team/graduate" },
+          ],
+        },
+        {
+          title: "交流合作",
+          path: "/cooperation",
+          subMenu: [
+            { title: "国内交流", path: "/cooperation/domestic" },
+            { title: "国际交流", path: "/cooperation/international" },
           ],
         },
         {
@@ -155,22 +159,19 @@ export default {
             { title: "Platform", path: "/scientificResearch/platform" },
           ],
         },
-
         {
-          title: "Education",
-          path: "/education",
-          subMenu: [{ title: "Curriculum", path: "/education/curriculum" }],
-        },
-        {
-          title: "Snapshot",
-          path: "/team",
+          title: "Prize",
+          path: "/prize",
           subMenu: [
-            { title: "Profile", path: "/team/profile" },
-            { title: "Teacher", path: "/team/teacher" },
-            { title: "Consultor", path: "/team/consultor" },
-            { title: "Doctor", path: "/team/doctor" },
-            { title: "Master", path: "/team/master" },
-            { title: "Graduate", path: "/team/graduate" },
+            { title: "team-prize", path: "/prize/teamPrize" },
+            {
+              title: "person-prize",
+              path: "/prize/personalPrize",
+            },
+            {
+              title: "project-award",
+              path: "/prize/projectPrize",
+            },
           ],
         },
         {
@@ -180,6 +181,36 @@ export default {
             { title: "Paper", path: "/paper/paper" },
             { title: "Patent", path: "/paper/patent" },
             { title: "Book", path: "/paper/book" },
+          ],
+        },
+        {
+          title: "Education",
+          path: "/education",
+          subMenu: [
+            { title: "Undergraduate", path: "/education/undergraduate" },
+            { title: "Graduate", path: "/education/graduate" },
+            { title: "Achievements", path: "/education/achievements" },
+          ],
+        },
+        {
+          title: "Snapshot",
+          path: "/team",
+          subMenu: [
+            { title: "Profile", path: "/team/profile" },
+            { title: "Consultor", path: "/team/consultor" },
+            { title: "Teacher", path: "/team/teacher" },
+            { title: "Doctor", path: "/team/doctor" },
+            { title: "Master", path: "/team/master" },
+            { title: "Graduate", path: "/team/graduate" },
+          ],
+        },
+        {
+          title: "Cooperation",
+          path: "/cooperation",
+          subMenu: [
+            { title: "Domestic", path: "/cooperation/domestic" },
+            // 路由还需要改过(英文版内容还没有添加)
+            { title: "International", path: "/cooperation/international" },
           ],
         },
         {
@@ -327,12 +358,12 @@ export default {
     height: 4rem;
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-between;
   }
 
   .navItem {
     cursor: pointer;
-    flex: 1 1 auto;
+    width: 12.5%;
     height: 4rem;
     overflow: hidden;
   }
@@ -348,13 +379,14 @@ export default {
   }
 
   .navItem:hover {
+    width: 12.5%;
     background-color: #008cd6;
   }
 
   .subNav {
     /* 隐藏元素 */
     cursor: pointer;
-    width: 14.6%;
+    width: 12.5%;
     font-size: 1.8rem;
     font-weight: bold;
     color: #fff;

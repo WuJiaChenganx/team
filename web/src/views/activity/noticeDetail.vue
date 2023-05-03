@@ -168,6 +168,7 @@ export default {
     color: #999;
   }
   .noticeInfo {
+    font-family: "宋体", SimSun, STSong, sans-serif;
     word-wrap: break-word;
     word-break: break-all;
     text-align: left;
@@ -257,6 +258,7 @@ export default {
     color: #999;
   }
   .noticeInfo {
+    font-family: "宋体", SimSun, STSong, sans-serif;
     word-wrap: break-word;
     word-break: break-all;
     text-align: left;

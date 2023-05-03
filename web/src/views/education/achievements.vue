@@ -1,13 +1,13 @@
 <template>
-  <div class="curriculum">
+  <div class="achievements">
     <!-- default-active表示是当前选中的菜单的index -->
-    <div class="curriculumContent">
-      <div class="curriculumAside">
-        <div class="curriculumAsideTitle">{{ pageItem.allTitle }}</div>
-        <div class="curriculumAsideContent">
+    <div class="achievementsContent">
+      <div class="achievementsAside">
+        <div class="achievementsAsideTitle">{{ pageItem.allTitle }}</div>
+        <div class="achievementsAsideContent">
           <el-menu :default-active="this.$route.path" router text-color="#000">
             <el-menu-item
-              class="curriculumAsideItem"
+              class="achievementsAsideItem"
               v-for="(menuItem, menuIndex) in menu"
               :key="menuIndex"
               :index="menuItem.path"
@@ -18,32 +18,29 @@
           </el-menu>
         </div>
       </div>
-      <div class="curriculumDetail">
-        <div class="curriculumTitle">
+      <div class="achievementsDetail">
+        <div class="achievementsTitle">
           <div class="title">{{ pageItem.subTitle }}</div>
           <div class="breadCrumb">
             <el-breadcrumb separator-class="el-icon-arrow-right">
               <el-breadcrumb-item :to="{ path: '/home' }">{{
                 pageItem.home
               }}</el-breadcrumb-item>
-              <el-breadcrumb-item
-                :to="{ path: '/scientificResearch/curriculum' }"
-                >{{ pageItem.curriculum }}</el-breadcrumb-item
-              >
+              <el-breadcrumb-item :to="{ path: '/education/achievements' }">{{
+                pageItem.achievements
+              }}</el-breadcrumb-item>
             </el-breadcrumb>
           </div>
         </div>
-        <div class="curriculumItem">
+        <div class="achievementsItem">
           <div
             class="detailItem"
-            v-for="(courseItem, index) in courses"
+            v-for="courseItem in courses"
             :key="courseItem.courseType"
           >
-            <!-- 课程类型:本科生/研究生 -->
             <div class="detailItemCourseType">
-              {{ index + 1 }}. {{ courseItem.courseType }}
+              {{ courseItem.courseType }}
             </div>
-            <!-- 教学简介 -->
             <div class="detailItemCourseProfile">{{ courseItem.profile }}</div>
             <div
               v-for="courseListItem in courseItem.courseList"
@@ -66,25 +63,33 @@ export default {
     return {
       pageItem: {},
       chineseItem: {
-        allTitle: "教学育人",
+        allTitle: "教育教学",
         subTitle: "课程教学",
         home: "首页",
-        curriculum: "课程教学",
+        achievements: "课程教学",
       },
       englishItem: {
         allTitle: "Education",
-        subTitle: "Curriculum",
+        subTitle: "achievements",
         home: "home",
-        curriculum: "Curriculum",
+        achievements: "achievements",
       },
       menu: [],
-      menuZH: [{ name: "课程教学", path: "/education/curriculum" }],
-      menuEN: [{ name: "Curriculum", path: "/education/curriculum" }],
+      menuZH: [
+        { name: "本科生教学", path: "/education/undergraduate" },
+        { name: "研究生教学", path: "/education/graduate" },
+        { name: "教学成果", path: "/education/achievements" },
+      ],
+      menuEN: [
+        { name: "undergraduate", path: "/education/undergraduate" },
+        { name: "graduate", path: "/education/graduate" },
+        { name: "achievements", path: "/education/achievements" },
+      ],
       courses: [
         {
-          courseType: " 本科生教学",
-          profile:
-            "主讲:《人工智能导论》、《Principles of Computer Networks》(《计算机网络原理》留学生)、《计算机网络原理》、《无线传感器网络》",
+          courseType: "教学成果",
+          // profile:
+          //   "主讲:《人工智能导论》、《Principles of Computer Networks》(《计算机网络原理》留学生)、《计算机网络原理》、《无线传感器网络》",
           courseList: [
             {
               id: 1,
@@ -103,23 +108,23 @@ export default {
             },
           ],
         },
-        {
-          courseType: " 研究生教学",
-          profile:
-            "主讲:《人工智能及其应用》、《Principles and Design of Wireless Sensor Networks》",
-          courseList: [
-            {
-              id: 1,
-              courseName:
-                "浙江省“十四五”研究生课程思政示范课程，“人工智能及其应用”，2022.12，项目负责人，1/6；",
-            },
-            {
-              id: 2,
-              courseName:
-                "浙江工业大学校级研究生核心课程建设项目，“人工智能及其应用”，2022.11-2023.12，项目负责人，1/4；",
-            },
-          ],
-        },
+        // {
+        //   courseType: " 研究生教学",
+        //   profile:
+        //     "主讲:《人工智能及其应用》、《Principles and Design of Wireless Sensor Networks》",
+        //   courseList: [
+        //     {
+        //       id: 1,
+        //       courseName:
+        //         "浙江省“十四五”研究生课程思政示范课程，“人工智能及其应用”，2022.12，项目负责人，1/6；",
+        //     },
+        //     {
+        //       id: 2,
+        //       courseName:
+        //         "浙江工业大学校级研究生核心课程建设项目，“人工智能及其应用”，2022.11-2023.12，项目负责人，1/4；",
+        //     },
+        //   ],
+        // },
       ],
     };
   },
@@ -142,13 +147,13 @@ export default {
 <style scoped>
 /* PC端  */
 @media screen and (min-width: 1000px) {
-  .curriculum {
+  .achievements {
     padding: 3rem 0;
     background: url(../../assets/images/background/contentBackground.jpg)
       no-repeat;
   }
 
-  .curriculumContent {
+  .achievementsContent {
     width: 75%;
     margin: 0 auto;
     display: flex;
@@ -156,11 +161,11 @@ export default {
     justify-content: space-between;
   }
 
-  .curriculumAside {
+  .achievementsAside {
     width: 255px;
     margin-right: 20px;
   }
-  .curriculumAsideTitle {
+  .achievementsAsideTitle {
     width: 255px;
     height: 78px;
     line-height: 78px;
@@ -171,11 +176,11 @@ export default {
     color: #fff;
     font-size: 24px;
   }
-  .curriculumAsideContent {
+  .achievementsAsideContent {
     width: 255px;
     background-color: #f9fbfd;
   }
-  .curriculumAsideItem {
+  .achievementsAsideItem {
     height: 52px;
     line-height: 52px;
     font-size: 16px;
@@ -184,7 +189,7 @@ export default {
     border-bottom: 1px solid #dfdfdf;
   }
 
-  .curriculumDetail {
+  .achievementsDetail {
     flex: 1 1 auto;
     padding: 0 3rem;
     box-sizing: border-box;
@@ -192,7 +197,7 @@ export default {
     border: 1px solid #dfdfdf;
   }
 
-  .curriculumTitle {
+  .achievementsTitle {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -229,7 +234,7 @@ export default {
     background: #eee;
   }
 
-  .curriculumItem {
+  .achievementsItem {
     min-height: 600px;
     padding-bottom: 2rem;
   }
@@ -258,13 +263,13 @@ export default {
 }
 /* 移动端  */
 @media screen and (max-width: 1000px) {
-  .curriculumAside {
+  .achievementsAside {
     background: url(../../assets/images/background/contentBackground.jpg) center
       0 no-repeat;
     background-size: cover;
   }
 
-  .curriculumAsideTitle {
+  .achievementsAsideTitle {
     font-size: 20px;
     padding: 10px 1.6%;
     line-height: 30px;
@@ -297,7 +302,7 @@ export default {
     display: none;
   }
 
-  .curriculumDetail {
+  .achievementsDetail {
     width: 100%;
     padding: 0 1.5rem;
     box-sizing: border-box;
@@ -305,7 +310,7 @@ export default {
     border: 1px solid #dfdfdf;
   }
 
-  .curriculumTitle {
+  .achievementsTitle {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -339,7 +344,7 @@ export default {
     font-weight: bold;
     border: #014da1 solid 1px;
   }
-  .curriculumItem {
+  .achievementsItem {
     min-height: 450px;
     padding-bottom: 2rem;
   }

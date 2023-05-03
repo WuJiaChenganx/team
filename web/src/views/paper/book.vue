@@ -38,40 +38,30 @@
             v-for="(detailItem, detailIndex) in books"
             :key="detailIndex"
           >
-            <div class="detailItemBookName">
-              {{ detailItem.number }}. 书籍名称: {{ detailItem.title }}
-            </div>
-            <div class="detailItemBookTime">
-              出版日期: {{ detailItem.date }}
-            </div>
-            <div class="detailItemBookAuthor">
-              作者: {{ detailItem.author }}
-            </div>
-
-            <div class="detailItemBookUrl" v-if="detailItem.url">
-              <a
-                :href="detailItem.url"
-                style="text-decoration: none; color: #034ea1"
-                target="_blank"
-                >购买链接</a
-              >
-            </div>
             <div class="detailItemBookCover">
               <img :src="detailItem.pictureUrl" alt="" />
             </div>
+            <div class="detailItemBookContent">
+              <div class="detailItemBookName">
+                {{ detailItem.title }}
+              </div>
+              <div class="detailItemBookTime">
+                出版日期: {{ detailItem.date }}
+              </div>
+              <div class="detailItemBookAuthor">
+                作者: {{ detailItem.author }}
+              </div>
+
+              <div class="detailItemBookUrl" v-if="detailItem.url">
+                <a
+                  :href="detailItem.url"
+                  style="text-decoration: none; color: #034ea1"
+                  target="_blank"
+                  >购买链接</a
+                >
+              </div>
+            </div>
           </div>
-        </div>
-        <div class="paging">
-          <!-- page-size展示的选择每页显示个数的选项,页面变动触发的事件是current-change后面的函数,total表示总共的数量 current-page表示当前页数-->
-          <el-pagination
-            background
-            layout="prev, pager, next"
-            @current-change="handleCurrentChange"
-            :page-size="3"
-            :total="total_number"
-            :current-page="current_index"
-          >
-          </el-pagination>
         </div>
       </div>
     </div>
@@ -108,10 +98,6 @@ export default {
         { name: "Book", path: "/paper/book" },
       ],
       books: [],
-      // 总共要展示的数量
-      total_number: 0,
-      // 当前页面从1开始的这两个属性会在刚开始的时候就更新
-      current_index: 1,
     };
   },
   created() {
@@ -132,19 +118,13 @@ export default {
     async getBookList() {
       let params = {
         // 定义参数
-        start: (this.current_index - 1) * 3,
-        end: this.current_index * 3,
+        start: 0,
+        end: 6,
         languageType: this.$store.getters.getLanguageType,
       };
       await getBookURL(params).then((res) => {
         this.books = res.data;
-        this.total_number = res.sum;
       });
-    },
-    handleCurrentChange(val) {
-      // 传入的val是当前页的页码
-      this.current_index = val;
-      this.getBookList();
     },
   },
 };
@@ -241,34 +221,56 @@ export default {
   }
   /* 设置块和分页的距离 */
   .bookItem {
-    min-height: 600px;
-    padding-bottom: 2rem;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-bottom: 2rem;
   }
 
   .detailItem {
-    word-wrap: break-word;
-    word-break: break-all;
-    margin-top: 2.5rem;
-    text-align: left;
-    line-height: 3rem;
-    font-size: 1.8rem;
-  }
-  .detailItemBookName {
-    color: #0055a2;
-    font-weight: bold;
-    font-size: 2rem;
+    padding: 10px;
+    width: 50%;
+    display: flex;
+    flex-direction: row;
+    box-sizing: border-box;
   }
   .detailItemBookCover {
-    margin-top: 1rem;
-    width: 100%;
+    margin-right: 10px;
   }
   .detailItemBookCover img {
-    width: 20rem;
-    height: 25rem;
+    width: 9rem;
+    height: 13rem;
   }
-  /* 设置分页和底部的距离 */
-  .paging {
-    margin-bottom: 3rem;
+  .detailItemBookContent {
+    flex: 1 1 auto;
+  }
+  .detailItemBookName {
+    display: -webkit-box;
+    /* 一行直接省略 */
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
+    color: #0055a2;
+    font-weight: bold;
+    text-align: left;
+    font-size: 1.6rem;
+    line-height: 3rem;
+  }
+  .detailItemBookTime {
+    text-align: left;
+    font-size: 1.6rem;
+    line-height: 3rem;
+  }
+  .detailItemBookAuthor {
+    text-align: left;
+    font-size: 1.6rem;
+    line-height: 3rem;
+  }
+  .detailItemBookUrl {
+    text-align: left;
+    font-size: 1.6rem;
+    line-height: 3rem;
   }
 }
 /* 移动端  */
@@ -355,33 +357,57 @@ export default {
   }
   /* 设置块和分页的距离 */
   .bookItem {
-    min-height: 450px;
-    padding-bottom: 2rem;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-bottom: 2rem;
   }
 
   .detailItem {
-    word-wrap: break-word;
-    word-break: break-all;
-    margin-top: 2.5rem;
-    text-align: left;
-    line-height: 3rem;
-    font-size: 1.8rem;
-  }
-  .detailItemBookName {
-    color: #0055a2;
-    font-weight: bold;
+    width: 100%;
+    padding: 10px 0;
+    display: flex;
+    flex-direction: row;
+    box-sizing: border-box;
   }
   .detailItemBookCover {
-    margin-top: 1rem;
-    width: 100%;
+    margin-right: 10px;
   }
   .detailItemBookCover img {
-    width: 20rem;
-    height: 25rem;
+    width: 11rem;
+    height: 14rem;
   }
-  /* 设置分页和底部的距离 */
-  .paging {
-    margin-bottom: 3rem;
+  .detailItemBookContent {
+    flex: 1 1 auto;
+  }
+  .detailItemBookName {
+    display: -webkit-box;
+    /* 一行直接省略 */
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
+    color: #0055a2;
+    font-weight: bold;
+    text-align: left;
+    font-size: 1.6rem;
+    line-height: 3rem;
+  }
+
+  .detailItemBookTime {
+    text-align: left;
+    font-size: 1.6rem;
+    line-height: 3rem;
+  }
+  .detailItemBookAuthor {
+    text-align: left;
+    font-size: 1.6rem;
+    line-height: 3rem;
+  }
+  .detailItemBookUrl {
+    text-align: left;
+    font-size: 1.6rem;
+    line-height: 3rem;
   }
 }
 </style>
