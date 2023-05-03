@@ -80,7 +80,7 @@
         SELECT `id`,`course_name` AS courseName,teacher,target
         FROM course
         WHERE type="${type}"
-        LIMIT ${start,end}
+        LIMIT ${start},${end}
     </select>
 
     <select id="allCourse" resultType="teamWeb.research.entity.CourseDO">
