@@ -1,13 +1,13 @@
 <template>
-  <div class="simulationTool">
+  <div class="master">
     <!-- default-active表示是当前选中的菜单的index -->
-    <div class="simulationToolContent">
-      <div class="simulationToolAside">
-        <div class="simulationToolAsideTitle">{{ pageItem.allTitle }}</div>
-        <div class="simulationToolAsideContent">
+    <div class="masterContent">
+      <div class="masterAside">
+        <div class="masterAsideTitle">{{ pageItem.allTitle }}</div>
+        <div class="masterAsideContent">
           <el-menu :default-active="this.$route.path" router text-color="#000">
             <el-menu-item
-              class="simulationToolAsideItem"
+              class="masterAsideItem"
               v-for="(menuItem, menuIndex) in menu"
               :key="menuIndex"
               :index="menuItem.path"
@@ -18,51 +18,33 @@
           </el-menu>
         </div>
       </div>
-      <div class="simulationToolDetail">
-        <div class="simulationToolTitle">
+      <div class="masterDetail">
+        <div class="masterTitle">
           <div class="title">{{ pageItem.subTitle }}</div>
           <div class="breadCrumb">
             <el-breadcrumb separator-class="el-icon-arrow-right">
               <el-breadcrumb-item :to="{ path: '/home' }">{{
                 pageItem.home
               }}</el-breadcrumb-item>
-              <el-breadcrumb-item :to="{ path: '/resource/simulationTool' }">{{
-                pageItem.toolList
+              <el-breadcrumb-item :to="{ path: '/educatiopn/master' }">{{
+                pageItem.master
               }}</el-breadcrumb-item>
             </el-breadcrumb>
           </div>
         </div>
-        <div class="simulationToolItem">
-          <div
-            class="simulationTool-row"
-            v-for="(detailItem, detailIndex) in showPageContent"
-            :key="detailIndex"
+        <div class="masterItem">
+          <a
+            class="detailItem"
+            v-for="courseItem in courses"
+            :key="courseItem.courseType"
+            :href="courseItem.target"
+            target="_blank"
           >
-            <div class="simulationTool-base">
-              <i class="el-icon-link"></i>
-              <div class="simulationTool-name">
-                {{ detailItem.title }}
-              </div>
-            </div>
-            <div class="simulationTool-profile">
-              {{ detailItem.detail }}
-            </div>
-            <div class="simulationTool-url">
-              <!-- 这个链接可以下载 -->
-              <!-- http://localhost:8186/teamWeb/resource/download/file/aaaa.pdf -->
-              <!-- :href="detailItem.fileUrl" -->
-              <a
-                class="el-button el-button--primary el-button--mini"
-                style="text-decoration: none"
-                :href="detailItem.fileUrl"
-                target="_blank"
-                >{{ pageItem.download }}</a
-              >
-            </div>
-          </div>
+            <div class="courseName">{{ courseItem.courseName }}</div>
+            <div class="courseTeacher">{{ courseItem.teacher }}</div>
+          </a>
         </div>
-        <div class="paging" v-show="total_number">
-          <!-- page-size展示的选择每页显示个数的选项,页面变动触发的事件是current-change后面的函数,total表示总共的数量 current-page表示当前页数-->
+        <div class="paging">
           <el-pagination
             background
             layout="prev, pager, next"
@@ -77,45 +59,44 @@
     </div>
   </div>
 </template>
-
 <script>
-import { getSimulationToolURL } from "@/api/api";
+import { getCourseURL } from "@/api/api";
 export default {
   data() {
     return {
       pageItem: {},
       chineseItem: {
-        allTitle: "资源共享",
-        subTitle: "仿真工具",
+        allTitle: "教育教学",
+        subTitle: "课程教学",
         home: "首页",
-        toolList: "仿真工具列表",
-        download: "下载仿真工具",
+        master: "研究生教学",
       },
       englishItem: {
-        allTitle: "Resource",
-        subTitle: "Tool",
+        allTitle: "Education",
+        subTitle: "Education",
         home: "home",
-        toolList: "Tool List",
-        download: "download",
+        master: "master",
       },
       menu: [],
       menuZH: [
-        { name: "仿真工具", path: "/resource/simulationTool" },
-        { name: "数据集", path: "/resource/dataSet" },
+        { name: "本科生教学", path: "/education/undergraduate" },
+        { name: "研究生教学", path: "/education/master" },
+        { name: "教学成果", path: "/education/achievements" },
       ],
       menuEN: [
-        { name: "Tool", path: "/resource/simulationTool" },
-        { name: "Dataset", path: "/resource/dataSet" },
+        { name: "undergraduate", path: "/education/undergraduate" },
+        { name: "graduate", path: "/education/master" },
+        { name: "achievements", path: "/education/achievements" },
       ],
-      showPageContent: [],
       // 总共要展示的数量
       total_number: 0,
       // 当前页面从1开始的这两个属性会在刚开始的时候就更新
       current_index: 1,
+      courses: [],
     };
   },
   created() {
-    this.getSimulationToolList();
+    this.getCourseList();
     this.changUI();
   },
   methods: {
@@ -128,24 +109,23 @@ export default {
         this.pageItem = this.englishItem;
       }
     },
-    // async和await用于同步,就是按顺序执行
-    async getSimulationToolList() {
+    async getCourseList() {
       let params = {
         // 定义参数
         start: (this.current_index - 1) * 10,
         end: this.current_index * 10,
         languageType: this.$store.getters.getLanguageType,
+        type: "master",
       };
-
-      await getSimulationToolURL(params).then((res) => {
-        this.showPageContent = res.data;
+      await getCourseURL(params).then((res) => {
+        this.courses = res.data;
         this.total_number = res.sum;
       });
     },
     handleCurrentChange(val) {
       // 传入的val是当前页的页码
       this.current_index = val;
-      this.getSimulationToolList();
+      this.getCourseList();
     },
   },
 };
@@ -153,7 +133,7 @@ export default {
 <style scoped>
 /* PC端  */
 @media screen and (min-width: 1000px) {
-  .simulationTool {
+  .master {
     padding: 3rem 0;
     box-sizing: border-box;
     background: url(../../assets/images/background/contentBackground.jpg)
@@ -161,7 +141,7 @@ export default {
     min-height: calc(100vh - 29rem);
   }
 
-  .simulationToolContent {
+  .masterContent {
     width: 75%;
     margin: 0 auto;
     display: flex;
@@ -169,11 +149,11 @@ export default {
     justify-content: space-between;
   }
 
-  .simulationToolAside {
+  .masterAside {
     width: 255px;
     margin-right: 20px;
   }
-  .simulationToolAsideTitle {
+  .masterAsideTitle {
     width: 255px;
     height: 78px;
     line-height: 78px;
@@ -184,11 +164,11 @@ export default {
     color: #fff;
     font-size: 24px;
   }
-  .simulationToolAsideContent {
+  .masterAsideContent {
     width: 255px;
     background-color: #f9fbfd;
   }
-  .simulationToolAsideItem {
+  .masterAsideItem {
     height: 52px;
     line-height: 52px;
     font-size: 16px;
@@ -197,17 +177,17 @@ export default {
     border-bottom: 1px solid #dfdfdf;
   }
 
-  .simulationToolDetail {
+  .masterDetail {
     flex: 1 1 auto;
     padding: 0 3rem;
     box-sizing: border-box;
     background-color: #fff;
     border: 1px solid #dfdfdf;
-    position: relative;
     min-height: calc(100vh - 29rem - 6rem);
+    position: relative;
   }
 
-  .simulationToolTitle {
+  .masterTitle {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -243,44 +223,39 @@ export default {
     color: #034ea1;
     background: #eee;
   }
-  /* 设置块和分页的距离 */
-  .simulationToolItem {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 3rem;
+
+  .masterItem {
+    padding-bottom: 2rem;
   }
 
-  .simulationTool-row {
-    display: flex;
-    flex-direction: column;
-    padding: 1.5rem 0;
-    border-bottom: 1px solid #dfdfdf;
-  }
-  .simulationTool-base {
+  .detailItem {
+    cursor: pointer;
     display: flex;
     flex-direction: row;
-    font-size: 2rem;
-    line-height: 2rem;
+    border-bottom: 1px dashed #b2b2b2;
+    padding: 20px 0;
+    text-decoration: none;
   }
-  .simulationTool-name {
-    text-align: left;
-    margin-left: 0.5rem;
+  .detailItem:hover .courseName {
+    color: #428bca;
+  }
+  .courseName {
+    height: 2rem;
+    line-height: 2rem;
+    width: 70%;
+    flex: 1 1 auto;
+    font-size: 1.6rem;
+    color: #333;
     display: -webkit-box;
+    /* 一行直接省略 */
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 1;
     overflow: hidden;
-    color: #333333;
-    height: 2rem;
-    margin-bottom: 1rem;
-  }
-  .simulationTool-profile {
-    text-indent: 2em;
     text-align: left;
-    font-size: 1.6rem;
-    margin-bottom: 1rem;
   }
-  .simulationTool-url {
-    text-align: right;
+  .courseTeacher {
+    font-size: 1.6rem;
+    color: #b2b2b2;
   }
   /* 设置分页和底部的距离 */
   .paging {
@@ -292,13 +267,13 @@ export default {
 }
 /* 移动端  */
 @media screen and (max-width: 1000px) {
-  .simulationToolAside {
+  .masterAside {
     background: url(../../assets/images/background/contentBackground.jpg) center
       0 no-repeat;
     background-size: cover;
   }
 
-  .simulationToolAsideTitle {
+  .masterAsideTitle {
     font-size: 20px;
     padding: 10px 1.6%;
     line-height: 30px;
@@ -327,28 +302,26 @@ export default {
     cursor: pointer;
     background-color: #fff;
   }
-
   .el-icon-sunny {
     display: none;
   }
 
-  .simulationToolDetail {
+  .masterDetail {
     width: 100%;
     padding: 0 1.5rem;
     box-sizing: border-box;
     background-color: #fff;
     border: 1px solid #dfdfdf;
-    position: relative;
-    min-height: calc(100vh - 36rem - 112px);
   }
 
-  .simulationToolTitle {
+  .masterTitle {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     padding: 10px 0;
     border-bottom: 1px solid #dfdfdf;
   }
+
   .title {
     color: #333333;
     font-weight: bold;
@@ -375,51 +348,41 @@ export default {
     font-weight: bold;
     border: #014da1 solid 1px;
   }
-  /* 设置块和分页的距离 */
-  .simulationToolItem {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 3rem;
+  .masterItem {
+    min-height: 450px;
+    padding-bottom: 2rem;
   }
 
-  .simulationTool-row {
-    display: flex;
-    flex-direction: column;
-    padding: 1.5rem 0;
-    border-bottom: 1px solid #dfdfdf;
-  }
-  .simulationTool-base {
+  .detailItem {
+    cursor: pointer;
     display: flex;
     flex-direction: row;
-    font-size: 2rem;
-    line-height: 2rem;
+    border-bottom: 1px dashed #b2b2b2;
+    padding: 15px 0;
+    text-decoration: none;
   }
-  .simulationTool-name {
-    text-align: left;
-    margin-left: 0.5rem;
+
+  .courseName {
+    height: 2rem;
+    line-height: 2rem;
+    width: 70%;
+    flex: 1 1 auto;
+    font-size: 1.6rem;
+    color: #333;
     display: -webkit-box;
+    /* 一行直接省略 */
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 1;
     overflow: hidden;
-    color: #333333;
-    height: 2rem;
-    margin-bottom: 1rem;
-  }
-  .simulationTool-profile {
-    text-indent: 2em;
     text-align: left;
-    font-size: 1.6rem;
-    margin-bottom: 1rem;
   }
-  .simulationTool-url {
-    text-align: right;
+  .courseTeacher {
+    font-size: 1.6rem;
+    color: #b2b2b2;
   }
   /* 设置分页和底部的距离 */
   .paging {
-    position: absolute;
-    left: 50%;
-    transform: translate(-50%, 0);
-    bottom: 3rem;
+    margin-bottom: 3rem;
   }
 }
 </style>

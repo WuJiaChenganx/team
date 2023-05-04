@@ -1,13 +1,13 @@
 <template>
-  <div class="graduate">
+  <div class="master">
     <!-- default-active表示是当前选中的菜单的index -->
-    <div class="graduateContent">
-      <div class="graduateAside">
-        <div class="graduateAsideTitle">{{ pageItem.allTitle }}</div>
-        <div class="graduateAsideContent">
+    <div class="masterContent">
+      <div class="masterAside">
+        <div class="masterAsideTitle">{{ pageItem.allTitle }}</div>
+        <div class="masterAsideContent">
           <el-menu :default-active="this.$route.path" router text-color="#000">
             <el-menu-item
-              class="graduateAsideItem"
+              class="masterAsideItem"
               v-for="(menuItem, menuIndex) in menu"
               :key="menuIndex"
               :index="menuItem.path"
@@ -18,45 +18,47 @@
           </el-menu>
         </div>
       </div>
-      <div class="graduateDetail">
-        <div class="graduateTitle">
+      <div class="masterDetail">
+        <div class="masterTitle">
           <div class="title">{{ pageItem.subTitle }}</div>
           <div class="breadCrumb">
             <el-breadcrumb separator-class="el-icon-arrow-right">
               <el-breadcrumb-item :to="{ path: '/home' }">{{
                 pageItem.home
               }}</el-breadcrumb-item>
-              <el-breadcrumb-item :to="{ path: '/educatiopn/graduate' }">{{
-                pageItem.graduate
+              <el-breadcrumb-item :to="{ path: '/educatiopn/master' }">{{
+                pageItem.master
               }}</el-breadcrumb-item>
             </el-breadcrumb>
           </div>
         </div>
-        <div class="graduateItem">
+        <div class="masterItem">
           <div
             class="detailItem"
             v-for="courseItem in courses"
             :key="courseItem.courseType"
           >
-            <div class="detailItemCourseType">
-              {{ courseItem.courseType }}
-            </div>
-            <div class="detailItemCourseProfile">{{ courseItem.profile }}</div>
-            <div
-              v-for="courseListItem in courseItem.courseList"
-              :key="courseListItem.id"
-            >
-              <div class="detailItemCourseName">
-                {{ courseListItem.id }}. {{ courseListItem.courseName }}
-              </div>
-            </div>
+            <div class="courseName">{{ courseItem.courseName }}</div>
+            <div class="courseTeacher">{{ courseItem.teacher }}</div>
           </div>
+        </div>
+        <div class="paging">
+          <el-pagination
+            background
+            layout="prev, pager, next"
+            @current-change="handleCurrentChange"
+            :page-size="10"
+            :total="total_number"
+            :current-page="current_index"
+          >
+          </el-pagination>
         </div>
       </div>
     </div>
   </div>
 </template>
 <script>
+import { getCourseURL } from "@/api/api";
 export default {
   data() {
     return {
@@ -65,47 +67,34 @@ export default {
         allTitle: "教育教学",
         subTitle: "课程教学",
         home: "首页",
-        graduate: "研究生教学",
+        master: "研究生教学",
       },
       englishItem: {
         allTitle: "Education",
         subTitle: "Education",
         home: "home",
-        graduate: "graduate",
+        master: "master",
       },
       menu: [],
       menuZH: [
         { name: "本科生教学", path: "/education/undergraduate" },
-        { name: "研究生教学", path: "/education/graduate" },
+        { name: "研究生教学", path: "/education/master" },
         { name: "教学成果", path: "/education/achievements" },
       ],
       menuEN: [
         { name: "undergraduate", path: "/education/undergraduate" },
-        { name: "graduate", path: "/education/graduate" },
+        { name: "graduate", path: "/education/master" },
         { name: "achievements", path: "/education/achievements" },
       ],
-      courses: [
-        {
-          courseType: " 研究生教学",
-          profile:
-            "主讲:《人工智能及其应用》、《Principles and Design of Wireless Sensor Networks》",
-          courseList: [
-            {
-              id: 1,
-              courseName:
-                "浙江省“十四五”研究生课程思政示范课程，“人工智能及其应用”，2022.12，项目负责人，1/6；",
-            },
-            {
-              id: 2,
-              courseName:
-                "浙江工业大学校级研究生核心课程建设项目，“人工智能及其应用”，2022.11-2023.12，项目负责人，1/4；",
-            },
-          ],
-        },
-      ],
+      // 总共要展示的数量
+      total_number: 0,
+      // 当前页面从1开始的这两个属性会在刚开始的时候就更新
+      current_index: 1,
+      courses: [],
     };
   },
   created() {
+    this.getCourseList();
     this.changUI();
   },
   methods: {
@@ -118,19 +107,37 @@ export default {
         this.pageItem = this.englishItem;
       }
     },
+    async getCourseList() {
+      let params = {
+        // 定义参数
+        start: (this.current_index - 1) * 10,
+        end: this.current_index * 10,
+        languageType: this.$store.getters.getLanguageType,
+        type: "master",
+      };
+      await getCourseURL(params).then((res) => {
+        this.courses = res.data;
+        this.total_number = res.sum;
+      });
+    },
+    handleCurrentChange(val) {
+      // 传入的val是当前页的页码
+      this.current_index = val;
+      this.getCourseList();
+    },
   },
 };
 </script>
 <style scoped>
 /* PC端  */
 @media screen and (min-width: 1000px) {
-  .graduate {
+  .master {
     padding: 3rem 0;
     background: url(../../assets/images/background/contentBackground.jpg)
       no-repeat;
   }
 
-  .graduateContent {
+  .masterContent {
     width: 75%;
     margin: 0 auto;
     display: flex;
@@ -138,11 +145,11 @@ export default {
     justify-content: space-between;
   }
 
-  .graduateAside {
+  .masterAside {
     width: 255px;
     margin-right: 20px;
   }
-  .graduateAsideTitle {
+  .masterAsideTitle {
     width: 255px;
     height: 78px;
     line-height: 78px;
@@ -153,11 +160,11 @@ export default {
     color: #fff;
     font-size: 24px;
   }
-  .graduateAsideContent {
+  .masterAsideContent {
     width: 255px;
     background-color: #f9fbfd;
   }
-  .graduateAsideItem {
+  .masterAsideItem {
     height: 52px;
     line-height: 52px;
     font-size: 16px;
@@ -166,7 +173,7 @@ export default {
     border-bottom: 1px solid #dfdfdf;
   }
 
-  .graduateDetail {
+  .masterDetail {
     flex: 1 1 auto;
     padding: 0 3rem;
     box-sizing: border-box;
@@ -174,7 +181,7 @@ export default {
     border: 1px solid #dfdfdf;
   }
 
-  .graduateTitle {
+  .masterTitle {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -211,42 +218,53 @@ export default {
     background: #eee;
   }
 
-  .graduateItem {
+  .masterItem {
     min-height: 600px;
     padding-bottom: 2rem;
   }
 
   .detailItem {
-    word-wrap: break-word;
-    word-break: break-all;
-    margin-top: 3rem;
+    cursor: pointer;
+    display: flex;
+    flex-direction: row;
+    border-bottom: 1px dashed #b2b2b2;
+    padding: 20px 0;
+  }
+  .detailItem:hover .courseName {
+    color: #428bca;
+  }
+  .courseName {
+    height: 2rem;
+    line-height: 2rem;
+    width: 70%;
+    flex: 1 1 auto;
+    font-size: 1.6rem;
+    color: #333;
+    display: -webkit-box;
+    /* 一行直接省略 */
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
     text-align: left;
-    line-height: 3rem;
-    font-size: 2rem;
   }
-  .detailItemCourseType {
-    font-size: 2.5rem;
-    font-weight: bold;
+  .courseTeacher {
+    font-size: 1.6rem;
+    color: #b2b2b2;
   }
-  .detailItemCourseProfile {
-    padding: 0.5rem 0;
-    font-size: 2rem;
-  }
-  .detailItemCourseName {
-    text-indent: 2em;
-    font-size: 2rem;
-    padding: 0.5rem 0;
+  /* 设置分页和底部的距离 */
+  .paging {
+    margin-bottom: 3rem;
   }
 }
 /* 移动端  */
 @media screen and (max-width: 1000px) {
-  .graduateAside {
+  .masterAside {
     background: url(../../assets/images/background/contentBackground.jpg) center
       0 no-repeat;
     background-size: cover;
   }
 
-  .graduateAsideTitle {
+  .masterAsideTitle {
     font-size: 20px;
     padding: 10px 1.6%;
     line-height: 30px;
@@ -279,7 +297,7 @@ export default {
     display: none;
   }
 
-  .graduateDetail {
+  .masterDetail {
     width: 100%;
     padding: 0 1.5rem;
     box-sizing: border-box;
@@ -287,7 +305,7 @@ export default {
     border: 1px solid #dfdfdf;
   }
 
-  .graduateTitle {
+  .masterTitle {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -321,32 +339,40 @@ export default {
     font-weight: bold;
     border: #014da1 solid 1px;
   }
-  .graduateItem {
+  .masterItem {
     min-height: 450px;
     padding-bottom: 2rem;
   }
 
   .detailItem {
-    word-wrap: break-word;
-    word-break: break-all;
-    margin-top: 3rem;
+    cursor: pointer;
+    display: flex;
+    flex-direction: row;
+    border-bottom: 1px dashed #b2b2b2;
+    padding: 15px 0;
+  }
+
+  .courseName {
+    height: 2rem;
+    line-height: 2rem;
+    width: 70%;
+    flex: 1 1 auto;
+    font-size: 1.6rem;
+    color: #333;
+    display: -webkit-box;
+    /* 一行直接省略 */
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
     text-align: left;
-    line-height: 3rem;
-    font-size: 2rem;
   }
-  .detailItemCourseType {
-    font-size: 2.5rem;
-    font-weight: bold;
-    padding: 0.5rem 0;
+  .courseTeacher {
+    font-size: 1.6rem;
+    color: #b2b2b2;
   }
-  .detailItemCourseProfile {
-    padding: 0.8rem 0;
-    font-size: 2.4rem;
-  }
-  .detailItemCourseName {
-    text-indent: 2em;
-    font-size: 2.2rem;
-    padding: 0.8rem 0;
+  /* 设置分页和底部的距离 */
+  .paging {
+    margin-bottom: 3rem;
   }
 }
 </style>

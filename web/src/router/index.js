@@ -168,9 +168,9 @@ const router = new VueRouter({
       component: () => import("../views/education/undergraduate.vue"),
     },
     {
-      path: "/education/graduate",
+      path: "/education/master",
       name: "研究生教学",
-      component: () => import("../views/education/graduate.vue"),
+      component: () => import("../views/education/master.vue"),
     },
     {
       path: "/education/achievements",

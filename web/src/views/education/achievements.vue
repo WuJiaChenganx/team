@@ -77,12 +77,12 @@ export default {
       menu: [],
       menuZH: [
         { name: "本科生教学", path: "/education/undergraduate" },
-        { name: "研究生教学", path: "/education/graduate" },
+        { name: "研究生教学", path: "/education/master" },
         { name: "教学成果", path: "/education/achievements" },
       ],
       menuEN: [
         { name: "undergraduate", path: "/education/undergraduate" },
-        { name: "graduate", path: "/education/graduate" },
+        { name: "graduate", path: "/education/master" },
         { name: "achievements", path: "/education/achievements" },
       ],
       courses: [

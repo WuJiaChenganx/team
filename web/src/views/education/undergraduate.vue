@@ -33,24 +33,27 @@
           </div>
         </div>
         <div class="undergraduateItem">
-          <div
+          <a
             class="detailItem"
             v-for="courseItem in courses"
-            :key="courseItem.courseType"
+            :key="courseItem.id"
+            :href="courseItem.target"
+            target="_blank"
           >
-            <div class="detailItemCourseType">
-              {{ courseItem.courseType }}
-            </div>
-            <div class="detailItemCourseProfile">{{ courseItem.profile }}</div>
-            <div
-              v-for="courseListItem in courseItem.courseList"
-              :key="courseListItem.id"
-            >
-              <div class="detailItemCourseName">
-                {{ courseListItem.id }}. {{ courseListItem.courseName }}
-              </div>
-            </div>
-          </div>
+            <div class="courseName">{{ courseItem.courseName }}</div>
+            <div class="courseTeacher">{{ courseItem.teacher }}</div>
+          </a>
+        </div>
+        <div class="paging">
+          <el-pagination
+            background
+            layout="prev, pager, next"
+            @current-change="handleCurrentChange"
+            :page-size="10"
+            :total="total_number"
+            :current-page="current_index"
+          >
+          </el-pagination>
         </div>
       </div>
     </div>
@@ -58,6 +61,7 @@
 </template>
 
 <script>
+import { getCourseURL } from "@/api/api";
 export default {
   data() {
     return {
@@ -66,7 +70,7 @@ export default {
         allTitle: "教育教学",
         subTitle: "课程教学",
         home: "首页",
-        undergraduate: "课程教学",
+        undergraduate: "本科生教学",
       },
       englishItem: {
         allTitle: "Education",
@@ -77,41 +81,23 @@ export default {
       menu: [],
       menuZH: [
         { name: "本科生教学", path: "/education/undergraduate" },
-        { name: "研究生教学", path: "/education/graduate" },
+        { name: "研究生教学", path: "/education/master" },
         { name: "教学成果", path: "/education/achievements" },
       ],
       menuEN: [
         { name: "undergraduate", path: "/education/undergraduate" },
-        { name: "graduate", path: "/education/graduate" },
+        { name: "graduate", path: "/education/master" },
         { name: "achievements", path: "/education/achievements" },
       ],
-      courses: [
-        {
-          courseType: " 本科生教学",
-          profile:
-            "主讲:《人工智能导论》、《Principles of Computer Networks》(《计算机网络原理》留学生)、《计算机网络原理》、《无线传感器网络》",
-          courseList: [
-            {
-              id: 1,
-              courseName:
-                "教育部2018年第一批产学合作协同育人项目，“基于Python的程序设计课程教学改革”，2019.02-2020.02，项目负责人，排名：1/4；",
-            },
-            {
-              id: 2,
-              courseName:
-                "浙江工业大学校级教学改革项目，“物联网工程专业国际化人才培养模式的创新与实践”，2015.08-2016.12，项目负责人，排名1/6；",
-            },
-            {
-              id: 3,
-              courseName:
-                "2018全国高校计算机教育大会优秀论文奖，“面向国际化人才培养的物联网工程专业课程体系改革探索-以浙江工业大学为例”，2018.04，教育部高等学校计算机类专业教学指导委员会，排名：1/4；",
-            },
-          ],
-        },
-      ],
+      // 总共要展示的数量
+      total_number: 0,
+      // 当前页面从1开始的这两个属性会在刚开始的时候就更新
+      current_index: 1,
+      courses: [],
     };
   },
   created() {
+    this.getCourseList();
     this.changUI();
   },
   methods: {
@@ -123,6 +109,24 @@ export default {
         this.menu = this.menuEN;
         this.pageItem = this.englishItem;
       }
+    },
+    async getCourseList() {
+      let params = {
+        // 定义参数
+        start: (this.current_index - 1) * 10,
+        end: this.current_index * 10,
+        languageType: this.$store.getters.getLanguageType,
+        type: "undergraduate",
+      };
+      await getCourseURL(params).then((res) => {
+        this.courses = res.data;
+        this.total_number = res.sum;
+      });
+    },
+    handleCurrentChange(val) {
+      // 传入的val是当前页的页码
+      this.current_index = val;
+      this.getCourseList();
     },
   },
 };
@@ -221,27 +225,38 @@ export default {
     min-height: 600px;
     padding-bottom: 2rem;
   }
-
   .detailItem {
-    word-wrap: break-word;
-    word-break: break-all;
-    margin-top: 3rem;
+    cursor: pointer;
+    display: flex;
+    flex-direction: row;
+    border-bottom: 1px dashed #b2b2b2;
+    padding: 20px 0;
+    text-decoration: none;
+  }
+  .detailItem:hover .courseName {
+    color: #428bca;
+  }
+  .courseName {
+    height: 2rem;
+    line-height: 2rem;
+    width: 70%;
+    flex: 1 1 auto;
+    font-size: 1.6rem;
+    color: #333;
+    display: -webkit-box;
+    /* 一行直接省略 */
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
     text-align: left;
-    line-height: 3rem;
-    font-size: 2rem;
   }
-  .detailItemCourseType {
-    font-size: 2.5rem;
-    font-weight: bold;
+  .courseTeacher {
+    font-size: 1.6rem;
+    color: #b2b2b2;
   }
-  .detailItemCourseProfile {
-    padding: 0.5rem 0;
-    font-size: 2rem;
-  }
-  .detailItemCourseName {
-    text-indent: 2em;
-    font-size: 2rem;
-    padding: 0.5rem 0;
+  /* 设置分页和底部的距离 */
+  .paging {
+    margin-bottom: 3rem;
   }
 }
 /* 移动端  */
@@ -333,26 +348,35 @@ export default {
   }
 
   .detailItem {
-    word-wrap: break-word;
-    word-break: break-all;
-    margin-top: 3rem;
+    cursor: pointer;
+    display: flex;
+    flex-direction: row;
+    border-bottom: 1px dashed #b2b2b2;
+    padding: 15px 0;
+    text-decoration: none;
+  }
+
+  .courseName {
+    height: 2rem;
+    line-height: 2rem;
+    width: 70%;
+    flex: 1 1 auto;
+    font-size: 1.6rem;
+    color: #333;
+    display: -webkit-box;
+    /* 一行直接省略 */
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
     text-align: left;
-    line-height: 3rem;
-    font-size: 2rem;
   }
-  .detailItemCourseType {
-    font-size: 2.5rem;
-    font-weight: bold;
-    padding: 0.5rem 0;
+  .courseTeacher {
+    font-size: 1.6rem;
+    color: #b2b2b2;
   }
-  .detailItemCourseProfile {
-    padding: 0.8rem 0;
-    font-size: 2.4rem;
-  }
-  .detailItemCourseName {
-    text-indent: 2em;
-    font-size: 2.2rem;
-    padding: 0.8rem 0;
+  /* 设置分页和底部的距离 */
+  .paging {
+    margin-bottom: 3rem;
   }
 }
 </style>

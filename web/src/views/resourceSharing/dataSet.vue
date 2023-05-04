@@ -159,7 +159,7 @@ export default {
     box-sizing: border-box;
     background: url(../../assets/images/background/contentBackground.jpg)
       no-repeat;
-    min-height: calc(100vh - 35.762rem);
+    min-height: calc(100vh - 29rem);
   }
 
   .dataSetContent {
@@ -204,7 +204,7 @@ export default {
     background-color: #fff;
     border: 1px solid #dfdfdf;
     position: relative;
-    min-height: calc(100vh - 35.762rem - 6rem);
+    min-height: calc(100vh - 29rem - 6rem);
   }
 
   .dataSetTitle {
@@ -349,7 +349,7 @@ export default {
     border-bottom: 1px solid #dfdfdf;
   }
   .title {
- color: #333333;
+    color: #333333;
     font-weight: bold;
     font-size: 20px;
     line-height: 30px;

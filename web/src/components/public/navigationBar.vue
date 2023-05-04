@@ -22,7 +22,7 @@
               >
             </span>
             |
-            <span @click="changeLanguage('Chinese')">Chinese</span> |
+            <span @click="changeLanguage('Chinese')">中文</span> |
             <span @click="changeLanguage('English')">English</span>
           </div>
         </div>
@@ -104,7 +104,7 @@ export default {
           path: "/education",
           subMenu: [
             { title: "本科生教育", path: "/education/undergraduate" },
-            { title: "研究生教育", path: "/education/graduate" },
+            { title: "研究生教育", path: "/education/master" },
             { title: "教学成果", path: "/education/achievements" },
           ],
         },

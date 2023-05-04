@@ -38,9 +38,7 @@
           v-for="(academyItem, academyItemIndex) in academyDetail.detail"
           :key="academyItemIndex"
         >
-          <div class="academyInfo">
-            {{ academyItem.text }}
-          </div>
+          <div class="academyInfo" v-html="academyItem.text"></div>
           <div
             v-if="academyItem.picUrl.length"
             :class="academyItem.picUrl.length == 2 ? 'photoBox2' : 'photoBox1'"
