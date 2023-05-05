@@ -1,0 +1,16 @@
+<?teamWeb.xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="teamWeb.award.mapper.AwardMapper">
+    <select id="award" resultType="teamWeb.award.pojo.AwardBO">
+        SELECT id,title,award_date as date,award_name as award
+        FROM award
+        WHERE award_type = "${type}"
+        ORDER BY award_date desc LIMIT ${start},${end}
+    </select>
+
+    <select id="sumAward" resultType="Integer">
+        SELECT COUNT(*) FROM award
+        WHERE award_type = "${type}"
+    </select>
+</mapper>
