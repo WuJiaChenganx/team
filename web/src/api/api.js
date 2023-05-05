@@ -135,3 +135,12 @@ export function getCourseURL(params) {
     params,
   });
 }
+// 获取荣誉:type=团队 team 个人 person 项目project
+// http://localhost:8186/teamWeb/award/require-award?languageType = Chinese &start=0&end=3&type=team
+export function getPrizeURL(params) {
+  return request({
+    url: "api/teamWeb/award/require-award",
+    method: "GET",
+    params,
+  });
+}
