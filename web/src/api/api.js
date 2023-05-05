@@ -126,3 +126,12 @@ export function getHomeMember(params) {
     params,
   });
 }
+// 本科生教育/研究生教育
+// http://localhost:8186/teamWeb/teach/require-courses?languageType = Chinese &start=0&end=10&type=master
+export function getCourseURL(params) {
+  return request({
+    url: "/api/teamWeb/teach/require-courses",
+    method: "GET",
+    params,
+  });
+}

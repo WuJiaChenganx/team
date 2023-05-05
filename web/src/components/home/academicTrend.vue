@@ -15,7 +15,6 @@
           :key="futureIndex"
           @click="gotoDetail(futureAcademyItem.id)"
         >
-          <span class="dot"></span>
           <div class="futureItemTitle">{{ futureAcademyItem.title }}</div>
           <span class="futureItemTime">
             {{ futureAcademyItem.date }}-{{ futureAcademyItem.day }}
@@ -181,12 +180,13 @@ export default {
     margin: 0 auto;
   }
   .futureAcademicTrend {
-    width: 100%;
+    display: flex;
+    flex-direction: row;
     flex-wrap: wrap;
   }
 
   .futureTitle {
-    font-size: 16px;
+    font-size: 18px;
     width: 100%;
     text-align: left;
   }
@@ -194,8 +194,8 @@ export default {
     content: "";
     display: inline-block; /* 将伪元素设置为行内块元素 */
     vertical-align: middle; /* 垂直居中对齐 */
-    width: 20px; /* 伪元素宽度 */
-    height: 20px; /* 伪元素高度 */
+    width: 24px; /* 伪元素宽度 */
+    height: 24px; /* 伪元素高度 */
     background-image: url("../../assets/images/background/upcoming.png");
     background-size: contain; /* 等比例缩小 */
     background-repeat: no-repeat;
@@ -206,15 +206,16 @@ export default {
     width: 50%;
     display: flex;
     flex-direction: row;
-    padding: 0 10px 0 5px;
+    padding: 0 10px;
     box-sizing: border-box;
   }
 
   .futureItemTitle {
-    width: 70%;
-    flex: 1 1 auto;
-    font-size: 1.5rem;
-    line-height: 3rem;
+    width: 75%;
+    text-align: left;
+    font-size: 1.6rem;
+    line-height: 4rem;
+    height: 4rem;
     color: #030f39;
     display: -webkit-box;
     /* 一行直接省略 */
@@ -222,22 +223,23 @@ export default {
     -webkit-line-clamp: 1;
     overflow: hidden;
     font-weight: bold;
-    text-align: left;
   }
   .futureItemTime {
+    flex: 1 1 auto;
+    text-align: right;
     font-size: 1.5rem;
-    line-height: 3rem;
+    line-height: 4rem;
+    height: 4rem;
     color: #999;
   }
   .pastAcademicTrend {
-    width: 100%;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
   }
 
   .pastTitle {
-    font-size: 16px;
+    font-size: 18px;
     width: 100%;
     text-align: left;
   }
@@ -245,8 +247,8 @@ export default {
     content: "";
     display: inline-block; /* 将伪元素设置为行内块元素 */
     vertical-align: middle; /* 垂直居中对齐 */
-    width: 20px; /* 伪元素宽度 */
-    height: 20px; /* 伪元素高度 */
+    width: 24px; /* 伪元素宽度 */
+    height: 24px; /* 伪元素高度 */
     background-image: url("../../assets/images/background/done.png");
     background-size: contain; /* 等比例缩小 */
     background-repeat: no-repeat;
@@ -269,22 +271,25 @@ export default {
   .pastText {
     width: 100%;
     word-break: break-all;
-    margin: 0 10px 5px 5px;
+    margin: 5px 10px;
     padding-bottom: 5px;
     box-sizing: border-box;
     border-bottom: 1.5px solid #dfdfdf;
   }
   .pastItemTime {
     font-size: 1.6rem;
+    line-height: 2rem;
+    height: 2rem;
+    color: #999;
   }
   .pastItem:hover .title-box {
     color: #ff2400;
   }
   .title-box {
     display: inline-block;
-    font-size: 16px;
-    line-height: 26px;
-    margin-bottom: 2px;
+    font-size: 1.6rem;
+    line-height: 3rem;
+    height: 3rem;
     color: #0055a2;
     font-weight: bold;
     width: 100%;
@@ -296,9 +301,8 @@ export default {
   }
   .detail-box {
     color: #666666;
-    font-size: 15px;
-    line-height: 24px;
-    margin-bottom: 2px;
+    font-size: 1.4rem;
+    line-height: 3rem;
     overflow: hidden;
     text-align: left;
     display: -webkit-box;
