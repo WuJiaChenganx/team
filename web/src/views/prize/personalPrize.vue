@@ -32,12 +32,35 @@
             </el-breadcrumb>
           </div>
         </div>
-        <div class="personalPrizeItem">
-          <div
-            class="detailItem"
-            v-for="(detailItem, detailIndex) in personalPrizes"
-            :key="detailIndex"
-          ></div>
+        <div
+          class="personalPrizeItem"
+          v-for="(detailItem, detailIndex) in personalPrizes"
+          :key="detailIndex"
+        >
+          <div class="icon">
+            <img src="../../assets/images/background/award.png" alt="" />
+            <div class="awardName">{{ detailItem.award }}</div>
+          </div>
+          <div class="awardTitle">
+            <div>奖励名称及等级：</div>
+            <div style="color: #404040">{{ detailItem.title }}</div>
+          </div>
+          <div class="awardDate">
+            <div>获奖年度：</div>
+            <div style="color: #404040">{{ detailItem.date }}</div>
+          </div>
+        </div>
+        <div class="paging">
+          <!-- page-size展示的选择每页显示个数的选项,页面变动触发的事件是current-change后面的函数,total表示总共的数量 current-page表示当前页数-->
+          <el-pagination
+            background
+            layout="prev, pager, next"
+            @current-change="handleCurrentChange"
+            :page-size="5"
+            :total="total_number"
+            :current-page="current_index"
+          >
+          </el-pagination>
         </div>
       </div>
     </div>
@@ -45,6 +68,7 @@
 </template>
 
 <script>
+import { getPrizeURL } from "@/api/api";
 export default {
   data() {
     return {
@@ -65,17 +89,21 @@ export default {
       menuZH: [
         { name: "团队荣誉", path: "/prize/teamPrize" },
         { name: "个人荣誉", path: "/prize/personalPrize" },
-        { name: "项目获奖", path: "/prize/projectPrize" },
+        // { name: "项目获奖", path: "/prize/projectPrize" },
       ],
       menuEN: [
         { name: "team-prize", path: "/prize/teamPrize" },
         { name: "person-prize", path: "/prize/personalPrize" },
-        { name: "project-award", path: "/prize/projectPrize" },
+        // { name: "project-award", path: "/prize/projectPrize" },
       ],
       personalPrizes: [],
+      total_number: 0,
+      // 当前页面从1开始的这两个属性会在刚开始的时候就更新
+      current_index: 1,
     };
   },
   created() {
+    this.getPersonalPrizeList();
     this.changUI();
   },
   methods: {
@@ -87,6 +115,25 @@ export default {
         this.menu = this.menuEN;
         this.pageItem = this.englishItem;
       }
+    },
+    // async和await用于同步,就是按顺序执行
+    async getPersonalPrizeList() {
+      let params = {
+        // 定义参数
+        start: (this.current_index - 1) * 5,
+        end: this.current_index * 5,
+        languageType: this.$store.getters.getLanguageType,
+        type: "person",
+      };
+      await getPrizeURL(params).then((res) => {
+        this.personalPrizes = res.data;
+        this.total_number = res.sum;
+      });
+    },
+    handleCurrentChange(val) {
+      // 传入的val是当前页的页码
+      this.current_index = val;
+      this.getPersonalPrizeList();
     },
   },
 };
@@ -145,7 +192,8 @@ export default {
     box-sizing: border-box;
     background-color: #fff;
     border: 1px solid #dfdfdf;
-    min-height: calc(100vh - 29rem - 6rem);
+    min-height: 80rem;
+    position: relative;
   }
 
   .personalPrizeTitle {
@@ -153,6 +201,7 @@ export default {
     flex-direction: row;
     justify-content: space-between;
     padding: 2rem 0;
+    margin-bottom: 2rem;
     border-bottom: 1px solid #dfdfdf;
   }
   .title {
@@ -184,21 +233,57 @@ export default {
     color: #034ea1;
     background: #eee;
   }
-  /* 设置块和分页的距离 */
   .personalPrizeItem {
-    width: 100%;
     display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
+    flex-direction: column;
+    padding-bottom: 2rem;
     margin-bottom: 2rem;
+    border-bottom: 1px solid #dfdfdf;
   }
-
-  .detailItem {
-    padding: 10px;
-    width: 50%;
+  .icon {
+    width: 100%;
+    height: 4rem;
     display: flex;
     flex-direction: row;
-    box-sizing: border-box;
+  }
+  .icon img {
+    height: 100%;
+  }
+  .awardName {
+    margin-left: 2rem;
+    color: #333333;
+    font-weight: bold;
+    line-height: 4rem;
+    font-size: 1.8rem;
+    /* 显示1行 */
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
+    text-align: left;
+  }
+  .awardTitle {
+    display: flex;
+    flex-direction: row;
+    margin-left: 6rem;
+    font-size: 1.5rem;
+    line-height: 2.4rem;
+    color: #1660c9;
+  }
+  .awardDate {
+    display: flex;
+    flex-direction: row;
+    margin-left: 6rem;
+    font-size: 1.5rem;
+    line-height: 2.4rem;
+    color: #1660c9;
+  }
+  /* 设置分页和底部的距离 */
+  .paging {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, 0);
+    bottom: 3rem;
   }
 }
 /* 移动端  */
@@ -248,13 +333,16 @@ export default {
     box-sizing: border-box;
     background-color: #fff;
     border: 1px solid #dfdfdf;
+    min-height: 540px;
+    position: relative;
   }
 
   .personalPrizeTitle {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    padding: 10px 0;
+    padding: 1rem 0;
+    margin-bottom: 1rem;
     border-bottom: 1px solid #dfdfdf;
   }
   .title {
@@ -283,21 +371,62 @@ export default {
     font-weight: bold;
     border: #014da1 solid 1px;
   }
-  /* 设置块和分页的距离 */
+
   .personalPrizeItem {
     width: 100%;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #dfdfdf;
   }
-
-  .detailItem {
+  .icon {
     width: 100%;
-    padding: 10px 0;
+    height: 4rem;
     display: flex;
     flex-direction: row;
-    box-sizing: border-box;
+  }
+  .icon img {
+    height: 100%;
+  }
+  .awardName {
+    margin-left: 2rem;
+    color: #333333;
+    font-weight: bold;
+    line-height: 4rem;
+    font-size: 1.8rem;
+    /* 显示1行 */
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
+    text-align: left;
+  }
+  .awardTitle {
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    margin-left: 6rem;
+    font-size: 1.5rem;
+    line-height: 2.4rem;
+    color: #1660c9;
+  }
+  .awardDate {
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    margin-left: 6rem;
+    font-size: 1.5rem;
+    line-height: 2.4rem;
+    color: #1660c9;
+  }
+  /* 设置分页和底部的距离 */
+  .paging {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, 0);
+    bottom: 3rem;
   }
 }
 </style>

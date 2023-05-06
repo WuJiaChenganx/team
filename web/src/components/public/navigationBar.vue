@@ -87,7 +87,7 @@ export default {
           subMenu: [
             { title: "团队荣誉", path: "/prize/teamPrize" },
             { title: "个人荣誉", path: "/prize/personalPrize" },
-            { title: "项目获奖", path: "/prize/projectPrize" },
+            // { title: "项目获奖", path: "/prize/projectPrize" },
           ],
         },
         {
@@ -168,10 +168,10 @@ export default {
               title: "person-prize",
               path: "/prize/personalPrize",
             },
-            {
-              title: "project-award",
-              path: "/prize/projectPrize",
-            },
+            // {
+            //   title: "project-award",
+            //   path: "/prize/projectPrize",
+            // },
           ],
         },
         {
