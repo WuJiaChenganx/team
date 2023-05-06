@@ -64,4 +64,6 @@ public interface TextboxInfoMapper extends BaseMapper<TextboxInfo> {
     String sumDire();
 
     Integer sumCourse(String type);
+
+    String teachBrief();
 }

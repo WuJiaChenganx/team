@@ -55,4 +55,6 @@ public interface TextboxInfoService extends IService<TextboxInfo> {
     String sumDire();
 
     Integer sumCourse(String type);
+
+    String teachBrief();
 }

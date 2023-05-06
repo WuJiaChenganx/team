@@ -231,5 +231,10 @@ public class TextboxInfoServiceImpl extends ServiceImpl<TextboxInfoMapper, Textb
         return textboxInfoMapper.sumCourse(type);
     }
 
+    @Override
+    public String teachBrief() {
+        return textboxInfoMapper.teachBrief();
+    }
+
 
 }

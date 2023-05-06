@@ -66,6 +66,13 @@
         limit ${start},${end}
     </select>
 
+    <select id="teachBrief" resultType="String">
+        select title
+        from textbox
+        <where>
+            tClass = "成果简介"
+        </where>
+    </select>
 
     <select id="getPlatform" resultType="teamWeb.research.entity.TextboxInfo">
         select `id`,`text`,`pictureUrl`,`tClass`,title

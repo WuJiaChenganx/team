@@ -13,4 +13,11 @@
         SELECT COUNT(*) FROM award
         WHERE award_type = "${type}"
     </select>
+
+    <select id="studentAward" resultType="teamWeb.teach.pojo.TeachAward">
+        SELECT id,award_name as name,title as teacher,award_date as grade,student
+        FROM award
+        WHERE award_type = "student"
+        ORDER BY award_name desc
+    </select>
 </mapper>
