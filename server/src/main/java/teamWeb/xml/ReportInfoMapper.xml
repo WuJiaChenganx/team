@@ -30,7 +30,7 @@
         <where>
             `r_class`= "动态" and `date` >= "${nowDate}"
         </where>
-        order by date desc limit ${start},${end}
+        order by date limit ${start},${end}
     </select>
 
 

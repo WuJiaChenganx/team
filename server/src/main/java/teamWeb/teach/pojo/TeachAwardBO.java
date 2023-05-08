@@ -1,6 +1,6 @@
 package teamWeb.teach.pojo;
 
-public class TeachAward {
+public class TeachAwardBO {
     private Integer id;
     private String grade;
     private String name;

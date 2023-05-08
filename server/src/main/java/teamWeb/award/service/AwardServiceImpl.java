@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import teamWeb.award.mapper.AwardMapper;
 import teamWeb.award.pojo.AwardBO;
-import teamWeb.teach.pojo.TeachAward;
+import teamWeb.teach.pojo.TeachAwardBO;
 
 import java.util.List;
 @Service
@@ -22,7 +22,7 @@ public class AwardServiceImpl implements AwardService{
     }
 
     @Override
-    public List<TeachAward> studentAward() {
+    public List<TeachAwardBO> studentAward() {
         return awardMapper.studentAward();
     }
 }

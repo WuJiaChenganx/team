@@ -1,7 +1,7 @@
 package teamWeb.award.mapper;
 
 import teamWeb.award.pojo.AwardBO;
-import teamWeb.teach.pojo.TeachAward;
+import teamWeb.teach.pojo.TeachAwardBO;
 
 import java.util.List;
 
@@ -10,5 +10,5 @@ public interface AwardMapper {
 
     Integer sumAward(String type);
 
-    List<TeachAward> studentAward();
+    List<TeachAwardBO> studentAward();
 }
