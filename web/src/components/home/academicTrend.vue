@@ -15,10 +15,13 @@
           :key="futureIndex"
           @click="gotoDetail(futureAcademyItem.id)"
         >
-          <div class="futureItemTitle">{{ futureAcademyItem.title }}</div>
-          <span class="futureItemTime">
-            {{ futureAcademyItem.date }}-{{ futureAcademyItem.day }}
-          </span>
+          <div class="futureTitleBox">
+            <div class="futureItemTitle">{{ futureAcademyItem.title }}</div>
+            <span class="futureItemTime">
+              {{ futureAcademyItem.date }}-{{ futureAcademyItem.day }}
+            </span>
+          </div>
+          <div class="futureItemDetail">{{ futureAcademyItem.detail }}</div>
         </div>
       </div>
       <div class="pastAcademicTrend">
@@ -31,15 +34,13 @@
           :key="pastIndex"
           @click="gotoDetail(pastAcademyItem.id)"
         >
-          <div class="pastText">
-            <div class="pastItemTime">
+          <div class="pastTitleBox">
+            <div class="pastItemTitle">{{ pastAcademyItem.title }}</div>
+            <span class="pastItemTime">
               {{ pastAcademyItem.date }}-{{ pastAcademyItem.day }}
-            </div>
-            <div class="title-box">{{ pastAcademyItem.title }}</div>
-            <div class="detail-box">
-              {{ pastAcademyItem.detail }}
-            </div>
+            </span>
           </div>
+          <div class="pastItemDetail">{{ pastAcademyItem.detail }}</div>
         </div>
       </div>
     </div>
@@ -205,11 +206,15 @@ export default {
   .futureItem {
     width: 50%;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     padding: 0 10px;
     box-sizing: border-box;
+    cursor: pointer;
   }
-
+  .futureTitleBox {
+    display: flex;
+    flex: row;
+  }
   .futureItemTitle {
     width: 75%;
     text-align: left;
@@ -231,6 +236,26 @@ export default {
     line-height: 4rem;
     height: 4rem;
     color: #999;
+  }
+  .futureItemDetail {
+    color: #666666;
+    font-size: 1.4rem;
+    line-height: 3rem;
+    overflow: hidden;
+    text-align: left;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    -webkit-box-orient: vertical;
+    word-break: break-all;
+    padding-bottom: 0.5rem;
+    border-bottom: 1.5px solid #dfdfdf;
+  }
+  .futureItem:hover .futureItemTitle {
+    color: #ff2400;
+  }
+  .futureItem:hover .futureItemTime {
+    color: #008cd6;
   }
   .pastAcademicTrend {
     display: flex;
@@ -259,47 +284,38 @@ export default {
   .pastItem {
     width: 50%;
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+    flex-direction: column;
+    padding: 0 10px;
+    box-sizing: border-box;
     cursor: pointer;
   }
-
-  .pastItem:hover img {
-    transform: scale(1.05);
-    transition: all 1s;
+  .pastTitleBox {
+    display: flex;
+    flex: row;
   }
-  .pastText {
-    width: 100%;
-    word-break: break-all;
-    margin: 5px 10px;
-    padding-bottom: 5px;
-    box-sizing: border-box;
-    border-bottom: 1.5px solid #dfdfdf;
+  .pastItemTitle {
+    width: 75%;
+    text-align: left;
+    font-size: 1.6rem;
+    line-height: 4rem;
+    height: 4rem;
+    color: #0055a2;
+    display: -webkit-box;
+    /* 一行直接省略 */
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
+    font-weight: bold;
   }
   .pastItemTime {
-    font-size: 1.6rem;
-    line-height: 2rem;
-    height: 2rem;
+    flex: 1 1 auto;
+    text-align: right;
+    font-size: 1.5rem;
+    line-height: 4rem;
+    height: 4rem;
     color: #999;
   }
-  .pastItem:hover .title-box {
-    color: #ff2400;
-  }
-  .title-box {
-    display: inline-block;
-    font-size: 1.6rem;
-    line-height: 3rem;
-    height: 3rem;
-    color: #0055a2;
-    font-weight: bold;
-    width: 100%;
-    overflow: hidden;
-    text-align: left;
-    display: -webkit-box;
-    -webkit-line-clamp: 1;
-    -webkit-box-orient: vertical;
-  }
-  .detail-box {
+  .pastItemDetail {
     color: #666666;
     font-size: 1.4rem;
     line-height: 3rem;
@@ -309,6 +325,15 @@ export default {
     -webkit-line-clamp: 3;
     line-clamp: 3;
     -webkit-box-orient: vertical;
+    word-break: break-all;
+    padding-bottom: 0.5rem;
+    border-bottom: 1.5px solid #dfdfdf;
+  }
+  .pastItem:hover .pastItemTitle {
+    color: #ff2400;
+  }
+  .pastItem:hover .pastItemTime {
+    color: #008cd6;
   }
 }
 @media screen and (max-width: 1000px) {
@@ -363,6 +388,7 @@ export default {
   .futureTitle {
     font-size: 2rem;
     text-align: left;
+    margin-bottom: 1rem;
   }
   .futureTitle::before {
     content: "";
@@ -378,30 +404,37 @@ export default {
   }
 
   .futureItem {
+    width: 100%;
     cursor: pointer;
-    display: flex;
-    flex-direction: row;
-    padding: 0 5px;
   }
 
+  .futureTitleBox {
+    width: 100%;
+    word-break: break-all;
+    box-sizing: border-box;
+  }
   .futureItemTitle {
-    width: 70%;
-    flex: 1 1 auto;
-    font-size: 1.8rem;
-    line-height: 3rem;
-    color: #030f39;
-    display: -webkit-box;
-    /* 一行直接省略 */
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 1;
-    overflow: hidden;
-    font-weight: bold;
     text-align: left;
+    font-size: 1.8rem;
+    line-height: 20px;
+    font-weight: bold;
+    margin-bottom: 5px;
   }
   .futureItemTime {
-    font-size: 1.8rem;
-    line-height: 3rem;
-    color: #999;
+    display: none;
+  }
+
+  .futureItemDetail {
+    color: #909090;
+    font-size: 1.6rem;
+    line-height: 30px;
+    text-align: left;
+    word-wrap: break-word;
+    word-break: break-all;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
   }
   .pastAcademicTrend {
     width: 100%;
@@ -413,6 +446,7 @@ export default {
     width: 100%;
     font-size: 2rem;
     text-align: left;
+    margin-bottom: 1rem;
   }
   .pastTitle::before {
     content: "";
@@ -431,27 +465,24 @@ export default {
     cursor: pointer;
   }
 
-  .pastText {
+  .pastTitleBox {
     width: 100%;
     word-break: break-all;
     box-sizing: border-box;
-    padding: 0 5px;
   }
-  .pastItemTime {
-    display: none;
-    text-align: left;
-    font-size: 1.8rem;
-    line-height: 3rem;
-  }
-  .title-box {
+  .pastItemTitle {
     text-align: left;
     color: #0055a2;
     font-size: 1.8rem;
-    line-height: 30px;
+    line-height: 20px;
     font-weight: bold;
     margin-bottom: 5px;
   }
-  .detail-box {
+  .pastItemTime {
+    display: none;
+  }
+
+  .pastItemDetail {
     color: #909090;
     font-size: 1.6rem;
     line-height: 30px;

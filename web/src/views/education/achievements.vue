@@ -33,23 +33,19 @@
           </div>
         </div>
         <div class="achievementsItem">
-          <div
-            class="detailItem"
-            v-for="courseItem in courses"
-            :key="courseItem.courseType"
-          >
-            <div class="detailItemCourseType">
-              {{ courseItem.courseType }}
-            </div>
-            <div class="detailItemCourseProfile">{{ courseItem.profile }}</div>
-            <div
-              v-for="courseListItem in courseItem.courseList"
-              :key="courseListItem.id"
-            >
-              <div class="detailItemCourseName">
-                {{ courseListItem.id }}. {{ courseListItem.courseName }}
-              </div>
-            </div>
+          <div class="titleBackground">学生竞赛</div>
+          <div class="introduction">
+            作为毕业设计导师累计培养本科毕业生30多人，作为指导老师指导浙江工业大学计算机学院机器人队参加国家级赛事并获得国家一等奖9次，国家二等奖13次，累计输送保研（直博、海外直博）学生20多人。
+          </div>
+          <div class="competitionTable">
+            <el-table :data="tableData" border style="width: 99%">
+              <el-table-column prop="name" label="比赛名称"></el-table-column>
+              <el-table-column prop="student" label="项目负责人及成员">
+              </el-table-column>
+              <el-table-column prop="grade" label="等级"> </el-table-column>
+              <el-table-column prop="teacher" label="指导老师">
+              </el-table-column>
+            </el-table>
           </div>
         </div>
       </div>
@@ -64,9 +60,9 @@ export default {
       pageItem: {},
       chineseItem: {
         allTitle: "教育教学",
-        subTitle: "课程教学",
+        subTitle: "成果",
         home: "首页",
-        achievements: "课程教学",
+        achievements: "教学成果",
       },
       englishItem: {
         allTitle: "Education",
@@ -85,46 +81,71 @@ export default {
         { name: "graduate", path: "/education/master" },
         { name: "achievements", path: "/education/achievements" },
       ],
-      courses: [
+      courses: [],
+      tableData: [
         {
-          courseType: "教学成果",
-          // profile:
-          //   "主讲:《人工智能导论》、《Principles of Computer Networks》(《计算机网络原理》留学生)、《计算机网络原理》、《无线传感器网络》",
-          courseList: [
-            {
-              id: 1,
-              courseName:
-                "教育部2018年第一批产学合作协同育人项目，“基于Python的程序设计课程教学改革”，2019.02-2020.02，项目负责人，排名：1/4；",
-            },
-            {
-              id: 2,
-              courseName:
-                "浙江工业大学校级教学改革项目，“物联网工程专业国际化人才培养模式的创新与实践”，2015.08-2016.12，项目负责人，排名1/6；",
-            },
-            {
-              id: 3,
-              courseName:
-                "2018全国高校计算机教育大会优秀论文奖，“面向国际化人才培养的物联网工程专业课程体系改革探索-以浙江工业大学为例”，2018.04，教育部高等学校计算机类专业教学指导委员会，排名：1/4；",
-            },
-          ],
+          id: 18,
+          grade: "二等奖",
+          name: "2022中国机器人大赛暨RoboCup机器人世界杯中国赛-机器人先进视觉赛-3D识别项目",
+          teacher: "邱杰凡、姚信威",
+          student: "丰泽辉、陈翰墨、杨正一、孙辰赫、盛嘉、屠恒彦、姜易臻",
         },
-        // {
-        //   courseType: " 研究生教学",
-        //   profile:
-        //     "主讲:《人工智能及其应用》、《Principles and Design of Wireless Sensor Networks》",
-        //   courseList: [
-        //     {
-        //       id: 1,
-        //       courseName:
-        //         "浙江省“十四五”研究生课程思政示范课程，“人工智能及其应用”，2022.12，项目负责人，1/6；",
-        //     },
-        //     {
-        //       id: 2,
-        //       courseName:
-        //         "浙江工业大学校级研究生核心课程建设项目，“人工智能及其应用”，2022.11-2023.12，项目负责人，1/4；",
-        //     },
-        //   ],
-        // },
+        {
+          id: 20,
+          grade: "一等奖",
+          name: "2021中国机器人大赛机器人先进视觉赛-工业测量项目",
+          teacher: "姚信威",
+          student: "童文韬、沈根行、张宇健、刘硕、张扬、徐子艺、申屠琦超",
+        },
+        {
+          id: 19,
+          grade: "一等奖",
+          name: "2021中国机器人大赛机器人先进视觉赛-3D识别项目",
+          teacher: "姚信威",
+          student: "刘硕、张扬、徐子艺、申屠琦超、童文韬、沈根行、张宇健",
+        },
+        {
+          id: 23,
+          grade: "三等奖",
+          name: "2020年中国机器人大赛足球机器人RoboCup小型组",
+          teacher: "姚信威",
+          student: "赵雨舟、何海煜、孙博航、王炜博等",
+        },
+        {
+          id: 21,
+          grade: "冠军/一等奖",
+          name: "2020年中国机器人大赛机器人先进视觉赛-3D识别项目",
+          teacher: "姚信威",
+          student: "陈兴迪、林泽、朱叙行、丁晨俊、杨振鑫等",
+        },
+        {
+          id: 22,
+          grade: "冠军/一等奖",
+          name: "2020年中国机器人大赛机器人先进视觉赛-3D测量项目",
+          teacher: "姚信威",
+          student: "陈兴迪、林泽、朱叙行、丁晨俊、杨振鑫等",
+        },
+        {
+          id: 25,
+          grade: "冠军/一等奖",
+          name: "2019中国机器人大赛先进视觉3D识别项目",
+          teacher: "姚信威",
+          student: "洪佳升、潘律翰、朱启月",
+        },
+        {
+          id: 24,
+          grade: "冠军/一等奖",
+          name: "2019中国机器人大赛先进视觉3D测量项目",
+          teacher: "姚信威",
+          student: "洪佳升、潘律翰",
+        },
+        {
+          id: 26,
+          grade: "优胜奖",
+          name: "2019RoboCup机器人世界杯中国赛",
+          teacher: "姚信威",
+          student: "王诗毅、俞淦、陈茵、王宇鹏、黄益明、郑铁驰、王炜博、王金泽",
+        },
       ],
     };
   },
@@ -238,27 +259,29 @@ export default {
     min-height: 600px;
     padding-bottom: 2rem;
   }
-
-  .detailItem {
-    word-wrap: break-word;
-    word-break: break-all;
-    margin-top: 3rem;
-    text-align: left;
-    line-height: 3rem;
-    font-size: 2rem;
-  }
-  .detailItemCourseType {
-    font-size: 2.5rem;
+  .titleBackground {
+    height: 4.5rem;
+    margin: 1rem 0;
+    background-size: cover !important;
+    background: url(../../assets/images/background/title-bg.png) no-repeat;
     font-weight: bold;
+    line-height: 4.5rem;
+    padding-left: 2.5rem;
+    font-size: 1.8rem;
+    text-align: left;
+    color: #404040;
   }
-  .detailItemCourseProfile {
-    padding: 0.5rem 0;
-    font-size: 2rem;
+  .introduction {
+    padding-left: 2.5rem;
+    font-size: 1.6rem;
+    font-weight: 400;
+    color: #404040;
+    line-height: 34px;
+    text-align: left;
   }
-  .detailItemCourseName {
-    text-indent: 2em;
-    font-size: 2rem;
-    padding: 0.5rem 0;
+  .competitionTable {
+    margin-top: 1rem;
+    padding-left: 2.5rem;
   }
 }
 /* 移动端  */
@@ -349,27 +372,28 @@ export default {
     padding-bottom: 2rem;
   }
 
-  .detailItem {
-    word-wrap: break-word;
-    word-break: break-all;
-    margin-top: 3rem;
-    text-align: left;
-    line-height: 3rem;
-    font-size: 2rem;
-  }
-  .detailItemCourseType {
-    font-size: 2.5rem;
+  .titleBackground {
+    height: 4.5rem;
+    margin: 1rem 0;
+    background-size: cover !important;
+    background: url(../../assets/images/background/title-bg.png) no-repeat;
     font-weight: bold;
-    padding: 0.5rem 0;
+    line-height: 4.5rem;
+    padding-left: 1.5rem;
+    font-size: 2rem;
+    text-align: left;
+    color: #404040;
   }
-  .detailItemCourseProfile {
-    padding: 0.8rem 0;
-    font-size: 2.4rem;
+  .introduction {
+    padding-left: 1.5rem;
+    font-size: 2rem;
+    font-weight: 400;
+    color: #404040;
+    line-height: 34px;
+    text-align: left;
   }
-  .detailItemCourseName {
-    text-indent: 2em;
-    font-size: 2.2rem;
-    padding: 0.8rem 0;
+  .competitionTable {
+    margin-top: 1rem;
   }
 }
 </style>
