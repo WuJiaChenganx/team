@@ -6,7 +6,7 @@ import teamWeb.teach.pojo.TeachAwardBO;
 import java.util.List;
 
 public interface AwardMapper {
-    List<AwardBO> award(int start, int end, String type);
+    List<AwardBO> award(int start, int end, String type,String award,String title,String date);
 
     Integer sumAward(String type);
 

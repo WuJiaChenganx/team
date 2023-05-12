@@ -5,7 +5,7 @@
     <select id="award" resultType="teamWeb.award.pojo.AwardBO">
         SELECT id,title,award_date as date,award_name as award
         FROM award
-        WHERE award_type = "${type}"
+        WHERE award_type = "${type}" and award_name LIKE '%${award}%' and title LIKE '%${title}%' and award_date LIKE '%${date}%'
         ORDER BY award_date desc LIMIT ${start},${end}
     </select>
 

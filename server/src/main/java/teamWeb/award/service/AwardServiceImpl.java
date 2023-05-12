@@ -11,9 +11,10 @@ import java.util.List;
 public class AwardServiceImpl implements AwardService{
     @Autowired
     private AwardMapper awardMapper;
+
     @Override
-    public List<AwardBO> award(int start, int end, String type) {
-        return awardMapper.award(start,end-start,type);
+    public List<AwardBO> award(int start, int end, String type, String award, String title, String date) {
+        return awardMapper.award(start,end-start,type,award,title,date);
     }
 
     @Override

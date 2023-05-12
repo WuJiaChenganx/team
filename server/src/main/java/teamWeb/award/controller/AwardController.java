@@ -23,9 +23,12 @@ public class AwardController {
     public APIResponse course(@RequestParam(value = "languageType") String languageType,
                               @RequestParam(value="start",defaultValue = "0") int start,
                               @RequestParam(value="end",defaultValue = "10") int end,
-                              @RequestParam(value="type") String type) {
+                              @RequestParam(value="type") String type,
+                              @RequestParam(value ="award",defaultValue = "") String award,
+                              @RequestParam(value = "title",defaultValue = "") String title,
+                              @RequestParam(value = "date",defaultValue = "") String date) {
         List<AwardBO> awardBOList=null;
-        awardBOList = awardService.award(start,end,type);
+        awardBOList = awardService.award(start,end,type,award,title,date);
         return APIResponse.success(awardBOList,awardService.sumAward(type));
     }
 }
