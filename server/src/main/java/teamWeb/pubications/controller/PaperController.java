@@ -47,10 +47,10 @@ public class PaperController {
         Integer sum = null;
         if (language.equals("Chinese")) {
             patentList = outcomeInfoService.patentDetail(start, end);
-            sum = outcomeInfoService.sumOutcome("论文");
+            sum = outcomeInfoService.sumOutcome("专利");
         }else if (language.equals("English")){
             patentList = outcomeInfoService.enPatentDetail(start, end);
-            sum = outcomeInfoService.sumEnOutcome("论文");
+            sum = outcomeInfoService.sumEnOutcome("专利");
         }
         return APIResponse.success(patentList,sum);
     }

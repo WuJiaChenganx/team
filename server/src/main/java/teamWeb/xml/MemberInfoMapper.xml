@@ -3,7 +3,7 @@
 
 <mapper namespace="teamWeb.teamSurvey.mapper.MemberInfoMapper">
     <select id="allMember" resultType="teamWeb.teamSurvey.pojo.MemberBO">
-        select `id`,`pictureUrl`,`edu`,`name`,m_class AS mClass,pageUrl, `come_in_year` AS comeInDate
+        select `id`,`pictureUrl`,`edu`,`name`,m_class AS mClass,pageUrl, `come_in_year` AS comeInDate,address
         from member
         <where>
             m_class = "${memberType}"

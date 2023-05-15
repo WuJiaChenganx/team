@@ -15,6 +15,15 @@ public class MemberDTO {
     private String title;
     private String pageUrl;
     private List<String> info;
+    private String address;
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
 
     public List<String> getInfo() {
         return info;
