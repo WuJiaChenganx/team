@@ -1,12 +1,14 @@
 package teamWeb.research.pojo;
 
+import java.util.List;
+
 public class DirectionsBO {
     private Integer id;
     private String text;
     private String pictureUrl;
 
     private String title;
-    private String picUrl;
+    private List<String> picUrl;
     private String detail;
 
     public String getTitle() {
@@ -41,11 +43,11 @@ public class DirectionsBO {
         this.pictureUrl = pictureUrl;
     }
 
-    public String getPicUrl() {
+    public List<String> getPicUrl() {
         return picUrl;
     }
 
-    public void setPicUrl(String picUrl) {
+    public void setPicUrl(List<String> picUrl) {
         this.picUrl = picUrl;
     }
 

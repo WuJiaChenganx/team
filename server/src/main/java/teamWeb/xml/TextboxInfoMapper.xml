@@ -50,11 +50,12 @@
 
 
     <select id="getDire" resultType="teamWeb.research.entity.TextboxInfo">
-        select `id`,`text`,`pictureUrl`,`tClass`,`title`
+        select `id`,`text`,`pictureUrl`,`tClass`,`title`,`sDate`
         from textbox
         <where>
             tClass = "科研方向"
         </where>
+        order by sDate
     </select>
 
     <select id="getEnDire" resultType="teamWeb.research.entity.TextboxInfo">

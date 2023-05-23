@@ -61,7 +61,7 @@ public class ProjectController {
             // sum = textboxInfoService.sumEnTextbox("科研方向");
             sum=" ";
         }
-        return APIResponse.success(direDetail,sum);
+        return APIResponse.success(direDetail);
     }
 
     @RequestMapping("/require-platform")

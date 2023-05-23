@@ -10,6 +10,7 @@ import teamWeb.research.entity.TextboxInfo;
 import teamWeb.research.mapper.TextboxInfoMapper;
 import teamWeb.research.pojo.*;
 import teamWeb.resource.pojo.ResourceBO;
+import teamWeb.teamDynamics.pojo.NoticeBO;
 import teamWeb.utils.Address;
 import teamWeb.utils.BeanUtil;
 
@@ -66,7 +67,6 @@ public class TextboxInfoServiceImpl extends ServiceImpl<TextboxInfoMapper, Textb
 
         for (DirectionsBO directionsBO:
                 directionsBOList) {
-            directionsBO.setPicUrl(Address.rootAddress()+directionsBO.getPictureUrl());
             directionsBO.setDetail(directionsBO.getText());
 
         }
@@ -80,7 +80,14 @@ public class TextboxInfoServiceImpl extends ServiceImpl<TextboxInfoMapper, Textb
 
         for (DirectionsBO directionsBO:
                 directionsBOList) {
-            directionsBO.setPicUrl(Address.rootAddress()+directionsBO.getPictureUrl());
+            List<String> picList = Collections.emptyList();
+            if(!(directionsBO.getPictureUrl() == null)&& !directionsBO.getPictureUrl().isEmpty()) {
+                picList = Arrays.asList(directionsBO.getPictureUrl().split(";"));
+                for (int i = 0; i < picList.size(); i++) {
+                    picList.set(i, Address.rootAddress() + picList.get(i));
+                }
+            }
+            directionsBO.setPicUrl(picList);
             directionsBO.setDetail(directionsBO.getText());
 
         }

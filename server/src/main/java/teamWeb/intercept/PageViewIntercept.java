@@ -25,6 +25,7 @@ public class PageViewIntercept implements HandlerInterceptor {
         if (session != null && session.getAttribute("view") != null) {
             // 表示已经登录
         }else if (session != null) {
+            session.setMaxInactiveInterval(1800);
             session.setAttribute("view",1);
             homeService.pageView();
         }
