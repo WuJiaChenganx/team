@@ -123,7 +123,7 @@ export default {
     background-color: #eef7fe;
   }
   .newFlashContent {
-    width: 75%;
+    width: 80%;
     margin: 0 auto;
   }
 

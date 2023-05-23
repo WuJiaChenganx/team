@@ -70,7 +70,7 @@ export default {
         home: "首页",
         project: "横向项目",
         projectDetail: "项目详情",
-        publicationDate: "发布时间: ",
+        publicationDate: "时间: ",
         pageView: "浏览量: ",
       },
       englishItem: {

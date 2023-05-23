@@ -2,49 +2,63 @@
   <div class="paper">
     <!-- default-active表示是当前选中的菜单的index -->
     <div class="paperContent">
+      <div class="breadCrumb">
+        <el-breadcrumb separator-class="el-icon-arrow-right">
+          <el-breadcrumb-item :to="{ path: '/home' }">{{
+            pageItem.home
+          }}</el-breadcrumb-item>
+          <el-breadcrumb-item :to="{ path: '/paper' }">{{
+            pageItem.allTitle
+          }}</el-breadcrumb-item>
+          <el-breadcrumb-item :to="{ path: '/paper/paper' }">{{
+            pageItem.subTitle
+          }}</el-breadcrumb-item>
+        </el-breadcrumb>
+      </div>
       <div class="paperAside">
-        <div class="paperAsideTitle">{{ pageItem.allTitle }}</div>
+        <div class="paperAsideTitle">
+          <span>
+            <img src="../../assets/images/background/asideTitle.png" alt="" />{{
+              pageItem.allTitle
+            }}
+          </span>
+        </div>
         <div class="paperAsideContent">
-          <el-menu :default-active="this.$route.path" router text-color="#000">
+          <el-menu :default-active="this.$route.path" router text-color="#444">
             <el-menu-item
               class="paperAsideItem"
               v-for="(menuItem, menuIndex) in menu"
               :key="menuIndex"
               :index="menuItem.path"
             >
-              <i class="el-icon-sunny"></i>
-              <span>{{ menuItem.name }}</span>
+              <span>
+                <img
+                  src="../../assets/images/background/asideSubtitle.png"
+                  alt=""
+                />
+                {{ menuItem.name }}
+              </span>
             </el-menu-item>
           </el-menu>
         </div>
       </div>
       <div class="paperDetail">
         <div class="paperTitle">
-          <div class="title">{{ pageItem.subTitle }}</div>
-          <div class="breadCrumb">
-            <el-breadcrumb separator-class="el-icon-arrow-right">
-              <el-breadcrumb-item :to="{ path: '/home' }">{{
-                pageItem.home
-              }}</el-breadcrumb-item>
-              <el-breadcrumb-item :to="{ path: '/paper/paper' }">{{
-                pageItem.paper
-              }}</el-breadcrumb-item>
-            </el-breadcrumb>
-          </div>
+          {{ pageItem.subTitle }}
         </div>
-        <div class="paperItem">
-          <div
-            class="detailItem"
-            v-for="(detailItem, detailIndex) in papers"
-            :key="detailIndex"
-          >
-            <div class="detailItemPaperName">
-              <span class="dot"></span>
+        <div
+          class="paperItem"
+          v-for="(detailItem, detailIndex) in papers"
+          :key="detailIndex"
+        >
+          <div class="paperItemName">
+            <span>
+              <img src="../../assets/images/background/list.png" alt="" />
               {{ detailItem.title }}
-              <a :href="detailItem.url" target="_blank" class="paperDetailUrl">
-                [ 详情 ]
-              </a>
-            </div>
+            </span>
+            <a :href="detailItem.url" target="_blank" class="paperItemUrl">
+              [ 详情 ]
+            </a>
           </div>
         </div>
         <div class="paging">
@@ -74,13 +88,11 @@ export default {
         allTitle: "论文著作",
         subTitle: "发表论文",
         home: "首页",
-        paper: "发表论文",
       },
       englishItem: {
         allTitle: "Publication",
         subTitle: "Paper",
         home: "home",
-        paper: "Paper",
       },
       menu: [],
       menuZH: [
@@ -139,69 +151,22 @@ export default {
 /* PC端  */
 @media screen and (min-width: 1000px) {
   .paper {
-    padding: 3rem 0;
-    background: url(../../assets/images/background/contentBackground.jpg)
-      no-repeat;
+    width: 100%;
   }
-
   .paperContent {
-    width: 75%;
+    width: 85%;
     margin: 0 auto;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
-  }
-
-  .paperAside {
-    width: 255px;
-    margin-right: 20px;
-  }
-  .paperAsideTitle {
-    width: 255px;
-    height: 78px;
-    line-height: 78px;
-    background: url(../../assets/images/background/zryy-menu-t-bg.png) no-repeat;
-    border-radius: 0.6rem;
-    background-size: cover !important;
-    font-weight: bold;
-    color: #fff;
-    font-size: 24px;
-  }
-  .paperAsideContent {
-    width: 255px;
-    background-color: #f9fbfd;
-  }
-  .paperAsideItem {
-    height: 52px;
-    line-height: 52px;
-    font-size: 16px;
-    text-align: left;
-    cursor: pointer;
-    border-bottom: 1px solid #dfdfdf;
-  }
-
-  .paperDetail {
-    flex: 1 1 auto;
-    padding: 0 3rem;
-    box-sizing: border-box;
-    background-color: #fff;
-    border: 1px solid #dfdfdf;
-  }
-
-  .paperTitle {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    padding: 2rem 0;
-    border-bottom: 1px solid #dfdfdf;
-  }
-  .title {
-    color: #333333;
-    font-weight: bold;
-    font-size: 2.5rem;
+    flex-wrap: wrap;
+    margin-bottom: 15px;
   }
   .breadCrumb {
-    padding-top: 1rem;
+    width: 100%;
+    background: #eee;
+    box-sizing: border-box;
+    padding: 10px 15px;
+    margin-bottom: 15px;
   }
   /* 不被选中时的颜色 */
   .el-breadcrumb ::v-deep .el-breadcrumb__inner {
@@ -213,59 +178,130 @@ export default {
     color: black !important;
     font-weight: 800 !important;
   }
+
+  .paperAside {
+    width: 20%;
+    padding-right: 30px;
+  }
+
+  .paperAsideTitle {
+    background: #fff;
+    height: 47px;
+    border-top: 3px solid #0c568e;
+    border-bottom: 1px solid #0c568e;
+    margin-bottom: 2px;
+  }
+  .paperAsideTitle span {
+    float: left;
+    height: 47px;
+    line-height: 47px;
+    font-size: 20px;
+    color: #4b74bb;
+    font-weight: bold;
+  }
+  .paperAsideTitle span img {
+    float: left;
+    margin-top: 15px;
+    margin-left: 5px;
+    margin-right: 10px;
+  }
+  .paperAsideContent {
+    width: 100%;
+  }
+  /* 去除侧边栏自带的边框 */
+  .el-menu {
+    border: none !important;
+  }
+  /* 去除侧边导航自带的边距 */
+  .el-menu-item {
+    padding: 0 !important;
+  }
   /* 侧边栏悬浮的背景颜色 */
   .el-menu-item:hover {
+    color: #fff !important;
     font-weight: bold;
-    background-color: #fff;
+    background-color: #4b74bb;
   }
   /* 选中侧边导航的背景颜色 */
   .el-menu-item.is-active {
+    color: #fff;
     font-weight: bold;
-    color: #034ea1;
-    background: #eee;
+    background-color: #4b74bb;
+  }
+
+  .paperAsideItem {
+    position: relative;
+    width: 100%;
+    height: 46px;
+    line-height: 46px;
+    font-size: 18px;
+    text-align: left;
+    cursor: pointer;
+    border-bottom: 1px solid #dfdfdf;
+  }
+  /* 最后一个侧边栏没有下划线 */
+  .paperAsideItem:last-child {
+    border-bottom: none;
+  }
+  .paperAsideItem span {
+    font-size: 18px;
+    line-height: 46px;
+  }
+
+  .paperAsideItem span img {
+    height: 18px;
+    width: 18px;
+    line-height: 46px;
+    margin-top: -3px;
+    padding: 8px 12px;
+  }
+  .paperDetail {
+    width: calc(80% - 30px);
+    min-height: calc(100vh - 29rem - 58px);
+  }
+
+  .paperTitle {
+    font-size: 22px;
+    font-weight: bold;
+    line-height: 40px;
+    color: #113f95;
+    margin: 15px 0;
   }
   .paperItem {
-    min-height: 600px;
-    padding-bottom: 2rem;
+    width: 100%;
   }
 
-  .detailItem {
-    display: block;
-    word-wrap: break-word;
-    word-break: break-all;
-    margin-top: 2.5rem;
+  .paperItemName {
     text-align: left;
-    line-height: 3rem;
     font-size: 1.6rem;
+    line-height: 3rem;
+    word-break: break-all;
+    border-bottom: 1px dashed #b2b2b2;
+  }
+  .paperItemName span img {
+    width: 15px;
+    height: 15px;
+  }
+  .paperItemUrl {
     text-decoration: none;
-    color: black;
+    color: #7db0cb;
   }
-  .detailItemPaperName {
-    color: #333;
-    font-size: 18px;
-  }
-  .dot {
-    display: inline-block;
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background-color: #333; /* 设置颜色 */
-    margin-right: 5px; /* 设置小圆点与文字之间的距离 */
-  }
-  .paperDetailUrl {
-    text-decoration: none;
-    color: #034ea1;
-    font-style: italic;
-  }
-
-  /* 设置分页和底部的距离 */
   .paging {
-    margin-bottom: 3rem;
+    margin: 3rem 0;
   }
 }
 /* 移动端  */
 @media screen and (max-width: 1000px) {
+  .paper {
+    width: 100%;
+  }
+  .paperContent {
+    display: flex;
+    flex-direction: column;
+  }
+
   .paperAside {
+    order: 1;
     background: url(../../assets/images/background/contentBackground.jpg) center
       0 no-repeat;
     background-size: cover;
@@ -277,6 +313,9 @@ export default {
     font-weight: bold;
     text-align: left;
     color: #014da1;
+  }
+  .paperAsideTitle span img {
+    display: none;
   }
   /* 菜单横向排列 */
   .el-menu {
@@ -299,33 +338,22 @@ export default {
     cursor: pointer;
     background-color: #fff;
   }
-
-  .el-icon-sunny {
+  /* 选中侧边导航的背景颜色 */
+  .el-menu-item.is-active {
+    background: #014da1;
+    color: #fff;
+    font-weight: bold;
+    border: #014da1 solid 1px;
+  }
+  .paperAsideItem span img {
     display: none;
   }
-  .paperDetail {
-    width: 100%;
-    padding: 0 1.5rem;
-    box-sizing: border-box;
-    background-color: #fff;
-    border: 1px solid #dfdfdf;
-  }
-
-  .paperTitle {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    padding: 10px 0;
-    border-bottom: 1px solid #dfdfdf;
-  }
-  .title {
-    color: #333333;
-    font-weight: bold;
-    font-size: 20px;
-    line-height: 30px;
-  }
   .breadCrumb {
-    padding-top: 1rem;
+    order: 2;
+    width: 100%;
+    background: #eee;
+    box-sizing: border-box;
+    padding: 10px 15px;
   }
   /* 不被选中时的颜色 */
   .el-breadcrumb ::v-deep .el-breadcrumb__inner {
@@ -337,50 +365,42 @@ export default {
     color: black !important;
     font-weight: 800 !important;
   }
-  /* 选中侧边导航的背景颜色 */
-  .el-menu-item.is-active {
-    background: #014da1;
-    color: #fff;
-    font-weight: bold;
-    border: #014da1 solid 1px;
+  .paperDetail {
+    order: 3;
+    width: 100%;
+    padding: 0 1.5rem;
+    box-sizing: border-box;
+    background-color: #fff;
+    min-height: calc(100vh - 29rem - 139px);
   }
-  /* 设置块和分页的距离 */
+  .paperTitle {
+    font-size: 3rem;
+    font-weight: bold;
+    line-height: 36px;
+    color: #113f95;
+    margin: 1rem 0;
+  }
   .paperItem {
-    padding-bottom: 2rem;
-    min-height: 450px;
+    width: 100%;
   }
 
-  .detailItem {
-    display: block;
-    word-wrap: break-word;
-    word-break: break-all;
-    margin-top: 2.5rem;
+  .paperItemName {
     text-align: left;
-    line-height: 3rem;
-    font-size: 1.6rem;
-    text-decoration: none;
-    color: black;
-  }
-  .detailItemPaperName {
-    color: black;
     font-size: 16px;
+    line-height: 30px;
+    word-break: break-all;
+    border-bottom: 1px dashed #b2b2b2;
   }
-  .dot {
-    display: inline-block;
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background-color: black; /* 设置颜色 */
-    margin-right: 5px; /* 设置小圆点与文字之间的距离 */
+  .paperItemName span img {
+    width: 15px;
+    height: 15px;
   }
-  .paperDetailUrl {
+  .paperItemUrl {
     text-decoration: none;
-    color: #034ea1;
-    font-style: italic;
+    color: #7db0cb;
   }
-  /* 设置分页和底部的距离 */
   .paging {
-    margin-bottom: 3rem;
+    margin: 2rem 0;
   }
 }
 </style>

@@ -124,7 +124,7 @@ export default {
     background-color: #eef7fe;
   }
   .academyContent {
-    width: 75%;
+    width: 80%;
     margin: 0 auto;
   }
   .academyDetail {

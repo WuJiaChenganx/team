@@ -13,18 +13,19 @@
         </div>
         <div class="rightBox">
           <div class="languageBtn">
-            <span
-              ><a
+            <span>
+              <a
                 href="http://www.cs.zjut.edu.cn/html/index.html"
                 target="_blank"
                 style="text-decoration: none"
-                >学院主页</a
-              >
+                >学院主页
+              </a>
             </span>
             |
             <span @click="changeLanguage('Chinese')">中文</span> |
             <span @click="changeLanguage('English')">English</span>
           </div>
+          <div class="pageView">浏览量: {{ pageView }}</div>
         </div>
       </div>
     </div>
@@ -56,9 +57,11 @@
 </template>
 <script>
 import logo from "./logo.vue";
+import { getHomePageViewURL } from "@/api/api";
 export default {
   data() {
     return {
+      pageView: "",
       navigation: [],
       navigationZH: [
         {
@@ -85,9 +88,8 @@ export default {
           title: "成果荣誉",
           path: "/prize",
           subMenu: [
-            { title: "团队荣誉", path: "/prize/teamPrize" },
-            { title: "个人荣誉", path: "/prize/personalPrize" },
-            // { title: "项目获奖", path: "/prize/projectPrize" },
+            { title: "科技成果", path: "/prize/prize" },
+            { title: "团队荣誉", path: "/prize/honour" },
           ],
         },
         {
@@ -163,15 +165,11 @@ export default {
           title: "Prize",
           path: "/prize",
           subMenu: [
-            { title: "team-prize", path: "/prize/teamPrize" },
+            { title: "prize", path: "/prize/prize" },
             {
-              title: "person-prize",
-              path: "/prize/personalPrize",
+              title: "honour",
+              path: "/prize/honour",
             },
-            // {
-            //   title: "project-award",
-            //   path: "/prize/projectPrize",
-            // },
           ],
         },
         {
@@ -229,6 +227,12 @@ export default {
   },
 
   methods: {
+    // async和await用于同步,就是按顺序执行
+    async getPageView() {
+      await getHomePageViewURL().then((res) => {
+        this.pageView = res.data;
+      });
+    },
     keepColor() {
       // DOM 加载完成之后执行该方案
       this.$nextTick(() => {
@@ -282,6 +286,7 @@ export default {
     },
   },
   created() {
+    this.getPageView();
     this.changUI();
   },
   watch: {
@@ -338,11 +343,21 @@ export default {
   }
   .rightBox {
     display: flex;
-    // 子元素垂直居中
-    align-items: center;
+    flex-direction: column;
+    justify-content: center;
   }
   .languageBtn {
+    width: 100%;
+    text-align: left;
     font-size: 1.6rem;
+    line-height: 2.5rem;
+    color: #fff;
+  }
+  .pageView {
+    width: 100%;
+    text-align: left;
+    font-size: 1.6rem;
+    line-height: 2.5rem;
     color: #fff;
   }
 
@@ -418,6 +433,7 @@ export default {
     width: 100%;
     display: flex;
     flex-direction: row;
+    justify-content: space-around;
   }
   .leftBox {
     display: flex;
@@ -434,7 +450,6 @@ export default {
     flex-direction: column;
     justify-content: center;
     color: #fff;
-    // font-weight: bold;
   }
   .chineseName {
     font-size: 2.4rem;
@@ -446,14 +461,23 @@ export default {
   }
   .rightBox {
     display: flex;
-    // 子元素垂直居中
-    align-items: center;
+    flex-direction: column;
+    justify-content: center;
   }
   .languageBtn {
+    width: 100%;
+    text-align: left;
     font-size: 1.6rem;
+    line-height: 2.5rem;
     color: #fff;
   }
-
+  .pageView {
+    width: 100%;
+    text-align: left;
+    font-size: 1.6rem;
+    line-height: 2.5rem;
+    color: #fff;
+  }
   /* 导航栏 */
   .navBackground {
     height: 4rem;

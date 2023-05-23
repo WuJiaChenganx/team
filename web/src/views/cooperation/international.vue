@@ -2,50 +2,51 @@
   <div class="international">
     <!-- default-active表示是当前选中的菜单的index -->
     <div class="internationalContent">
+      <div class="breadCrumb">
+        <el-breadcrumb separator-class="el-icon-arrow-right">
+          <el-breadcrumb-item :to="{ path: '/home' }">{{
+            pageItem.home
+          }}</el-breadcrumb-item>
+          <el-breadcrumb-item :to="{ path: '/cooperation' }">{{
+            pageItem.allTitle
+          }}</el-breadcrumb-item>
+          <el-breadcrumb-item :to="{ path: '/cooperation/international' }">{{
+            pageItem.subTitle
+          }}</el-breadcrumb-item>
+        </el-breadcrumb>
+      </div>
       <div class="internationalAside">
-        <div class="internationalAsideTitle">{{ pageItem.allTitle }}</div>
+        <div class="internationalAsideTitle">
+          <span>
+            <img src="../../assets/images/background/asideTitle.png" alt="" />{{
+              pageItem.allTitle
+            }}
+          </span>
+        </div>
         <div class="internationalAsideContent">
-          <el-menu :default-active="this.$route.path" router text-color="#000">
+          <el-menu :default-active="this.$route.path" router text-color="#444">
             <el-menu-item
               class="internationalAsideItem"
               v-for="(menuItem, menuIndex) in menu"
               :key="menuIndex"
               :index="menuItem.path"
             >
-              <i class="el-icon-sunny"></i>
-              <span>{{ menuItem.name }}</span>
+              <span>
+                <img
+                  src="../../assets/images/background/asideSubtitle.png"
+                  alt=""
+                />
+                {{ menuItem.name }}
+              </span>
             </el-menu-item>
           </el-menu>
         </div>
       </div>
       <div class="internationalDetail">
         <div class="internationalTitle">
-          <div class="title">{{ pageItem.subTitle }}</div>
-          <div class="breadCrumb">
-            <el-breadcrumb separator-class="el-icon-arrow-right">
-              <el-breadcrumb-item :to="{ path: '/home' }">{{
-                pageItem.home
-              }}</el-breadcrumb-item>
-              <el-breadcrumb-item
-                :to="{ path: '/cooperation/international' }"
-                >{{ pageItem.international }}</el-breadcrumb-item
-              >
-            </el-breadcrumb>
-          </div>
+          {{ pageItem.subTitle }}
         </div>
         <div class="internationalItem"></div>
-        <div class="paging" v-show="total_number">
-          <!-- page-size展示的选择每页显示个数的选项,页面变动触发的事件是current-change后面的函数,total表示总共的数量 current-page表示当前页数-->
-          <el-pagination
-            background
-            layout="prev, pager, next"
-            @current-change="handleCurrentChange"
-            :page-size="10"
-            :total="total_number"
-            :current-page="current_index"
-          >
-          </el-pagination>
-        </div>
       </div>
     </div>
   </div>
@@ -60,13 +61,11 @@ export default {
         allTitle: "交流合作",
         subTitle: "国际交流",
         home: "首页",
-        international: "国际交流",
       },
       englishItem: {
         allTitle: "Cooperation",
         subTitle: "International",
         home: "home",
-        international: "International",
       },
       menu: [],
       menuZH: [
@@ -77,12 +76,6 @@ export default {
         { name: "Domestic", path: "/cooperation/domestic" },
         { name: "International", path: "/cooperation/international" },
       ],
-      // 需要展示页面数据
-      showPageContent: [],
-      // 总共要展示的数量
-      total_number: 0,
-      // 当前页面从1开始的这两个属性会在刚开始的时候就更新
-      current_index: 1,
     };
   },
   created() {
@@ -105,72 +98,22 @@ export default {
 /* PC端  */
 @media screen and (min-width: 1000px) {
   .international {
-    padding: 3rem 0;
-    box-sizing: border-box;
-    background: url(../../assets/images/background/contentBackground.jpg)
-      no-repeat;
-    min-height: calc(100vh - 29rem);
+    width: 100%;
   }
-
   .internationalContent {
-    width: 75%;
+    width: 85%;
     margin: 0 auto;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
-  }
-
-  .internationalAside {
-    width: 255px;
-    margin-right: 20px;
-  }
-  .internationalAsideTitle {
-    width: 255px;
-    height: 78px;
-    line-height: 78px;
-    background: url(../../assets/images/background/zryy-menu-t-bg.png) no-repeat;
-    border-radius: 0.6rem;
-    background-size: cover !important;
-    font-weight: bold;
-    color: #fff;
-    font-size: 24px;
-  }
-  .internationalAsideContent {
-    width: 255px;
-    background-color: #f9fbfd;
-  }
-  .internationalAsideItem {
-    height: 52px;
-    line-height: 52px;
-    font-size: 16px;
-    text-align: left;
-    cursor: pointer;
-    border-bottom: 1px solid #dfdfdf;
-  }
-  .internationalDetail {
-    flex: 1 1 auto;
-    padding: 0 3rem;
-    box-sizing: border-box;
-    background-color: #fff;
-    border: 1px solid #dfdfdf;
-    position: relative;
-    min-height: calc(100vh - 29rem - 6rem);
-  }
-
-  .internationalTitle {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    padding: 2rem 0;
-    border-bottom: 1px solid #dfdfdf;
-  }
-  .title {
-    color: #333333;
-    font-weight: bold;
-    font-size: 2.5rem;
+    flex-wrap: wrap;
+    margin-bottom: 15px;
   }
   .breadCrumb {
-    padding-top: 1rem;
+    width: 100%;
+    background: #eee;
+    box-sizing: border-box;
+    padding: 10px 15px;
+    margin-bottom: 15px;
   }
   /* 不被选中时的颜色 */
   .el-breadcrumb ::v-deep .el-breadcrumb__inner {
@@ -182,35 +125,114 @@ export default {
     color: black !important;
     font-weight: 800 !important;
   }
+
+  .internationalAside {
+    width: 20%;
+    padding-right: 30px;
+  }
+
+  .internationalAsideTitle {
+    background: #fff;
+    height: 47px;
+    border-top: 3px solid #0c568e;
+    border-bottom: 1px solid #0c568e;
+    margin-bottom: 2px;
+  }
+  .internationalAsideTitle span {
+    float: left;
+    height: 47px;
+    line-height: 47px;
+    font-size: 20px;
+    color: #4b74bb;
+    font-weight: bold;
+  }
+  .internationalAsideTitle span img {
+    float: left;
+    margin-top: 15px;
+    margin-left: 5px;
+    margin-right: 10px;
+  }
+  .internationalAsideContent {
+    width: 100%;
+  }
+  /* 去除侧边栏自带的边框 */
+  .el-menu {
+    border: none !important;
+  }
+  /* 去除侧边导航自带的边距 */
+  .el-menu-item {
+    padding: 0 !important;
+  }
   /* 侧边栏悬浮的背景颜色 */
   .el-menu-item:hover {
+    color: #fff !important;
     font-weight: bold;
-    background-color: #fff;
+    background-color: #4b74bb;
   }
   /* 选中侧边导航的背景颜色 */
   .el-menu-item.is-active {
+    color: #fff;
     font-weight: bold;
-    color: #034ea1;
-    background: #eee;
+    background-color: #4b74bb;
   }
-  /* 设置块和分页的距离 */
+
+  .internationalAsideItem {
+    position: relative;
+    width: 100%;
+    height: 46px;
+    line-height: 46px;
+    font-size: 18px;
+    text-align: left;
+    cursor: pointer;
+    border-bottom: 1px solid #dfdfdf;
+  }
+  /* 最后一个侧边栏没有下划线 */
+  .internationalAsideItem:last-child {
+    border-bottom: none;
+  }
+  .internationalAsideItem span {
+    font-size: 18px;
+    line-height: 46px;
+  }
+
+  .internationalAsideItem span img {
+    height: 18px;
+    width: 18px;
+    line-height: 46px;
+    margin-top: -3px;
+    padding: 8px 12px;
+  }
+  .internationalDetail {
+    flex: 1 1 auto;
+    min-height: calc(100vh - 29rem - 58px);
+  }
+
+  .internationalTitle {
+    font-size: 22px;
+    font-weight: bold;
+    line-height: 40px;
+    color: #113f95;
+    margin: 15px 0;
+  }
+
   .internationalItem {
     display: flex;
     flex-direction: column;
     margin-bottom: 3rem;
   }
-
-  /* 设置分页和底部的距离 */
-  .paging {
-    position: absolute;
-    left: 50%;
-    transform: translate(-50%, 0);
-    bottom: 3rem;
-  }
 }
 /* 移动端  */
 @media screen and (max-width: 1000px) {
+  .international {
+    width: 100%;
+  }
+  .internationalContent {
+    display: flex;
+    flex-direction: column;
+  }
+
   .internationalAside {
+    order: 1;
     background: url(../../assets/images/background/contentBackground.jpg) center
       0 no-repeat;
     background-size: cover;
@@ -222,6 +244,9 @@ export default {
     font-weight: bold;
     text-align: left;
     color: #014da1;
+  }
+  .internationalAsideTitle span img {
+    display: none;
   }
   /* 菜单横向排列 */
   .el-menu {
@@ -244,36 +269,22 @@ export default {
     cursor: pointer;
     background-color: #fff;
   }
-
-  .el-icon-sunny {
+  /* 选中侧边导航的背景颜色 */
+  .el-menu-item.is-active {
+    background: #014da1;
+    color: #fff;
+    font-weight: bold;
+    border: #014da1 solid 1px;
+  }
+  .internationalAsideItem span img {
     display: none;
   }
-
-  .internationalDetail {
-    width: 100%;
-    padding: 0 1.5rem;
-    box-sizing: border-box;
-    background-color: #fff;
-    border: 1px solid #dfdfdf;
-    position: relative;
-    min-height: calc(100vh - 36rem - 112px);
-  }
-
-  .internationalTitle {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    padding: 10px 0;
-    border-bottom: 1px solid #dfdfdf;
-  }
-  .title {
-    color: #333333;
-    font-weight: bold;
-    font-size: 20px;
-    line-height: 30px;
-  }
   .breadCrumb {
-    padding-top: 1rem;
+    order: 2;
+    width: 100%;
+    background: #eee;
+    box-sizing: border-box;
+    padding: 10px 15px;
   }
   /* 不被选中时的颜色 */
   .el-breadcrumb ::v-deep .el-breadcrumb__inner {
@@ -285,27 +296,20 @@ export default {
     color: black !important;
     font-weight: 800 !important;
   }
-  /* 选中侧边导航的背景颜色 */
-  .el-menu-item.is-active {
-    background: #014da1;
-    color: #fff;
+  .internationalDetail {
+    order: 3;
+    width: 100%;
+    padding: 0 1.5rem;
+    box-sizing: border-box;
+    background-color: #fff;
+    min-height: calc(100vh - 29rem - 139px);
+  }
+  .internationalTitle {
+    font-size: 3rem;
     font-weight: bold;
-    border: #014da1 solid 1px;
-  }
-  /* 设置块和分页的距离 */
-  .internationalItem {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 3rem;
-    min-height: 350px;
-  }
-
-  /* 设置分页和底部的距离 */
-  .paging {
-    position: absolute;
-    left: 50%;
-    transform: translate(-50%, 0);
-    bottom: 3rem;
+    line-height: 36px;
+    color: #113f95;
+    margin: 1rem 0;
   }
 }
 </style>

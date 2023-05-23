@@ -67,7 +67,7 @@ export default {
         home: "首页",
         noticeList: "新闻列表",
         noticeDetail: "新闻详情",
-        publicationDate: "发布时间: ",
+        publicationDate: "时间: ",
         pageView: "浏览量: ",
       },
       englishItem: {
@@ -115,7 +115,7 @@ export default {
     background: #eef7fe;
   }
   .noticeDetail {
-    width: 75%;
+    width: 80%;
     /* 内容里面缩进 */
     padding: 0 3rem;
     margin: 0 auto;
@@ -155,16 +155,17 @@ export default {
     padding: 2rem;
   }
   .publicationDate {
-    font-size: 16px;
+    font-size: 2rem;
     margin: 10px 0;
     display: inline-block;
-    margin-right: 10px;
+    margin-right: 20px;
     color: #999;
   }
   .pageView {
-    font-size: 16px;
+    font-size: 2rem;
     margin: 10px 0;
     display: inline-block;
+    margin-right: 20px;
     color: #999;
   }
   .noticeInfo {
@@ -245,14 +246,14 @@ export default {
     padding: 1rem;
   }
   .publicationDate {
-    font-size: 14px;
+    font-size: 15px;
     margin: 5px 0;
     display: inline-block;
     margin-right: 10px;
     color: #999;
   }
   .pageView {
-    font-size: 14px;
+    font-size: 15px;
     margin: 5px 0;
     display: inline-block;
     color: #999;

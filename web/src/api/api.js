@@ -135,11 +135,36 @@ export function getCourseURL(params) {
     params,
   });
 }
-// 获取荣誉:type=团队 team 个人 person 项目project
+// 成果荣誉:type=团队荣誉honor 科技成果project
 // http://localhost:8186/teamWeb/award/require-award?languageType = Chinese &start=0&end=3&type=team
-export function getPrizeURL(params) {
+export function getPrizeAndHonourURL(params) {
   return request({
     url: "api/teamWeb/award/require-award",
+    method: "GET",
+    params,
+  });
+}
+// 教育成果
+// http://localhost:8186/teamWeb/teach/require-studentAward?languageType = Chinese
+export function getStudentAwardURL(params) {
+  return request({
+    url: "api/teamWeb/teach/require-studentAward",
+    method: "GET",
+    params,
+  });
+}
+// 首页浏览量
+export function getHomePageViewURL(params) {
+  return request({
+    url: "api/teamWeb/home/pageView",
+    method: "GET",
+    params,
+  });
+}
+// 获取研究方向
+export function getDirectionURL(params) {
+  return request({
+    url: "api/teamWeb/project/require-direction",
     method: "GET",
     params,
   });

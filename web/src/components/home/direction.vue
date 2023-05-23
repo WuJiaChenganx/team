@@ -17,7 +17,7 @@
         @click="goTo('/scientificResearch/direction')"
       >
         <div class="direction-img">
-          <img :src="item.picUrl" alt="" />
+          <img :src="item.picUrl[0]" alt="" />
         </div>
         <!-- 遮罩 -->
         <div class="mask">{{ item.title }}</div>
@@ -28,23 +28,11 @@
 <script>
 import AOS from "aos";
 import "aos/dist/aos.css";
+import { getDirectionURL } from "@/api/api";
 export default {
   data() {
     return {
-      directions: [
-        {
-          picUrl: require("../../assets/images/direction/AIot.png"),
-          title: "智联网",
-        },
-        {
-          picUrl: require("../../assets/images/direction/wiseCommunity.png"),
-          title: "智慧社区",
-        },
-        {
-          picUrl: require("../../assets/images/direction/coordination.png"),
-          title: "多智能体协同",
-        },
-      ],
+      directions: [],
       pageItem: {},
       chineseItem: { title: "研究方向", more: "more" },
       englishItem: { title: "Direction", more: "more" },
@@ -58,6 +46,7 @@ export default {
       duration: 1000, // 动画持续时间
     });
     this.changUI();
+    this.getDirectionList();
   },
   methods: {
     changUI() {
@@ -76,6 +65,16 @@ export default {
         });
       }
     },
+    async getDirectionList() {
+      let params = {
+        // 定义参数
+        languageType: this.$store.getters.getLanguageType,
+      };
+      await getDirectionURL(params).then((res) => {
+        // 取前三个
+        this.directions = res.data.slice(0, 3);
+      });
+    },
   },
 };
 </script>
@@ -88,7 +87,7 @@ export default {
 /* PC端 */
 @media screen and (min-width: 1000px) {
   .direction {
-    width: 65%;
+    width: 100%;
     margin: 0 auto;
     background-color: #ffffff;
   }
@@ -135,7 +134,7 @@ export default {
     justify-content: space-between;
   }
   .direction-item {
-    width: 32%;
+    width: 32.5%;
     margin-bottom: 25px;
     border: 1.5px solid #dfdfdf;
     position: relative;

@@ -1,32 +1,32 @@
 <template>
-  <div class="dataSet">
+  <div class="honour">
     <!-- default-active表示是当前选中的菜单的index -->
-    <div class="dataSetContent">
+    <div class="honourContent">
       <div class="breadCrumb">
         <el-breadcrumb separator-class="el-icon-arrow-right">
           <el-breadcrumb-item :to="{ path: '/home' }">{{
             pageItem.home
           }}</el-breadcrumb-item>
-          <el-breadcrumb-item :to="{ path: '/resource' }">{{
+          <el-breadcrumb-item :to="{ path: '/prize' }">{{
             pageItem.allTitle
           }}</el-breadcrumb-item>
-          <el-breadcrumb-item :to="{ path: '/resource/dataSet' }">{{
+          <el-breadcrumb-item :to="{ path: '/prize/honour' }">{{
             pageItem.subTitle
           }}</el-breadcrumb-item>
         </el-breadcrumb>
       </div>
-      <div class="dataSetAside">
-        <div class="dataSetAsideTitle">
+      <div class="honourAside">
+        <div class="honourAsideTitle">
           <span>
             <img src="../../assets/images/background/asideTitle.png" alt="" />{{
               pageItem.allTitle
             }}
           </span>
         </div>
-        <div class="dataSetAsideContent">
+        <div class="honourAsideContent">
           <el-menu :default-active="this.$route.path" router text-color="#444">
             <el-menu-item
-              class="dataSetAsideItem"
+              class="honourAsideItem"
               v-for="(menuItem, menuIndex) in menu"
               :key="menuIndex"
               :index="menuItem.path"
@@ -42,43 +42,53 @@
           </el-menu>
         </div>
       </div>
-      <div class="dataSetDetail">
-        <div class="dataSetTitle">
+      <div class="honourDetail">
+        <div class="honourTitle">
           {{ pageItem.subTitle }}
         </div>
-        <div class="dataSetItem"></div>
+        <div class="honourProfile">{{ honourProfile }}</div>
+        <div class="honourTable">
+          <el-table :data="honours" border>
+            <el-table-column prop="award" label="获奖名称"></el-table-column>
+            <el-table-column prop="title" label="获奖人"></el-table-column>
+            <el-table-column prop="date" label="获奖时间"></el-table-column>
+          </el-table>
+        </div>
       </div>
     </div>
   </div>
 </template>
-
 <script>
+import { getPrizeAndHonourURL } from "@/api/api";
 export default {
   data() {
     return {
       pageItem: {},
       chineseItem: {
-        allTitle: "资源共享",
-        subTitle: "数据集",
+        allTitle: "成果荣誉",
+        subTitle: "团队荣誉",
         home: "首页",
       },
       englishItem: {
-        allTitle: "Resource",
-        subTitle: "Dataset",
+        allTitle: "prize & honour",
+        subTitle: "Honour",
         home: "home",
       },
       menu: [],
       menuZH: [
-        { name: "仿真工具", path: "/resource/simulationTool" },
-        { name: "数据集", path: "/resource/dataSet" },
+        { name: "科技成果", path: "/prize/prize" },
+        { name: "团队荣誉", path: "/prize/honour" },
       ],
       menuEN: [
-        { name: "Tool", path: "/resource/simulationTool" },
-        { name: "Dataset", path: "/resource/dataSet" },
+        { name: "Prize", path: "/prize/prize" },
+        { name: "Honour", path: "/prize/honour" },
       ],
+      honourProfile: "",
+      honours: [],
     };
   },
   created() {
+    this.getHonourList();
     this.changUI();
   },
   methods: {
@@ -91,16 +101,28 @@ export default {
         this.pageItem = this.englishItem;
       }
     },
+    async getHonourList() {
+      let params = {
+        languageType: this.$store.getters.getLanguageType,
+        start: 0,
+        end: 100,
+        type: "honor",
+      };
+      await getPrizeAndHonourURL(params).then((res) => {
+        this.honours = res.data;
+        this.honourProfile = res.summarize;
+      });
+    },
   },
 };
 </script>
 <style scoped>
 /* PC端  */
 @media screen and (min-width: 1000px) {
-  .dataSet {
+  .honour {
     width: 100%;
   }
-  .dataSetContent {
+  .honourContent {
     width: 85%;
     margin: 0 auto;
     display: flex;
@@ -126,19 +148,19 @@ export default {
     font-weight: 800 !important;
   }
 
-  .dataSetAside {
+  .honourAside {
     width: 20%;
     padding-right: 30px;
   }
 
-  .dataSetAsideTitle {
+  .honourAsideTitle {
     background: #fff;
     height: 47px;
     border-top: 3px solid #0c568e;
     border-bottom: 1px solid #0c568e;
     margin-bottom: 2px;
   }
-  .dataSetAsideTitle span {
+  .honourAsideTitle span {
     float: left;
     height: 47px;
     line-height: 47px;
@@ -146,13 +168,13 @@ export default {
     color: #4b74bb;
     font-weight: bold;
   }
-  .dataSetAsideTitle span img {
+  .honourAsideTitle span img {
     float: left;
     margin-top: 15px;
     margin-left: 5px;
     margin-right: 10px;
   }
-  .dataSetAsideContent {
+  .honourAsideContent {
     width: 100%;
   }
   /* 去除侧边栏自带的边框 */
@@ -176,7 +198,7 @@ export default {
     background-color: #4b74bb;
   }
 
-  .dataSetAsideItem {
+  .honourAsideItem {
     position: relative;
     width: 100%;
     height: 46px;
@@ -187,27 +209,27 @@ export default {
     border-bottom: 1px solid #dfdfdf;
   }
   /* 最后一个侧边栏没有下划线 */
-  .dataSetAsideItem:last-child {
+  .honourAsideItem:last-child {
     border-bottom: none;
   }
-  .dataSetAsideItem span {
+  .honourAsideItem span {
     font-size: 18px;
     line-height: 46px;
   }
 
-  .dataSetAsideItem span img {
+  .honourAsideItem span img {
     height: 18px;
     width: 18px;
     line-height: 46px;
     margin-top: -3px;
     padding: 8px 12px;
   }
-  .dataSetDetail {
-    flex: 1 1 auto;
+  .honourDetail {
+    width: calc(80% - 30px);
     min-height: calc(100vh - 29rem - 58px);
   }
 
-  .dataSetTitle {
+  .honourTitle {
     font-size: 22px;
     font-weight: bold;
     line-height: 40px;
@@ -215,29 +237,34 @@ export default {
     margin: 15px 0;
   }
 
-  .dataSetItem {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 3rem;
+  .honourProfile {
+    font-size: 1.6rem;
+    line-height: 2.1rem;
+    margin-bottom: 1.2rem;
+    text-align: left;
+  }
+  .honourTable {
+    width: 100%;
   }
 }
 /* 移动端  */
 @media screen and (max-width: 1000px) {
-  .dataSet {
+  .honour {
     width: 100%;
   }
-  .dataSetContent {
+  .honourContent {
     display: flex;
     flex-direction: column;
+    margin-bottom: 15px;
   }
 
-  .dataSetAside {
+  .honourAside {
     order: 1;
     background: url(../../assets/images/background/contentBackground.jpg) center
       0 no-repeat;
     background-size: cover;
   }
-  .dataSetAsideTitle {
+  .honourAsideTitle {
     font-size: 20px;
     padding: 10px 1.6%;
     line-height: 30px;
@@ -245,7 +272,7 @@ export default {
     text-align: left;
     color: #014da1;
   }
-  .dataSetAsideTitle span img {
+  .honourAsideTitle span img {
     display: none;
   }
   /* 菜单横向排列 */
@@ -276,7 +303,7 @@ export default {
     font-weight: bold;
     border: #014da1 solid 1px;
   }
-  .dataSetAsideItem span img {
+  .honourAsideItem span img {
     display: none;
   }
   .breadCrumb {
@@ -296,20 +323,29 @@ export default {
     color: black !important;
     font-weight: 800 !important;
   }
-  .dataSetDetail {
+  .honourDetail {
     order: 3;
     width: 100%;
     padding: 0 1.5rem;
     box-sizing: border-box;
     background-color: #fff;
-    min-height: calc(100vh - 29rem - 139px);
+    min-height: calc(100vh - 36rem - 112px);
   }
-  .dataSetTitle {
+  .honourTitle {
     font-size: 3rem;
     font-weight: bold;
     line-height: 36px;
     color: #113f95;
     margin: 1rem 0;
+  }
+  .honourProfile {
+    font-size: 14px;
+    line-height: 20px;
+    margin-bottom: 10px;
+    text-align: left;
+  }
+  .honourTable {
+    width: 100%;
   }
 }
 </style>
