@@ -1,6 +1,7 @@
 package teamWeb.teamSurvey.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import teamWeb.interflow.pojo.FlowMemberBO;
 import teamWeb.teamSurvey.entity.MemberDO;
 import teamWeb.teamSurvey.pojo.MemberBO;
 import teamWeb.teamSurvey.pojo.MemberDTO;
@@ -35,4 +36,8 @@ public interface MemberInfoService extends IService<MemberDO> {
     MemberBO enMemberDetail(Integer id);
 
     List<Student> student(String memberType);
+
+    List<FlowMemberBO> internalFlow();
+
+    List<FlowMemberBO> foreignFlow();
 }

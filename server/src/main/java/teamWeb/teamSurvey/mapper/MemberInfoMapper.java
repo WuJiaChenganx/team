@@ -1,6 +1,7 @@
 package teamWeb.teamSurvey.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import teamWeb.interflow.pojo.FlowMemberBO;
 import teamWeb.teamSurvey.entity.EducationDO;
 import teamWeb.teamSurvey.entity.MemberDO;
 import teamWeb.teamSurvey.entity.PaperDO;
@@ -39,4 +40,6 @@ public interface MemberInfoMapper extends BaseMapper<MemberDO> {
     List<MemberDO> student(String memberType);
 
     List<String> teacherInfo(Integer memberBOId);
+
+    List<FlowMemberBO> flowMember(String memberType);
 }

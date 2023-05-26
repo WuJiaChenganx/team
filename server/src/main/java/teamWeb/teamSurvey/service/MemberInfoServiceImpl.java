@@ -3,6 +3,7 @@ package teamWeb.teamSurvey.service;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import teamWeb.interflow.pojo.FlowMemberBO;
 import teamWeb.teamSurvey.entity.MemberDO;
 import teamWeb.teamSurvey.mapper.MemberInfoMapper;
 import teamWeb.teamSurvey.pojo.MemberBO;
@@ -71,6 +72,16 @@ public class MemberInfoServiceImpl extends ServiceImpl<MemberInfoMapper, MemberD
             Collections.reverse(list);
         }
         return list;
+    }
+
+    @Override
+    public List<FlowMemberBO> internalFlow() {
+        return memberInfoMapper.flowMember("internal");
+    }
+
+    @Override
+    public List<FlowMemberBO> foreignFlow() {
+        return memberInfoMapper.flowMember("foreign");
     }
 
 

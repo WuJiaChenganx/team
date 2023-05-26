@@ -112,4 +112,13 @@
         </where>
         ORDER BY e.time DESC
     </select>
+
+    <select id="flowMember" resultType="teamWeb.interflow.pojo.FlowMemberBO">
+        select `id`,`name`,`pageUrl` AS url
+        from member
+        <where>
+            m_class ="${memberType}"
+        </where>
+        order by name
+    </select>
 </mapper>
