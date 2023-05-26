@@ -8,24 +8,25 @@
       }}</a>
     </div>
     <div class="newsContent">
-      <!-- 轮播图 -->
-      <div class="newsPhoto">
-        <el-carousel
-          :interval="4000"
-          indicator-position="outside"
-          :height="height"
-        >
-          <el-carousel-item
-            v-for="(newsItem, newsItemIndex) in newsList"
-            :key="newsItemIndex"
-            @click.native="gotoDetail(newsItem.id)"
-            class="newsPhotoItem"
-          >
-            <img :src="newsItem.picUrl[0]" alt="" />
-            <!-- 遮罩 -->
-            <div class="mask">{{ newsItem.title }}</div>
-          </el-carousel-item>
-        </el-carousel>
+      <div id="swiper-member">
+        <!-- 如果没有的话就不显示 -->
+        <div class="swiper-container" v-if="newsList.length">
+          <div class="swiper-wrapper">
+            <div
+              class="swiper-slide"
+              v-for="(newsItem, newsItemIndex) in newsList"
+              :key="newsItemIndex"
+              @click="gotoDetail(newsItem.id)"
+            >
+              <img :src="newsItem.picUrl[0]" alt="" />
+              <div class="mask">{{ newsItem.title }}</div>
+            </div>
+          </div>
+          <!-- 下一个箭头 -->
+          <div class="swiper-button-prev swiper-button-white"></div>
+          <!-- 上一个箭头 -->
+          <div class="swiper-button-next swiper-button-white"></div>
+        </div>
       </div>
       <!-- 消息列表 -->
       <div class="newsListContent">
@@ -44,35 +45,27 @@
   </div>
 </template>
 <script>
+// 引入JS部分
+import Swiper from "swiper";
+// 引入css部分
+import "swiper/css/swiper.min.css";
 import { getNewFlashURL } from "@/api/api";
 export default {
   data() {
     return {
-      height: "30rem",
+      // height: "30rem",
       // 要展示的新闻信息(加载前还要处理过)
       newsList: [],
       pageItem: {},
-      chineseItem: { title: "新闻快讯", more: "more" },
+      chineseItem: { title: "新闻快讯", more: "更多+" },
       englishItem: { title: "News", more: "more" },
     };
   },
   created() {
     this.getNewFlashList();
     this.changUI();
-    this.changePhotoHeight();
   },
   methods: {
-    changePhotoHeight() {
-      if (
-        /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-          navigator.userAgent
-        )
-      ) {
-        this.height = "35rem";
-      } else {
-        this.height = "30rem";
-      }
-    },
     changUI() {
       if (this.$store.getters.getLanguageType == "Chinese") {
         this.pageItem = this.chineseItem;
@@ -87,12 +80,28 @@ export default {
         // start: 0,
         // end: 5,
         start: 1,
-        end: 8,
+        end: 9,
 
         languageType: this.$store.getters.getLanguageType,
       };
       await getNewFlashURL(params).then((res) => {
         this.newsList = res.data;
+      });
+      new Swiper(".swiper-container", {
+        // 最后一张和第一张无缝衔接
+        loop: true,
+        // 自动播放
+        autoplay: {
+          delay: 1500,
+        },
+        navigation: {
+          nextEl: ".swiper-button-next",
+          prevEl: ".swiper-button-prev",
+        },
+        // 一次显示几张照片,可以设置成auto,然后在css中设置swiper-slide的宽度
+        slidesPerView: 1,
+        // 每一次移动的时候移动1张
+        slidesPerGroup: 1,
       });
     },
     gotoDetail(id) {
@@ -161,16 +170,22 @@ export default {
     cursor: pointer;
   }
   .newsContent {
+    width: 100%;
     display: flex;
     flex-direction: row;
   }
-  /* 轮播图 */
-  .newsPhoto {
-    width: 800px;
-  }
-  .newsPhotoItem {
+  /* 轮播图css */
+  #swiper-member {
+    width: 50%;
     cursor: pointer;
   }
+
+  .swiper-slide img {
+    width: 100%;
+    /* 修改完比例记得注释 */
+    height: 45rem;
+  }
+
   .mask {
     position: absolute;
     left: 0;
@@ -181,25 +196,20 @@ export default {
     color: #fff;
     height: 42px;
     line-height: 42px;
-    font-size: 15px;
+    font-size: 18px;
     text-indent: 2em;
-    font-weight: bold;
     display: -webkit-box;
     /* 一行直接省略 */
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 1;
   }
-  .el-carousel__item img {
-    width: 100%;
-    height: 100%;
-  }
+
   .newsListContent {
     display: flex;
-    flex: 1 1 auto;
-    margin-left: 50px;
+    width: 50%;
+    margin-left: 20px;
     flex-direction: column;
     justify-content: space-between;
-    height: 30rem;
   }
   .news-row {
     cursor: pointer;
@@ -213,19 +223,18 @@ export default {
   .dot::before {
     content: "";
     position: absolute;
-    top: 6px;
+    top: 15px;
     left: 0;
-    width: 6px;
-    height: 6px;
+    width: 8px;
+    height: 8px;
     background-color: #000;
   }
 
   .news-title {
-    height: 2rem;
-    line-height: 2rem;
-    width: 70%;
+    height: 4rem;
+    line-height: 4rem;
     flex: 1 1 auto;
-    font-size: 1.5rem;
+    font-size: 2rem;
     color: #030f39;
     display: -webkit-box;
     /* 一行直接省略 */
@@ -237,7 +246,10 @@ export default {
   }
   /* 时间框 */
   .news-date {
-    font-size: 1.5rem;
+    min-width: 120px;
+    height: 4rem;
+    line-height: 4rem;
+    font-size: 2rem;
     color: #999;
   }
 }
@@ -251,6 +263,7 @@ export default {
   }
   .newsTitle {
     font-size: 20px;
+    margin-bottom: 2rem;
     position: relative;
   }
   .title {
@@ -284,17 +297,19 @@ export default {
     right: 0;
   }
   .newsContent {
+    width: 100%;
     display: flex;
     flex-direction: column;
   }
-  /* 轮播图 */
-  .newsPhoto {
-    width: 90%;
-    padding-top: 20px;
-    margin: 0 auto;
+  /* 轮播图css */
+  #swiper-member {
+    width: 100%;
   }
-  .newsPhotoItem {
-    cursor: pointer;
+
+  .swiper-slide img {
+    width: 100%;
+    /* 修改完比例记得注释 */
+    height: 35rem;
   }
   .mask {
     position: absolute;
@@ -322,29 +337,7 @@ export default {
   .el-scrollbar__wrap {
     overflow-x: hidden;
   }
-  /* 新闻列表 */
-  /* .newsList {
-    padding: 1rem;
-    box-sizing: border-box;
-  }
-  .newsListTitle {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    padding-bottom: 2rem;
-    border-bottom: 1px solid #c5e7ff;
-  }
-  .left-title {
-    font-size: 2rem;
-    font-weight: bold;
-    color: #003266;
-  }
-  .title-more {
-    color: #7db0cb;
-    font-size: 1.6rem;
-    cursor: pointer;
-  } */
+
   .newsListContent {
     margin-top: 1rem;
     display: flex;
@@ -370,21 +363,7 @@ export default {
     height: 6px;
     background-color: #000;
   }
-  /* 时间框 */
-  /* .news-date {
-    width: 8rem;
-    height: 8rem;
-    margin-right: 1.5rem;
-    background: #008cd6;
-    border-radius: 6px;
-    /* 时间数字的颜色 */
-  /* color: #ffffff;
-    font-size: 1rem;
-    font-weight: bold;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  } */
+
   .news-title {
     width: 70%;
     flex: 1 1 auto;

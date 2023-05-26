@@ -2,50 +2,65 @@
   <div class="direction">
     <!-- default-active表示是当前选中的菜单的index -->
     <div class="directionContent">
+      <div class="breadCrumb">
+        <el-breadcrumb separator-class="el-icon-arrow-right">
+          <el-breadcrumb-item :to="{ path: '/home' }">{{
+            pageItem.home
+          }}</el-breadcrumb-item>
+          <el-breadcrumb-item :to="{ path: '/scientificResearch' }">{{
+            pageItem.allTitle
+          }}</el-breadcrumb-item>
+          <el-breadcrumb-item :to="{ path: '/scientificResearch/direction' }">{{
+            pageItem.subTitle
+          }}</el-breadcrumb-item>
+        </el-breadcrumb>
+      </div>
       <div class="directionAside">
-        <div class="directionAsideTitle">{{ pageItem.allTitle }}</div>
+        <div class="directionAsideTitle">
+          <span>
+            <img src="../../assets/images/background/asideTitle.png" alt="" />{{
+              pageItem.allTitle
+            }}
+          </span>
+        </div>
         <div class="directionAsideContent">
-          <el-menu :default-active="this.$route.path" router text-color="#000">
+          <el-menu :default-active="this.$route.path" router text-color="#444">
             <el-menu-item
               class="directionAsideItem"
               v-for="(menuItem, menuIndex) in menu"
               :key="menuIndex"
               :index="menuItem.path"
             >
-              <i class="el-icon-sunny"></i>
-              <span>{{ menuItem.name }}</span>
+              <span>
+                <img
+                  src="../../assets/images/background/asideSubtitle.png"
+                  alt=""
+                />
+                {{ menuItem.name }}
+              </span>
             </el-menu-item>
           </el-menu>
         </div>
       </div>
       <div class="directionDetail">
         <div class="directionTitle">
-          <div class="title">{{ pageItem.subTitle }}</div>
-          <div class="breadCrumb">
-            <el-breadcrumb separator-class="el-icon-arrow-right">
-              <el-breadcrumb-item :to="{ path: '/home' }">{{
-                pageItem.home
-              }}</el-breadcrumb-item>
-              <el-breadcrumb-item
-                :to="{ path: '/scientificResearch/direction' }"
-                >{{ pageItem.direction }}</el-breadcrumb-item
-              >
-            </el-breadcrumb>
-          </div>
+          {{ pageItem.subTitle }}
         </div>
-        <div class="directionItem">
+        <div
+          class="directionItem"
+          v-for="(detailItem, detailItemIndex) in directions"
+          :key="detailItemIndex"
+        >
+          <div class="directionItemTitle">
+            {{ detailItem.title }}
+          </div>
+          <div class="directionItemDetail" v-html="detailItem.detail"></div>
           <div
-            class="detailItem"
-            v-for="(directionItem, directionItemIndex) in directions"
-            :key="directionItemIndex"
+            class="directionItemPhoto"
+            v-for="photoItem in detailItem.picUrl"
+            :key="photoItem"
           >
-            <div class="detailItemTitle">
-              {{ directionItemIndex + 1 }}. {{ directionItem.title }}
-            </div>
-            <div class="detailItemDetail">{{ directionItem.detail }}</div>
-            <div class="detailItemPhoto">
-              <img :src="directionItem.picUrl" alt="" />
-            </div>
+            <img :src="photoItem" alt="" />
           </div>
         </div>
       </div>
@@ -54,6 +69,7 @@
 </template>
 
 <script>
+import { getDirectionURL } from "@/api/api";
 export default {
   data() {
     return {
@@ -62,13 +78,11 @@ export default {
         allTitle: "科研概况",
         subTitle: "科研方向",
         home: "首页",
-        direction: "科研方向",
       },
       englishItem: {
         allTitle: "Research",
         subTitle: "Direction",
         home: "home",
-        direction: "Direction",
       },
       menu: [],
       menuZH: [
@@ -89,30 +103,12 @@ export default {
         },
         { name: "Platform", path: "/scientificResearch/platform" },
       ],
-      directions: [
-        {
-          title: "微观尺度——纳米物联网",
-          detail:
-            " 随着纳米技术和微电子技术的不断发展，微观世界领域的物联网智能感知与通信技术及其前所未有的应用场景具有极其重大的价值与战略意义。虽然纳米机器人的潜在用途非常广泛，并具有巨大的战略意义，然而受纳米器件的体积大小、感知能力、计算能力、存储能力、能量供应等物理因素制约，单个纳米器件（机器人）只能执行一些十分简单的任务（如计算、感知、数据存贮和驱动等）。因此，在人体健康应用场景下，如何释放单个纳米机器人的应用潜能，允许纳米机器人之间相互协作，共享和融合信息，扩展单个纳米机器人在复杂性和操作性等方面的能力，即构建高可靠性的人体移动电磁纳米机器人网络。该特殊的人体移动电磁纳米机器人网络（统称：纳米物联网或纳米网络）的基础网络理论和关键通信技术就是本方向的重点研究内容，具体包括基于太赫兹频段的人体纳米网络同信道干扰模型和调制解调机制，人体移动纳米网络的动态拓扑结构及能量模型，能量受限环境下的纳米网络MAC协议，以及能耗均衡的中继协议。本方向的研究对于微观动态环境下的人体纳米机器人网络具有重要的理论研究价值，对未来人体医学健康诊疗等场景具有重要的实际应用价值。",
-          picUrl: require("../../assets/images/direction/AIot.png"),
-        },
-        {
-          title: "宏观尺度——智能感知与计算",
-          detail:
-            "实为提升多模态智能物联融合感知与计算能力，推动物联网感知相关技术的进一步发展与应用，1）拟研究基于多模数据语义框架的语义理解与智能抽取方法，针对多模数据的共性特征，设计针对结构化或非结构化多源原始数据的语义框架自适应定义方法与自动拓展机制，将语义框架定义抽象为马尔可夫决策过程，设计基于逆强化学习的语义框架构建模型，将领域先验知识结合到奖励函数学习过程中。在框架构建的基础上，设计针对多模数据的特征抽取与表达方法，实现数据的统一描述与表示。2）在多模数据语义定义与特征发现的基础上，拟利用多模态数据本身的特征及对应的应用，挖掘不同模态数据的重要程度，进而提升多模态数据的融合表达与共同学习能力。设计一种具有一定通用性和可解释性的多模态融合框架。3）拟针对多模态数据的分析任务，研究相关大规模知识库的构建，包括知识表示、实体对齐、数据异常修复等。进而通过将知识库整合进统一语义表述框架，实现多模数据与外部知识的无缝融合，从而获得更为精确的结果。",
-          picUrl: require("../../assets/images/direction/wiseCommunity.png"),
-        },
-        {
-          title: "宏观尺度——交通运输碳排放智能感知与协同控制",
-          detail:
-            "研发交通运行碳排放智能监测系统，重点突破出行方式与运输结构的优化、多模式交通网络实时在线碳排放监测与低碳导向的智能管控等关键技术，实现成果在城市交通、公路货运等行业的示范应用。1）拟提出构建“云-边-端”结构化分布式的路侧多形态智能感知架构，利用部署在路侧及路面的摄像机和雷达以及高精度称重装置对交通运行车辆的车牌、类型、重量、位置、速度及流量等信息进行实时、动态、精准、全息感知，进而研发交通运行碳排放智能监测系统；2）基于“云-边-端”架构的智能监测系统采集的多模态交通运输车辆数据，研究基于深度学习方法构建“单车级-路径级-区域级”的多尺度碳排放计算模型，即基于车辆个性化数据的单个车辆碳排放的计算模型、基于车辆运行路径的碳排放计算模型和基于路段的区域碳排放计算模型。结合车辆实时行驶特征属性和碳排放监测数据构建训练数据，对单个车辆碳排放进行测算；基于单车碳排放量计算模型，结合机动车在不同等级道路上的，分析交通流量状况对机动车碳排放的影响，对车辆运行路径的碳排放进行测算；进一步基于路段的检测数据构建区域短时碳排放计算模型。3）结合交通运输碳排放深度学习模型，构建涵盖微观-中观-宏观多尺度碳排放计算评估体系和计算方法，打造面向超大规模交通网络的实时在线碳排放计算平台，实现实时、精准、高效的碳排放计算和管理，同时突破出行方式与运输结构优化并实现低碳导向的智能管控。",
-          picUrl: require("../../assets/images/direction/coordination.png"),
-        },
-      ],
+      directions: [],
     };
   },
   created() {
     this.changUI();
+    this.getDirectionList();
   },
   methods: {
     changUI() {
@@ -124,6 +120,15 @@ export default {
         this.pageItem = this.englishItem;
       }
     },
+    async getDirectionList() {
+      let params = {
+        // 定义参数
+        languageType: this.$store.getters.getLanguageType,
+      };
+      await getDirectionURL(params).then((res) => {
+        this.directions = res.data.slice(0, 3);
+      });
+    },
   },
 };
 </script>
@@ -131,69 +136,22 @@ export default {
 /* PC端  */
 @media screen and (min-width: 1000px) {
   .direction {
-    padding: 3rem 0;
-    background: url(../../assets/images/background/contentBackground.jpg)
-      no-repeat;
+    width: 100%;
   }
-
   .directionContent {
-    width: 75%;
+    width: 85%;
     margin: 0 auto;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
-  }
-
-  .directionAside {
-    width: 255px;
-    margin-right: 20px;
-  }
-  .directionAsideTitle {
-    width: 255px;
-    height: 78px;
-    line-height: 78px;
-    background: url(../../assets/images/background/zryy-menu-t-bg.png) no-repeat;
-    border-radius: 0.6rem;
-    background-size: cover !important;
-    font-weight: bold;
-    color: #fff;
-    font-size: 24px;
-  }
-  .directionAsideContent {
-    width: 255px;
-    background-color: #f9fbfd;
-  }
-  .directionAsideItem {
-    height: 52px;
-    line-height: 52px;
-    font-size: 16px;
-    text-align: left;
-    cursor: pointer;
-    border-bottom: 1px solid #dfdfdf;
-  }
-
-  .directionDetail {
-    flex: 1 1 auto;
-    padding: 0 3rem;
-    box-sizing: border-box;
-    background-color: #fff;
-    border: 1px solid #dfdfdf;
-  }
-
-  .directionTitle {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    padding: 2rem 0;
-    border-bottom: 1px solid #dfdfdf;
-  }
-  .title {
-    color: #333333;
-    font-weight: bold;
-    font-size: 2.5rem;
+    flex-wrap: wrap;
+    margin-bottom: 15px;
   }
   .breadCrumb {
-    padding-top: 1rem;
+    width: 100%;
+    background: #eee;
+    box-sizing: border-box;
+    padding: 10px 15px;
+    margin-bottom: 15px;
   }
   /* 不被选中时的颜色 */
   .el-breadcrumb ::v-deep .el-breadcrumb__inner {
@@ -205,55 +163,142 @@ export default {
     color: black !important;
     font-weight: 800 !important;
   }
+
+  .directionAside {
+    width: 20%;
+    padding-right: 30px;
+  }
+
+  .directionAsideTitle {
+    background: #fff;
+    height: 47px;
+    border-top: 3px solid #0c568e;
+    border-bottom: 1px solid #0c568e;
+    margin-bottom: 2px;
+  }
+  .directionAsideTitle span {
+    float: left;
+    height: 47px;
+    line-height: 47px;
+    font-size: 20px;
+    color: #4b74bb;
+    font-weight: bold;
+  }
+  .directionAsideTitle span img {
+    float: left;
+    margin-top: 15px;
+    margin-left: 5px;
+    margin-right: 10px;
+  }
+  .directionAsideContent {
+    width: 100%;
+  }
+  /* 去除侧边栏自带的边框 */
+  .el-menu {
+    border: none !important;
+  }
+  /* 去除侧边导航自带的边距 */
+  .el-menu-item {
+    padding: 0 !important;
+  }
   /* 侧边栏悬浮的背景颜色 */
   .el-menu-item:hover {
+    color: #fff !important;
     font-weight: bold;
-    background-color: #fff;
+    background-color: #4b74bb;
   }
   /* 选中侧边导航的背景颜色 */
   .el-menu-item.is-active {
+    color: #fff;
     font-weight: bold;
-    color: #034ea1;
-    background: #eee;
+    background-color: #4b74bb;
+  }
+
+  .directionAsideItem {
+    position: relative;
+    width: 100%;
+    height: 46px;
+    line-height: 46px;
+    font-size: 18px;
+    text-align: left;
+    cursor: pointer;
+    border-bottom: 1px solid #dfdfdf;
+  }
+  /* 最后一个侧边栏没有下划线 */
+  .directionAsideItem:last-child {
+    border-bottom: none;
+  }
+  .directionAsideItem span {
+    font-size: 18px;
+    line-height: 46px;
+  }
+
+  .directionAsideItem span img {
+    height: 18px;
+    width: 18px;
+    line-height: 46px;
+    margin-top: -3px;
+    padding: 8px 12px;
+  }
+  .directionDetail {
+    width: calc(80% - 30px);
+    min-height: calc(100vh - 29rem - 58px);
+  }
+
+  .directionTitle {
+    font-size: 22px;
+    font-weight: bold;
+    line-height: 40px;
+    color: #113f95;
+    margin: 15px 0;
   }
 
   .directionItem {
-    min-height: 600px;
-    padding-bottom: 2rem;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
   }
-  /*每个item之间的上边距 */
-  .detailItem {
-    word-wrap: break-word;
-    word-break: break-all;
-    margin-top: 1rem;
-    text-align: left;
-    line-height: 3rem;
-    font-size: 2rem;
-  }
-  .detailItemTitle {
-    color: #153c87;
+  .directionItemTitle {
+    height: 4.5rem;
+    width: 100%;
+    margin: 1rem 0;
+    background-size: cover !important;
+    background: url(../../assets/images/background/title-bg.png) no-repeat;
     font-weight: bold;
-    font-size: 2.2rem;
-    padding: 0.5rem 0;
-  }
-  .detailItemDetail {
-    margin-top: 1rem;
-    text-indent: 2em;
+    line-height: 4.5rem;
+    padding-left: 2.5rem;
     font-size: 2rem;
+    text-align: left;
+    color: #404040;
+  }
+  .directionItemDetail {
+    text-align: left;
+    margin: 1rem 0;
+    text-indent: 2em;
+    font-size: 1.8rem;
     line-height: 3.5rem;
-    margin-bottom: 1rem;
   }
-  .detailItemPhoto {
-    width: 50%;
-    margin: 0 auto;
+  .directionItemPhoto {
+    width: 100%;
+    border: 1.5px solid #dfdfdf;
   }
-  .detailItemPhoto img {
+  .directionItemPhoto img {
     width: 100%;
   }
 }
-/* 移动端 */
+/* 移动端  */
 @media screen and (max-width: 1000px) {
+  .direction {
+    width: 100%;
+  }
+  .directionContent {
+    display: flex;
+    flex-direction: column;
+  }
+
   .directionAside {
+    order: 1;
     background: url(../../assets/images/background/contentBackground.jpg) center
       0 no-repeat;
     background-size: cover;
@@ -265,6 +310,9 @@ export default {
     font-weight: bold;
     text-align: left;
     color: #014da1;
+  }
+  .directionAsideTitle span img {
+    display: none;
   }
   /* 菜单横向排列 */
   .el-menu {
@@ -287,34 +335,22 @@ export default {
     cursor: pointer;
     background-color: #fff;
   }
-
-  .el-icon-sunny {
+  /* 选中侧边导航的背景颜色 */
+  .el-menu-item.is-active {
+    background: #014da1;
+    color: #fff;
+    font-weight: bold;
+    border: #014da1 solid 1px;
+  }
+  .directionAsideItem span img {
     display: none;
   }
-
-  .directionDetail {
-    width: 100%;
-    padding: 0 1.5rem;
-    box-sizing: border-box;
-    background-color: #fff;
-    border: 1px solid #dfdfdf;
-  }
-
-  .directionTitle {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    padding: 10px 0;
-    border-bottom: 1px solid #dfdfdf;
-  }
-  .title {
-    color: #333333;
-    font-weight: bold;
-    font-size: 20px;
-    line-height: 30px;
-  }
   .breadCrumb {
-    padding-top: 1rem;
+    order: 2;
+    width: 100%;
+    background: #eee;
+    box-sizing: border-box;
+    padding: 10px 15px;
   }
   /* 不被选中时的颜色 */
   .el-breadcrumb ::v-deep .el-breadcrumb__inner {
@@ -326,43 +362,53 @@ export default {
     color: black !important;
     font-weight: 800 !important;
   }
-  /* 选中侧边导航的背景颜色 */
-  .el-menu-item.is-active {
-    background: #014da1;
-    color: #fff;
-    font-weight: bold;
-    border: #014da1 solid 1px;
+  .directionDetail {
+    order: 3;
+    width: 100%;
+    padding: 0 1.5rem;
+    box-sizing: border-box;
+    background-color: #fff;
+    min-height: calc(100vh - 36rem - 112px);
   }
-
+  .directionTitle {
+    font-size: 3rem;
+    font-weight: bold;
+    line-height: 36px;
+    color: #113f95;
+    margin: 1rem 0;
+  }
   .directionItem {
-    min-height: 450px;
-    padding-bottom: 2rem;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-bottom: 2rem;
   }
-  .detailItem {
-    word-wrap: break-word;
-    word-break: break-all;
-    margin-top: 3rem;
-    text-align: left;
-    line-height: 3rem;
-    font-size: 2rem;
-  }
-  .detailItemTitle {
-    color: #153c87;
+  .directionItemTitle {
+    height: 4.5rem;
+    width: 100%;
+    margin: 1rem 0;
+    background-size: cover !important;
+    background: url(../../assets/images/background/title-bg.png) no-repeat;
     font-weight: bold;
-    font-size: 2.5rem;
-    padding: 0.5rem 0;
+    line-height: 4.5rem;
+    padding-left: 1.5rem;
+    font-size: 2rem;
+    text-align: left;
+    color: #404040;
   }
-  /* 文字和图片的距离 */
-  .detailItemDetail {
-    margin-top: 1rem;
+  .directionItemDetail {
+    text-align: left;
+    margin: 1rem 0;
     text-indent: 2em;
+    font-size: 1.8rem;
     line-height: 3.5rem;
   }
-  .detailItemPhoto {
-    width: 80%;
-    margin: 10px auto;
+  .directionItemPhoto {
+    width: 100%;
+    border: 1.5px solid #dfdfdf;
   }
-  .detailItemPhoto img {
+  .directionItemPhoto img {
     width: 100%;
   }
 }

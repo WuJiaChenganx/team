@@ -2,58 +2,60 @@
   <div class="master">
     <!-- default-active表示是当前选中的菜单的index -->
     <div class="masterContent">
+      <div class="breadCrumb">
+        <el-breadcrumb separator-class="el-icon-arrow-right">
+          <el-breadcrumb-item :to="{ path: '/home' }">{{
+            pageItem.home
+          }}</el-breadcrumb-item>
+          <el-breadcrumb-item :to="{ path: '/education' }">{{
+            pageItem.allTitle
+          }}</el-breadcrumb-item>
+          <el-breadcrumb-item :to="{ path: '/education/master' }">{{
+            pageItem.subTitle
+          }}</el-breadcrumb-item>
+        </el-breadcrumb>
+      </div>
       <div class="masterAside">
-        <div class="masterAsideTitle">{{ pageItem.allTitle }}</div>
+        <div class="masterAsideTitle">
+          <span>
+            <img src="../../assets/images/background/asideTitle.png" alt="" />{{
+              pageItem.allTitle
+            }}
+          </span>
+        </div>
         <div class="masterAsideContent">
-          <el-menu :default-active="this.$route.path" router text-color="#000">
+          <el-menu :default-active="this.$route.path" router text-color="#444">
             <el-menu-item
               class="masterAsideItem"
               v-for="(menuItem, menuIndex) in menu"
               :key="menuIndex"
               :index="menuItem.path"
             >
-              <i class="el-icon-sunny"></i>
-              <span>{{ menuItem.name }}</span>
+              <span>
+                <img
+                  src="../../assets/images/background/asideSubtitle.png"
+                  alt=""
+                />
+                {{ menuItem.name }}
+              </span>
             </el-menu-item>
           </el-menu>
         </div>
       </div>
       <div class="masterDetail">
         <div class="masterTitle">
-          <div class="title">{{ pageItem.subTitle }}</div>
-          <div class="breadCrumb">
-            <el-breadcrumb separator-class="el-icon-arrow-right">
-              <el-breadcrumb-item :to="{ path: '/home' }">{{
-                pageItem.home
-              }}</el-breadcrumb-item>
-              <el-breadcrumb-item :to="{ path: '/educatiopn/master' }">{{
-                pageItem.master
-              }}</el-breadcrumb-item>
-            </el-breadcrumb>
+          {{ pageItem.subTitle }}
+        </div>
+        <div
+          class="masterItem"
+          v-for="(detailItem, detailIndex) in courses"
+          :key="detailIndex"
+        >
+          <div class="masterItemCourse">
+            <img src="../../assets/images/background/list.png" alt="" />
+            {{ detailItem.courseName }}
           </div>
-        </div>
-        <div class="masterItem">
-          <a
-            class="detailItem"
-            v-for="courseItem in courses"
-            :key="courseItem.courseType"
-            :href="courseItem.target"
-            target="_blank"
-          >
-            <div class="courseName">{{ courseItem.courseName }}</div>
-            <div class="courseTeacher">{{ courseItem.teacher }}</div>
-          </a>
-        </div>
-        <div class="paging">
-          <el-pagination
-            background
-            layout="prev, pager, next"
-            @current-change="handleCurrentChange"
-            :page-size="10"
-            :total="total_number"
-            :current-page="current_index"
-          >
-          </el-pagination>
+          <div class="masterItemTeacher">{{ detailItem.teacher }}</div>
         </div>
       </div>
     </div>
@@ -67,15 +69,13 @@ export default {
       pageItem: {},
       chineseItem: {
         allTitle: "教育教学",
-        subTitle: "课程教学",
+        subTitle: "研究生教学",
         home: "首页",
-        master: "研究生教学",
       },
       englishItem: {
         allTitle: "Education",
-        subTitle: "Education",
+        subTitle: "master",
         home: "home",
-        master: "master",
       },
       menu: [],
       menuZH: [
@@ -88,10 +88,6 @@ export default {
         { name: "graduate", path: "/education/master" },
         { name: "achievements", path: "/education/achievements" },
       ],
-      // 总共要展示的数量
-      total_number: 0,
-      // 当前页面从1开始的这两个属性会在刚开始的时候就更新
-      current_index: 1,
       courses: [],
     };
   },
@@ -112,20 +108,14 @@ export default {
     async getCourseList() {
       let params = {
         // 定义参数
-        start: (this.current_index - 1) * 10,
-        end: this.current_index * 10,
+        start: 0,
+        end: 100,
         languageType: this.$store.getters.getLanguageType,
         type: "master",
       };
       await getCourseURL(params).then((res) => {
         this.courses = res.data;
-        this.total_number = res.sum;
       });
-    },
-    handleCurrentChange(val) {
-      // 传入的val是当前页的页码
-      this.current_index = val;
-      this.getCourseList();
     },
   },
 };
@@ -134,73 +124,22 @@ export default {
 /* PC端  */
 @media screen and (min-width: 1000px) {
   .master {
-    padding: 3rem 0;
-    box-sizing: border-box;
-    background: url(../../assets/images/background/contentBackground.jpg)
-      no-repeat;
-    min-height: calc(100vh - 29rem);
+    width: 100%;
   }
-
   .masterContent {
-    width: 75%;
+    width: 85%;
     margin: 0 auto;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
-  }
-
-  .masterAside {
-    width: 255px;
-    margin-right: 20px;
-  }
-  .masterAsideTitle {
-    width: 255px;
-    height: 78px;
-    line-height: 78px;
-    background: url(../../assets/images/background/zryy-menu-t-bg.png) no-repeat;
-    border-radius: 0.6rem;
-    background-size: cover !important;
-    font-weight: bold;
-    color: #fff;
-    font-size: 24px;
-  }
-  .masterAsideContent {
-    width: 255px;
-    background-color: #f9fbfd;
-  }
-  .masterAsideItem {
-    height: 52px;
-    line-height: 52px;
-    font-size: 16px;
-    text-align: left;
-    cursor: pointer;
-    border-bottom: 1px solid #dfdfdf;
-  }
-
-  .masterDetail {
-    flex: 1 1 auto;
-    padding: 0 3rem;
-    box-sizing: border-box;
-    background-color: #fff;
-    border: 1px solid #dfdfdf;
-    min-height: calc(100vh - 29rem - 6rem);
-    position: relative;
-  }
-
-  .masterTitle {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    padding: 2rem 0;
-    border-bottom: 1px solid #dfdfdf;
-  }
-  .title {
-    color: #333333;
-    font-weight: bold;
-    font-size: 2.5rem;
+    flex-wrap: wrap;
+    margin-bottom: 15px;
   }
   .breadCrumb {
-    padding-top: 1rem;
+    width: 100%;
+    background: #eee;
+    box-sizing: border-box;
+    padding: 10px 15px;
+    margin-bottom: 15px;
   }
   /* 不被选中时的颜色 */
   .el-breadcrumb ::v-deep .el-breadcrumb__inner {
@@ -212,67 +151,141 @@ export default {
     color: black !important;
     font-weight: 800 !important;
   }
+
+  .masterAside {
+    width: 20%;
+    padding-right: 30px;
+  }
+
+  .masterAsideTitle {
+    background: #fff;
+    height: 47px;
+    border-top: 3px solid #0c568e;
+    border-bottom: 1px solid #0c568e;
+    margin-bottom: 2px;
+  }
+  .masterAsideTitle span {
+    float: left;
+    height: 47px;
+    line-height: 47px;
+    font-size: 20px;
+    color: #4b74bb;
+    font-weight: bold;
+  }
+  .masterAsideTitle span img {
+    float: left;
+    margin-top: 15px;
+    margin-left: 5px;
+    margin-right: 10px;
+  }
+  .masterAsideContent {
+    width: 100%;
+  }
+  /* 去除侧边栏自带的边框 */
+  .el-menu {
+    border: none !important;
+  }
+  /* 去除侧边导航自带的边距 */
+  .el-menu-item {
+    padding: 0 !important;
+  }
   /* 侧边栏悬浮的背景颜色 */
   .el-menu-item:hover {
+    color: #fff !important;
     font-weight: bold;
-    background-color: #fff;
+    background-color: #4b74bb;
   }
   /* 选中侧边导航的背景颜色 */
   .el-menu-item.is-active {
+    color: #fff;
     font-weight: bold;
-    color: #034ea1;
-    background: #eee;
+    background-color: #4b74bb;
   }
 
-  .masterItem {
-    padding-bottom: 2rem;
-  }
-
-  .detailItem {
+  .masterAsideItem {
+    position: relative;
+    width: 100%;
+    height: 46px;
+    line-height: 46px;
+    font-size: 18px;
+    text-align: left;
     cursor: pointer;
+    border-bottom: 1px solid #dfdfdf;
+  }
+  /* 最后一个侧边栏没有下划线 */
+  .masterAsideItem:last-child {
+    border-bottom: none;
+  }
+  .masterAsideItem span {
+    font-size: 18px;
+    line-height: 46px;
+  }
+
+  .masterAsideItem span img {
+    height: 18px;
+    width: 18px;
+    line-height: 46px;
+    margin-top: -3px;
+    padding: 8px 12px;
+  }
+  .masterDetail {
+    width: calc(80% - 30px);
+    min-height: calc(100vh - 29rem - 58px);
+  }
+
+  .masterTitle {
+    font-size: 22px;
+    font-weight: bold;
+    line-height: 40px;
+    color: #113f95;
+    margin: 15px 0;
+  }
+  .masterItem {
+    width: 100%;
     display: flex;
     flex-direction: row;
     border-bottom: 1px dashed #b2b2b2;
-    padding: 20px 0;
-    text-decoration: none;
   }
-  .detailItem:hover .courseName {
-    color: #428bca;
-  }
-  .courseName {
-    height: 2rem;
-    line-height: 2rem;
-    width: 70%;
-    flex: 1 1 auto;
+  .masterItemCourse {
+    width: 80%;
+    text-align: left;
     font-size: 1.6rem;
-    color: #333;
+    line-height: 4rem;
     display: -webkit-box;
     /* 一行直接省略 */
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 1;
     overflow: hidden;
-    text-align: left;
   }
-  .courseTeacher {
+  .masterItemCourse img {
+    width: 15px;
+    height: 15px;
+  }
+  .masterItemTeacher {
+    flex: 1 1 auto;
+    text-align: right;
     font-size: 1.6rem;
+    line-height: 4rem;
     color: #b2b2b2;
-  }
-  /* 设置分页和底部的距离 */
-  .paging {
-    position: absolute;
-    left: 50%;
-    transform: translate(-50%, 0);
-    bottom: 3rem;
   }
 }
 /* 移动端  */
 @media screen and (max-width: 1000px) {
+  .master {
+    width: 100%;
+  }
+  .masterContent {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+  }
+
   .masterAside {
+    order: 1;
     background: url(../../assets/images/background/contentBackground.jpg) center
       0 no-repeat;
     background-size: cover;
   }
-
   .masterAsideTitle {
     font-size: 20px;
     padding: 10px 1.6%;
@@ -280,6 +293,9 @@ export default {
     font-weight: bold;
     text-align: left;
     color: #014da1;
+  }
+  .masterAsideTitle span img {
+    display: none;
   }
   /* 菜单横向排列 */
   .el-menu {
@@ -302,34 +318,22 @@ export default {
     cursor: pointer;
     background-color: #fff;
   }
-  .el-icon-sunny {
+  /* 选中侧边导航的背景颜色 */
+  .el-menu-item.is-active {
+    background: #014da1;
+    color: #fff;
+    font-weight: bold;
+    border: #014da1 solid 1px;
+  }
+  .masterAsideItem span img {
     display: none;
   }
-
-  .masterDetail {
-    width: 100%;
-    padding: 0 1.5rem;
-    box-sizing: border-box;
-    background-color: #fff;
-    border: 1px solid #dfdfdf;
-  }
-
-  .masterTitle {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    padding: 10px 0;
-    border-bottom: 1px solid #dfdfdf;
-  }
-
-  .title {
-    color: #333333;
-    font-weight: bold;
-    font-size: 20px;
-    line-height: 30px;
-  }
   .breadCrumb {
-    padding-top: 1rem;
+    order: 2;
+    width: 100%;
+    background: #eee;
+    box-sizing: border-box;
+    padding: 10px 15px;
   }
   /* 不被选中时的颜色 */
   .el-breadcrumb ::v-deep .el-breadcrumb__inner {
@@ -341,48 +345,49 @@ export default {
     color: black !important;
     font-weight: 800 !important;
   }
-  /* 选中侧边导航的背景颜色 */
-  .el-menu-item.is-active {
-    background: #014da1;
-    color: #fff;
+  .masterDetail {
+    order: 3;
+    width: 100%;
+    padding: 0 1.5rem;
+    box-sizing: border-box;
+    background-color: #fff;
+    min-height: calc(100vh - 29rem - 139px);
+  }
+  .masterTitle {
+    font-size: 3rem;
     font-weight: bold;
-    border: #014da1 solid 1px;
+    line-height: 36px;
+    color: #113f95;
+    margin: 1rem 0;
   }
   .masterItem {
-    min-height: 450px;
-    padding-bottom: 2rem;
-  }
-
-  .detailItem {
-    cursor: pointer;
     display: flex;
     flex-direction: row;
+    width: 100%;
     border-bottom: 1px dashed #b2b2b2;
-    padding: 15px 0;
-    text-decoration: none;
   }
 
-  .courseName {
-    height: 2rem;
-    line-height: 2rem;
+  .masterItemCourse {
     width: 70%;
-    flex: 1 1 auto;
-    font-size: 1.6rem;
-    color: #333;
+    text-align: left;
+    font-size: 16px;
+    line-height: 40px;
     display: -webkit-box;
     /* 一行直接省略 */
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 1;
     overflow: hidden;
-    text-align: left;
   }
-  .courseTeacher {
-    font-size: 1.6rem;
+  .masterItemCourse img {
+    width: 10px;
+    height: 10px;
+  }
+  .masterItemTeacher {
+    flex: 1 1 auto;
+    text-align: right;
+    font-size: 12px;
+    line-height: 40px;
     color: #b2b2b2;
-  }
-  /* 设置分页和底部的距离 */
-  .paging {
-    margin-bottom: 3rem;
   }
 }
 </style>

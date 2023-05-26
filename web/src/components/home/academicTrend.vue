@@ -3,11 +3,17 @@
     <div class="academicTitle">
       <div class="title">{{ pageItem.title }}</div>
       <p></p>
-      <a class="more" @click="goTo('/activity/academy')">{{ pageItem.more }}</a>
+      <!-- <a class="more" @click="goTo('/activity/academy')">{{ pageItem.more }}</a> -->
     </div>
     <div class="academicTrendDetail animation" data-aos="fade-up">
       <div class="futureAcademicTrend">
-        <div class="futureTitle">预告</div>
+        <div class="futureTitle">
+          <div class="futureTitleName">
+            <img src="../../assets/images/background/trend.png" alt="" />
+            <span>预告</span>
+          </div>
+          <div class="futureMore" @click="goTo('/activity/academy')">更多+</div>
+        </div>
         <div
           class="futureItem animation"
           data-aos="fade-up"
@@ -25,7 +31,13 @@
         </div>
       </div>
       <div class="pastAcademicTrend">
-        <div class="pastTitle">动态回顾</div>
+        <div class="pastTitle">
+          <div class="pastTitleName">
+            <img src="../../assets/images/background/trend.png" alt="" />
+            <span>回顾</span>
+          </div>
+          <div class="pastMore" @click="goTo('/activity/academy')">更多+</div>
+        </div>
         <div
           class="pastItem animation"
           data-aos="fade-up"
@@ -83,8 +95,6 @@ export default {
     async getAcademyPastList() {
       let params = {
         // 定义参数
-        // start: 0,
-        // end: 4,
         start: 1,
         end: 7,
         languageType: this.$store.getters.getLanguageType,
@@ -168,46 +178,61 @@ export default {
     display: table;
     content: "";
   }
-  .more {
-    color: #333;
-    font-size: 14px;
-    position: absolute;
-    bottom: 28px;
-    right: calc(17.5% + 10px);
-    cursor: pointer;
-  }
+
   .academicTrendDetail {
-    width: 65%;
-    margin: 0 auto;
+    width: 100%;
   }
   .futureAcademicTrend {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    margin-bottom: 1rem;
   }
 
   .futureTitle {
-    font-size: 18px;
+    display: flex;
     width: 100%;
-    text-align: left;
+    flex-direction: row;
+    margin-bottom: 0.5rem;
   }
-  .futureTitle::before {
-    content: "";
-    display: inline-block; /* 将伪元素设置为行内块元素 */
-    vertical-align: middle; /* 垂直居中对齐 */
-    width: 24px; /* 伪元素宽度 */
-    height: 24px; /* 伪元素高度 */
-    background-image: url("../../assets/images/background/upcoming.png");
-    background-size: contain; /* 等比例缩小 */
-    background-repeat: no-repeat;
-    background-position: center center; /* 图片居中 */
-    margin-right: 10px; /* 可选，为伪元素和文字之间留出一定的间隔 */
+  .futureTitleName {
+    display: flex;
+    flex-direction: row;
+    background: #4b74bb;
+    font-weight: bold;
+    font-size: 1.8rem;
+    border: 1px solid transparent;
+    color: #fff;
+    width: 10rem;
+    height: 4rem;
+  }
+  .futureTitleName img {
+    width: 3rem;
+    height: 3rem;
+    margin-top: 3px;
+    padding: 0 1rem;
+    line-height: 4rem;
+  }
+  .futureTitleName span {
+    line-height: 4rem;
+  }
+  .futureMore {
+    cursor: pointer;
+    flex: 1 1 auto;
+    text-align: right;
+    font-size: 1.6rem;
+    height: 4rem;
+    line-height: 4rem;
+    color: #444;
+  }
+  .futureMore:hover {
+    color: #0055a2;
   }
   .futureItem {
     width: 50%;
     display: flex;
     flex-direction: column;
-    padding: 0 10px;
+    padding-right: 10px;
     box-sizing: border-box;
     cursor: pointer;
   }
@@ -244,8 +269,8 @@ export default {
     overflow: hidden;
     text-align: left;
     display: -webkit-box;
-    -webkit-line-clamp: 3;
-    line-clamp: 3;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
     -webkit-box-orient: vertical;
     word-break: break-all;
     padding-bottom: 0.5rem;
@@ -257,35 +282,56 @@ export default {
   .futureItem:hover .futureItemTime {
     color: #008cd6;
   }
+
   .pastAcademicTrend {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
   }
-
   .pastTitle {
-    font-size: 18px;
+    display: flex;
     width: 100%;
-    text-align: left;
+    flex-direction: row;
+    margin-bottom: 0.5rem;
   }
-  .pastTitle::before {
-    content: "";
-    display: inline-block; /* 将伪元素设置为行内块元素 */
-    vertical-align: middle; /* 垂直居中对齐 */
-    width: 24px; /* 伪元素宽度 */
-    height: 24px; /* 伪元素高度 */
-    background-image: url("../../assets/images/background/done.png");
-    background-size: contain; /* 等比例缩小 */
-    background-repeat: no-repeat;
-    background-position: center center; /* 图片居中 */
-    margin-right: 10px; /* 可选，为伪元素和文字之间留出一定的间隔 */
+  .pastTitleName {
+    display: flex;
+    flex-direction: row;
+    background: #4b74bb;
+    font-weight: bold;
+    font-size: 1.8rem;
+    border: 1px solid transparent;
+    color: #fff;
+    width: 10rem;
+    height: 4rem;
   }
-
+  .pastTitleName img {
+    width: 3rem;
+    height: 3rem;
+    margin-top: 3px;
+    padding: 0 1rem;
+    line-height: 4rem;
+  }
+  .pastTitleName span {
+    line-height: 4rem;
+  }
+  .pastMore {
+    cursor: pointer;
+    flex: 1 1 auto;
+    text-align: right;
+    font-size: 1.6rem;
+    height: 4rem;
+    line-height: 4rem;
+    color: #444;
+  }
+  .pastMore:hover {
+    color: #0055a2;
+  }
   .pastItem {
     width: 50%;
     display: flex;
     flex-direction: column;
-    padding: 0 10px;
+    padding-right: 10px;
     box-sizing: border-box;
     cursor: pointer;
   }
@@ -322,8 +368,8 @@ export default {
     overflow: hidden;
     text-align: left;
     display: -webkit-box;
-    -webkit-line-clamp: 3;
-    line-clamp: 3;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
     -webkit-box-orient: vertical;
     word-break: break-all;
     padding-bottom: 0.5rem;
@@ -336,10 +382,10 @@ export default {
     color: #008cd6;
   }
 }
+/* 移动端 */
 @media screen and (max-width: 1000px) {
   .academicTrend {
     width: 100%;
-    background-color: #ffffff;
   }
   .academicTitle {
     margin-bottom: 20px;
@@ -368,13 +414,7 @@ export default {
     display: table;
     content: "";
   }
-  .more {
-    color: #0055a2;
-    font-size: 16px;
-    position: absolute;
-    bottom: 20px;
-    right: 0;
-  }
+
   .academicTrendDetail {
     display: flex;
     flex-direction: column;
@@ -383,28 +423,50 @@ export default {
     width: 100%;
     display: flex;
     flex-direction: column;
-    margin-top: 10px;
   }
   .futureTitle {
-    font-size: 2rem;
-    text-align: left;
+    display: flex;
+    width: 100%;
+    flex-direction: row;
     margin-bottom: 1rem;
   }
-  .futureTitle::before {
-    content: "";
-    display: inline-block; /* 将伪元素设置为行内块元素 */
-    vertical-align: middle; /* 垂直居中对齐 */
-    width: 2rem; /* 伪元素宽度 */
-    height: 2rem; /* 伪元素高度 */
-    background-image: url("../../assets/images/background/upcoming.png");
-    background-size: contain; /* 等比例缩小 */
-    background-repeat: no-repeat;
-    background-position: center center; /* 图片居中 */
-    margin-right: 10px; /* 可选，为伪元素和文字之间留出一定的间隔 */
+  .futureTitleName {
+    display: flex;
+    flex-direction: row;
+    background: #4b74bb;
+    font-weight: bold;
+    font-size: 1.8rem;
+    border: 1px solid transparent;
+    color: #fff;
+    width: 80px;
+    height: 30px;
+  }
+  .futureTitleName img {
+    width: 20px;
+    height: 20px;
+    margin-top: 3px;
+    padding: 0 10px;
+    line-height: 30px;
+  }
+  .futureTitleName span {
+    line-height: 30px;
+  }
+  .futureMore {
+    cursor: pointer;
+    flex: 1 1 auto;
+    text-align: right;
+    font-size: 1.6rem;
+    height: 30px;
+    line-height: 30px;
+    color: #444;
+  }
+  .futureMore:hover {
+    color: #0055a2;
   }
 
   .futureItem {
     width: 100%;
+    margin-bottom: 5px;
     cursor: pointer;
   }
 
@@ -439,29 +501,50 @@ export default {
   .pastAcademicTrend {
     width: 100%;
     display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
+    flex-direction: column;
   }
   .pastTitle {
+    display: flex;
     width: 100%;
-    font-size: 2rem;
-    text-align: left;
+    flex-direction: row;
     margin-bottom: 1rem;
   }
-  .pastTitle::before {
-    content: "";
-    display: inline-block; /* 将伪元素设置为行内块元素 */
-    vertical-align: middle; /* 垂直居中对齐 */
-    width: 2rem; /* 伪元素宽度 */
-    height: 2rem; /* 伪元素高度 */
-    background-image: url("../../assets/images/background/done.png");
-    background-size: contain; /* 等比例缩小 */
-    background-repeat: no-repeat;
-    background-position: center center; /* 图片居中 */
-    margin-right: 10px; /* 可选，为伪元素和文字之间留出一定的间隔 */
+  .pastTitleName {
+    display: flex;
+    flex-direction: row;
+    background: #4b74bb;
+    font-weight: bold;
+    font-size: 1.8rem;
+    border: 1px solid transparent;
+    color: #fff;
+    width: 80px;
+    height: 30px;
+  }
+  .pastTitleName img {
+    width: 20px;
+    height: 20px;
+    margin-top: 3px;
+    padding: 0 10px;
+    line-height: 30px;
+  }
+  .pastTitleName span {
+    line-height: 30px;
+  }
+  .pastMore {
+    cursor: pointer;
+    flex: 1 1 auto;
+    text-align: right;
+    font-size: 1.6rem;
+    height: 30px;
+    line-height: 30px;
+    color: #444;
+  }
+  .pastMore:hover {
+    color: #0055a2;
   }
   .pastItem {
     width: 100%;
+    margin-bottom: 5px;
     cursor: pointer;
   }
 

@@ -2,59 +2,71 @@
   <div class="consultor">
     <!-- default-active表示是当前选中的菜单的index -->
     <div class="consultorContent">
+      <div class="breadCrumb">
+        <el-breadcrumb separator-class="el-icon-arrow-right">
+          <el-breadcrumb-item :to="{ path: '/home' }">{{
+            pageItem.home
+          }}</el-breadcrumb-item>
+          <el-breadcrumb-item :to="{ path: '/team' }">{{
+            pageItem.allTitle
+          }}</el-breadcrumb-item>
+          <el-breadcrumb-item :to="{ path: '/team/consultor' }">{{
+            pageItem.subTitle
+          }}</el-breadcrumb-item>
+        </el-breadcrumb>
+      </div>
       <div class="consultorAside">
-        <div class="consultorAsideTitle">{{ pageItem.allTitle }}</div>
+        <div class="consultorAsideTitle">
+          <span>
+            <img src="../../assets/images/background/asideTitle.png" alt="" />{{
+              pageItem.allTitle
+            }}
+          </span>
+        </div>
         <div class="consultorAsideContent">
-          <el-menu :default-active="this.$route.path" router text-color="#000">
+          <el-menu :default-active="this.$route.path" router text-color="#444">
             <el-menu-item
               class="consultorAsideItem"
               v-for="(menuItem, menuIndex) in menu"
               :key="menuIndex"
               :index="menuItem.path"
             >
-              <i class="el-icon-sunny"></i>
-              <span v-html="menuItem.name"></span>
+              <span>
+                <img
+                  src="../../assets/images/background/asideSubtitle.png"
+                  alt=""
+                />
+                {{ menuItem.name }}
+              </span>
             </el-menu-item>
           </el-menu>
         </div>
       </div>
       <div class="consultorDetail">
         <div class="consultorTitle">
-          <div class="title">{{ pageItem.subTitle }}</div>
-          <div class="breadCrumb">
-            <el-breadcrumb separator-class="el-icon-arrow-right">
-              <el-breadcrumb-item :to="{ path: '/home' }">{{
-                pageItem.home
-              }}</el-breadcrumb-item>
-              <el-breadcrumb-item :to="{ path: '/team/consultor' }">{{
-                pageItem.consultor
-              }}</el-breadcrumb-item>
-            </el-breadcrumb>
-          </div>
+          {{ pageItem.subTitle }}
         </div>
-        <div class="subTitle">顾问:</div>
-        <div class="consultors">
-          <div
-            class="consultorItem"
-            v-for="(consultorItem, consultorIndex) in consultorCover"
-            :key="consultorIndex"
-            @click="gotoDetail(consultorItem)"
-          >
-            <div class="consultorImg">
-              <img :src="consultorItem.picUrl" @error="setDefaultImage" />
-            </div>
-            <div class="consultorInfo">
-              <div class="consultorName">{{ consultorItem.name }}</div>
-              <div
-                class="consultorInfoItem"
-                v-for="(
-                  consultorInfoItem, consultorInfoIndex
-                ) in consultorItem.info"
-                :key="consultorInfoIndex"
-              >
-                <span class="dot"></span>
-                {{ consultorInfoItem }}
-              </div>
+        <div
+          class="consultorItem"
+          v-for="(detailItem, detailIndex) in consultorCover"
+          :key="detailIndex"
+          @click="gotoDetail(detailItem)"
+        >
+          <div class="consultorItemTitle">
+            {{ detailItem.address }}
+          </div>
+          <div class="consultorItemImg">
+            <img :src="detailItem.picUrl" @error="setDefaultImage" />
+          </div>
+          <div class="consultorItemInfo">
+            <div class="consultorItemName">{{ detailItem.name }}</div>
+            <div
+              class="consultorItemInfoList"
+              v-for="(detailInfoItem, detailInfoIndex) in detailItem.info"
+              :key="detailInfoIndex"
+            >
+              <span class="consultorItemInfoListDot"></span>
+              {{ detailInfoItem }}
             </div>
           </div>
         </div>
@@ -75,19 +87,17 @@ export default {
         allTitle: "团队概况",
         subTitle: "顾问",
         home: "首页",
-        consultor: "顾问",
       },
       englishItem: {
         allTitle: "Snapshot",
         subTitle: "consultor",
         home: "home",
-        consultor: "consultor",
       },
       menu: [],
       menuZH: [
         { name: "团队简介", path: "/team/profile" },
-        { name: "顾&nbsp;&nbsp;&nbsp;&nbsp;问", path: "/team/consultor" },
-        { name: "导&nbsp;&nbsp;&nbsp;&nbsp;师", path: "/team/teacher" },
+        { name: "顾问", path: "/team/consultor" },
+        { name: "导师", path: "/team/teacher" },
         { name: "博士生", path: "/team/doctor" },
         { name: "硕士生", path: "/team/master" },
         { name: "毕业生", path: "/team/graduate" },
@@ -105,7 +115,7 @@ export default {
   },
 
   created() {
-    this.getconsultorCoverList();
+    this.getConsultorCoverList();
     this.changUI();
   },
   methods: {
@@ -119,7 +129,7 @@ export default {
       }
     },
     // async和await用于同步,就是按顺序执行
-    async getconsultorCoverList() {
+    async getConsultorCoverList() {
       let params = {
         start: 0,
         end: 100,
@@ -146,72 +156,22 @@ export default {
 /* PC端  */
 @media screen and (min-width: 1000px) {
   .consultor {
-    padding: 3rem 0;
-    box-sizing: border-box;
-    background: url(../../assets/images/background/contentBackground.jpg)
-      no-repeat;
-    min-height: calc(100vh - 35.762rem);
+    width: 100%;
   }
-
   .consultorContent {
-    width: 75%;
+    width: 85%;
     margin: 0 auto;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
-  }
-
-  .consultorAside {
-    width: 255px;
-    margin-right: 20px;
-  }
-  .consultorAsideTitle {
-    width: 255px;
-    height: 78px;
-    line-height: 78px;
-    background: url(../../assets/images/background/zryy-menu-t-bg.png) no-repeat;
-    border-radius: 0.6rem;
-    background-size: cover !important;
-    font-weight: bold;
-    color: #fff;
-    font-size: 24px;
-  }
-  .consultorAsideContent {
-    width: 255px;
-    background-color: #f9fbfd;
-  }
-  .consultorAsideItem {
-    height: 52px;
-    line-height: 52px;
-    font-size: 16px;
-    text-align: left;
-    cursor: pointer;
-    border-bottom: 1px solid #dfdfdf;
-  }
-
-  .consultorDetail {
-    flex: 1 1 auto;
-    padding: 0 3rem;
-    box-sizing: border-box;
-    background-color: #fff;
-    border: 1px solid #dfdfdf;
-    min-height: calc(100vh - 35.762rem - 6rem);
-  }
-
-  .consultorTitle {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    padding: 2rem 0;
-    border-bottom: 1px solid #dfdfdf;
-  }
-  .title {
-    color: #333333;
-    font-weight: bold;
-    font-size: 2.5rem;
+    flex-wrap: wrap;
+    margin-bottom: 15px;
   }
   .breadCrumb {
-    padding-top: 1rem;
+    width: 100%;
+    background: #eee;
+    box-sizing: border-box;
+    padding: 10px 15px;
+    margin-bottom: 15px;
   }
   /* 不被选中时的颜色 */
   .el-breadcrumb ::v-deep .el-breadcrumb__inner {
@@ -223,30 +183,148 @@ export default {
     color: black !important;
     font-weight: 800 !important;
   }
+
+  .consultorAside {
+    width: 20%;
+    padding-right: 30px;
+  }
+
+  .consultorAsideTitle {
+    background: #fff;
+    height: 47px;
+    border-top: 3px solid #0c568e;
+    border-bottom: 1px solid #0c568e;
+    margin-bottom: 2px;
+  }
+  .consultorAsideTitle span {
+    float: left;
+    height: 47px;
+    line-height: 47px;
+    font-size: 20px;
+    color: #4b74bb;
+    font-weight: bold;
+  }
+  .consultorAsideTitle span img {
+    float: left;
+    margin-top: 15px;
+    margin-left: 5px;
+    margin-right: 10px;
+  }
+  .consultorAsideContent {
+    width: 100%;
+  }
+  /* 去除侧边栏自带的边框 */
+  .el-menu {
+    border: none !important;
+  }
+  /* 去除侧边导航自带的边距 */
+  .el-menu-item {
+    padding: 0 !important;
+  }
   /* 侧边栏悬浮的背景颜色 */
   .el-menu-item:hover {
+    color: #fff !important;
     font-weight: bold;
-    background-color: #fff;
+    background-color: #4b74bb;
   }
   /* 选中侧边导航的背景颜色 */
   .el-menu-item.is-active {
+    color: #fff;
     font-weight: bold;
-    color: #034ea1;
-    background: #eee;
-  }
-  .subTitle {
-    font-size: 20px;
-    font-weight: bold;
-    color: #444444;
-    text-align: left;
-    margin: 10px 0;
+    background-color: #4b74bb;
   }
 
-  .dot {
+  .consultorAsideItem {
+    position: relative;
+    width: 100%;
+    height: 46px;
+    line-height: 46px;
+    font-size: 18px;
+    text-align: left;
+    cursor: pointer;
+    border-bottom: 1px solid #dfdfdf;
+  }
+  /* 最后一个侧边栏没有下划线 */
+  .consultorAsideItem:last-child {
+    border-bottom: none;
+  }
+  .consultorAsideItem span {
+    font-size: 18px;
+    line-height: 46px;
+  }
+
+  .consultorAsideItem span img {
+    height: 18px;
+    width: 18px;
+    line-height: 46px;
+    margin-top: -3px;
+    padding: 8px 12px;
+  }
+  .consultorDetail {
+    width: calc(80% - 30px);
+    min-height: calc(100vh - 29rem - 58px);
+  }
+
+  .consultorTitle {
+    font-size: 22px;
+    font-weight: bold;
+    line-height: 40px;
+    color: #113f95;
+    margin: 15px 0;
+  }
+  .consultorItem {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-bottom: 15px;
+  }
+  .consultorItemTitle {
+    height: 4.5rem;
+    width: 100%;
+    margin: 1rem 0;
+    background-size: cover !important;
+    background: url(../../assets/images/background/title-bg.png) no-repeat;
+    font-weight: bold;
+    line-height: 4.5rem;
+    padding-left: 2.5rem;
+    font-size: 2rem;
+    text-align: left;
+    color: #404040;
+  }
+  .consultorItemImg {
+    height: 190px;
+    border: 1px solid #ccc;
+    margin-right: 10px;
+  }
+  .consultorItemImg img {
+    width: 100%;
+    height: 100%;
+  }
+  /* 顾问信息 */
+  .consultorItemInfo {
+    background: #dbeeff;
+    flex: 1 1 auto;
+    padding: 0 10px;
+    border: 1px solid #ccc;
+  }
+  .consultorItemName {
+    font-size: 20px;
+    text-align: left;
+  }
+  .consultorItemInfoList {
+    text-align: left;
+    margin: 10px 0;
+    font-size: 16px;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
+  }
+  .consultorItemInfoListDot {
     position: relative;
     padding-left: 20px;
   }
-  .dot::before {
+  .consultorItemInfoListDot::before {
     content: "";
     position: absolute;
     top: 6px;
@@ -256,55 +334,19 @@ export default {
     background-color: #000;
     border-radius: 50%;
   }
-
-  .consultors {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    margin-bottom: 30px;
-  }
-  .consultorItem {
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    margin: 5px 0;
-    cursor: pointer;
-  }
-  /* 顾问图片 */
-  .consultorImg {
-    height: 190px;
-    border: 1px solid #ccc;
-    margin-right: 10px;
-  }
-  .consultorImg img {
-    width: 100%;
-    height: 100%;
-  }
-  /* 顾问信息 */
-  .consultorInfo {
-    background: #dbeeff;
-    flex: 1 1 auto;
-    padding: 0 10px;
-    border: 1px solid #ccc;
-  }
-  .consultorName {
-    font-size: 20px;
-    text-align: left;
-  }
-  .consultorInfoItem {
-    text-align: left;
-    margin: 10px 0;
-    font-size: 16px;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 1;
-    overflow: hidden;
-  }
 }
-/* 移动端 */
+/* 移动端  */
 @media screen and (max-width: 1000px) {
+  .consultor {
+    width: 100%;
+  }
+  .consultorContent {
+    display: flex;
+    flex-direction: column;
+  }
+
   .consultorAside {
+    order: 1;
     background: url(../../assets/images/background/contentBackground.jpg) center
       0 no-repeat;
     background-size: cover;
@@ -316,6 +358,9 @@ export default {
     font-weight: bold;
     text-align: left;
     color: #014da1;
+  }
+  .consultorAsideTitle span img {
+    display: none;
   }
   /* 菜单横向排列 */
   .el-menu {
@@ -338,34 +383,22 @@ export default {
     cursor: pointer;
     background-color: #fff;
   }
-
-  .el-icon-sunny {
+  /* 选中侧边导航的背景颜色 */
+  .el-menu-item.is-active {
+    background: #014da1;
+    color: #fff;
+    font-weight: bold;
+    border: #014da1 solid 1px;
+  }
+  .consultorAsideItem span img {
     display: none;
   }
-
-  .consultorDetail {
-    width: 100%;
-    padding: 0 1.5rem;
-    box-sizing: border-box;
-    background-color: #fff;
-    border: 1px solid #dfdfdf;
-  }
-
-  .consultorTitle {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    padding: 10px 0;
-    border-bottom: 1px solid #dfdfdf;
-  }
-  .title {
-    color: #333333;
-    font-weight: bold;
-    font-size: 20px;
-    line-height: 30px;
-  }
   .breadCrumb {
-    padding-top: 1rem;
+    order: 2;
+    width: 100%;
+    background: #eee;
+    box-sizing: border-box;
+    padding: 10px 15px;
   }
   /* 不被选中时的颜色 */
   .el-breadcrumb ::v-deep .el-breadcrumb__inner {
@@ -377,26 +410,74 @@ export default {
     color: black !important;
     font-weight: 800 !important;
   }
-  /* 选中侧边导航的背景颜色 */
-  .el-menu-item.is-active {
-    background: #014da1;
-    color: #fff;
-    font-weight: bold;
-    border: #014da1 solid 1px;
+  .consultorDetail {
+    order: 3;
+    width: 100%;
+    padding: 0 1.5rem;
+    box-sizing: border-box;
+    background-color: #fff;
+    min-height: calc(100vh - 29rem - 179px);
   }
-  .subTitle {
-    font-size: 16px;
+  .consultorTitle {
+    font-size: 3rem;
     font-weight: bold;
-    color: #444444;
+    line-height: 36px;
+    color: #113f95;
+    margin: 1rem 0;
+  }
+  .consultorItem {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    cursor: pointer;
+    margin-bottom: 5px;
+  }
+  .consultorItemTitle {
+    height: 4.5rem;
+    width: 100%;
+    margin: 1rem 0;
+    background-size: cover !important;
+    background: url(../../assets/images/background/title-bg.png) no-repeat;
+    font-weight: bold;
+    line-height: 4.5rem;
+    padding-left: 1.5rem;
+    font-size: 2rem;
     text-align: left;
-    margin: 10px 0;
+    color: #404040;
   }
-
-  .dot {
+  .consultorItemImg {
+    height: 195px;
+    border: 1px solid #ccc;
+    margin-right: 5px;
+  }
+  .consultorItemImg img {
+    height: 100%;
+  }
+  /* 顾问信息 */
+  .consultorItemInfo {
+    background: #dbeeff;
+    width: calc(100% - 195px + 20px);
+    padding: 0 10px;
+    border: 1px solid #ccc;
+  }
+  .consultorItemName {
+    font-size: 20px;
+    text-align: left;
+  }
+  .consultorItemInfoList {
+    text-align: left;
+    margin: 5px 0;
+    font-size: 16px;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
+  }
+  .consultorItemInfoListDot {
     position: relative;
     padding-left: 20px;
   }
-  .dot::before {
+  .consultorItemInfoListDot::before {
     content: "";
     position: absolute;
     top: 6px;
@@ -405,46 +486,6 @@ export default {
     height: 6px;
     background-color: #000;
     border-radius: 50%;
-  }
-  .consultors {
-    display: flex;
-    flex-direction: column;
-  }
-  .consultorItem {
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    margin: 5px 0;
-    cursor: pointer;
-  }
-  /* 顾问图片 */
-  .consultorImg {
-    height: 165px;
-    border: 1px solid #ccc;
-    margin-right: 10px;
-  }
-  .consultorImg img {
-    height: 100%;
-  }
-  /* 顾问信息 */
-  .consultorInfo {
-    background: #dbeeff;
-    flex: 1 1 auto;
-    padding: 0 10px;
-    border: 1px solid #ccc;
-  }
-  .consultorName {
-    font-size: 20px;
-    text-align: left;
-  }
-  .consultorInfoItem {
-    text-align: left;
-    margin: 5px 0;
-    font-size: 16px;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 1;
-    overflow: hidden;
   }
 }
 </style>

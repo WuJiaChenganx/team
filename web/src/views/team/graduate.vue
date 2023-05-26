@@ -2,52 +2,74 @@
   <div class="graduate">
     <!-- default-active表示是当前选中的菜单的index -->
     <div class="graduateContent">
+      <div class="breadCrumb">
+        <el-breadcrumb separator-class="el-icon-arrow-right">
+          <el-breadcrumb-item :to="{ path: '/home' }">{{
+            pageItem.home
+          }}</el-breadcrumb-item>
+          <el-breadcrumb-item :to="{ path: '/team' }">{{
+            pageItem.allTitle
+          }}</el-breadcrumb-item>
+          <el-breadcrumb-item :to="{ path: '/team/graduate' }">{{
+            pageItem.subTitle
+          }}</el-breadcrumb-item>
+        </el-breadcrumb>
+      </div>
       <div class="graduateAside">
-        <div class="graduateAsideTitle">{{ pageItem.allTitle }}</div>
+        <div class="graduateAsideTitle">
+          <span>
+            <img src="../../assets/images/background/asideTitle.png" alt="" />{{
+              pageItem.allTitle
+            }}
+          </span>
+        </div>
         <div class="graduateAsideContent">
-          <el-menu :default-active="this.$route.path" router text-color="#000">
+          <el-menu :default-active="this.$route.path" router text-color="#444">
             <el-menu-item
               class="graduateAsideItem"
               v-for="(menuItem, menuIndex) in menu"
               :key="menuIndex"
               :index="menuItem.path"
             >
-              <i class="el-icon-sunny"></i>
-              <span v-html="menuItem.name"></span>
+              <span>
+                <img
+                  src="../../assets/images/background/asideSubtitle.png"
+                  alt=""
+                />
+                {{ menuItem.name }}
+              </span>
             </el-menu-item>
           </el-menu>
         </div>
       </div>
       <div class="graduateDetail">
         <div class="graduateTitle">
-          <div class="title">{{ pageItem.subTitle }}</div>
-          <div class="breadCrumb">
-            <el-breadcrumb separator-class="el-icon-arrow-right">
-              <el-breadcrumb-item :to="{ path: '/home' }">{{
-                pageItem.home
-              }}</el-breadcrumb-item>
-              <el-breadcrumb-item :to="{ path: '/team/graduate' }">{{
-                pageItem.graduate
-              }}</el-breadcrumb-item>
-            </el-breadcrumb>
-          </div>
+          {{ pageItem.subTitle }}
         </div>
-        <div v-for="(item, index) in studentCover" :key="index">
-          <div class="subTitle">{{ item.title }}级毕业生</div>
-          <div class="graduateItem">
+        <div
+          v-for="(sessionItem, sessionIndex) in studentCover"
+          :key="sessionIndex"
+        >
+          <div class="graduatesSession">
+            <div class="graduatesTitle">{{ sessionItem.title }}级毕业生</div>
             <div
-              class="detailItem"
-              v-for="(memberItem, index) in item.memberInfo"
-              :key="index"
-              @click="gotoDetail(memberItem.id)"
+              class="graduatesItem"
+              v-for="(
+                detailGraduateInfoItem, detailGraduateInfoIndex
+              ) in sessionItem.memberInfo"
+              :key="detailGraduateInfoIndex"
+              @click="gotoDetail(detailGraduateInfoItem.id)"
             >
-              <div class="detailItemImg">
-                <img :src="memberItem.picUrl" @error="setDefaultImage" />
+              <div class="graduatesItemImg">
+                <img
+                  :src="detailGraduateInfoItem.picUrl"
+                  @error="setDefaultImage"
+                />
               </div>
-              <div class="detailItemInfo">
-                {{ memberItem.title }}
+              <div class="graduatesItemInfo">
+                {{ detailGraduateInfoItem.title }}
                 <br />
-                {{ memberItem.name }}
+                {{ detailGraduateInfoItem.name }}
               </div>
             </div>
           </div>
@@ -69,19 +91,17 @@ export default {
         allTitle: "团队概况",
         subTitle: "毕业生",
         home: "首页",
-        graduate: "毕业生",
       },
       englishItem: {
         allTitle: "Snapshot",
         subTitle: "Graduate",
         home: "home",
-        graduate: "Graduate",
       },
       menu: [],
       menuZH: [
         { name: "团队简介", path: "/team/profile" },
-        { name: "顾&nbsp;&nbsp;&nbsp;&nbsp;问", path: "/team/consultor" },
-        { name: "导&nbsp;&nbsp;&nbsp;&nbsp;师", path: "/team/teacher" },
+        { name: "顾问", path: "/team/consultor" },
+        { name: "导师", path: "/team/teacher" },
         { name: "博士生", path: "/team/doctor" },
         { name: "硕士生", path: "/team/master" },
         { name: "毕业生", path: "/team/graduate" },
@@ -143,69 +163,22 @@ export default {
 /* PC端  */
 @media screen and (min-width: 1000px) {
   .graduate {
-    padding: 3rem 0;
-    background: url(../../assets/images/background/contentBackground.jpg)
-      no-repeat;
+    width: 100%;
   }
-
   .graduateContent {
-    width: 75%;
+    width: 85%;
     margin: 0 auto;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
-  }
-
-  .graduateAside {
-    width: 255px;
-    margin-right: 20px;
-  }
-  .graduateAsideTitle {
-    width: 255px;
-    height: 78px;
-    line-height: 78px;
-    background: url(../../assets/images/background/zryy-menu-t-bg.png) no-repeat;
-    border-radius: 0.6rem;
-    background-size: cover !important;
-    font-weight: bold;
-    color: #fff;
-    font-size: 24px;
-  }
-  .graduateAsideContent {
-    width: 255px;
-    background-color: #f9fbfd;
-  }
-  .graduateAsideItem {
-    height: 52px;
-    line-height: 52px;
-    font-size: 16px;
-    text-align: left;
-    cursor: pointer;
-    border-bottom: 1px solid #dfdfdf;
-  }
-
-  .graduateDetail {
-    flex: 1 1 auto;
-    padding: 0 3rem;
-    box-sizing: border-box;
-    background-color: #fff;
-    border: 1px solid #dfdfdf;
-  }
-
-  .graduateTitle {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    padding: 2rem 0;
-    border-bottom: 1px solid #dfdfdf;
-  }
-  .title {
-    color: #333333;
-    font-weight: bold;
-    font-size: 2.5rem;
+    flex-wrap: wrap;
+    margin-bottom: 15px;
   }
   .breadCrumb {
-    padding-top: 1rem;
+    width: 100%;
+    background: #eee;
+    box-sizing: border-box;
+    padding: 10px 15px;
+    margin-bottom: 15px;
   }
   /* 不被选中时的颜色 */
   .el-breadcrumb ::v-deep .el-breadcrumb__inner {
@@ -217,60 +190,141 @@ export default {
     color: black !important;
     font-weight: 800 !important;
   }
+
+  .graduateAside {
+    width: 20%;
+    padding-right: 30px;
+  }
+
+  .graduateAsideTitle {
+    background: #fff;
+    height: 47px;
+    border-top: 3px solid #0c568e;
+    border-bottom: 1px solid #0c568e;
+    margin-bottom: 2px;
+  }
+  .graduateAsideTitle span {
+    float: left;
+    height: 47px;
+    line-height: 47px;
+    font-size: 20px;
+    color: #4b74bb;
+    font-weight: bold;
+  }
+  .graduateAsideTitle span img {
+    float: left;
+    margin-top: 15px;
+    margin-left: 5px;
+    margin-right: 10px;
+  }
+  .graduateAsideContent {
+    width: 100%;
+  }
+  /* 去除侧边栏自带的边框 */
+  .el-menu {
+    border: none !important;
+  }
+  /* 去除侧边导航自带的边距 */
+  .el-menu-item {
+    padding: 0 !important;
+  }
   /* 侧边栏悬浮的背景颜色 */
   .el-menu-item:hover {
+    color: #fff !important;
     font-weight: bold;
-    background-color: #fff;
+    background-color: #4b74bb;
   }
   /* 选中侧边导航的背景颜色 */
   .el-menu-item.is-active {
+    color: #fff;
     font-weight: bold;
-    color: #034ea1;
-    background: #eee;
+    background-color: #4b74bb;
   }
-  .subTitle {
-    font-size: 20px;
-    font-weight: bold;
-    color: #444444;
+
+  .graduateAsideItem {
+    position: relative;
+    width: 100%;
+    height: 46px;
+    line-height: 46px;
+    font-size: 18px;
     text-align: left;
-    margin: 10px 0;
+    cursor: pointer;
+    border-bottom: 1px solid #dfdfdf;
   }
-  .graduateItem {
+  /* 最后一个侧边栏没有下划线 */
+  .graduateAsideItem:last-child {
+    border-bottom: none;
+  }
+  .graduateAsideItem span {
+    font-size: 18px;
+    line-height: 46px;
+  }
+
+  .graduateAsideItem span img {
+    height: 18px;
+    width: 18px;
+    line-height: 46px;
+    margin-top: -3px;
+    padding: 8px 12px;
+  }
+  .graduateDetail {
+    width: calc(80% - 30px);
+    min-height: calc(100vh - 29rem - 58px);
+  }
+
+  .graduateTitle {
+    font-size: 22px;
+    font-weight: bold;
+    line-height: 40px;
+    color: #113f95;
+    margin: 15px 0;
+  }
+  .graduatesSession {
     width: 100%;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
-    padding: 3rem 0;
   }
-  .detailItem {
+  .graduatesTitle {
+    height: 4.5rem;
+    width: 100%;
+    margin: 1rem 0;
+    background-size: cover !important;
+    background: url(../../assets/images/background/title-bg.png) no-repeat;
+    font-weight: bold;
+    line-height: 4.5rem;
+    padding-left: 2.5rem;
+    font-size: 2rem;
+    text-align: left;
+    color: #404040;
+  }
+  .graduatesItem {
     cursor: pointer;
     text-decoration: none;
-    flex: 0 0 calc(20% - 10px); /* 每个元素占据20%的宽度，同时减去10px的margin-right */
+    flex: 0 0 calc(12.5% - 10px); /* 每个元素占据12.5%的宽度，同时减去10px的margin-right */
     margin-right: 10px; /* 设置右外边距 */
-    box-sizing: border-box;
   }
-  /* 取消最后一个元素的右外边距 */
-  .detailItem:last-child {
-    margin-right: 0;
-  }
-  /* 最后一行左对齐 */
-  .graduateItem:last-child {
-    justify-content: flex-start;
-  }
-  .detailItemImg {
+  .graduatesItemImg {
     width: 100%;
   }
-  .detailItem img {
-    width: 70%;
+  .graduatesItemImg img {
+    width: 75%;
   }
-
-  .detailItemInfo {
-    padding: 1rem 0;
+  .graduatesItemInfo {
+    padding: 5px 0;
   }
 }
 /* 移动端  */
 @media screen and (max-width: 1000px) {
+  .graduate {
+    width: 100%;
+  }
+  .graduateContent {
+    display: flex;
+    flex-direction: column;
+  }
+
   .graduateAside {
+    order: 1;
     background: url(../../assets/images/background/contentBackground.jpg) center
       0 no-repeat;
     background-size: cover;
@@ -282,6 +336,9 @@ export default {
     font-weight: bold;
     text-align: left;
     color: #014da1;
+  }
+  .graduateAsideTitle span img {
+    display: none;
   }
   /* 菜单横向排列 */
   .el-menu {
@@ -304,34 +361,22 @@ export default {
     cursor: pointer;
     background-color: #fff;
   }
-
-  .el-icon-sunny {
+  /* 选中侧边导航的背景颜色 */
+  .el-menu-item.is-active {
+    background: #014da1;
+    color: #fff;
+    font-weight: bold;
+    border: #014da1 solid 1px;
+  }
+  .graduateAsideItem span img {
     display: none;
   }
-
-  .graduateDetail {
-    width: 100%;
-    padding: 0 1.5rem;
-    box-sizing: border-box;
-    background-color: #fff;
-    border: 1px solid #dfdfdf;
-  }
-
-  .graduateTitle {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    padding: 10px 0;
-    border-bottom: 1px solid #dfdfdf;
-  }
-  .title {
-    color: #333333;
-    font-weight: bold;
-    font-size: 20px;
-    line-height: 30px;
-  }
   .breadCrumb {
-    padding-top: 1rem;
+    order: 2;
+    width: 100%;
+    background: #eee;
+    box-sizing: border-box;
+    padding: 10px 15px;
   }
   /* 不被选中时的颜色 */
   .el-breadcrumb ::v-deep .el-breadcrumb__inner {
@@ -343,38 +388,55 @@ export default {
     color: black !important;
     font-weight: 800 !important;
   }
-  /* 选中侧边导航的背景颜色 */
-  .el-menu-item.is-active {
-    background: #014da1;
-    color: #fff;
-    font-weight: bold;
-    border: #014da1 solid 1px;
+  .graduateDetail {
+    order: 3;
+    width: 100%;
+    padding: 0 1.5rem;
+    box-sizing: border-box;
+    background-color: #fff;
+    min-height: calc(100vh - 29rem - 179px);
   }
-  .subTitle {
-    font-size: 16px;
+  .graduateTitle {
+    font-size: 3rem;
     font-weight: bold;
-    color: #444444;
+    line-height: 36px;
+    color: #113f95;
+    margin: 1rem 0;
+  }
+
+  .graduatesSession {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .graduatesTitle {
+    height: 4.5rem;
+    width: 100%;
+    margin: 1rem 0;
+    background-size: cover !important;
+    background: url(../../assets/images/background/title-bg.png) no-repeat;
+    font-weight: bold;
+    line-height: 4.5rem;
+    padding-left: 2.5rem;
+    font-size: 2rem;
     text-align: left;
-    margin: 10px 0;
+    color: #404040;
   }
-  .graduateItem {
+  .graduatesItem {
+    width: 50%;
     display: flex;
     flex-direction: column;
     padding: 2rem 0;
   }
-  .detailItem {
-    cursor: pointer;
-    text-decoration: none;
-    margin-bottom: 2rem;
-  }
-
-  .detailItem img {
+  .graduatesItemImg {
+    margin: 0 auto;
     width: 20rem;
-    height: 23rem;
   }
-
-  .detailItem .detailItemInfo {
-    padding: 1rem 0;
+  .graduatesItemImg img {
+    width: 70%;
+  }
+  .graduatesItemInfo {
+    padding: 5px 0;
   }
 }
 </style>

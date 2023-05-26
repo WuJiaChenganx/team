@@ -2,83 +2,91 @@
   <div class="teacher">
     <!-- default-active表示是当前选中的菜单的index -->
     <div class="teacherContent">
+      <div class="breadCrumb">
+        <el-breadcrumb separator-class="el-icon-arrow-right">
+          <el-breadcrumb-item :to="{ path: '/home' }">{{
+            pageItem.home
+          }}</el-breadcrumb-item>
+          <el-breadcrumb-item :to="{ path: '/team' }">{{
+            pageItem.allTitle
+          }}</el-breadcrumb-item>
+          <el-breadcrumb-item :to="{ path: '/team/teacher' }">{{
+            pageItem.subTitle
+          }}</el-breadcrumb-item>
+        </el-breadcrumb>
+      </div>
       <div class="teacherAside">
-        <div class="teacherAsideTitle">{{ pageItem.allTitle }}</div>
+        <div class="teacherAsideTitle">
+          <span>
+            <img src="../../assets/images/background/asideTitle.png" alt="" />{{
+              pageItem.allTitle
+            }}
+          </span>
+        </div>
         <div class="teacherAsideContent">
-          <el-menu :default-active="this.$route.path" router text-color="#000">
+          <el-menu :default-active="this.$route.path" router text-color="#444">
             <el-menu-item
               class="teacherAsideItem"
               v-for="(menuItem, menuIndex) in menu"
               :key="menuIndex"
               :index="menuItem.path"
             >
-              <i class="el-icon-sunny"></i>
-              <span v-html="menuItem.name"></span>
+              <span>
+                <img
+                  src="../../assets/images/background/asideSubtitle.png"
+                  alt=""
+                />
+                {{ menuItem.name }}
+              </span>
             </el-menu-item>
           </el-menu>
         </div>
       </div>
       <div class="teacherDetail">
         <div class="teacherTitle">
-          <div class="title">{{ pageItem.subTitle }}</div>
-          <div class="breadCrumb">
-            <el-breadcrumb separator-class="el-icon-arrow-right">
-              <el-breadcrumb-item :to="{ path: '/home' }">{{
-                pageItem.home
-              }}</el-breadcrumb-item>
-              <el-breadcrumb-item :to="{ path: '/team/teacher' }">{{
-                pageItem.teacher
-              }}</el-breadcrumb-item>
-            </el-breadcrumb>
-          </div>
+          {{ pageItem.subTitle }}
         </div>
-        <div class="subTitle">团队负责人:</div>
-        <div class="principals">
-          <div
-            class="principalItem"
-            v-for="(principalItem, principalIndex) in principalCover"
-            :key="principalIndex"
-            @click="gotoDetail(principalItem)"
-          >
-            <div class="principalImg">
-              <img :src="principalItem.picUrl" @error="setDefaultImage" />
-            </div>
-            <div class="princiPalInfo">
-              <div class="principalName">{{ principalItem.name }}</div>
-              <div
-                class="princiPalInfoItem"
-                v-for="(
-                  princiPalInfoItem, princiPalInfoIndex
-                ) in principalItem.info"
-                :key="princiPalInfoIndex"
-              >
-                <span class="dot"></span>
-                {{ princiPalInfoItem }}
-              </div>
+        <div class="principalsTitle">团队负责人</div>
+        <div
+          class="principalsItem"
+          v-for="detailPrincipalItem in principalCover"
+          :key="detailPrincipalItem.id"
+          @click="gotoDetail(detailPrincipalItem)"
+        >
+          <div class="principalsItemImg">
+            <img :src="detailPrincipalItem.picUrl" @error="setDefaultImage" />
+          </div>
+          <div class="principalsItemInfo">
+            <div class="principalsItemName">{{ detailPrincipalItem.name }}</div>
+            <div
+              class="principalsItemInfoList"
+              v-for="detailPrincipalInfoItem in detailPrincipalItem.info"
+              :key="detailPrincipalInfoItem"
+            >
+              <span class="principalsItemInfoListDot"></span>
+              {{ detailPrincipalInfoItem }}
             </div>
           </div>
         </div>
-        <div class="subTitle">团队成员:</div>
-        <div class="teachers">
-          <div
-            class="teacherItem"
-            v-for="(teacherItem, teacherIndex) in teacherCover"
-            :key="teacherIndex"
-            @click="gotoDetail(teacherItem)"
-          >
-            <div class="teacherImg">
-              <img :src="teacherItem.picUrl" @error="setDefaultImage" />
-            </div>
-            <div class="teacherInfo">
-              <div class="teacherName">{{ teacherItem.name }}</div>
-              <div
-                class="teacherInfoItem"
-                v-for="(teacherInfoItem, teacherInfoIndex) in teacherItem.info"
-                :key="teacherInfoIndex"
-              >
-                <span class="dot"></span>
-                {{ teacherInfoItem }}
-              </div>
+        <div class="teachersTitle">团队成员</div>
+        <div
+          class="teachersItem"
+          v-for="detailTeacherItem in teacherCover"
+          :key="detailTeacherItem.id"
+          @click="gotoDetail(detailTeacherItem)"
+        >
+          <div class="teachersItemImg">
+            <img :src="detailTeacherItem.picUrl" @error="setDefaultImage" />
+          </div>
+          <div class="teachersItemInfo">
+            <div class="teachersItemName">{{ detailTeacherItem.name }}</div>
+            <div
+              class="teachersItemInfoList"
+              v-for="detailTeacherInfoItem in detailTeacherItem.info"
+              :key="detailTeacherInfoItem"
+            >
+              <span class="teachersItemInfoListDot"></span>
+              {{ detailTeacherInfoItem }}
             </div>
           </div>
         </div>
@@ -99,19 +107,17 @@ export default {
         allTitle: "团队概况",
         subTitle: "导师",
         home: "首页",
-        teacher: "导师",
       },
       englishItem: {
         allTitle: "Snapshot",
         subTitle: "Teacher",
         home: "home",
-        teacher: "Teacher",
       },
       menu: [],
       menuZH: [
         { name: "团队简介", path: "/team/profile" },
-        { name: "顾&nbsp;&nbsp;&nbsp;&nbsp;问", path: "/team/consultor" },
-        { name: "导&nbsp;&nbsp;&nbsp;&nbsp;师", path: "/team/teacher" },
+        { name: "顾问", path: "/team/consultor" },
+        { name: "导师", path: "/team/teacher" },
         { name: "博士生", path: "/team/doctor" },
         { name: "硕士生", path: "/team/master" },
         { name: "毕业生", path: "/team/graduate" },
@@ -147,7 +153,7 @@ export default {
     async getPrincipalCoverList() {
       let params = {
         start: 0,
-        end: 2,
+        end: 100,
         memberType: "principal",
         languageType: this.$store.getters.getLanguageType,
       };
@@ -182,72 +188,22 @@ export default {
 /* PC端  */
 @media screen and (min-width: 1000px) {
   .teacher {
-    padding: 3rem 0;
-    box-sizing: border-box;
-    background: url(../../assets/images/background/contentBackground.jpg)
-      no-repeat;
-    min-height: calc(100vh - 35.762rem);
+    width: 100%;
   }
-
   .teacherContent {
-    width: 75%;
+    width: 85%;
     margin: 0 auto;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
-  }
-
-  .teacherAside {
-    width: 255px;
-    margin-right: 20px;
-  }
-  .teacherAsideTitle {
-    width: 255px;
-    height: 78px;
-    line-height: 78px;
-    background: url(../../assets/images/background/zryy-menu-t-bg.png) no-repeat;
-    border-radius: 0.6rem;
-    background-size: cover !important;
-    font-weight: bold;
-    color: #fff;
-    font-size: 24px;
-  }
-  .teacherAsideContent {
-    width: 255px;
-    background-color: #f9fbfd;
-  }
-  .teacherAsideItem {
-    height: 52px;
-    line-height: 52px;
-    font-size: 16px;
-    text-align: left;
-    cursor: pointer;
-    border-bottom: 1px solid #dfdfdf;
-  }
-
-  .teacherDetail {
-    flex: 1 1 auto;
-    padding: 0 3rem;
-    box-sizing: border-box;
-    background-color: #fff;
-    border: 1px solid #dfdfdf;
-    min-height: calc(100vh - 35.762rem - 6rem);
-  }
-
-  .teacherTitle {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    padding: 2rem 0;
-    border-bottom: 1px solid #dfdfdf;
-  }
-  .title {
-    color: #333333;
-    font-weight: bold;
-    font-size: 2.5rem;
+    flex-wrap: wrap;
+    margin-bottom: 15px;
   }
   .breadCrumb {
-    padding-top: 1rem;
+    width: 100%;
+    background: #eee;
+    box-sizing: border-box;
+    padding: 10px 15px;
+    margin-bottom: 15px;
   }
   /* 不被选中时的颜色 */
   .el-breadcrumb ::v-deep .el-breadcrumb__inner {
@@ -259,62 +215,148 @@ export default {
     color: black !important;
     font-weight: 800 !important;
   }
+
+  .teacherAside {
+    width: 20%;
+    padding-right: 30px;
+  }
+
+  .teacherAsideTitle {
+    background: #fff;
+    height: 47px;
+    border-top: 3px solid #0c568e;
+    border-bottom: 1px solid #0c568e;
+    margin-bottom: 2px;
+  }
+  .teacherAsideTitle span {
+    float: left;
+    height: 47px;
+    line-height: 47px;
+    font-size: 20px;
+    color: #4b74bb;
+    font-weight: bold;
+  }
+  .teacherAsideTitle span img {
+    float: left;
+    margin-top: 15px;
+    margin-left: 5px;
+    margin-right: 10px;
+  }
+  .teacherAsideContent {
+    width: 100%;
+  }
+  /* 去除侧边栏自带的边框 */
+  .el-menu {
+    border: none !important;
+  }
+  /* 去除侧边导航自带的边距 */
+  .el-menu-item {
+    padding: 0 !important;
+  }
   /* 侧边栏悬浮的背景颜色 */
   .el-menu-item:hover {
+    color: #fff !important;
     font-weight: bold;
-    background-color: #fff;
+    background-color: #4b74bb;
   }
   /* 选中侧边导航的背景颜色 */
   .el-menu-item.is-active {
+    color: #fff;
     font-weight: bold;
-    color: #034ea1;
-    background: #eee;
+    background-color: #4b74bb;
   }
-  .subTitle {
-    font-size: 20px;
-    font-weight: bold;
-    color: #444444;
-    text-align: left;
-    margin: 10px 0;
-  }
-  .principals {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-  }
-  .principalItem {
-    display: flex;
-    flex-direction: row;
+
+  .teacherAsideItem {
+    position: relative;
     width: 100%;
+    height: 46px;
+    line-height: 46px;
+    font-size: 18px;
+    text-align: left;
     cursor: pointer;
+    border-bottom: 1px solid #dfdfdf;
   }
-  /* 负责人图片 */
-  .principalImg {
+  /* 最后一个侧边栏没有下划线 */
+  .teacherAsideItem:last-child {
+    border-bottom: none;
+  }
+  .teacherAsideItem span {
+    font-size: 18px;
+    line-height: 46px;
+  }
+
+  .teacherAsideItem span img {
+    height: 18px;
+    width: 18px;
+    line-height: 46px;
+    margin-top: -3px;
+    padding: 8px 12px;
+  }
+  .teacherDetail {
+    width: calc(80% - 30px);
+    min-height: calc(100vh - 29rem - 58px);
+  }
+
+  .teacherTitle {
+    font-size: 22px;
+    font-weight: bold;
+    line-height: 40px;
+    color: #113f95;
+    margin: 15px 0;
+  }
+  .principalsTitle {
+    height: 4.5rem;
+    width: 100%;
+    margin: 1rem 0;
+    background-size: cover !important;
+    background: url(../../assets/images/background/title-bg.png) no-repeat;
+    font-weight: bold;
+    line-height: 4.5rem;
+    padding-left: 2.5rem;
+    font-size: 2rem;
+    text-align: left;
+    color: #404040;
+  }
+  .principalsItem {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-bottom: 15px;
+  }
+  .principalsItemImg {
     height: 190px;
     border: 1px solid #ccc;
     margin-right: 10px;
   }
-  .principalImg img {
+  .principalsItemImg img {
     width: 100%;
     height: 100%;
   }
-
   /* 负责人信息 */
-  .princiPalInfo {
+  .principalsItemInfo {
     background: #dbeeff;
     flex: 1 1 auto;
     padding: 0 10px;
     border: 1px solid #ccc;
   }
-  .principalName {
+  .principalsItemName {
     font-size: 20px;
     text-align: left;
   }
-  .dot {
+  .principalsItemInfoList {
+    text-align: left;
+    margin: 10px 0;
+    font-size: 16px;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
+  }
+  .principalsItemInfoListDot {
     position: relative;
     padding-left: 20px;
   }
-  .dot::before {
+  .principalsItemInfoListDot::before {
     content: "";
     position: absolute;
     top: 6px;
@@ -324,51 +366,46 @@ export default {
     background-color: #000;
     border-radius: 50%;
   }
-  .princiPalInfoItem {
+  .teachersTitle {
+    height: 4.5rem;
+    width: 100%;
+    margin: 1rem 0;
+    background-size: cover !important;
+    background: url(../../assets/images/background/title-bg.png) no-repeat;
+    font-weight: bold;
+    line-height: 4.5rem;
+    padding-left: 2.5rem;
+    font-size: 2rem;
     text-align: left;
-    margin: 10px 0;
-    font-size: 16px;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 1;
-    overflow: hidden;
+    color: #404040;
   }
-  .teachers {
+  .teachersItem {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: space-between;
-    margin-bottom: 30px;
+    margin-bottom: 15px;
   }
-  .teacherItem {
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    margin: 5px 0;
-    cursor: pointer;
-  }
-  /* 教师成员图片 */
-  .teacherImg {
+  .teachersItemImg {
     height: 190px;
     border: 1px solid #ccc;
     margin-right: 10px;
   }
-  .teacherImg img {
+  .teachersItemImg img {
     width: 100%;
     height: 100%;
   }
-  /* 教师成员信息 */
-  .teacherInfo {
+  /* 团队老师 */
+  .teachersItemInfo {
     background: #dbeeff;
     flex: 1 1 auto;
     padding: 0 10px;
     border: 1px solid #ccc;
   }
-  .teacherName {
+  .teachersItemName {
     font-size: 20px;
     text-align: left;
   }
-  .teacherInfoItem {
+  .teachersItemInfoList {
     text-align: left;
     margin: 10px 0;
     font-size: 16px;
@@ -377,10 +414,33 @@ export default {
     -webkit-line-clamp: 1;
     overflow: hidden;
   }
+  .teachersItemInfoListDot {
+    position: relative;
+    padding-left: 20px;
+  }
+  .teachersItemInfoListDot::before {
+    content: "";
+    position: absolute;
+    top: 6px;
+    left: 0;
+    width: 6px;
+    height: 6px;
+    background-color: #000;
+    border-radius: 50%;
+  }
 }
-/* 移动端 */
+/* 移动端  */
 @media screen and (max-width: 1000px) {
+  .teacher {
+    width: 100%;
+  }
+  .teacherContent {
+    display: flex;
+    flex-direction: column;
+  }
+
   .teacherAside {
+    order: 1;
     background: url(../../assets/images/background/contentBackground.jpg) center
       0 no-repeat;
     background-size: cover;
@@ -392,6 +452,9 @@ export default {
     font-weight: bold;
     text-align: left;
     color: #014da1;
+  }
+  .teacherAsideTitle span img {
+    display: none;
   }
   /* 菜单横向排列 */
   .el-menu {
@@ -414,34 +477,22 @@ export default {
     cursor: pointer;
     background-color: #fff;
   }
-
-  .el-icon-sunny {
+  /* 选中侧边导航的背景颜色 */
+  .el-menu-item.is-active {
+    background: #014da1;
+    color: #fff;
+    font-weight: bold;
+    border: #014da1 solid 1px;
+  }
+  .teacherAsideItem span img {
     display: none;
   }
-
-  .teacherDetail {
-    width: 100%;
-    padding: 0 1.5rem;
-    box-sizing: border-box;
-    background-color: #fff;
-    border: 1px solid #dfdfdf;
-  }
-
-  .teacherTitle {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    padding: 10px 0;
-    border-bottom: 1px solid #dfdfdf;
-  }
-  .title {
-    color: #333333;
-    font-weight: bold;
-    font-size: 20px;
-    line-height: 30px;
-  }
   .breadCrumb {
-    padding-top: 1rem;
+    order: 2;
+    width: 100%;
+    background: #eee;
+    box-sizing: border-box;
+    padding: 10px 15px;
   }
   /* 不被选中时的颜色 */
   .el-breadcrumb ::v-deep .el-breadcrumb__inner {
@@ -453,56 +504,74 @@ export default {
     color: black !important;
     font-weight: 800 !important;
   }
-  /* 选中侧边导航的背景颜色 */
-  .el-menu-item.is-active {
-    background: #014da1;
-    color: #fff;
-    font-weight: bold;
-    border: #014da1 solid 1px;
+  .teacherDetail {
+    order: 3;
+    width: 100%;
+    padding: 0 1.5rem;
+    box-sizing: border-box;
+    background-color: #fff;
+    min-height: calc(100vh - 29rem - 179px);
   }
-  .subTitle {
-    font-size: 16px;
+  .teacherTitle {
+    font-size: 3rem;
     font-weight: bold;
-    color: #444444;
+    line-height: 36px;
+    color: #113f95;
+    margin: 1rem 0;
+  }
+  .principalsTitle {
+    height: 4.5rem;
+    width: 100%;
+    margin: 1rem 0;
+    background-size: cover !important;
+    background: url(../../assets/images/background/title-bg.png) no-repeat;
+    font-weight: bold;
+    line-height: 4.5rem;
+    padding-left: 1.5rem;
+    font-size: 2rem;
     text-align: left;
-    margin: 10px 0;
+    color: #404040;
   }
-  .principals {
-    display: flex;
-    flex-direction: column;
-  }
-  .principalItem {
+  .principalsItem {
     display: flex;
     flex-direction: row;
     width: 100%;
-    margin: 5px 0;
     cursor: pointer;
+    margin-bottom: 5px;
   }
-  /* 负责人图片 */
-  .principalImg {
-    height: 165px;
+  .principalsItemImg {
+    height: 195px;
     border: 1px solid #ccc;
-    margin-right: 10px;
+    margin-right: 5px;
   }
-  .principalImg img {
+  .principalsItemImg img {
     height: 100%;
   }
   /* 负责人信息 */
-  .princiPalInfo {
+  .principalsItemInfo {
     background: #dbeeff;
     flex: 1 1 auto;
     padding: 0 10px;
     border: 1px solid #ccc;
   }
-  .principalName {
+  .principalsItemName {
     font-size: 20px;
     text-align: left;
   }
-  .dot {
+  .principalsItemInfoList {
+    text-align: left;
+    margin: 10px 0;
+    font-size: 16px;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
+  }
+  .principalsItemInfoListDot {
     position: relative;
     padding-left: 20px;
   }
-  .dot::before {
+  .principalsItemInfoListDot::before {
     content: "";
     position: absolute;
     top: 6px;
@@ -512,55 +581,67 @@ export default {
     background-color: #000;
     border-radius: 50%;
   }
-  .princiPalInfoItem {
+  .teachersTitle {
+    height: 4.5rem;
+    width: 100%;
+    margin: 1rem 0;
+    background-size: cover !important;
+    background: url(../../assets/images/background/title-bg.png) no-repeat;
+    font-weight: bold;
+    line-height: 4.5rem;
+    padding-left: 1.5rem;
+    font-size: 2rem;
     text-align: left;
-    margin: 5px 0;
-    font-size: 16px;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 1;
-    overflow: hidden;
+    color: #404040;
   }
-  .teachers {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 10px;
-  }
-  .teacherItem {
+  .teachersItem {
     display: flex;
     flex-direction: row;
     width: 100%;
-    margin: 5px 0;
     cursor: pointer;
+    margin-bottom: 5px;
   }
-  /* 教师成员图片 */
-  .teacherImg {
-    height: 165px;
+  .teachersItemImg {
+    height: 195px;
     border: 1px solid #ccc;
-    margin-right: 10px;
+    margin-right: 5px;
   }
-  .teacherImg img {
+  .teachersItemImg img {
     height: 100%;
   }
-  /* 教师成员信息 */
-  .teacherInfo {
+  /* 团队老师 */
+  .teachersItemInfo {
     background: #dbeeff;
     flex: 1 1 auto;
     padding: 0 10px;
     border: 1px solid #ccc;
   }
-  .teacherName {
+  .teachersItemName {
     font-size: 20px;
     text-align: left;
   }
-  .teacherInfoItem {
+  .teachersItemInfoList {
     text-align: left;
-    margin: 5px 0;
+    margin: 10px 0;
     font-size: 16px;
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 1;
     overflow: hidden;
+  }
+  .teachersItemInfoListDot {
+    position: relative;
+    padding-left: 20px;
+  }
+  .teachersItemInfoListDot::before {
+    content: "";
+    position: absolute;
+    top: 6px;
+    left: 0;
+    width: 6px;
+    height: 6px;
+    background-color: #000;
+    border-radius: 50%;
   }
 }
 </style>

@@ -1,60 +1,63 @@
 <template>
-  <div class="project">
+  <div class="verticalProject">
     <!-- default-active表示是当前选中的菜单的index -->
-    <div class="projectContent">
-      <div class="projectAside">
-        <div class="projectAsideTitle">{{ pageItem.allTitle }}</div>
-        <div class="projectAsideContent">
-          <el-menu :default-active="this.$route.path" router text-color="#000">
+    <div class="verticalProjectContent">
+      <div class="breadCrumb">
+        <el-breadcrumb separator-class="el-icon-arrow-right">
+          <el-breadcrumb-item :to="{ path: '/home' }">{{
+            pageItem.home
+          }}</el-breadcrumb-item>
+          <el-breadcrumb-item :to="{ path: '/scientificResearch' }">{{
+            pageItem.allTitle
+          }}</el-breadcrumb-item>
+          <el-breadcrumb-item
+            :to="{ path: '/scientificResearch/verticalProject' }"
+            >{{ pageItem.subTitle }}</el-breadcrumb-item
+          >
+        </el-breadcrumb>
+      </div>
+      <div class="verticalProjectAside">
+        <div class="verticalProjectAsideTitle">
+          <span>
+            <img src="../../assets/images/background/asideTitle.png" alt="" />{{
+              pageItem.allTitle
+            }}
+          </span>
+        </div>
+        <div class="verticalProjectAsideContent">
+          <el-menu :default-active="this.$route.path" router text-color="#444">
             <el-menu-item
-              class="projectAsideItem"
+              class="verticalProjectAsideItem"
               v-for="(menuItem, menuIndex) in menu"
               :key="menuIndex"
               :index="menuItem.path"
             >
-              <i class="el-icon-sunny"></i>
-              <span>{{ menuItem.name }}</span>
+              <span>
+                <img
+                  src="../../assets/images/background/asideSubtitle.png"
+                  alt=""
+                />
+                {{ menuItem.name }}
+              </span>
             </el-menu-item>
           </el-menu>
         </div>
       </div>
-      <div class="projectDetail">
-        <div class="projectTitle">
-          <div class="title">{{ pageItem.subTitle }}</div>
-          <div class="breadCrumb">
-            <el-breadcrumb separator-class="el-icon-arrow-right">
-              <el-breadcrumb-item :to="{ path: '/home' }">{{
-                pageItem.home
-              }}</el-breadcrumb-item>
-              <el-breadcrumb-item
-                :to="{ path: '/scientificResearch/project' }"
-                >{{ pageItem.project }}</el-breadcrumb-item
-              >
-            </el-breadcrumb>
-          </div>
+      <div class="verticalProjectDetail">
+        <div class="verticalProjectTitle">
+          {{ pageItem.subTitle }}
         </div>
-        <div class="projectItem">
-          <div
-            class="detailItem"
-            v-for="projectItem in projects"
-            :key="projectItem.id"
-            @click="gotoDetail()"
-          >
-            <div class="detailItemProjectName">
-              {{ projectItem.number }}. {{ pageItem.projectName }}:{{
-                projectItem.projectName
-              }}
-            </div>
-            <div class="detailItemProjectResponser">
-              {{ pageItem.projectResponser }}: {{ projectItem.responser }}
-            </div>
-            <div class="detailItemProjectType">
-              {{ pageItem.projectType }}: {{ projectItem.projectType }}
-            </div>
-            <div class="detailItemProjectTime">
-              {{ pageItem.projectTime }}: {{ projectItem.time }}
-            </div>
-          </div>
+        <div class="verticalProjectTable">
+          <el-table :data="projects" border>
+            <el-table-column
+              prop="projectName"
+              label="项目名称"
+            ></el-table-column>
+            <el-table-column prop="responser" label="项目负责人">
+            </el-table-column>
+            <el-table-column prop="projectType" label="类型"> </el-table-column>
+            <el-table-column prop="time" label="时间"> </el-table-column>
+          </el-table>
         </div>
         <div class="paging">
           <!-- page-size展示的选择每页显示个数的选项,页面变动触发的事件是current-change后面的函数,total表示总共的数量 current-page表示当前页数-->
@@ -81,23 +84,13 @@ export default {
       pageItem: {},
       chineseItem: {
         allTitle: "科研概况",
-        subTitle: "科研项目",
+        subTitle: "纵向项目",
         home: "首页",
-        project: "纵向项目",
-        projectName: "项目名称",
-        projectResponser: "项目负责人",
-        projectType: "项目类型",
-        projectTime: "起止时间",
       },
       englishItem: {
         allTitle: "Research",
-        subTitle: "Project",
+        subTitle: "vertical-project",
         home: "home",
-        project: "vertical-project",
-        projectName: "Name",
-        projectResponser: "Responser",
-        projectType: "Type",
-        projectTime: "Time",
       },
       menu: [],
       menuZH: [
@@ -158,82 +151,35 @@ export default {
       this.current_index = val;
       this.getProjectList();
     },
-    gotoDetail() {
-      this.$router.push({
-        path: "/scientificResearch/verticalDetail",
-        name: "纵向项目详情",
-      });
-    },
+    // gotoDetail() {
+    //   this.$router.push({
+    //     path: "/scientificResearch/verticalDetail",
+    //     name: "纵向项目详情",
+    //   });
+    // },
   },
 };
 </script>
 <style scoped>
 /* PC端  */
 @media screen and (min-width: 1000px) {
-  .project {
-    padding: 3rem 0;
-    background: url(../../assets/images/background/contentBackground.jpg)
-      no-repeat;
+  .verticalProject {
+    width: 100%;
   }
-
-  .projectContent {
-    width: 75%;
+  .verticalProjectContent {
+    width: 85%;
     margin: 0 auto;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
-  }
-
-  .projectAside {
-    width: 255px;
-    margin-right: 20px;
-  }
-  .projectAsideTitle {
-    width: 255px;
-    height: 78px;
-    line-height: 78px;
-    background: url(../../assets/images/background/zryy-menu-t-bg.png) no-repeat;
-    border-radius: 0.6rem;
-    background-size: cover !important;
-    font-weight: bold;
-    color: #fff;
-    font-size: 24px;
-  }
-  .projectAsideContent {
-    width: 255px;
-    background-color: #f9fbfd;
-  }
-  .projectAsideItem {
-    height: 52px;
-    line-height: 52px;
-    font-size: 16px;
-    text-align: left;
-    cursor: pointer;
-    border-bottom: 1px solid #dfdfdf;
-  }
-
-  .projectDetail {
-    flex: 1 1 auto;
-    padding: 0 3rem;
-    box-sizing: border-box;
-    background-color: #fff;
-    border: 1px solid #dfdfdf;
-  }
-
-  .projectTitle {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    padding: 2rem 0;
-    border-bottom: 1px solid #dfdfdf;
-  }
-  .title {
-    color: #333333;
-    font-weight: bold;
-    font-size: 2.5rem;
+    flex-wrap: wrap;
+    margin-bottom: 15px;
   }
   .breadCrumb {
-    padding-top: 1rem;
+    width: 100%;
+    background: #eee;
+    box-sizing: border-box;
+    padding: 10px 15px;
+    margin-bottom: 15px;
   }
   /* 不被选中时的颜色 */
   .el-breadcrumb ::v-deep .el-breadcrumb__inner {
@@ -245,66 +191,135 @@ export default {
     color: black !important;
     font-weight: 800 !important;
   }
+
+  .verticalProjectAside {
+    width: 20%;
+    padding-right: 30px;
+  }
+
+  .verticalProjectAsideTitle {
+    background: #fff;
+    height: 47px;
+    border-top: 3px solid #0c568e;
+    border-bottom: 1px solid #0c568e;
+    margin-bottom: 2px;
+  }
+  .verticalProjectAsideTitle span {
+    float: left;
+    height: 47px;
+    line-height: 47px;
+    font-size: 20px;
+    color: #4b74bb;
+    font-weight: bold;
+  }
+  .verticalProjectAsideTitle span img {
+    float: left;
+    margin-top: 15px;
+    margin-left: 5px;
+    margin-right: 10px;
+  }
+  .verticalProjectAsideContent {
+    width: 100%;
+  }
+  /* 去除侧边栏自带的边框 */
+  .el-menu {
+    border: none !important;
+  }
+  /* 去除侧边导航自带的边距 */
+  .el-menu-item {
+    padding: 0 !important;
+  }
   /* 侧边栏悬浮的背景颜色 */
   .el-menu-item:hover {
+    color: #fff !important;
     font-weight: bold;
-    background-color: #fff;
+    background-color: #4b74bb;
   }
   /* 选中侧边导航的背景颜色 */
   .el-menu-item.is-active {
+    color: #fff;
     font-weight: bold;
-    color: #034ea1;
-    background: #eee;
-  }
-  .projectItem {
-    min-height: 600px;
-    padding-bottom: 2rem;
+    background-color: #4b74bb;
   }
 
-  .detailItem {
-    word-wrap: break-word;
-    word-break: break-all;
-    margin-top: 1rem;
+  .verticalProjectAsideItem {
+    position: relative;
+    width: 100%;
+    height: 46px;
+    line-height: 46px;
+    font-size: 18px;
     text-align: left;
-    line-height: 3rem;
-    font-size: 2rem;
-  }
-  .detailItem:hover {
     cursor: pointer;
+    border-bottom: 1px solid #dfdfdf;
   }
-  .detailItemProjectName {
+  /* 最后一个侧边栏没有下划线 */
+  .verticalProjectAsideItem:last-child {
+    border-bottom: none;
+  }
+  .verticalProjectAsideItem span {
+    font-size: 18px;
+    line-height: 46px;
+  }
+
+  .verticalProjectAsideItem span img {
+    height: 18px;
+    width: 18px;
+    line-height: 46px;
+    margin-top: -3px;
+    padding: 8px 12px;
+  }
+  .verticalProjectDetail {
+    width: calc(80% - 30px);
+    min-height: calc(100vh - 29rem - 58px);
+  }
+
+  .verticalProjectTitle {
+    font-size: 22px;
     font-weight: bold;
-    font-size: 2.2rem;
-    padding: 0.5rem 0;
+    line-height: 40px;
+    color: #113f95;
+    margin: 15px 0;
   }
-  .detailItemProjectResponser {
-    padding: 0.5rem 0;
+
+  .verticalProjectProfile {
+    font-size: 1.6rem;
+    line-height: 2.1rem;
+    margin-bottom: 1.2rem;
+    text-align: left;
   }
-  .detailItemProjectType {
-    padding: 0.5rem 0;
+  .verticalProjectTable {
+    width: 100%;
   }
-  .detailItemProjectTime {
-    padding: 0.5rem 0;
-  }
-  /* 设置分页和底部的距离 */
   .paging {
     margin: 3rem 0;
   }
 }
 /* 移动端  */
 @media screen and (max-width: 1000px) {
-  .projectAside {
+  .verticalProject {
+    width: 100%;
+  }
+  .verticalProjectContent {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .verticalProjectAside {
+    order: 1;
     background: url(../../assets/images/background/contentBackground.jpg) center
       0 no-repeat;
     background-size: cover;
   }
-  .projectAsideTitle {
+  .verticalProjectAsideTitle {
     font-size: 20px;
     padding: 10px 1.6%;
     line-height: 30px;
     font-weight: bold;
     text-align: left;
     color: #014da1;
+  }
+  .verticalProjectAsideTitle span img {
+    display: none;
   }
   /* 菜单横向排列 */
   .el-menu {
@@ -327,32 +342,22 @@ export default {
     cursor: pointer;
     background-color: #fff;
   }
-
-  .el-icon-sunny {
+  /* 选中侧边导航的背景颜色 */
+  .el-menu-item.is-active {
+    background: #014da1;
+    color: #fff;
+    font-weight: bold;
+    border: #014da1 solid 1px;
+  }
+  .verticalProjectAsideItem span img {
     display: none;
   }
-  .projectDetail {
-    width: 100%;
-    padding: 0 1.5rem;
-    box-sizing: border-box;
-    background-color: #fff;
-    border: 1px solid #dfdfdf;
-  }
-  .projectTitle {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    padding: 10px 0;
-    border-bottom: 1px solid #dfdfdf;
-  }
-  .title {
-    color: #333333;
-    font-weight: bold;
-    font-size: 20px;
-    line-height: 30px;
-  }
   .breadCrumb {
-    padding-top: 1rem;
+    order: 2;
+    width: 100%;
+    background: #eee;
+    box-sizing: border-box;
+    padding: 10px 15px;
   }
   /* 不被选中时的颜色 */
   .el-breadcrumb ::v-deep .el-breadcrumb__inner {
@@ -364,46 +369,32 @@ export default {
     color: black !important;
     font-weight: 800 !important;
   }
-  /* 被选中时的颜色 */
-  .el-breadcrumb__item:last-child ::v-deep .el-breadcrumb__inner {
-    color: black !important;
-    font-weight: 800 !important;
+  .verticalProjectDetail {
+    order: 3;
+    width: 100%;
+    padding: 0 1.5rem;
+    box-sizing: border-box;
+    background-color: #fff;
+    min-height: calc(100vh - 36rem - 112px);
   }
-  /* 选中侧边导航的背景颜色 */
-  .el-menu-item.is-active {
-    background: #014da1;
-    color: #fff;
+  .verticalProjectTitle {
+    font-size: 3rem;
     font-weight: bold;
-    border: #014da1 solid 1px;
+    line-height: 36px;
+    color: #113f95;
+    margin: 1rem 0;
   }
-  .projectItem {
-    min-height: 450px;
-    padding-bottom: 2rem;
-  }
-  .detailItem {
-    word-wrap: break-word;
-    word-break: break-all;
-    margin-top: 3rem;
+  .verticalProjectProfile {
+    font-size: 14px;
+    line-height: 20px;
+    margin-bottom: 10px;
     text-align: left;
-    line-height: 3rem;
-    font-size: 2.4rem;
   }
-  .detailItemProjectName {
-    font-size: 2.5rem;
-    font-weight: bold;
+  .verticalProjectTable {
+    width: 100%;
   }
-  .detailItemProjectResponser {
-    padding: 0.8rem 0;
-  }
-  .detailItemProjectType {
-    padding: 0.8rem 0;
-  }
-  .detailItemProjectTime {
-    padding: 0.8rem 0;
-  }
-  /* 设置分页和底部的距离 */
   .paging {
-    margin: 3rem 0;
+    margin: 2rem 0;
   }
 }
 </style>
