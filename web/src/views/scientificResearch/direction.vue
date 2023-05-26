@@ -126,7 +126,7 @@ export default {
         languageType: this.$store.getters.getLanguageType,
       };
       await getDirectionURL(params).then((res) => {
-        this.directions = res.data;
+        this.directions = res.data.slice(0, 3);
       });
     },
   },
@@ -280,10 +280,8 @@ export default {
     line-height: 3.5rem;
   }
   .directionItemPhoto {
-    width: 50%;
+    width: 100%;
     border: 1.5px solid #dfdfdf;
-    margin: 0 auto;
-    margin-bottom: 10px;
   }
   .directionItemPhoto img {
     width: 100%;
@@ -407,10 +405,8 @@ export default {
     line-height: 3.5rem;
   }
   .directionItemPhoto {
-    width: 80%;
+    width: 100%;
     border: 1.5px solid #dfdfdf;
-    margin: 0 auto;
-    margin-bottom: 10px;
   }
   .directionItemPhoto img {
     width: 100%;

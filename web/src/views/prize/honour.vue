@@ -49,8 +49,8 @@
         <div class="honourProfile">{{ honourProfile }}</div>
         <div class="honourTable">
           <el-table :data="honours" border>
-            <el-table-column prop="award" label="获奖名称"></el-table-column>
-            <el-table-column prop="title" label="获奖人"></el-table-column>
+            <el-table-column prop="award" label="荣誉名称"></el-table-column>
+            <el-table-column prop="title" label="荣誉获得者"></el-table-column>
             <el-table-column prop="date" label="获奖时间"></el-table-column>
           </el-table>
         </div>
