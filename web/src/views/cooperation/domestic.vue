@@ -46,7 +46,16 @@
         <div class="domesticTitle">
           {{ pageItem.subTitle }}
         </div>
-        <div class="domesticItem"></div>
+        <div
+          class="domesticItem"
+          v-for="(detailItem, detailIndex) in domestics"
+          :key="detailIndex"
+        >
+          <div class="domesticItemImg">
+            <img src="../../assets/images/background/list.png" alt="" />
+          </div>
+          <div class="undergraduateItemTeacher">{{ detailItem.teacher }}</div>
+        </div>
       </div>
     </div>
   </div>
@@ -76,6 +85,7 @@ export default {
         { name: "Domestic", path: "/cooperation/domestic" },
         { name: "International", path: "/cooperation/international" },
       ],
+      domestics: [],
     };
   },
   created() {

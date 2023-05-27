@@ -17,8 +17,9 @@
               v-for="(newsItem, newsItemIndex) in newsList"
               :key="newsItemIndex"
               @click="gotoDetail(newsItem.id)"
+              v-if="newsItem.picUrl[0]"
             >
-              <img :src="newsItem.picUrl[0]" alt="" />
+              <img :src="newsItem.picUrl[0]" alt="" v-if="newsItem.picUrl[0]" />
               <div class="mask">{{ newsItem.title }}</div>
             </div>
           </div>
@@ -79,8 +80,8 @@ export default {
         // 定义参数
         // start: 0,
         // end: 5,
-        start: 1,
-        end: 9,
+        start: 0,
+        end: 8,
 
         languageType: this.$store.getters.getLanguageType,
       };

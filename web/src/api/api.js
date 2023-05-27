@@ -169,3 +169,21 @@ export function getDirectionURL(params) {
     params,
   });
 }
+// http://localhost:8186/teamWeb/interflow/require-internal?languageType=Chinese
+// 获取国内交流
+export function getDomesticURL(params) {
+  return request({
+    url: "api/teamWeb/interflow/require-internal",
+    method: "GET",
+    params,
+  });
+}
+// http://localhost:8186/teamWeb/interflow/require-foreign?languageType=Chinese
+// 获取国外交流
+export function getInternationalURL(params) {
+  return request({
+    url: "api/teamWeb/interflow/require-foreign",
+    method: "GET",
+    params,
+  });
+}
