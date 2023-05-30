@@ -46,13 +46,32 @@
         <div class="internationalTitle">
           {{ pageItem.subTitle }}
         </div>
-        <div class="internationalItem"></div>
+        <div
+          class="internationalItem"
+          v-for="(detailItem, detailIndex) in internationals"
+          :key="detailIndex"
+        >
+          <div class="internationalItemName">
+            <img src="../../assets/images/background/list.png" alt="" />
+            {{ detailItem.name }}
+          </div>
+          <div class="internationalItemUrl">
+            <a
+              :href="detailItem.url"
+              target="_blank"
+              class="internationalItemLink"
+            >
+              [ 详情 ]
+            </a>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import { getInternationalURL } from "@/api/api";
 export default {
   data() {
     return {
@@ -76,9 +95,11 @@ export default {
         { name: "Domestic", path: "/cooperation/domestic" },
         { name: "International", path: "/cooperation/international" },
       ],
+      internationals: [],
     };
   },
   created() {
+    this.getInternationalList();
     this.changUI();
   },
   methods: {
@@ -90,6 +111,15 @@ export default {
         this.menu = this.menuEN;
         this.pageItem = this.englishItem;
       }
+    },
+    // async和await用于同步,就是按顺序执行
+    async getInternationalList() {
+      let params = {
+        languageType: this.$store.getters.getLanguageType,
+      };
+      await getInternationalURL(params).then((res) => {
+        this.internationals = res.data;
+      });
     },
   },
 };
@@ -216,9 +246,35 @@ export default {
   }
 
   .internationalItem {
+    width: 100%;
     display: flex;
-    flex-direction: column;
-    margin-bottom: 3rem;
+    flex-direction: row;
+    border-bottom: 1px dashed #b2b2b2;
+  }
+  .internationalItemName {
+    width: 80%;
+    text-align: left;
+    font-size: 1.8rem;
+    line-height: 3.5rem;
+    display: -webkit-box;
+    /* 一行直接省略 */
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
+  }
+  .internationalItemName img {
+    width: 15px;
+    height: 15px;
+  }
+  .internationalItemUrl {
+    flex: 1 1 auto;
+    text-align: right;
+  }
+  .internationalItemLink {
+    font-size: 1.8rem;
+    line-height: 3.5rem;
+    text-decoration: none;
+    color: #7db0cb;
   }
 }
 /* 移动端  */
@@ -310,6 +366,37 @@ export default {
     line-height: 36px;
     color: #113f95;
     margin: 1rem 0;
+  }
+  .internationalItem {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    border-bottom: 1px dashed #b2b2b2;
+  }
+  .internationalItemName {
+    width: 80%;
+    text-align: left;
+    font-size: 1.8rem;
+    line-height: 3.5rem;
+    display: -webkit-box;
+    /* 一行直接省略 */
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
+  }
+  .internationalItemName img {
+    width: 10px;
+    height: 10px;
+  }
+  .internationalItemUrl {
+    flex: 1 1 auto;
+    text-align: right;
+  }
+  .internationalItemLink {
+    font-size: 1.8rem;
+    line-height: 3.5rem;
+    text-decoration: none;
+    color: #7db0cb;
   }
 }
 </style>

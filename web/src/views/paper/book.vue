@@ -282,6 +282,7 @@ export default {
   .detailItemBookCover img {
     width: 9rem;
     height: 13rem;
+    border: 1.5px solid #dfdfdf;
   }
   .detailItemBookContent {
     flex: 1 1 auto;
@@ -295,23 +296,23 @@ export default {
     color: #0055a2;
     font-weight: bold;
     text-align: left;
-    font-size: 1.6rem;
-    line-height: 3rem;
+    font-size: 1.8rem;
+    line-height: 3.5rem;
   }
   .detailItemBookTime {
     text-align: left;
-    font-size: 1.6rem;
-    line-height: 3rem;
+    font-size: 1.8rem;
+    line-height: 3.5rem;
   }
   .detailItemBookAuthor {
     text-align: left;
-    font-size: 1.6rem;
-    line-height: 3rem;
+    font-size: 1.8rem;
+    line-height: 3.5rem;
   }
   .detailItemBookUrl {
     text-align: left;
-    font-size: 1.6rem;
-    line-height: 3rem;
+    font-size: 1.8rem;
+    line-height: 3.5rem;
   }
 }
 /* 移动端  */
@@ -425,6 +426,7 @@ export default {
   .detailItemBookCover img {
     width: 11rem;
     height: 14rem;
+    border: 1.5px solid #dfdfdf;
   }
   .detailItemBookContent {
     flex: 1 1 auto;
@@ -438,24 +440,24 @@ export default {
     color: #0055a2;
     font-weight: bold;
     text-align: left;
-    font-size: 14px;
-    line-height: 25px;
+    font-size: 1.8rem;
+    line-height: 3.5rem;
   }
 
   .detailItemBookTime {
     text-align: left;
-    font-size: 14px;
-    line-height: 25px;
+    font-size: 1.8rem;
+    line-height: 3.5rem;
   }
   .detailItemBookAuthor {
     text-align: left;
-    font-size: 14px;
-    line-height: 25px;
+    font-size: 1.8rem;
+    line-height: 3.5rem;
   }
   .detailItemBookUrl {
     text-align: left;
-    font-size: 14px;
-    line-height: 25px;
+    font-size: 1.8rem;
+    line-height: 3.5rem;
   }
 }
 </style>

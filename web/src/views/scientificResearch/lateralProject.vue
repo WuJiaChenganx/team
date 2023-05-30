@@ -48,7 +48,7 @@
           {{ pageItem.subTitle }}
         </div>
         <div class="lateralProjectTable">
-          <el-table :data="projects" border>
+          <el-table :data="projects" border class="lateralProjectTableFont">
             <el-table-column
               prop="projectName"
               label="项目名称"
@@ -59,6 +59,7 @@
             <el-table-column prop="time" label="时间"> </el-table-column>
           </el-table>
         </div>
+
         <div class="paging">
           <el-pagination
             background
@@ -281,6 +282,13 @@ export default {
   .lateralProjectTable {
     width: 100%;
   }
+  .lateralProjectTableFont {
+    font-family: Avenir, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-size: 1.8rem;
+  }
+
   .paging {
     margin: 3rem 0;
   }
@@ -378,6 +386,12 @@ export default {
 
   .lateralProjectTable {
     width: 100%;
+  }
+  .lateralProjectTableFont {
+    font-family: Avenir, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-size: 1.8rem;
   }
   .paging {
     margin: 2rem 0;

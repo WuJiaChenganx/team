@@ -48,7 +48,7 @@
           {{ pageItem.subTitle }}
         </div>
         <div class="verticalProjectTable">
-          <el-table :data="projects" border>
+          <el-table :data="projects" border class="verticalProjectTableFont">
             <el-table-column
               prop="projectName"
               label="项目名称"
@@ -290,6 +290,12 @@ export default {
   .verticalProjectTable {
     width: 100%;
   }
+  .verticalProjectTableFont {
+    font-family: Avenir, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-size: 1.8rem;
+  }
   .paging {
     margin: 3rem 0;
   }
@@ -392,6 +398,12 @@ export default {
   }
   .verticalProjectTable {
     width: 100%;
+  }
+  .verticalProjectTableFont {
+    font-family: Avenir, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-size: 1.8rem;
   }
   .paging {
     margin: 2rem 0;

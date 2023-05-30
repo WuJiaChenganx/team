@@ -231,6 +231,7 @@ export default {
   .masterDetail {
     width: calc(80% - 30px);
     min-height: calc(100vh - 29rem - 58px);
+    margin-bottom: 1rem;
   }
 
   .masterTitle {
@@ -249,8 +250,8 @@ export default {
   .masterItemCourse {
     width: 80%;
     text-align: left;
-    font-size: 1.6rem;
-    line-height: 4rem;
+    font-size: 1.8rem;
+    line-height: 3.5rem;
     display: -webkit-box;
     /* 一行直接省略 */
     -webkit-box-orient: vertical;
@@ -264,8 +265,8 @@ export default {
   .masterItemTeacher {
     flex: 1 1 auto;
     text-align: right;
-    font-size: 1.6rem;
-    line-height: 4rem;
+    font-size: 1.8rem;
+    line-height: 3.5rem;
     color: #b2b2b2;
   }
 }
@@ -352,6 +353,7 @@ export default {
     box-sizing: border-box;
     background-color: #fff;
     min-height: calc(100vh - 29rem - 139px);
+    margin-bottom: 1rem;
   }
   .masterTitle {
     font-size: 3rem;
@@ -370,8 +372,8 @@ export default {
   .masterItemCourse {
     width: 70%;
     text-align: left;
-    font-size: 16px;
-    line-height: 40px;
+    font-size: 1.8rem;
+    line-height: 3.5rem;
     display: -webkit-box;
     /* 一行直接省略 */
     -webkit-box-orient: vertical;
@@ -385,8 +387,8 @@ export default {
   .masterItemTeacher {
     flex: 1 1 auto;
     text-align: right;
-    font-size: 12px;
-    line-height: 40px;
+    font-size: 1.8rem;
+    line-height: 3.5rem;
     color: #b2b2b2;
   }
 }

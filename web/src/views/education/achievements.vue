@@ -49,7 +49,11 @@
           {{ studentAchievementsProfile }}
         </div>
         <div class="studentAchievementsTable">
-          <el-table :data="studentAchievements" border>
+          <el-table
+            :data="studentAchievements"
+            border
+            class="studentAchievementsTableFont"
+          >
             <el-table-column prop="name" label="比赛名称"></el-table-column>
             <el-table-column prop="student" label="项目负责人及成员">
             </el-table-column>
@@ -262,6 +266,13 @@ export default {
   }
   .studentAchievementsTable {
     width: 100%;
+    margin-bottom: 1rem;
+  }
+  .studentAchievementsTableFont {
+    font-family: Avenir, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-size: 1.8rem;
   }
 }
 /* 移动端  */
@@ -378,6 +389,13 @@ export default {
   }
   .studentAchievementsTable {
     width: 100%;
+    margin-bottom: 1rem;
+  }
+  .studentAchievementsTableFont {
+    font-family: Avenir, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-size: 1.8rem;
   }
 }
 </style>

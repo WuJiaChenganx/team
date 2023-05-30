@@ -48,7 +48,7 @@
         </div>
         <div class="prizeProfile">{{ prizeProfile }}</div>
         <div class="prizeTable">
-          <el-table :data="prizes" border>
+          <el-table :data="prizes" border class="prizeTableFont">
             <el-table-column prop="award" label="获奖名称"></el-table-column>
             <el-table-column prop="title" label="获奖级别"></el-table-column>
             <el-table-column prop="date" label="获奖时间"></el-table-column>
@@ -244,6 +244,13 @@ export default {
   }
   .prizeTable {
     width: 100%;
+    margin-bottom: 1rem;
+  }
+  .prizeTableFont {
+    font-family: Avenir, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-size: 1.8rem;
   }
 }
 /* 移动端  */
@@ -345,6 +352,13 @@ export default {
   }
   .prizeTable {
     width: 100%;
+    margin-bottom: 1rem;
+  }
+  .prizeTableFont {
+    font-family: Avenir, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-size: 1.8rem;
   }
 }
 </style>

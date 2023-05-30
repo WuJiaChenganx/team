@@ -48,7 +48,7 @@
         </div>
         <div class="honourProfile">{{ honourProfile }}</div>
         <div class="honourTable">
-          <el-table :data="honours" border>
+          <el-table :data="honours" border class="honourTableFont">
             <el-table-column prop="award" label="荣誉名称"></el-table-column>
             <el-table-column prop="title" label="荣誉获得者"></el-table-column>
             <el-table-column prop="date" label="获奖时间"></el-table-column>
@@ -245,6 +245,13 @@ export default {
   }
   .honourTable {
     width: 100%;
+    margin-bottom: 1rem;
+  }
+  .honourTableFont {
+    font-family: Avenir, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-size: 1.8rem;
   }
 }
 /* 移动端  */
@@ -346,6 +353,13 @@ export default {
   }
   .honourTable {
     width: 100%;
+    margin-bottom: 1rem;
+  }
+  .honourTableFont {
+    font-family: Avenir, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-size: 1.8rem;
   }
 }
 </style>

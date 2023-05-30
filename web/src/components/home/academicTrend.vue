@@ -2,8 +2,6 @@
   <div class="academicTrend">
     <div class="academicTitle">
       <div class="title">{{ pageItem.title }}</div>
-      <p></p>
-      <!-- <a class="more" @click="goTo('/activity/academy')">{{ pageItem.more }}</a> -->
     </div>
     <div class="academicTrendDetail animation" data-aos="fade-up">
       <div class="futureAcademicTrend">

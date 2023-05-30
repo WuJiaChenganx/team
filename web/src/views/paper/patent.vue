@@ -273,8 +273,8 @@ export default {
 
   .patentItemName {
     text-align: left;
-    font-size: 1.6rem;
-    line-height: 3rem;
+    font-size: 1.8rem;
+    line-height: 3.5rem;
     word-break: break-all;
     border-bottom: 1px dashed #b2b2b2;
   }
@@ -386,8 +386,8 @@ export default {
 
   .patentItemName {
     text-align: left;
-    font-size: 16px;
-    line-height: 30px;
+    font-size: 1.8rem;
+    line-height: 3.5rem;
     word-break: break-all;
     border-bottom: 1px dashed #b2b2b2;
   }
