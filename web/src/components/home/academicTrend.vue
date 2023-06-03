@@ -2,6 +2,7 @@
   <div class="academicTrend">
     <div class="academicTitle">
       <div class="title">{{ pageItem.title }}</div>
+      <p></p>
     </div>
     <div class="academicTrendDetail animation" data-aos="fade-up">
       <div class="futureAcademicTrend">
@@ -148,9 +149,8 @@ export default {
   .academicTitle {
     width: 100%;
     font-size: 18px;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
     position: relative;
-    background-color: #fff;
   }
   .title {
     width: 164px;

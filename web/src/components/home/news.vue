@@ -228,6 +228,7 @@ export default {
     left: 0;
     width: 8px;
     height: 8px;
+    border-radius: 4px;
     background-color: #000;
   }
 
@@ -242,7 +243,6 @@ export default {
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 1;
     overflow: hidden;
-    font-weight: bold;
     text-align: left;
   }
   /* 时间框 */
