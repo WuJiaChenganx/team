@@ -46,16 +46,18 @@
         <div class="undergraduateTitle">
           {{ pageItem.subTitle }}
         </div>
-        <div
-          class="undergraduateItem"
-          v-for="(detailItem, detailIndex) in courses"
-          :key="detailIndex"
-        >
-          <div class="undergraduateItemCourse">
-            <img src="../../assets/images/background/list.png" alt="" />
-            {{ detailItem.courseName }}
+        <div class="undergraduateItemContent">
+          <div
+            class="undergraduateItem"
+            v-for="(detailItem, detailIndex) in courses"
+            :key="detailIndex"
+          >
+            <div class="undergraduateItemCourse">
+              <img src="../../assets/images/background/list.png" alt="" />
+              {{ detailItem.courseName }}
+            </div>
+            <div class="undergraduateItemTeacher">{{ detailItem.teacher }}</div>
           </div>
-          <div class="undergraduateItemTeacher">{{ detailItem.teacher }}</div>
         </div>
       </div>
     </div>
@@ -236,20 +238,29 @@ export default {
   }
 
   .undergraduateTitle {
+    width: 100%;
     font-size: 22px;
     font-weight: bold;
     line-height: 40px;
     color: #113f95;
     margin: 15px 0;
   }
-  .undergraduateItem {
+  .undergraduateItemContent {
     width: 100%;
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  .undergraduateItem {
+    width: 49%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
     border-bottom: 1px dashed #b2b2b2;
   }
   .undergraduateItemCourse {
-    width: 80%;
+    width: 70%;
     text-align: left;
     font-size: 1.8rem;
     line-height: 3.5rem;
@@ -264,7 +275,7 @@ export default {
     height: 15px;
   }
   .undergraduateItemTeacher {
-    flex: 1 1 auto;
+    min-width: 120px;
     text-align: right;
     font-size: 1.8rem;
     line-height: 3.5rem;
@@ -362,6 +373,9 @@ export default {
     line-height: 36px;
     color: #113f95;
     margin: 1rem 0;
+  }
+  .undergraduateItemContent {
+    width: 100%;
   }
   .undergraduateItem {
     display: flex;

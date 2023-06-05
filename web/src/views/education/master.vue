@@ -46,16 +46,18 @@
         <div class="masterTitle">
           {{ pageItem.subTitle }}
         </div>
-        <div
-          class="masterItem"
-          v-for="(detailItem, detailIndex) in courses"
-          :key="detailIndex"
-        >
-          <div class="masterItemCourse">
-            <img src="../../assets/images/background/list.png" alt="" />
-            {{ detailItem.courseName }}
+        <div class="masterItemContent">
+          <div
+            class="masterItem"
+            v-for="(detailItem, detailIndex) in courses"
+            :key="detailIndex"
+          >
+            <div class="masterItemCourse">
+              <img src="../../assets/images/background/list.png" alt="" />
+              {{ detailItem.courseName }}
+            </div>
+            <div class="masterItemTeacher">{{ detailItem.teacher }}</div>
           </div>
-          <div class="masterItemTeacher">{{ detailItem.teacher }}</div>
         </div>
       </div>
     </div>
@@ -233,22 +235,30 @@ export default {
     min-height: calc(100vh - 29rem - 58px);
     margin-bottom: 1rem;
   }
-
   .masterTitle {
+    width: 100%;
     font-size: 22px;
     font-weight: bold;
     line-height: 40px;
     color: #113f95;
     margin: 15px 0;
   }
-  .masterItem {
+  .masterItemContent {
     width: 100%;
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  .masterItem {
+    width: 49%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
     border-bottom: 1px dashed #b2b2b2;
   }
   .masterItemCourse {
-    width: 80%;
+    width: 70%;
     text-align: left;
     font-size: 1.8rem;
     line-height: 3.5rem;
@@ -263,7 +273,7 @@ export default {
     height: 15px;
   }
   .masterItemTeacher {
-    flex: 1 1 auto;
+    min-width: 120px;
     text-align: right;
     font-size: 1.8rem;
     line-height: 3.5rem;
@@ -361,6 +371,9 @@ export default {
     line-height: 36px;
     color: #113f95;
     margin: 1rem 0;
+  }
+  .masterItemContent {
+    width: 100%;
   }
   .masterItem {
     display: flex;

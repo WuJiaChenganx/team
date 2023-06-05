@@ -51,6 +51,20 @@
           v-for="(detailItem, detailIndex) in domestics"
           :key="detailIndex"
         >
+          <!-- <div class="domesticItemImg">
+            <img :src="detailPrincipalItem.picUrl" @error="setDefaultImage" />
+          </div>
+          <div class="domesticItemInfo">
+            <div class="domesticItemName">{{ detailPrincipalItem.name }}</div>
+            <div
+              class="domesticItemInfoList"
+              v-for="detailPrincipalInfoItem in detailPrincipalItem.info"
+              :key="detailPrincipalInfoItem"
+            >
+              <span class="domesticItemInfoListDot"></span>
+              {{ detailPrincipalInfoItem }}
+            </div>
+          </div> -->
           <div class="domesticItemName">
             <img src="../../assets/images/background/list.png" alt="" />
             {{ detailItem.name }}

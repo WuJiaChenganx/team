@@ -13,6 +13,7 @@
       :mode="mode"
       @onCreated="onCreated"
     />
+    <button @click="exportHTML">导出HTML</button>
   </div>
 </template>
 <script>
